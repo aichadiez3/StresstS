@@ -50,6 +50,9 @@
     -fx-text-fill: -fx-secondary;
 }
 
+.anchorpane-style{
+	-fx-background-color: transparent;
+}
 
 .menu-layout{
 	-fx-background-color: -fx-white;

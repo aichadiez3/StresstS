@@ -7,17 +7,27 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class logInController implements Initializable {
 
+	
 	@FXML
     private Pane logInPanel;
+	
+	@FXML
+    private Pane registerPane;
 	
 	@FXML
     private Button logInButton;
@@ -35,16 +45,28 @@ public class logInController implements Initializable {
     private ImageView exitButton;
     
 
-    @FXML
+    public logInController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+   
+	public Pane getRegisterPane() {
+		return registerPane;
+	}
+
+
+	@FXML
     void close_app(MouseEvent event) {
     	System.exit(0);
     }
 
     @FXML
     void open_registration(MouseEvent event) throws IOException {
-		Pane registration_panel_fxml = FXMLLoader.load(getClass().getResource("RegistrationView.fxml"));
-		logInPanel.getChildren().removeAll();
-		logInPanel.getChildren().setAll(registration_panel_fxml);
+    	Pane registration_pane_fxml = FXMLLoader.load(getClass().getResource("RegistrationView.fxml"));
+    	registerPane.setVisible(true);
+    	registerPane.getChildren().removeAll();
+		registerPane.getChildren().setAll(registration_pane_fxml);
     }
 
 	@Override
@@ -52,5 +74,7 @@ public class logInController implements Initializable {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 }

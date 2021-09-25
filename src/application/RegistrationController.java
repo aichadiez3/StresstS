@@ -13,10 +13,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public class RegistrationController implements Initializable{
 
-    @FXML
+	private logInController controller;
+	
+	@FXML
+    private Pane registrationPane;
+	
+	@FXML
     private TextField nameField;
 
     @FXML
@@ -38,9 +44,6 @@ public class RegistrationController implements Initializable{
     private Label warning_username;
 
     @FXML
-    private ImageView returnButton;
-
-    @FXML
     private ImageView exitButton;
 
     @FXML
@@ -49,6 +52,9 @@ public class RegistrationController implements Initializable{
     @FXML
     private ImageView emailOk;
     
+    @FXML
+    private ImageView returnButton;
+    
     
     
     @FXML
@@ -56,19 +62,6 @@ public class RegistrationController implements Initializable{
     	System.exit(0);
     }
 
-    @FXML
-    void return_window(MouseEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("LogInView.fxml"));
-		Main.getStage().getScene().setRoot(root);
-		nameField.clear();
-		surnameField.clear();
-		emailField.clear();
-		usernameField.clear();
-		usernameOk.setVisible(false);
-		emailOk.setVisible(false);
-		warning_username.setVisible(false);
-		warning_username.setVisible(false);
-    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -76,6 +69,12 @@ public class RegistrationController implements Initializable{
 		
 	}
     
+	@FXML
+	void return_window(MouseEvent event) throws IOException  {
+		// NO FUNCIONA
+		registrationPane.setVisible(false);
+		
+	}
 
 	
 }
