@@ -1,19 +1,25 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public class logInController implements Initializable {
 
-    @FXML
+	@FXML
+    private Pane logInPanel;
+	
+	@FXML
     private Button logInButton;
 
     @FXML
@@ -35,8 +41,10 @@ public class logInController implements Initializable {
     }
 
     @FXML
-    void open_registration(MouseEvent event) {
-    	System.exit(0);
+    void open_registration(MouseEvent event) throws IOException {
+		Pane registration_panel_fxml = FXMLLoader.load(getClass().getResource("RegistrationView.fxml"));
+		logInPanel.getChildren().removeAll();
+		logInPanel.getChildren().setAll(registration_panel_fxml);
     }
 
 	@Override
