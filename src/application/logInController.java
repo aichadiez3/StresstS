@@ -28,8 +28,6 @@ public class logInController implements Initializable {
     @FXML
     private ImageView exitButton;
     
-    @FXML
-    private Label exit;
 
     @FXML
     void close_app(MouseEvent event) {
