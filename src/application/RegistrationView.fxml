@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane fx:id="registrationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="390.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegistrationController">
    <children>
-      <ImageView fitHeight="123.0" fitWidth="135.0" layoutX="138.0" layoutY="74.0" opacity="0.5" preserveRatio="true">
+      <ImageView fitHeight="123.0" fitWidth="135.0" layoutX="138.0" layoutY="74.0" preserveRatio="true">
          <image>
             <Image url="@icon/new_user.png" />
          </image>

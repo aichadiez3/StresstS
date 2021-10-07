@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +23,12 @@ import javafx.stage.StageStyle;
 
 public class logInController implements Initializable {
 
+	private PatientMenuController patient_controller;
+	private RegistrationController registration_controller;
+	private static Stage main_menu_stage;
+	
+	@FXML
+    private AnchorPane anchorPane;
 	
 	@FXML
     private Pane logInPanel;
@@ -44,6 +51,7 @@ public class logInController implements Initializable {
     @FXML
     private ImageView exitButton;
     
+    
 
     public logInController() {
 		super();
@@ -54,27 +62,52 @@ public class logInController implements Initializable {
 	public Pane getRegisterPane() {
 		return registerPane;
 	}
+	
+    @FXML
+    void open_registration(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInView.fxml"));
+		Parent root = (Parent) loader.load();
+		
+    }
+    
+    
 
-
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		logInButton.setOnAction((ActionEvent event) -> {
+			try {
+				usernameField.getText();
+				passwordField.getText();
+				
+				if (!(usernameField.equals("") | passwordField.equals(""))) {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientMenuView.fxml"));
+					Parent root = (Parent) loader.load();
+					this.patient_controller = new PatientMenuController();
+					this.patient_controller = loader.getController();
+					Stage stage = new Stage();
+					stage.setAlwaysOnTop(true);
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.initModality(Modality.APPLICATION_MODAL);
+					stage.setScene(new Scene(root));
+					stage.show();
+					
+					// ---> To close the log in stage icon 
+					main_menu_stage = (Stage) anchorPane.getScene().getWindow();
+					main_menu_stage.close();
+					
+					
+				}
+			} catch (IOException log_in_error) {
+				log_in_error.printStackTrace();
+			}
+			
+		});
+		
+	}
+	
 	@FXML
     void close_app(MouseEvent event) {
     	System.exit(0);
     }
-
-    @FXML
-    void open_registration(MouseEvent event) throws IOException {
-    	Pane registration_pane_fxml = FXMLLoader.load(getClass().getResource("RegistrationView.fxml"));
-    	registerPane.setVisible(true);
-    	registerPane.getChildren().removeAll();
-		registerPane.getChildren().setAll(registration_pane_fxml);
-    }
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 
 }

@@ -1,13 +1,14 @@
 package application;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.scene.Parent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -57,7 +58,19 @@ public class RegistrationController implements Initializable{
     
     
     
-    @FXML
+    
+    
+    public logInController getController() {
+		return controller;
+	}
+
+
+	public void setController(logInController controller) {
+		this.controller = controller;
+	}
+
+
+	@FXML
     void close_app(MouseEvent event) {
     	System.exit(0);
     }
@@ -71,10 +84,9 @@ public class RegistrationController implements Initializable{
     
 	@FXML
 	void return_window(MouseEvent event) throws IOException  {
-		// NO FUNCIONA
-		registrationPane.setVisible(false);
+		Parent root = FXMLLoader.load(getClass().getResource("LogInView.fxml"));
+		Main.getStage().getScene().setRoot(root);
 		
 	}
-
 	
 }

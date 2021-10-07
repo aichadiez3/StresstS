@@ -3,16 +3,20 @@ package application;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 
 
 public class Main extends Application {
 	
 	private static Stage stage;
+	private double xOffset = 0;
+	private double yOffset = 0;
 	
 	public static Stage getStage() {
 		return stage;
@@ -30,6 +34,29 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			stage = primaryStage;
 			primaryStage.show();
+			
+			
+			// ----> This is to be able to move the window
+			
+			root.setOnMousePressed(new EventHandler<MouseEvent> () {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					xOffset = arg0.getSceneX();
+					yOffset = arg0.getSceneY();
+				}
+				
+			});
+			
+			root.setOnMouseDragged(new EventHandler<MouseEvent> () {
+
+				@Override
+				public void handle(MouseEvent arg0) {
+					stage.setX(arg0.getSceneX() - xOffset);
+					stage.setY(arg0.getSceneY() - yOffset);
+				}
+				
+			});
 			
 		} catch(IOException fatal_error) {
 			fatal_error.printStackTrace();

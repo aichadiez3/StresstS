@@ -1,10 +1,11 @@
 *{
     -fx-primary : #2A2E37;
     -fx-secondary : #eee5ae;
-    -fx-primarytext: #817e7e;
+    -fx-primarytext: #585858;
     -fx-primarytext-dark : #B2B2B2;
     -fx-color-1:#1976D2;
     -fx-gray: #ebebeb;
+    -fx-gray-dark: #585858;
     -fx-pale-green: #eee5ae;
     -fx-pale-blue: #94bbe9;
     -fx-degradation: linear-gradient(to right, rgba(238,229,174,1) 0%, rgba(148,187,233,1) 100%);
@@ -69,18 +70,18 @@
 
 .text-style{
 	-fx-text-fill: -fx-primarytext;
-	-fx-font-weight: bold;
+	-fx-font-weight: normal;
 	-fx-font-size: 14px;
 }
 
 .title-text-style{
-	-fx-text-fill: -fx-primarytext;
+	-fx-text-fill: -fx-gray-dark;
 	-fx-font-weight: bold;
 	-fx-font-size: 18px;
 }
 
 .text-field{
-	-fx-text-fill: -fx-primarytext;
+	-fx-text-fill: #dcdacd;
 	-fx-font-size: 14px;
 	-fx-background-color:  -fx-primary;
 	-fx-border-color:  -fx-secondary;
@@ -156,12 +157,6 @@
 	-fx-border-color: -fx-secondary;
 	-fx-background-color: -fx-secondary;
 	-fx-text-fill: -fx-primarytext;
-}
-
-.wrong-credentials
-{
-    -jfx-unfocus-color: #ef5350;
-    -jfx-focus-color: #ef5350;
 }
 
 /*Main Screen CSS Styling starts here*/
