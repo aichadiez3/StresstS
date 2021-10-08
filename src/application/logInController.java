@@ -53,25 +53,6 @@ public class logInController implements Initializable {
     
     
 
-    public logInController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-    
-   
-	public Pane getRegisterPane() {
-		return registerPane;
-	}
-	
-    @FXML
-    void open_registration(MouseEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInView.fxml"));
-		Parent root = (Parent) loader.load();
-		
-    }
-    
-    
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		logInButton.setOnAction((ActionEvent event) -> {
@@ -99,6 +80,31 @@ public class logInController implements Initializable {
 				}
 			} catch (IOException log_in_error) {
 				log_in_error.printStackTrace();
+			}
+			
+		});
+		
+		signInButton.setOnMouseClicked((MouseEvent event) -> {
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInView.fxml"));
+				Parent root = (Parent) loader.load();
+				this.registration_controller = new RegistrationController();
+				this.registration_controller = loader.getController();
+				
+				Stage stage = new Stage();
+				stage.setAlwaysOnTop(true);
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setScene(new Scene(root));
+				stage.show();
+				
+				// ---> To close the menu window
+				
+				main_menu_stage = (Stage) anchorPane.getScene().getWindow();
+				main_menu_stage.close();
+			
+			} catch(IOException sign_in_error) {
+				sign_in_error.printStackTrace();
 			}
 			
 		});
