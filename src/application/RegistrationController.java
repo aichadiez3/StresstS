@@ -1,25 +1,33 @@
 package application;
 
+import java.io.File;
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ResourceBundle;
 
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class RegistrationController implements Initializable{
 
@@ -63,9 +71,17 @@ public class RegistrationController implements Initializable{
     @FXML
     private ImageView returnButton;
     
+    @FXML
+    private ImageView spinner;
+    
+    @FXML
+    private Group loadingAnimation;
+    
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.loadingAnimation.setVisible(false);
+		
 		signInButton.setOnAction((ActionEvent event) -> {
 			try {
 				// AÑADIR AQUI LA CREACION DE USUARIO A DATABASE
@@ -76,15 +92,37 @@ public class RegistrationController implements Initializable{
 			this.patient_controller = new PatientMenuController();
 			this.patient_controller = loader.getController();
 			Stage stage = new Stage();
-			stage.setAlwaysOnTop(true);
-			stage.initStyle(StageStyle.UNDECORATED);
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setScene(new Scene(root));
-			stage.show();
 			
-			// ---> To close the log in stage icon 
-			main_menu_stage = (Stage) registrationPane.getScene().getWindow();
-			main_menu_stage.close();
+			// --> Loads a charging state view
+			PauseTransition wait = new PauseTransition(Duration.seconds(2));
+			wait.setOnFinished(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
+					//System.exit(0);
+					stage.setAlwaysOnTop(true);
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.initModality(Modality.APPLICATION_MODAL);
+					stage.setScene(new Scene(root));
+					stage.show();
+					
+					// ---> To close the log in stage icon 
+					main_menu_stage = (Stage) registrationPane.getScene().getWindow();
+					main_menu_stage.close();
+				}
+	        });
+			
+			wait.play();
+			this.registrationPane.setEffect(new BoxBlur(4,4,4));
+			this.registrationPane.setDisable(true);
+			
+			// --> This opens a spinner for charging representation purposes
+			Image imageView = new Image(new File("/test/src/application/icon/spinner.gif").toURI().toString()); // NO LO CARGA ADECUADAMENTE. SÓLO ACEPTA RUTA ABSOLTA
+            //spinner.setImage(new Image(this.getClass().getResource("spinner.gif").toExternalForm()));
+			spinner.setImage(imageView);
+			this.loadingAnimation.setVisible(true);
+			
+			
+			
 			
 			} catch (IOException create_account_error) {
 				create_account_error.printStackTrace();
@@ -94,6 +132,8 @@ public class RegistrationController implements Initializable{
 		
 	}
     
+	
+	
 	@FXML
 	void return_window(MouseEvent event) throws IOException  {
 		Parent root = FXMLLoader.load(getClass().getResource("LogInView.fxml"));

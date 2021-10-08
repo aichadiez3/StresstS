@@ -34,7 +34,7 @@
 }
 
 #back-cover{
-	-fx-background-image: url("back.jpg");
+	-fx-background-image: url("flow.gif");
 	-fx-background-size: cover;
 }
 

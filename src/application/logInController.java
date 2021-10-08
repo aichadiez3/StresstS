@@ -86,7 +86,7 @@ public class logInController implements Initializable {
 		
 		signInButton.setOnMouseClicked((MouseEvent event) -> {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInView.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("RegistrationView.fxml"));
 				Parent root = (Parent) loader.load();
 				this.registration_controller = new RegistrationController();
 				this.registration_controller = loader.getController();
