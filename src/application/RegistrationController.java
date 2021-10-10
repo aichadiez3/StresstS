@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -77,6 +78,11 @@ public class RegistrationController implements Initializable{
     @FXML
     private Group loadingAnimation;
     
+    @FXML
+    private PasswordField passwordField;
+    
+    @FXML
+    private PasswordField passwordField2;
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

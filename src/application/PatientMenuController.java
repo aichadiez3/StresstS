@@ -26,12 +26,15 @@ public class PatientMenuController implements Initializable{
 	
 	@FXML
     private AnchorPane anchorPane;
-	
+
     @FXML
     private Pane menuPane;
 
     @FXML
     private Pane optionsPane;
+
+    @FXML
+    private Label titlePane;
 
     @FXML
     private Pane moreOptionsPane;
@@ -52,8 +55,16 @@ public class PatientMenuController implements Initializable{
     private Group statisticsButton;
 
     @FXML
-    private Label titlePane;
+    private Group homeButton;
     
+    
+	public Pane getMenuPane() {
+		return menuPane;
+	}
+	public void setMenuPane(Pane menuPane) {
+		this.menuPane = menuPane;
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		optionsPane.setOnMouseEntered(new EventHandler<MouseEvent> () {
@@ -71,6 +82,47 @@ public class PatientMenuController implements Initializable{
 				optionsPane.setVisible(true);
 			}			
 		});
+		
+		/***
+		homeButton.setOnMouseClicked((MouseEvent event) -> {
+			titlePane.setText("MENU");
+			try {
+				Pane menu_pane_fxml = FXMLLoader.load(getClass().getResource("PatientMenuView.fxml"));
+				menuPane.getChildren().removeAll();
+				menuPane.getChildren().setAll(menu_pane_fxml);
+				
+			} catch (IOException open_menu_error) {
+				open_menu_error.printStackTrace();
+			}
+		});
+		
+		**/
+		
+		userInfoButton.setOnMouseClicked((MouseEvent event) -> {
+			titlePane.setText("Patient personal information");
+			try {
+				Pane user_info_pane_fxml = FXMLLoader.load(getClass().getResource("PatientInfoView.fxml"));
+				menuPane.getChildren().removeAll();
+				menuPane.getChildren().setAll(user_info_pane_fxml);
+				
+			} catch (IOException open_info_error) {
+				open_info_error.printStackTrace();
+			}
+			
+		});
+		
+		healthParametersButton.setOnMouseClicked((MouseEvent event) -> {
+			titlePane.setText("Health parameters");
+			try {
+				Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("PatientInfoView.fxml"));
+				menuPane.getChildren().removeAll();
+				menuPane.getChildren().setAll(health_pane_fxml);
+				
+			} catch (IOException open_info_error) {
+				open_info_error.printStackTrace();
+			}
+		});
+		
 		
 		logoutButton.setOnMouseClicked((MouseEvent event) -> {
 			try {

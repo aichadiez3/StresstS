@@ -3,6 +3,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.GaussianBlur?>
@@ -15,7 +16,6 @@
    <children>
       <Pane fx:id="logInPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="390.0" style="-fx-background-color: -fx-primary;" stylesheets="@dark-theme.css">
          <children>
-            <TextField fx:id="passwordField" layoutX="126.0" layoutY="325.0" promptText="Password" style="-fx-background-color: -fx-primary; -fx-border-color: -fx-secondary;" styleClass="text-field" stylesheets="@dark-theme.css" />
             <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="88.0" layoutY="270.0" preserveRatio="true">
                <image>
                   <Image url="@icon/user.png" />
@@ -49,6 +49,7 @@
                </image>
             </ImageView>
             <Pane fx:id="registerPane" layoutX="-1.0" prefHeight="536.0" prefWidth="390.0" stylesheets="@dark-theme.css" visible="false" />
+            <PasswordField fx:id="passwordField" layoutX="126.0" layoutY="328.0" promptText="Password" />
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />

@@ -1,11 +1,9 @@
 *{
     -fx-primary : #2A2E37;
     -fx-secondary : #eee5ae;
-    -fx-primarytext: #585858;
-    -fx-primarytext-dark : #B2B2B2;
-    -fx-color-1:#1976D2;
-    -fx-gray: #ebebeb;
-    -fx-gray-dark: #585858;
+    -fx-primarytext: #B2B2B2;
+    -fx-primarytext-dark : #585858;
+    -fx-gray: #f4f6fb;
     -fx-pale-green: #eee5ae;
     -fx-pale-blue: #94bbe9;
     -fx-degradation: linear-gradient(to right, rgba(238,229,174,1) 0%, rgba(148,187,233,1) 100%);
@@ -18,7 +16,7 @@
 	-fx-background-color: -fx-degradation;
 	-fx-border-radius: 20px;
     -fx-background-radius: 20px;
-    -fx-text-fill: -fx-primarytext;
+    -fx-text-fill: -fx-primarytext-dark;
     -fx-font-weight: bold;
     -fx-font-size: 15px;
 }
@@ -38,17 +36,9 @@
 	-fx-background-size: cover;
 }
 
+
 .root{
     -fx-background-color: -fx-primary;
-}
-
-.glyph-icon {
-    -fx-fill: -fx-primarytext;
-}
-
-.glyph-icon-light {
-    -fx-fill: -fx-secondary;
-    -fx-text-fill: -fx-secondary;
 }
 
 .anchorpane-style{
@@ -56,9 +46,11 @@
 }
 
 .menu-layout{
-	-fx-background-color: -fx-white;
-	-fx-text-fill: -fx-pale-blue;
+	-fx-background-color: -fx;
+	-fx-text-fill: -fx-primarytext-dark;
+	-fx-font-size: 15px;
 }
+
 
 .options-pane-layout{
 	-fx-background-color: white;
@@ -69,7 +61,7 @@
 }
 
 .text-style{
-	-fx-text-fill: -fx-primarytext;
+	-fx-text-fill: -fx-primarytext-dark;
 	-fx-font-weight: normal;
 	-fx-font-size: 14px;
 }
@@ -81,11 +73,19 @@
 }
 
 .text-field{
-	-fx-text-fill: #dcdacd;
-	-fx-font-size: 14px;
-	-fx-background-color:  -fx-primary;
+	-fx-text-fill: -fx-primarytext-dark;
+	-fx-font-size: 15px;
+	-fx-background-color:  transparent;
 	-fx-border-color:  -fx-secondary;
 }
+
+.text-field-transparent {
+	-fx-text-fill: -fx-primarytext-dark;
+	-fx-font-size: 15px;
+	-fx-background-color:  transparent;
+	-fx-border-color:  transparent;
+}
+
 
 .subpane-layout{
 	-fx-background-color: white;
@@ -94,23 +94,19 @@
 	-fx-background-radius: 20px;
 	
 }
-/*
-.button{
-    -fx-text-fill: -fx-primarytext;
-    -fx-background-color: -fx-primary;
-    -fx-border-color: -fx-secondary;
-    -fx-border-radius: 20px;
-    -fx-background-radius: 20px;
+
+.bubble-pane-layout{
+	
+	-fx-background-color: white;
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
+	-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10,0,0,0);
+	
 }
 
-.button:hover, .button:focused{
-    -fx-border-color: -fx-secondary;
-    -fx-background-color: -fx-secondary;
-    -fx-text-fill: -fx-primary;
-}
- */
+
 .sign-in-button{
-	-fx-text-fill: -fx-primarytext;
+	-fx-text-fill: -fx-primarytext-dark;
 	-fx-background-color: -fx-degradation;
 	-fx-border-color: transparent;
 	-fx-border-radius: 20px;
@@ -123,17 +119,17 @@
 .sign-in-button:hover, sign-in-button:focused{
 	
     -fx-background-color: -fx-secondary;
-    -fx-text-fill: -fx-primarytext;
+    -fx-text-fill: -fx-primarytext-dark;
 }
 
 .done-button{
 	-fx-border-radius: 20px;
 	-fx-background-radius: 20px;
-	-fx-text-fill: -fx-primarytext;
+	-fx-text-fill: -fx-primarytext-dark;
 }
 
 .done-button:hover{
-	-fx-text-fill: -fx-primarytext;
+	-fx-text-fill: -fx-primarytext-dark;
 	-fx-font-weight: bold;	
 }
 
@@ -156,8 +152,27 @@
 {
 	-fx-border-color: -fx-secondary;
 	-fx-background-color: -fx-secondary;
-	-fx-text-fill: -fx-primarytext;
+	-fx-text-fill: -fx-primarytext-dark;
 }
+
+/*Date picker css styling Specific*/
+
+.date-picker:editable > .arrow-button > * {
+    -fx-opacity: 1; /* Set the node in the button to be visible */
+}
+
+.date-picker > .text-field{
+	-fx-background-color: white;
+}  
+.date-picker > .arrow-button {
+    -fx-background-image: url("/icon/calendar.png"); /* Url of the icon */
+    -fx-background-color: -fx-pale-green;
+    -fx-border-color: -fx-pale-green;
+    -fx-background-size: 60% 60%; /* Can be `cover` or `100% 100%` ect. */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center; /* Put the icon in the center */
+}
+
 
 /*Main Screen CSS Styling starts here*/
 
@@ -204,6 +219,10 @@
     -fx-font-size: 14;
     -fx-base : -fx-primary;
     -fx-background-color: -fx-primary;
+}
+
+.menu-bar >  *.button-bar > *.container{
+	-fx-background-color: white;
 }
 
 .context-menu {
