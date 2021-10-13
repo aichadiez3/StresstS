@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="528.0" prefWidth="908.0" style="-fx-background-color: -fx-degradation;" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OtherParametersController">
+   <children>
+      <Pane fx:id="mainPane" layoutX="5.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="898.0" styleClass="menu-layout" stylesheets="@dark-theme.css">
+         <children>
+            <Label layoutX="386.0" layoutY="46.0" styleClass="title-text-style" stylesheets="@dark-theme.css" text="Medical Parameters" />
+            <Group fx:id="helpButton" layoutX="739.0" layoutY="471.0">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="42.0" layoutX="105.0" preserveRatio="true">
+                     <image>
+                        <Image url="@icon/info.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="30.0" layoutY="13.0" styleClass="text-style" stylesheets="@dark-theme.css" text="First steps" />
+               </children>
+            </Group>
+            <ImageView fitHeight="73.0" fitWidth="56.0" layoutX="302.0" layoutY="32.0" onMouseClicked="#return_window" preserveRatio="true">
+               <image>
+                  <Image url="@icon/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="55.0" fitWidth="38.0" layoutX="844.0" layoutY="14.0" onMouseClicked="#exit_window" preserveRatio="true">
+               <image>
+                  <Image url="@icon/cross.png" />
+               </image>
+            </ImageView>
+            <Group layoutX="102.0" layoutY="142.0">
+               <children>
+                  <Spinner fx:id="oxygenSatSpinner" editable="true" layoutX="117.0" layoutY="112.0" prefHeight="27.0" prefWidth="151.0" stylesheets="@dark-theme.css" />
+                  <Spinner fx:id="heartRateSpinner" editable="true" layoutX="117.0" layoutY="168.0" prefHeight="20.0" prefWidth="151.0" stylesheets="@dark-theme.css" />
+                  <Label layoutX="93.0" layoutY="39.0" style="-fx-font-size: 18;" styleClass="text-style" text="Pulse Oximeter" />
+                  <Label layoutX="4.0" layoutY="119.0" prefHeight="19.0" prefWidth="109.0" style="-fx-font-size: 13; -fx-text-fill: -fx-pale-blue;" text="O2 Saturation (%)" />
+                  <Label alignment="CENTER_RIGHT" layoutX="11.0" layoutY="175.0" style="-fx-font-size: 13; -fx-text-fill: -fx-pale-blue;" text="Heart rate (bpm)" />
+                  <ImageView fx:id="pulseOximeterImage" fitHeight="257.0" fitWidth="290.0" layoutY="10.0" preserveRatio="true" styleClass="image-layout">
+                     <image>
+                        <Image url="@icon/pulse.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Button fx:id="saveButton" layoutX="420.0" layoutY="454.0" mnemonicParsing="false" onAction="#save_parameters" prefHeight="34.0" prefWidth="99.0" styleClass="sign-in-button" stylesheets="@dark-theme.css" text="Save" />
+            <Group layoutX="-10.0" layoutY="-10.0">
+               <children>
+                  <Button fx:id="startButton" layoutX="610.0" layoutY="247.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="144.0" style="-fx-background-color: -fx-pale-green;" styleClass="sign-in-button" text="Start to breath" />
+                  <ImageView fx:id="breathingRateImage" fitHeight="262.0" fitWidth="276.0" layoutX="540.0" layoutY="157.0" styleClass="image-layout">
+                     <image>
+                        <Image url="@icon/breath.jpg" />
+                     </image>
+                  </ImageView>
+                  <Group fx:id="timerGroup" layoutX="570.0" layoutY="193.0" visible="false">
+                     <children>
+                        <Label fx:id="timeCounter" alignment="CENTER" layoutX="88.0" layoutY="118.0" prefHeight="50.0" prefWidth="44.0" style="-fx-font-size: 34;" styleClass="title-text-style" text="0" />
+                        <ProgressIndicator fx:id="timerIndicator" layoutX="61.0" layoutY="-31.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="98.0" progress="1.0">
+                           <effect>
+                              <ColorAdjust brightness="0.17" contrast="0.11" hue="0.04" saturation="-0.8" />
+                           </effect>
+                        </ProgressIndicator>
+                        <Button fx:id="tapButton" layoutX="37.0" layoutY="178.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="146.0" style="-fx-background-color: -fx-gray; -fx-border-color: -fx-gray;" text="Tap at inspiration" />
+                     </children>
+                  </Group>
+               </children>
+            </Group>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

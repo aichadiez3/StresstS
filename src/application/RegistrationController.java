@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -73,9 +74,6 @@ public class RegistrationController implements Initializable{
     private ImageView returnButton;
     
     @FXML
-    private ImageView spinner;
-    
-    @FXML
     private Group loadingAnimation;
     
     @FXML
@@ -90,8 +88,16 @@ public class RegistrationController implements Initializable{
 		
 		signInButton.setOnAction((ActionEvent event) -> {
 			try {
-				// AÑADIR AQUI LA CREACION DE USUARIO A DATABASE
-			
+				
+				// queda añadir una funcion que compruebe en la database que no existe este usuario
+				
+				if (passwordField.getText().equals(passwordField2.getText()) & !usernameField.equals(null) & !emailField.equals(null) & !nameField.equals(null) 
+						& !surnameField.equals(null)) {
+					
+					// AÑADIR AQUI LA CREACION DE USUARIO A DATABASE
+					// Cuando esté hecho, añadir el código de debajo en este if
+				}
+				
 			// ---> Load new patient menu scene
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientMenuView.fxml"));
 			Parent root = (Parent) loader.load();
@@ -121,13 +127,9 @@ public class RegistrationController implements Initializable{
 			this.registrationPane.setEffect(new BoxBlur(4,4,4));
 			this.registrationPane.setDisable(true);
 			
-			// --> This opens a spinner for charging representation purposes
-			Image imageView = new Image(new File("/test/src/application/icon/spinner.gif").toURI().toString()); // NO LO CARGA ADECUADAMENTE. SÓLO ACEPTA RUTA ABSOLTA
-            //spinner.setImage(new Image(this.getClass().getResource("spinner.gif").toExternalForm()));
-			spinner.setImage(imageView);
+			// --> This opens a spinner for charging simulation purposes
+			
 			this.loadingAnimation.setVisible(true);
-			
-			
 			
 			
 			} catch (IOException create_account_error) {

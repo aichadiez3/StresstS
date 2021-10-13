@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="709.0" prefWidth="960.0" style="-fx-background-color: -fx-degradation;" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BitalinoController">
+   <children>
+      <Pane fx:id="mainPane" layoutX="4.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="952.0" styleClass="menu-layout" stylesheets="@dark-theme.css">
+         <children>
+            <Label layoutX="451.0" layoutY="47.0" styleClass="title-text-style" stylesheets="@dark-theme.css" text="Bitalino Menu" />
+            <Group fx:id="helpButton" layoutX="779.0" layoutY="642.0">
+               <children>
+                  <ImageView fitHeight="35.0" fitWidth="42.0" layoutX="105.0" preserveRatio="true">
+                     <image>
+                        <Image url="@icon/info.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutY="16.0" styleClass="text-style" stylesheets="@dark-theme.css" text="How to connect" />
+               </children>
+            </Group>
+            <ImageView fitHeight="73.0" fitWidth="56.0" layoutX="381.0" layoutY="32.0" onMouseClicked="#return_window" preserveRatio="true">
+               <image>
+                  <Image url="@icon/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="55.0" fitWidth="38.0" layoutX="884.0" layoutY="14.0" onMouseClicked="#exit_window" preserveRatio="true">
+               <image>
+                  <Image url="@icon/cross.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -46,7 +46,7 @@
 }
 
 .menu-layout{
-	-fx-background-color: -fx;
+	-fx-background-color: white;
 	-fx-text-fill: -fx-primarytext-dark;
 	-fx-font-size: 15px;
 }
@@ -67,7 +67,7 @@
 }
 
 .title-text-style{
-	-fx-text-fill: -fx-gray-dark;
+	-fx-text-fill: -fx-primarytext-dark;
 	-fx-font-weight: bold;
 	-fx-font-size: 18px;
 }
@@ -90,8 +90,6 @@
 .subpane-layout{
 	-fx-background-color: white;
 	-fx-border-color: transparent;
-	-fx-border-radius: 20px;
-	-fx-background-radius: 20px;
 	
 }
 
@@ -173,6 +171,36 @@
     -fx-background-position: center center; /* Put the icon in the center */
 }
 
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-body-color: white;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-body-color: -fx-gray;
+}
+
+.spinner .increment-arrow-button:hover:pressed, .spinner .decrement-arrow-button:hover:pressed,
+.spinner .increment-arrow-button:pressed, .spinner .decrement-arrow-button:pressed {
+    -fx-body-color: -fx-pale-green;
+}
+
+.spinner > .text-field{
+	-fx-background-color: white;
+	-fx-border-color: -fx-gray;
+}
+
+
+.image-layout{
+	-fx-border-radius: 20px;
+	-fx-background-radius: 20px;
+	-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10,0,0,0);
+}
+
+.image-layout, .image-layout:hover{
+	-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10,0,0,0);
+}
 
 /*Main Screen CSS Styling starts here*/
 

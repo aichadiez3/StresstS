@@ -12,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -20,10 +21,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class PatientMenuController implements Initializable{
-
-	private static Stage main_menu_stage;
-	private logInController login_controller;
 	
+	private static PatientMenuController patient_controller;
+	private logInController login_controller;
+	private static Stage main_menu_stage;
+	
+
 	@FXML
     private AnchorPane anchorPane;
 
@@ -58,20 +61,25 @@ public class PatientMenuController implements Initializable{
     private Group homeButton;
     
     
-	public Pane getMenuPane() {
-		return menuPane;
+    public static void setController(PatientMenuController controller) {
+		patient_controller = controller;
 	}
-	public void setMenuPane(Pane menuPane) {
-		this.menuPane = menuPane;
+
+	public AnchorPane getAnchorPane() {
+		return anchorPane;
 	}
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		
 		optionsPane.setOnMouseEntered(new EventHandler<MouseEvent> () {
 			@Override
 			public void handle(MouseEvent event) {
 				moreOptionsPane.setVisible(true);
 				optionsPane.setVisible(false);
+				menuPane.setEffect(new BoxBlur(4,4,4));
 			}
 		});
 		
@@ -80,23 +88,18 @@ public class PatientMenuController implements Initializable{
 			public void handle(MouseEvent arg0) {
 				moreOptionsPane.setVisible(false);
 				optionsPane.setVisible(true);
+				menuPane.setEffect(null);
 			}			
 		});
 		
-		/***
+		/*
 		homeButton.setOnMouseClicked((MouseEvent event) -> {
 			titlePane.setText("MENU");
-			try {
-				Pane menu_pane_fxml = FXMLLoader.load(getClass().getResource("PatientMenuView.fxml"));
-				menuPane.getChildren().removeAll();
-				menuPane.getChildren().setAll(menu_pane_fxml);
-				
-			} catch (IOException open_menu_error) {
-				open_menu_error.printStackTrace();
-			}
+			menuPane.getChildren().removeAll();
+			menuPane.getChildren().setAll(menu_init_pane);
 		});
 		
-		**/
+		*/
 		
 		userInfoButton.setOnMouseClicked((MouseEvent event) -> {
 			titlePane.setText("Patient personal information");
@@ -114,7 +117,7 @@ public class PatientMenuController implements Initializable{
 		healthParametersButton.setOnMouseClicked((MouseEvent event) -> {
 			titlePane.setText("Health parameters");
 			try {
-				Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("PatientInfoView.fxml"));
+				Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
 				menuPane.getChildren().removeAll();
 				menuPane.getChildren().setAll(health_pane_fxml);
 				
