@@ -45,7 +45,7 @@
             <Button fx:id="logInButton" layoutX="152.0" layoutY="414.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="92.0" styleClass="login-button" stylesheets="@dark-theme.css" text="Login" />
             <ImageView fx:id="exitButton" fitHeight="31.0" fitWidth="31.0" layoutX="345.0" layoutY="14.0" onMouseClicked="#close_app" preserveRatio="true">
                <image>
-                  <Image url="@icon/cross.png" />
+                  <Image url="@icon/transparent_cross.png" />
                </image>
             </ImageView>
             <Pane fx:id="registerPane" layoutX="-1.0" prefHeight="536.0" prefWidth="390.0" stylesheets="@dark-theme.css" visible="false" />

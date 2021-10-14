@@ -14,9 +14,9 @@
    <children>
       <Pane id="0" fx:id="menuPane" layoutX="92.0" layoutY="33.0" prefHeight="706.0" prefWidth="1295.0" styleClass="pane-layout" stylesheets="@dark-theme.css">
          <children>
-            <Pane layoutX="109.0" layoutY="97.0" prefHeight="312.0" prefWidth="661.0" styleClass="subpane-layout" stylesheets="@dark-theme.css" />
-            <Pane layoutX="830.0" layoutY="97.0" prefHeight="444.0" prefWidth="405.0" styleClass="subpane-layout" stylesheets="@dark-theme.css" />
-            <Pane layoutX="109.0" layoutY="461.0" prefHeight="80.0" prefWidth="661.0" styleClass="subpane-layout" stylesheets="@dark-theme.css">
+            <Pane layoutX="109.0" layoutY="97.0" prefHeight="312.0" prefWidth="661.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
+            <Pane layoutX="830.0" layoutY="97.0" prefHeight="444.0" prefWidth="405.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
+            <Pane layoutX="109.0" layoutY="461.0" prefHeight="80.0" prefWidth="661.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
                <children>
                   <Label layoutX="179.0" layoutY="14.0" style="-fx-font-size: 23;" styleClass="text-style" text="Hi! How are you doing today?">
                      <font>

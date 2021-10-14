@@ -21,13 +21,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.application.Platform;
 
 public class OtherParametersController implements Initializable {
 
 	private static Stage main_stage;
 	private Integer counter;
-	private Integer seconds;
-	private Float progress;
+	private double timelapse;
+	private double progress;
 	
 	 @FXML
 	    private Pane mainPane;
@@ -77,32 +78,32 @@ public class OtherParametersController implements Initializable {
 			
 			
 			startButton.setOnMouseClicked((MouseEvent event2) -> {
-				disable_buttons();
+				startButton.setVisible(false);
 				timerGroup.setVisible(true);
 				
 				counter = 0; //set the count to 0
-				seconds = 0;
-				progress = (float) 0.0;
+				timelapse = 0.01;
+				progress = 0.0;
 				timerIndicator.setProgress(progress);
 				
-				Timer timer = new Timer(true);
-				timer.scheduleAtFixedRate(new TimerTask() {
-					
-					@Override
-				    public void run() {
-						if (progress <= 1.0) {
-							progress = (float) (progress + seconds/100);
-							timerIndicator.setProgress(progress);
-							seconds = seconds++;
-						} else
-							timer.cancel(); //stop the timer when 100secs have passed
-				    }
-				}, 0,1000); // 1000 means 1000ms, 1 second play before get executed 
-				 				
+				Timer timer = new Timer();
+			    timer.scheduleAtFixedRate(new TimerTask() {
+			        public void run() {
+			        	Platform.setImplicitExit(false);
+			        	
+			            if(progress >= 1.0) {
+			                timer.cancel();
+			                timer.purge();
+			            } else {
+			            	progress += (double) timelapse;
+			            	Platform.runLater(() -> timerIndicator.setProgress(progress*3.33)); //for simulating 30secs of recording
+			            }
+			                
+			        }
+			    }, 0, 1000);
+			
 		
 				tapButton.setOnAction((ActionEvent event) -> {
-					timeCounter.setText("" + counter);
-					System.exit(0);
 					counter();
 				});
 			});
@@ -124,12 +125,15 @@ public class OtherParametersController implements Initializable {
 	
 	@FXML
     void save_parameters(ActionEvent event) {
+		// Get all values
 		oxygenSatSpinner.getValue();
 		heartRateSpinner.getValue();
 		
+		// Enable buttons and images as in restart
+		timerGroup.setVisible(false);
+		startButton.setVisible(true);
 		breathingRateImage.setVisible(true);
 		pulseOximeterImage.setVisible(true);
-		enable_buttons();
     }
 	
 	@FXML
@@ -146,17 +150,7 @@ public class OtherParametersController implements Initializable {
 		 main_stage.close();
 	  }
 	 
-	 void disable_buttons() {
-		 startButton.setVisible(false);
-		 saveButton.setDisable(true);
-	 }
 	 
-	 void enable_buttons() {
-		 startButton.setVisible(true);
-		 saveButton.setDisable(false);
-		 timerGroup.setVisible(false);
-	 }
-	
 	 public void counter(){
 	        counter++;
 	        timeCounter.setText("" + counter);

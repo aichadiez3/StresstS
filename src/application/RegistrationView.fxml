@@ -57,8 +57,8 @@
                   <Image url="@icon/back.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="passwordField" layoutX="287.0" layoutY="290.0" prefHeight="31.0" prefWidth="197.0" promptText="Password" styleClass="text" />
-            <PasswordField fx:id="passwordField2" layoutX="287.0" layoutY="333.0" prefHeight="31.0" prefWidth="197.0" promptText="Confirm your password" style="-fx-background-color: white;" />
+            <PasswordField fx:id="passwordField" layoutX="287.0" layoutY="290.0" prefHeight="31.0" prefWidth="197.0" promptText="Password" styleClass="text-field" stylesheets="@dark-theme.css" />
+            <PasswordField fx:id="passwordField2" layoutX="287.0" layoutY="333.0" prefHeight="31.0" prefWidth="197.0" promptText="Confirm your password" styleClass="text-field" stylesheets="@dark-theme.css" />
          </children>
       </Pane>
       <Group fx:id="loadingAnimation" layoutX="193.0" layoutY="150.0">
