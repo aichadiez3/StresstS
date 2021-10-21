@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -41,6 +42,9 @@ public class PatientMenuController implements Initializable{
 
     @FXML
     private Pane moreOptionsPane;
+	
+	@FXML
+    private ImageView maxWindowButton;
 
     @FXML
     private Group logoutButton;
@@ -72,6 +76,7 @@ public class PatientMenuController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
 		
 		
 		optionsPane.setOnMouseEntered(new EventHandler<MouseEvent> () {
@@ -166,5 +171,4 @@ public class PatientMenuController implements Initializable{
 		main_menu_stage.setIconified(true);
 	}
 	
-
 }

@@ -10,13 +10,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="738.0" prefWidth="1387.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientMenuController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="1282.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientMenuController">
    <children>
-      <Pane id="0" fx:id="menuPane" layoutX="92.0" layoutY="33.0" prefHeight="706.0" prefWidth="1295.0" styleClass="pane-layout" stylesheets="@dark-theme.css">
+      <Pane id="0" fx:id="menuPane" layoutX="94.0" layoutY="33.0" prefHeight="682.0" prefWidth="1188.0" styleClass="pane-layout" stylesheets="@dark-theme.css">
          <children>
-            <Pane layoutX="109.0" layoutY="97.0" prefHeight="312.0" prefWidth="661.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
-            <Pane layoutX="830.0" layoutY="97.0" prefHeight="444.0" prefWidth="405.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
-            <Pane layoutX="109.0" layoutY="461.0" prefHeight="80.0" prefWidth="661.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
+            <Pane layoutX="65.0" layoutY="97.0" prefHeight="312.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
+            <Pane layoutX="689.0" layoutY="97.0" prefHeight="444.0" prefWidth="383.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
+            <Pane layoutX="65.0" layoutY="461.0" prefHeight="80.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
                <children>
                   <Label layoutX="179.0" layoutY="14.0" style="-fx-font-size: 23;" styleClass="text-style" text="Hi! How are you doing today?">
                      <font>
@@ -29,28 +29,33 @@
                </children>
             </Pane>
          </children></Pane>
-      <Group layoutX="1319.0" layoutY="8.0">
+      <Group layoutX="1228.0" layoutY="2.0">
          <children>
             <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="28.0" onMouseClicked="#close_app" preserveRatio="true" smooth="false">
                <image>
                   <Image url="@icon/cross.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="33.0" onMouseClicked="#minimize_window" preserveRatio="true" smooth="false">
+            <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="-29.0" layoutY="-1.0" onMouseClicked="#minimize_window" preserveRatio="true" smooth="false">
                <image>
                   <Image url="@icon/minus.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="maxWindowButton" fitHeight="34.0" fitWidth="28.0" layoutX="-1.0" layoutY="-1.0" preserveRatio="true">
+               <image>
+                  <Image url="@icon/window.png" />
+               </image>
+            </ImageView>
          </children>
       </Group>
-      <Pane fx:id="optionsPane" prefHeight="738.0" prefWidth="94.0" styleClass="options-pane-layout" stylesheets="@dark-theme.css">
+      <Pane fx:id="optionsPane" prefHeight="715.0" prefWidth="94.0" styleClass="options-pane-layout" stylesheets="@dark-theme.css">
          <children>
             <ImageView fitHeight="49.0" fitWidth="56.0" layoutX="19.0" layoutY="236.0" preserveRatio="true">
                <image>
                   <Image url="@icon/infoUser.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="47.0" fitWidth="42.0" layoutX="26.0" layoutY="675.0" preserveRatio="true">
+            <ImageView fitHeight="47.0" fitWidth="42.0" layoutX="26.0" layoutY="659.0" preserveRatio="true">
                <image>
                   <Image url="@icon/signOut.png" />
                </image>
@@ -87,9 +92,9 @@
             <Label fx:id="titlePane" alignment="BOTTOM_CENTER" layoutX="61.0" layoutY="23.0" prefHeight="40.0" prefWidth="323.0" styleClass="title-text-style" stylesheets="@dark-theme.css" text="MENU" textAlignment="CENTER" />
          </children>
       </Group>
-      <Pane fx:id="moreOptionsPane" prefHeight="738.0" prefWidth="298.0" styleClass="options-pane-layout" stylesheets="@dark-theme.css" visible="false">
+      <Pane fx:id="moreOptionsPane" prefHeight="715.0" prefWidth="300.0" styleClass="options-pane-layout" stylesheets="@dark-theme.css" visible="false">
          <children>
-            <Group fx:id="logoutButton" layoutX="183.0" layoutY="675.0">
+            <Group fx:id="logoutButton" layoutX="185.0" layoutY="659.0">
                <children>
                   <ImageView fitHeight="47.0" fitWidth="42.0" layoutX="59.0" preserveRatio="true">
                      <image>

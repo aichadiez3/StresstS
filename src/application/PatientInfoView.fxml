@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="infoPane" prefHeight="706.0" prefWidth="1295.0" style="-fx-background-color: -fx-gray;" styleClass="subpane-layout" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientInfoController">
+<Pane fx:id="infoPane" prefHeight="687.0" prefWidth="1188.0" style="-fx-background-color: -fx-gray;" styleClass="subpane-layout" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientInfoController">
    <children>
       <ComboBox layoutX="112.0" layoutY="512.0" prefWidth="150.0" style="-fx-border-color: -fx-pale-green;" styleClass="menu-layout">
          <opaqueInsets>

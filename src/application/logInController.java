@@ -68,6 +68,7 @@ public class logInController implements Initializable {
 					this.patient_controller = loader.getController();
 					Stage stage = new Stage();
 					stage.setAlwaysOnTop(true);
+					stage.setMaximized(true);
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.initModality(Modality.APPLICATION_MODAL);
 					stage.setScene(new Scene(root));
@@ -117,4 +118,5 @@ public class logInController implements Initializable {
     	System.exit(0);
     }
 
+	
 }
