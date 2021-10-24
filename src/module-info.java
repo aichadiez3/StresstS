@@ -4,6 +4,8 @@ module test {
 	requires javafx.fxml;
 	requires javafx.base;
 	requires javafx.media;
+	requires bluecove;
+	requires java.logging;
 	opens application to javafx.fxml;
 	exports application;
 }
