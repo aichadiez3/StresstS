@@ -87,7 +87,7 @@ public class BitalinoController implements Initializable{
 			String macAddress = "20:17:11:20:50:75";
             macAddressField.setText(macAddress);
             this. macAddress = macAddressField.getText();
-            this.SamplingRate = Integer.parseInt(this.macAddress);
+            this.SamplingRate = Integer.parseInt(this.freqSelection.getValue());
            
             
 		});
