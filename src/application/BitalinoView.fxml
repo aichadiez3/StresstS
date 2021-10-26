@@ -1,16 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Group?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 
 <AnchorPane prefHeight="709.0" prefWidth="960.0" style="-fx-background-color: -fx-degradation;" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BitalinoController">
    <children>
       <Pane fx:id="mainPane" layoutX="4.0" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="952.0" styleClass="menu-layout" stylesheets="@dark-theme.css">
          <children>
+            <Group fx:id="allOptions" layoutX="119.0" layoutY="152.0" visible="false">
+               <children>
+                  <Group fx:id="edaTestButton" layoutY="261.0">
+                     <children>
+                        <ImageView fitHeight="166.0" fitWidth="170.0" layoutX="195.0">
+                           <image>
+                              <Image url="@icon/edaTest.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutY="90.0" text="Electrodermal activity test" />
+                        <Label layoutX="14.0" layoutY="35.0" prefHeight="55.0" prefWidth="143.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Start recording EDA" textAlignment="CENTER" wrapText="true" />
+                     </children>
+                  </Group>
+                  <Group fx:id="ecgTestButton" layoutX="13.0">
+                     <children>
+                        <Label layoutY="113.0" text="Electrocardiogram test" />
+                        <ImageView fitHeight="192.0" fitWidth="200.0" layoutX="164.0">
+                           <image>
+                              <Image url="@icon/ecgTest.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="3.0" layoutY="58.0" prefHeight="55.0" prefWidth="143.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Start recording ECG" textAlignment="CENTER" wrapText="true" />
+                     </children>
+                  </Group>
+                  <Group layoutX="387.20001220703125" layoutY="85.5">
+                     <children>
+                        <ImageView fx:id="startButton" fitHeight="166.0" fitWidth="170.0" layoutX="170.0" layoutY="48.0" preserveRatio="true">
+                           <image>
+                              <Image url="@icon/start.png" />
+                           </image>
+                        </ImageView>
+                        <Line endX="159.0" layoutX="94.0" layoutY="-1.0" startX="-81.89996337890625" stroke="#817e7e" />
+                        <Line endX="-99.5" endY="-77.5" layoutX="353.0" layoutY="77.0" startX="-99.5" startY="-30.399993896484375" stroke="#817e7e" />
+                        <Line endX="159.0" endY="-0.899993896484375" layoutX="94.0" layoutY="263.0" startX="-84.29998779296875" startY="-0.899993896484375" stroke="#817e7e" />
+                        <Line endX="-99.5" endY="-77.5" layoutX="353.0" layoutY="292.0" startX="-99.5" startY="-30.399993896484375" stroke="#817e7e" />
+                     </children>
+                  </Group>
+               </children>
+            </Group>
             <Label layoutX="451.0" layoutY="47.0" styleClass="title-text-style" stylesheets="@dark-theme.css" text="Bitalino Menu" />
             <Group fx:id="helpButton" layoutX="779.0" layoutY="642.0">
                <children>
@@ -32,6 +77,39 @@
                   <Image url="@icon/cross.png" />
                </image>
             </ImageView>
+            <LineChart fx:id="ecgGraph" layoutX="49.0" layoutY="133.0" prefHeight="232.0" prefWidth="854.0" title="Electrocardiogram test" visible="false">
+              <xAxis>
+                <CategoryAxis label="Time (in s)" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis label="ECG (in mV)" side="LEFT" />
+              </yAxis>
+            </LineChart>
+            <LineChart fx:id="edaGraph" layoutX="49.0" layoutY="381.0" prefHeight="232.0" prefWidth="854.0" title="Electrodermal activity test" visible="false">
+               <xAxis>
+                  <CategoryAxis label="Time (in s)" side="BOTTOM" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis label="EDA (in mV)" side="LEFT" />
+               </yAxis>
+            </LineChart>
+            <Pane fx:id="configurationPane" layoutX="317.0" layoutY="189.0" prefHeight="353.0" prefWidth="462.0" style="-fx-border-color: -fx-degradation; -fx-border-width: 3;">
+               <children>
+                  <Label layoutX="129.0" layoutY="45.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Board configuration step" />
+                  <Group fx:id="nextButton" layoutX="333.0" layoutY="186.0">
+                     <children>
+                        <ImageView fitHeight="55.0" fitWidth="47.0" layoutX="40.0" preserveRatio="true">
+                           <image>
+                              <Image url="@icon/small_arrow.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutY="8.0" styleClass="main-text" text="Next" />
+                     </children>
+                  </Group>
+                  <TextField fx:id="macAddressField" layoutX="57.0" layoutY="169.0" prefHeight="34.0" prefWidth="242.0" promptText="MAC address" style="-fx-background-color: -fx-gray;" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
+                  <ComboBox fx:id="freqSelection" layoutX="57.0" layoutY="230.0" prefHeight="31.0" prefWidth="242.0" promptText="Select sampling frequency" style="-fx-background-color: -fx-gray;" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>
