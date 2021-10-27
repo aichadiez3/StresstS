@@ -5,9 +5,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="healthPane" prefHeight="706.0" prefWidth="1295.0" style="-fx-background-color: -fx-gray;" styleClass="subpane-layout" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientHealthController">
+<Pane fx:id="healthPane" prefHeight="682.0" prefWidth="1188.0" style="-fx-background-color: -fx-gray;" styleClass="subpane-layout" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientHealthController">
    <children>
-      <Pane fx:id="basicParametersButton" layoutX="237.0" layoutY="253.0" prefHeight="200.0" prefWidth="200.0" styleClass="bubble-pane-layout">
+      <Pane fx:id="basicParametersButton" layoutX="202.0" layoutY="254.0" prefHeight="200.0" prefWidth="200.0" styleClass="bubble-pane-layout">
          <children>
             <ImageView fitHeight="132.0" fitWidth="115.0" layoutX="43.0" layoutY="39.0" preserveRatio="true">
                <image>
@@ -16,7 +16,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="bitalinoButton" layoutX="548.0" layoutY="253.0" prefHeight="200.0" prefWidth="200.0" styleClass="bubble-pane-layout">
+      <Pane fx:id="bitalinoButton" layoutX="513.0" layoutY="254.0" prefHeight="200.0" prefWidth="200.0" styleClass="bubble-pane-layout">
          <children>
             <ImageView fitHeight="155.0" fitWidth="160.0" layoutX="22.0" layoutY="22.0" preserveRatio="true">
                <image>
@@ -25,7 +25,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="voiceButton" layoutX="848.0" layoutY="253.0" prefHeight="200.0" prefWidth="200.0" styleClass="bubble-pane-layout">
+      <Pane fx:id="voiceButton" layoutX="813.0" layoutY="254.0" prefHeight="200.0" prefWidth="200.0" styleClass="bubble-pane-layout">
          <children>
             <ImageView fitHeight="106.0" fitWidth="120.0" layoutX="43.0" layoutY="47.0" preserveRatio="true">
                <image>
@@ -34,9 +34,9 @@
             </ImageView>
          </children>
       </Pane>
-      <Label layoutX="567.0" layoutY="468.0" styleClass="main-text" text="Bitalino registration" />
-      <Label layoutX="513.0" layoutY="133.0" style="-fx-font-size: 25;" styleClass="main-text" text="Choose a registration type" />
-      <Label layoutX="870.0" layoutY="468.0" styleClass="main-text" text="Voice recorder test" />
-      <Label layoutX="211.0" layoutY="468.0" styleClass="main-text" text="Basic physiological parameters" />
+      <Label layoutX="532.0" layoutY="469.0" styleClass="main-text" text="Bitalino registration" />
+      <Label layoutX="478.0" layoutY="134.0" style="-fx-font-size: 25;" styleClass="main-text" text="Choose a registration type" />
+      <Label layoutX="835.0" layoutY="469.0" styleClass="main-text" text="Voice recorder test" />
+      <Label layoutX="176.0" layoutY="469.0" styleClass="main-text" text="Basic physiological parameters" />
    </children>
 </Pane>

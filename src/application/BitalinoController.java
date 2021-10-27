@@ -15,15 +15,17 @@ import Bitalino.BitalinoException;
 import Bitalino.Frame;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.image.*;
@@ -37,7 +39,7 @@ public class BitalinoController implements Initializable{
 	public Integer SamplingRate;
 	
 	@FXML
-    private Pane mainPane;
+    private AnchorPane menuPane;
 
     @FXML
     private Group allOptions;
@@ -53,6 +55,12 @@ public class BitalinoController implements Initializable{
     
     @FXML
     private Group helpButton;
+    
+    @FXML
+    private ImageView MACimage;
+
+    @FXML
+    private ImageView infoMACaddress;
 
     @FXML
     private Pane configurationPane;
@@ -78,18 +86,35 @@ public class BitalinoController implements Initializable{
 		
 		ObservableList<String> freqs = FXCollections.observableArrayList( "10","100","1000" );
 		freqSelection.setItems(freqs);
+		macAddressField.setText("20:17:11:20:50:75");
 		
-
+		infoMACaddress.setOnMouseEntered(new EventHandler<MouseEvent> () {
+			@Override
+			public void handle(MouseEvent arg0) {
+				MACimage.setVisible(true);
+				configurationPane.setEffect(new BoxBlur(4,4,4));
+				MACimage.setEffect(null);
+			}
+			
+		});
+		
+		infoMACaddress.setOnMouseExited(new EventHandler<MouseEvent> () {
+			@Override
+			public void handle(MouseEvent arg0) {
+				MACimage.setVisible(false);
+				configurationPane.setEffect(null);
+			}
+			
+		});
+		
+		
 		nextButton.setOnMouseClicked((MouseEvent event) -> {
 			configurationPane.setVisible(false);
 			allOptions.setVisible(true);
-			
-			String macAddress = "20:17:11:20:50:75";
-            macAddressField.setText(macAddress);
+			helpButton.setDisable(false);
             this. macAddress = macAddressField.getText();
             this.SamplingRate = Integer.parseInt(this.freqSelection.getValue());
-           
-            
+            menuPane.setEffect(null);
 		});
 		
 		
@@ -275,16 +300,16 @@ public class BitalinoController implements Initializable{
 
 	@FXML
     void return_window(MouseEvent event) throws IOException {
+		/*
 		Parent root = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
 		main_stage = (Stage) mainPane.getScene().getWindow();
 		main_stage.close();
 		Main.getStage().getScene().setRoot(root);
+		*/
+		Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
+		menuPane.getChildren().removeAll();
+		menuPane.getChildren().setAll(health_pane_fxml);
     }
-	
-	 @FXML
-	 void exit_window(MouseEvent event) {
-		 main_stage = (Stage) mainPane.getScene().getWindow();
-		 main_stage.close();
-	  }
-	
+	 
+	 
 }

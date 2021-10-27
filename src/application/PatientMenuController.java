@@ -42,9 +42,6 @@ public class PatientMenuController implements Initializable{
 
     @FXML
     private Pane moreOptionsPane;
-	
-	@FXML
-    private ImageView maxWindowButton;
 
     @FXML
     private Group logoutButton;
@@ -77,7 +74,15 @@ public class PatientMenuController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		try {
+			Pane initialize_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
+			menuPane.getChildren().removeAll();
+			menuPane.getChildren().setAll(initialize_pane_fxml);
+		} catch (IOException init_error) {
+			init_error.printStackTrace();
+		}
 		
+		enable_all_buttons();
 		
 		optionsPane.setOnMouseEntered(new EventHandler<MouseEvent> () {
 			@Override
@@ -97,17 +102,28 @@ public class PatientMenuController implements Initializable{
 			}			
 		});
 		
-		/*
+		
 		homeButton.setOnMouseClicked((MouseEvent event) -> {
 			titlePane.setText("MENU");
-			menuPane.getChildren().removeAll();
-			menuPane.getChildren().setAll(menu_init_pane);
+			enable_all_buttons();
+			homeButton.setDisable(true);
+			try {
+				Pane home_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
+				menuPane.getChildren().removeAll();
+				menuPane.getChildren().setAll(home_pane_fxml);
+				
+			} catch (IOException open_home_error) {
+				open_home_error.printStackTrace();
+			}
+			
 		});
 		
-		*/
+		
 		
 		userInfoButton.setOnMouseClicked((MouseEvent event) -> {
 			titlePane.setText("Patient personal information");
+			enable_all_buttons();
+			userInfoButton.setDisable(true);
 			try {
 				Pane user_info_pane_fxml = FXMLLoader.load(getClass().getResource("PatientInfoView.fxml"));
 				menuPane.getChildren().removeAll();
@@ -121,6 +137,8 @@ public class PatientMenuController implements Initializable{
 		
 		healthParametersButton.setOnMouseClicked((MouseEvent event) -> {
 			titlePane.setText("Health parameters");
+			enable_all_buttons();
+			healthParametersButton.setDisable(true);
 			try {
 				Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
 				menuPane.getChildren().removeAll();
@@ -170,5 +188,22 @@ public class PatientMenuController implements Initializable{
 		main_menu_stage = (Stage) anchorPane.getScene().getWindow();
 		main_menu_stage.setIconified(true);
 	}
+	
+	@FXML
+    void resize_window(MouseEvent event) {
+		main_menu_stage = (Stage) anchorPane.getScene().getWindow();
+		main_menu_stage.setResizable(true);
+    }
+	
+	void enable_all_buttons() {
+		homeButton.setDisable(false);
+		healthParametersButton.setDisable(false);
+		userInfoButton.setDisable(false);
+		homeButton.setDisable(false);
+		statisticsButton.setDisable(false);
+		settingsButton.setDisable(false);
+	}
+	
+	
 	
 }

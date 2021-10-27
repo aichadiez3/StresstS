@@ -45,16 +45,9 @@ public class PatientHealthController implements Initializable{
 		bitalinoButton.setOnMouseClicked((MouseEvent event) -> {
 			
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("BitalinoView.fxml"));
-				Parent root = (Parent) loader.load();
-				this.bitalino_controller = new BitalinoController();
-				this.bitalino_controller = loader.getController();
-				Stage stage = new Stage();
-				stage.setAlwaysOnTop(true);
-				stage.initStyle(StageStyle.UNDECORATED);
-				stage.initModality(Modality.APPLICATION_MODAL);
-				stage.setScene(new Scene(root));
-				stage.show();
+				Pane bitalino_pane_fxml = FXMLLoader.load(getClass().getResource("BitalinoView.fxml"));
+				healthPane.getChildren().removeAll();
+				healthPane.getChildren().setAll(bitalino_pane_fxml);
 				
 			} catch (IOException open_bitalino_error) {
 				open_bitalino_error.printStackTrace();

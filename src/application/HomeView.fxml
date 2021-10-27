@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane id="0" fx:id="menuPane" prefHeight="682.0" prefWidth="1188.0" styleClass="pane-layout" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
+   <children>
+      <Pane layoutX="65.0" layoutY="97.0" prefHeight="312.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
+      <Pane layoutX="689.0" layoutY="97.0" prefHeight="444.0" prefWidth="383.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
+      <Pane layoutX="65.0" layoutY="461.0" prefHeight="80.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
+         <children>
+            <Label layoutX="179.0" layoutY="14.0" style="-fx-font-size: 23;" styleClass="text-style" text="Hi! How are you doing today?">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <effect>
+                  <Reflection fraction="0.63" />
+               </effect>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</Pane>
