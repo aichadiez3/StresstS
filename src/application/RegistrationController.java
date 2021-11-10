@@ -145,7 +145,7 @@ public class RegistrationController implements Initializable{
 	@FXML
 	void return_window(MouseEvent event) throws IOException  {
 		Parent root = FXMLLoader.load(getClass().getResource("LogInView.fxml"));
-		Main.getStage().getScene().setRoot(root);
+		LaunchClientApp.getStage().getScene().setRoot(root);
 		
 	}
 	

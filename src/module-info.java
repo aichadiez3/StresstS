@@ -6,6 +6,7 @@ module test {
 	requires javafx.media;
 	requires bluecove;
 	requires java.logging;
+	requires java.sql;
 	opens application to javafx.fxml;
 	exports application;
 }

@@ -1,8 +1,10 @@
 package application;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.sql.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,7 +63,13 @@ public class logInController implements Initializable {
 				usernameField.getText();
 				passwordField.getText();
 				
-				if (!(usernameField.equals("") | passwordField.equals(""))) {
+				if (!(usernameField.getText().equals("") | passwordField.getText().equals(""))) {
+					
+					// Connection to web database
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:/anxipharma","root","");
+					
+					// Charge the new Menu scene
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientMenuView.fxml"));
 					Parent root = (Parent) loader.load();
 					this.patient_controller = new PatientMenuController();
@@ -79,7 +87,7 @@ public class logInController implements Initializable {
 					
 					
 				}
-			} catch (IOException log_in_error) {
+			} catch (Exception log_in_error) {
 				log_in_error.printStackTrace();
 			}
 			

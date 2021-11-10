@@ -141,7 +141,7 @@ public class OtherParametersController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
 		main_stage = (Stage) mainPane.getScene().getWindow();
 		main_stage.close();
-		Main.getStage().getScene().setRoot(root);
+		LaunchClientApp.getStage().getScene().setRoot(root);
     }
 	
 	 @FXML

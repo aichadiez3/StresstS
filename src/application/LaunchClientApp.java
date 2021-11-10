@@ -1,6 +1,10 @@
 package application;
 	
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -12,7 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 
 
-public class Main extends Application {
+public class LaunchClientApp extends Application{
 	
 	private static Stage stage;
 	private double xOffset = 0;
@@ -25,7 +29,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			//BorderPane root = new BorderPane();
 			Parent root = FXMLLoader.load(getClass().getResource("LogInView.fxml"));
 			primaryStage.setTitle("Log in page");
 			Scene scene = new Scene(root);
@@ -34,6 +37,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			stage = primaryStage;
 			primaryStage.show();
+			
 			
 			
 			// ----> This is to be able to move the window
@@ -64,7 +68,19 @@ public class Main extends Application {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		launch(args);
+		
+		/* -------> Here goes the code for the client connection to server
+		 * 
+		Socket socket = new Socket("localhost", 9000);
+        OutputStream outputStream = socket.getOutputStream();
+        
+         * ............
+         * 
+		*/
 	}
+	
+	
+	
 }

@@ -1,8 +1,12 @@
 package application;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,6 +27,8 @@ import javafx.stage.StageStyle;
 
 public class PatientMenuController implements Initializable{
 	
+	
+	Socket socket;
 	private static PatientMenuController patient_controller;
 	private logInController login_controller;
 	private static Stage main_menu_stage;
@@ -169,6 +175,12 @@ public class PatientMenuController implements Initializable{
 				main_menu_stage = (Stage) anchorPane.getScene().getWindow();
 				main_menu_stage.close();
 				
+				// ---> To close connection to the server
+				
+				/*	
+					outputStream.flush();
+			        releaseResources(outputStream, socket);
+				*/
 				
 			} catch (IOException log_out_error) {
 				log_out_error.printStackTrace();
@@ -180,6 +192,12 @@ public class PatientMenuController implements Initializable{
 	
 	@FXML
     void close_app(MouseEvent event) {
+		
+		// --------> Here closes the connection to server too
+		
+			//outputStream.flush();
+			//releaseResources(outputStream, socket);
+		
     	System.exit(0);
     }
 	
@@ -204,6 +222,21 @@ public class PatientMenuController implements Initializable{
 		settingsButton.setDisable(false);
 	}
 	
+	
+	private static void releaseResources(OutputStream outputStream, Socket socket) {
+        try {
+            try {
+                outputStream.close();
+
+            } catch (IOException ex) {
+                Logger.getLogger(LaunchClientApp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            socket.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(LaunchClientApp.class .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 	
 	
 }
