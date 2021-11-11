@@ -1,10 +1,11 @@
 package application;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.net.URLConnection;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.scene.Group;
@@ -19,10 +20,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -94,8 +93,23 @@ public class RegistrationController implements Initializable{
 				if (passwordField.getText().equals(passwordField2.getText()) & !usernameField.equals(null) & !emailField.equals(null) & !nameField.equals(null) 
 						& !surnameField.equals(null)) {
 					
-					// AÑADIR AQUI LA CREACION DE USUARIO A DATABASE
-					// Cuando esté hecho, añadir el código de debajo en este if
+
+					// Connection to web database
+					/*
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/anxipharma","root","");
+					PreparedStatement ps_user = dbConnection.prepareStatement("insert into user(user_name,password,email) values(?,?,?);");
+					ps_user.setString(1,usernameField.getText());
+					ps_user.setString(2,passwordField.getText());
+					ps_user.setString(3,emailField.getText());
+					ps_user.executeUpdate();
+					
+					PreparedStatement ps_patient = dbConnection.prepareStatement("insert into patient(name,surname) values(?,?);");
+					ps_patient.setString(1,nameField.getText());
+					ps_patient.setString(2,surnameField.getText());
+					ps_patient.executeUpdate();
+					
+					*/
 				}
 				
 			// ---> Load new patient menu scene

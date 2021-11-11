@@ -70,7 +70,7 @@ public class LaunchClientApp extends Application{
 	
 	public static void main(String[] args) throws IOException {
 		launch(args);
-		
+			
 		/* -------> Here goes the code for the client connection to server
 		 * 
 		Socket socket = new Socket("localhost", 9000);

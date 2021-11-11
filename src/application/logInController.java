@@ -23,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import pojos.User;
 
 public class logInController implements Initializable {
 
@@ -60,14 +61,19 @@ public class logInController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		logInButton.setOnAction((ActionEvent event) -> {
 			try {
-				usernameField.getText();
-				passwordField.getText();
 				
-				if (!(usernameField.getText().equals("") | passwordField.getText().equals(""))) {
+				if (!usernameField.getText().equals("") && !passwordField.getText().equals("")) {
 					
 					// Connection to web database
+					/*
 					Class.forName("com.mysql.jdbc.Driver");
-					Connection dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:/anxipharma","root","");
+					Connection dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/anxipharma","root","");
+					PreparedStatement ps = dbConnection.prepareStatement("insert into user(user_name,password) values(?,?);");
+					ps.setString(1,usernameField.getText());
+					ps.setString(2,passwordField.getText());
+					ps.executeUpdate();
+					*/
+					// ---> Condition if the name exists in the database to load the next scene
 					
 					// Charge the new Menu scene
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientMenuView.fxml"));
@@ -95,6 +101,7 @@ public class logInController implements Initializable {
 		
 		signInButton.setOnMouseClicked((MouseEvent event) -> {
 			try {
+				
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("RegistrationView.fxml"));
 				Parent root = (Parent) loader.load();
 				this.registration_controller = new RegistrationController();
