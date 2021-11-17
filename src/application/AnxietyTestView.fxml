@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="testPane" prefHeight="682.0" prefWidth="1188.0" style="-fx-background-color: -fx-gray;" styleClass="subpane-layout" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AnxietyTestController">
+   <children>
+      <Pane layoutX="67.0" layoutY="172.0" prefHeight="466.0" prefWidth="386.0" styleClass="bubble-pane-layout">
+         <children>
+            <CheckBox fx:id="yes_sport" layoutX="12.0" layoutY="54.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I sport weekly">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="yes_socialize" layoutX="12.0" layoutY="98.0" mnemonicParsing="false" styleClass="check-box1" text="I usually socialize everyday (family, friends...)">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="yes_read" layoutX="12.0" layoutY="139.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="340.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I often have time to read or to watch movies">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="yes_sleep" layoutX="12.0" layoutY="181.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="255.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I sleep between 7-8 hours everyday">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="yes_meditation" layoutX="12.0" layoutY="220.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="340.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I sometimes do meditation before or after sleep">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="yes_hobbies" layoutX="12.0" layoutY="261.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="386.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I can make some time during the week for my hobbies">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="yes_raising_thoughts" layoutX="13.0" layoutY="345.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="360.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I sometimes have rasing thoughts during the day">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="yes_stress" layoutX="12.0" layoutY="379.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="267.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I usually feel confortable under stress">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="yes_overthinker" layoutX="12.0" layoutY="414.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="327.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I consider that I tend to overthink too much">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </Pane>
+      <Pane layoutX="882.0" layoutY="104.0" prefHeight="503.0" prefWidth="267.0" styleClass="bubble-pane-layout">
+         <children>
+            <CheckBox fx:id="raising_thoughts" layoutX="36.0" layoutY="40.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Raising thoughts">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="panic_attacks" layoutX="36.0" layoutY="88.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Panic attacks">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="sleeping_troubles" layoutX="36.0" layoutY="139.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="159.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Sleeping troubles">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="appetite_alterations" layoutX="36.0" layoutY="190.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="159.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Appetite alterations">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="dissociation" layoutX="36.0" layoutY="239.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Dissociation">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="heavy_fast_breathing" layoutX="36.0" layoutY="288.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Heavy and fast breathing">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="shaking" layoutX="36.0" layoutY="336.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Shaking">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="dizziness" layoutX="36.0" layoutY="383.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Dizziness">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="fainting" layoutX="36.0" layoutY="429.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Fainting">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </Pane>
+      <Label layoutX="893.0" layoutY="27.0" prefHeight="64.0" prefWidth="245.0" style="-fx-font-size: 17;" styleClass="main-text" text="Symptoms you may have experienced lately" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="130.0" layoutY="50.0" style="-fx-font-size: 25;" styleClass="main-text" text="Daily anxiety test levels" />
+      <Label layoutX="260.0" layoutY="104.0" prefHeight="64.0" prefWidth="386.0" style="-fx-font-size: 17;" styleClass="main-text" text="Try to give approach for the following statements regarding your past days activities" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Pane layoutX="450.0" layoutY="172.0" prefHeight="466.0" prefWidth="402.0" styleClass="bubble-pane-layout">
+         <children>
+            <Label alignment="CENTER" layoutX="-83.0" layoutY="15.0" prefHeight="26.0" prefWidth="159.0" style="-fx-font-size: 16; -fx-font-style: italic; -fx-background-color: -fx-pale-green;" styleClass="main-text" text="My routines" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="-128.0" layoutY="310.0" prefHeight="26.0" prefWidth="245.0" style="-fx-font-size: 16; -fx-font-style: italic; -fx-background-color: -fx-pale-blue;" styleClass="main-text" text="About myself" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="no_sport" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="255.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I don't practice any sport">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="no_socialize" layoutX="14.0" layoutY="93.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="255.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I usually prefer to be on my own">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="no_read" layoutX="14.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="255.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I never read or watch movies">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="no_sleep" layoutX="14.0" layoutY="177.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="255.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I sleep less than 7-8 hours everyday">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="no_meditation" layoutX="14.0" layoutY="220.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="255.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I never meditate">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="no_hobbies" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="386.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I never make some time during the week for my hobbies">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="no_raising_thoughts" layoutX="14.0" layoutY="343.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="255.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I never have rasing thoughts">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="no_stress" layoutX="14.0" layoutY="379.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="305.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I often panic when I'm under a lot of stress">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="no_overthinker" layoutX="14.0" layoutY="413.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="209.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I rarely overthink too much">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </Pane>
+      <ImageView fitHeight="53.0" fitWidth="59.0" layoutX="67.0" layoutY="42.0" preserveRatio="true">
+         <image>
+            <Image url="@icon/small_arrow.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="submitButton" layoutX="953.0" layoutY="623.0" mnemonicParsing="false" styleClass="sign-in-button" text="Submit this test" />
+   </children>
+</Pane>

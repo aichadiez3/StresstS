@@ -25,6 +25,7 @@ import javafx.application.Platform;
 
 public class OtherParametersController implements Initializable {
 
+	private PatientHealthController health_controller;
 	private static Stage main_stage;
 	private Integer counter;
 	private double timelapse;
@@ -69,7 +70,13 @@ public class OtherParametersController implements Initializable {
 	    @FXML
 	    private Button tapButton;
 
-	
+
+		public void setHealt_controller(PatientHealthController health_controller) {
+			this.health_controller = health_controller;
+		}
+
+
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -134,6 +141,20 @@ public class OtherParametersController implements Initializable {
 		startButton.setVisible(true);
 		breathingRateImage.setVisible(true);
 		pulseOximeterImage.setVisible(true);
+
+		//Close the emergent window
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
+			main_stage = (Stage) mainPane.getScene().getWindow();
+			main_stage.close();
+			LaunchClientApp.getStage().getScene().setRoot(root);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
     }
 	
 	@FXML

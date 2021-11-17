@@ -20,23 +20,30 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.image.*;
 
 public class BitalinoController implements Initializable{
 
 	private static Stage main_stage;
+	public HelpConnectionController help_controller;
 	@SuppressWarnings("exports")
 	public static Frame[] frame;
 	public String macAddress;
 	public Integer SamplingRate;
+	Bitalino bitalino = null;
 	
 	@FXML
     private AnchorPane menuPane;
@@ -51,16 +58,13 @@ public class BitalinoController implements Initializable{
     private Group ecgTestButton;
 
     @FXML
-    private ImageView startButton;
-    
-    @FXML
-    private Group helpButton;
-    
-    @FXML
-    private ImageView MACimage;
+    private Group startButton;
 
     @FXML
-    private ImageView infoMACaddress;
+    private Group helpButton;
+
+    @FXML
+    private Group proceedButton;
 
     @FXML
     private Pane configurationPane;
@@ -70,6 +74,15 @@ public class BitalinoController implements Initializable{
 
     @FXML
     private TextField macAddressField;
+    
+    @FXML
+    private ImageView infoMACaddress;
+
+    @FXML
+    private ImageView MACimage;
+
+    @FXML
+    private Group chargingIndicator;
 
     @FXML
     private LineChart<Integer, Integer> ecgGraph;
@@ -83,6 +96,9 @@ public class BitalinoController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		ecgGraph.resize(1060, 232);
+		edaGraph.resize(1060, 232);
 		
 		ObservableList<String> freqs = FXCollections.observableArrayList( "10","100","1000" );
 		freqSelection.setItems(freqs);
@@ -119,47 +135,49 @@ public class BitalinoController implements Initializable{
 		
 		
 		startButton.setOnMouseClicked((MouseEvent event) -> {
+			this.SamplingRate=Integer.parseInt(freqSelection.getValue());
 			ecgGraph.setVisible(true);
 			edaGraph.setVisible(true);
-			edaTestButton.setVisible(false);
-			ecgTestButton.setVisible(false);
 			
-			Bitalino bitalino = null;
 	        try {
+	        	set_buttons_invisible();
+	        	
 	            bitalino = new Bitalino();
 	            Vector<RemoteDevice> devices = bitalino.findDevices();
-	            System.out.println(devices);
 
 	            bitalino.open(macAddress, this.SamplingRate);
-
+	            
 	            // ----> Start acquisition on analog channels A2 (ECG) and A3 (EDA)
 	            int[] channelsToAcquire = {1, 2};
 	            bitalino.start(channelsToAcquire);
+	            
 
-	            //Read in total 10000000 times
-	            for (int j = 0; j < 10000000; j++) {
+	            //Read in total 100 times
+	            for (int j = 0; j < 100; j++) {
 
 	                //Each time read a block of 10 samples 
 	                int block_size=10;
-	                frame = bitalino.read(block_size);
-
-	                System.out.println("size block: " + frame.length);
 
 	                //Print the samples
 	                for (int i = 0; i < frame.length; i++) {
-	                    System.out.println((j * block_size + i) + " seq: " + frame[i].seq + " "
-	                            + frame[i].analog[0] + " "
-	                            + frame[i].analog[1] + " "
-	                    //  + frame[i].analog[2] + " "
-	                    //  + frame[i].analog[3] + " "
-	                    //  + frame[i].analog[4] + " "
-	                    //  + frame[i].analog[5]
-	                    );
-
+	                	// To get a JavaFX LineChart component to display any lines, you must provide it with a data series.
+	                	// A data series is a list of data points. Each data point contains an X value and a Y value.
+	                	XYChart.Series dataECG=new XYChart.Series<>();
+	                	int x_axis=(j * block_size + i)/SamplingRate;
+	                	
+	                	dataECG.getData().add(new XYChart.Data<Integer, Integer>(x_axis, frame[i].analog[1]));
+	                	ecgGraph.getData().add(dataECG);
+	                	
+	                	XYChart.Series<Integer,Integer> dataEDA=new XYChart.Series<>();
+	                	dataEDA.getData().add(new XYChart.Data<Integer, Integer>(x_axis, frame[i].analog[2]));
+	                	edaGraph.getData().add(dataEDA);
 	                }
 	            }
 	            //stop acquisition
+	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
+	            
+	            
 	        } catch (BitalinoException ex) {
 	            Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
 	        } catch (Throwable ex) {
@@ -168,54 +186,66 @@ public class BitalinoController implements Initializable{
 	            try {
 	                if (bitalino != null) {
 	                    bitalino.close();   //close bluetooth connection
+	                    proceedButton.setVisible(true);
 	                }
 	            } catch (BitalinoException ex) {
 	                Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
 	            }
 	        }
+	        
+	        
+	        proceedButton.setVisible(true); //<----------- ESTO HAY Q QUITARLO
+	        
+	        proceedButton.setOnMouseClicked((MouseEvent e)->{
+	        	try {
+	    			Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
+	    			menuPane.getChildren().removeAll();
+	    			menuPane.getChildren().setAll(health_pane_fxml);
+	    			
+	    		} catch (IOException ev1) {
+	    			// TODO Auto-generated catch block
+	    			ev1.printStackTrace();
+	    		}
+	        });
 
 		});
 		
 		edaTestButton.setOnMouseClicked((MouseEvent event) -> {
+			this.SamplingRate=Integer.parseInt(freqSelection.getValue());
 			edaGraph.setVisible(true);
-			edaTestButton.setVisible(false);
-			startButton.setVisible(false);
+			edaGraph.resize(1060, 477);
 			
-			Bitalino bitalino = null;
 	        try {
+	        	
+	        	set_buttons_invisible();
 	            bitalino = new Bitalino();
+	            
 	            Vector<RemoteDevice> devices = bitalino.findDevices();
-	            System.out.println(devices);
-
+				
 	            bitalino.open(macAddress, this.SamplingRate);
-
+	            
 	            // ----> Start acquisition on analog channel A3 (EDA)
 	            int[] channelsToAcquire = {2};
 	            bitalino.start(channelsToAcquire);
-
-	            //Read in total 10000000 times
-	            for (int j = 0; j < 10000000; j++) {
+	            
+	            
+	            //Read in total 100 times
+	            for (int j = 0; j < 100; j++) {
 
 	                //Each time read a block of 10 samples 
 	                int block_size=10;
 	                frame = bitalino.read(block_size);
 
-	                System.out.println("size block: " + frame.length);
-
 	                //Print the samples
 	                for (int i = 0; i < frame.length; i++) {
-	                    System.out.println((j * block_size + i) + " seq: " + frame[i].seq + " "
-	                            + frame[i].analog[0] + " "
-	                            + frame[i].analog[1] + " "
-	                    //  + frame[i].analog[2] + " "
-	                    //  + frame[i].analog[3] + " "
-	                    //  + frame[i].analog[4] + " "
-	                    //  + frame[i].analog[5]
-	                    );
-
+	                	
+	                	XYChart.Series<Integer,Integer> dataEDA=new XYChart.Series<>();
+	                	dataEDA.getData().add(new XYChart.Data<Integer, Integer>((j * block_size + i)/this.SamplingRate, frame[i].analog[2]));
+	                	edaGraph.getData().add(dataEDA);
 	                }
 	            }
 	            //stop acquisition
+	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
 	        } catch (BitalinoException ex) {
 	            Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -225,56 +255,63 @@ public class BitalinoController implements Initializable{
 	            try {
 	                if (bitalino != null) {
 	                    bitalino.close();   //close bluetooth connection
+	                    proceedButton.setVisible(true);
 	                }
 	            } catch (BitalinoException ex) {
 	                Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
 	            }
 	        }
 
-			
-			
+	        proceedButton.setVisible(true); //<----------- ESTO HAY Q QUITARLO
+	        
+	        proceedButton.setOnMouseClicked((MouseEvent ev)->{
+	        	try {
+	    			Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
+	    			menuPane.getChildren().removeAll();
+	    			menuPane.getChildren().setAll(health_pane_fxml);
+	    			
+	    		} catch (IOException ev1) {
+	    			// TODO Auto-generated catch block
+	    			ev1.printStackTrace();
+	    		}
+	        });
 		});
 		
 		ecgTestButton.setOnMouseClicked((MouseEvent event) -> {
+			this.SamplingRate=Integer.parseInt(freqSelection.getValue());
 			ecgGraph.setVisible(true);
-			ecgTestButton.setVisible(false);
-			startButton.setVisible(false);
+			ecgGraph.resize(1060, 477);
 			
-			Bitalino bitalino = null;
 	        try {
+	            set_buttons_invisible();
 	            bitalino = new Bitalino();
+	            
 	            Vector<RemoteDevice> devices = bitalino.findDevices();
-	            System.out.println(devices);
-
+				
 	            bitalino.open(macAddress, this.SamplingRate);
-
+	            
 	            // ----> Start acquisition on analog channels A2 (ECG)
 	            int[] channelsToAcquire = {1};
 	            bitalino.start(channelsToAcquire);
-
-	            //Read in total 10000000 times
-	            for (int j = 0; j < 10000000; j++) {
+	            
+	            
+	            //Read in total 100 times
+	            for (int j = 0; j < 100; j++) {
 
 	                //Each time read a block of 10 samples 
 	                int block_size=10;
 	                frame = bitalino.read(block_size);
 
-	                System.out.println("size block: " + frame.length);
-
 	                //Print the samples
 	                for (int i = 0; i < frame.length; i++) {
-	                    System.out.println((j * block_size + i) + " seq: " + frame[i].seq + " "
-	                            + frame[i].analog[0] + " "
-	                            + frame[i].analog[1] + " "
-	                    //  + frame[i].analog[2] + " "
-	                    //  + frame[i].analog[3] + " "
-	                    //  + frame[i].analog[4] + " "
-	                    //  + frame[i].analog[5]
-	                    );
-
+	                	
+	                	XYChart.Series<Integer,Integer> dataECG=new XYChart.Series<>();
+	                	dataECG.getData().add(new XYChart.Data<Integer, Integer>((j * block_size + i)/this.SamplingRate, frame[i].analog[1]));
+	                	ecgGraph.getData().add(dataECG);
 	                }
 	            }
 	            //stop acquisition
+	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
 	        } catch (BitalinoException ex) {
 	            Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -284,32 +321,58 @@ public class BitalinoController implements Initializable{
 	            try {
 	                if (bitalino != null) {
 	                    bitalino.close();   //close bluetooth connection
+	                    proceedButton.setVisible(true);
 	                }
 	            } catch (BitalinoException ex) {
 	                Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
 	            }
 	        }
+	        
+	        proceedButton.setVisible(true); //<----------- ESTO HAY Q QUITARLO
+	        
+	        proceedButton.setOnMouseClicked((MouseEvent e)->{
+	        	//Close the stage
+	    		try {
+	    			Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
+	    			menuPane.getChildren().removeAll();
+	    			menuPane.getChildren().setAll(health_pane_fxml);
+	    			
+	    		} catch (IOException ev1) {
+	    			// TODO Auto-generated catch block
+	    			ev1.printStackTrace();
+	    		}
+	        });
 
 		});
 		
 		helpButton.setOnMouseClicked((MouseEvent event) -> {
-			// Here we display a pane with the steps to follow for connecting the bitalino board + sensors
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("HelpElectrodesView.fxml"));
+				Parent root = (Parent) loader.load();
+				this.help_controller = new HelpConnectionController();
+				this.help_controller = loader.getController();
+				
+				Stage stage = new Stage();
+				stage.setAlwaysOnTop(true);
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setScene(new Scene(root));
+				stage.show();
+				
+			} catch (IOException open_help_error) {
+				open_help_error.printStackTrace();
+			}
 		});
 		
 	}
 
-	@FXML
-    void return_window(MouseEvent event) throws IOException {
-		/*
-		Parent root = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
-		main_stage = (Stage) mainPane.getScene().getWindow();
-		main_stage.close();
-		Main.getStage().getScene().setRoot(root);
-		*/
-		Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
-		menuPane.getChildren().removeAll();
-		menuPane.getChildren().setAll(health_pane_fxml);
-    }
+	
+	void set_buttons_invisible() {
+		ecgTestButton.setVisible(false);
+		edaTestButton.setVisible(false);
+		startButton.setVisible(false);
+		chargingIndicator.setVisible(true);
+	}
 	 
 	 
 }

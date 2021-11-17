@@ -117,7 +117,7 @@ public class PatientInfoController implements Initializable{
 				});
 		ref_date.setResizable(false);
 		
-		JFXTreeTableColumn<MedicalRecordObject, String> bitalino_column = new JFXTreeTableColumn<>("Includes BItalino test");
+		JFXTreeTableColumn<MedicalRecordObject, String> bitalino_column = new JFXTreeTableColumn<>("Includes Bitalino test");
 		bitalino_column.setPrefWidth(100);
 		bitalino_column.setCellValueFactory(
 				new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {

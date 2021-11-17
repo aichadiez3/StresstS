@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -18,7 +19,7 @@ import javafx.stage.StageStyle;
 public class PatientHealthController implements Initializable{
 
 	private OtherParametersController parameters_controller;
-	private BitalinoController bitalino_controller;
+	private PatientHealthController health_controller;
 	private static Stage main_stage;
 	
 	@FXML
@@ -31,7 +32,10 @@ public class PatientHealthController implements Initializable{
     private Pane bitalinoButton;
 
     @FXML
-    private Pane voiceButton;
+    private Pane testButton;
+    
+    @FXML
+    private ProgressBar progressBar;
 	
 
 
@@ -40,8 +44,45 @@ public class PatientHealthController implements Initializable{
 	}
 
 	
+	// ----------> GETTERS AND SETTERS <-------------
+	
+	public PatientHealthController getHealth_controller() {
+		return health_controller;
+	}
+
+	public void setHealth_controller(PatientHealthController health_controller) {
+		this.health_controller = health_controller;
+	}
+
+
+
+	public Pane getBasicParametersButton() {
+		return basicParametersButton;
+	}
+	public void setBasicParametersButton(Pane basicParametersButton) {
+		this.basicParametersButton = basicParametersButton;
+	}
+
+	public Pane getBitalinoButton() {
+		return bitalinoButton;
+	}
+	public void setBitalinoButton(Pane bitalinoButton) {
+		this.bitalinoButton = bitalinoButton;
+	}
+
+	public Pane getTestButton() {
+		return testButton;
+	}
+	public void setTestButton(Pane testButton) {
+		this.testButton = testButton;
+	}
+
+
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		//bitalinoButton.setDisable(true);
+		//testButton.setDisable(true);
+		
 		bitalinoButton.setOnMouseClicked((MouseEvent event) -> {
 			
 			try {
@@ -62,6 +103,7 @@ public class PatientHealthController implements Initializable{
 				Parent root = (Parent) loader.load();
 				this.parameters_controller = new OtherParametersController();
 				this.parameters_controller = loader.getController();
+				
 				Stage stage = new Stage();
 				stage.setAlwaysOnTop(true);
 				stage.initStyle(StageStyle.UNDECORATED);
@@ -74,6 +116,17 @@ public class PatientHealthController implements Initializable{
 			}
 		});
 		
+		testButton.setOnMouseClicked((MouseEvent event) -> {
+			try {
+				Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
+				healthPane.getChildren().removeAll();
+				healthPane.getChildren().setAll(test_pane_fxml);
+				
+				
+			} catch (IOException test_error) {
+				test_error.printStackTrace();
+			}
+		});
 		
 	}
 

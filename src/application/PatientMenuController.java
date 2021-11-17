@@ -38,7 +38,6 @@ public class PatientMenuController implements Initializable{
 	private logInController login_controller;
 	private static Stage main_menu_stage;
 	
-
 	@FXML
     private AnchorPane anchorPane;
 
@@ -50,18 +49,6 @@ public class PatientMenuController implements Initializable{
 
     @FXML
     private Label titlePane;
-    
-    @FXML
-    private Label dayLabel;
-    
-    @FXML
-    private Label timeLabel;
-    
-    @FXML
-    private Label countCheckUpLabel;
-    
-    @FXML
-    private Pane testButton;
 
     @FXML
     private Pane moreOptionsPane;
@@ -83,6 +70,7 @@ public class PatientMenuController implements Initializable{
 
     @FXML
     private Group homeButton;
+
     
     
     public static void setController(PatientMenuController controller) {
@@ -93,6 +81,13 @@ public class PatientMenuController implements Initializable{
 		return anchorPane;
 	}
 
+	public Pane getMenuPane() {
+		return menuPane;
+	}
+
+	public void setMenuPane(Pane menuPane) {
+		this.menuPane = menuPane;
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -107,11 +102,7 @@ public class PatientMenuController implements Initializable{
 		
 		enable_all_buttons();
 		
-		TimeLocalZoneSetter time=new TimeLocalZoneSetter();
-		/*
-		this.timeLabel.setText(time.getTimeString());
-		this.dayLabel.setText(time.getDateString());
-		*/
+		
 		optionsPane.setOnMouseEntered(new EventHandler<MouseEvent> () {
 			@Override
 			public void handle(MouseEvent event) {
@@ -139,6 +130,7 @@ public class PatientMenuController implements Initializable{
 				Pane home_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
 				menuPane.getChildren().removeAll();
 				menuPane.getChildren().setAll(home_pane_fxml);
+				
 				
 			} catch (IOException open_home_error) {
 				open_home_error.printStackTrace();

@@ -26,17 +26,6 @@
 	-fx-text-fill: -fx-secondary;
 }
 
-#image-cover{
-	-fx-background-image: url("image.jpg");
-	-fx-background-size: cover;
-}
-
-#back-cover{
-	-fx-background-image: url("flow.gif");
-	-fx-background-size: cover;
-}
-
-
 .root{
     -fx-background-color: white;
 }
@@ -110,7 +99,44 @@
 	-fx-border-radius: 10px;
 	-fx-background-radius: 10px;
 	-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10,0,0,0);
-	
+}
+
+.check-box1 .box {
+    -fx-background-color: white;
+    -fx-border-color: -fx-primarytext-dark;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-border-width: 2.5px;
+    -fx-scale-x:0.75 ;
+    -fx-scale-y:0.75 ;
+}
+
+.check-box1:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box1:selected .box {
+    -fx-background-color: -fx-pale-blue;
+    -fx-border-color: -fx-pale-blue;
+}
+
+.check-box2 .box {
+    -fx-background-color: white;
+    -fx-border-color: -fx-primarytext-dark;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-border-width: 2.5px;
+    -fx-scale-x:0.75 ;
+    -fx-scale-y:0.75 ;
+}
+
+.check-box2:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box2:selected .box {
+    -fx-background-color: -fx-pale-green;
+    -fx-border-color: -fx-pale-green;
 }
 
 
@@ -478,11 +504,11 @@
 /*Progrss bar*/
 
 .progress-bar-main .track{
-    -fx-background-color: -fx-primary;
+    -fx-background-color: white;
 }
 .progress-bar-main .bar{
     -fx-background-color: -fx-secondary;
-    -fx-padding: 5px;
+    -fx-padding: 8px;
 }
 
 .common-label{

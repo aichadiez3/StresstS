@@ -6,6 +6,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -64,7 +65,10 @@
       <Group fx:id="loadingAnimation" layoutX="193.0" layoutY="150.0">
          <children>
             <Label layoutX="18.0" layoutY="162.0" prefHeight="35.0" prefWidth="157.0" style="-fx-font-size: 20;" styleClass="text-style" stylesheets="@dark-theme.css" text="Creating account" />
-            <ProgressIndicator minHeight="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="172.0" styleClass="progress-bar-main" />
+            <ProgressIndicator minHeight="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="172.0" styleClass="progress-bar-main">
+               <effect>
+                  <ColorAdjust brightness="0.69" contrast="0.14" saturation="-0.14" />
+               </effect></ProgressIndicator>
          </children>
       </Group>
    </children>

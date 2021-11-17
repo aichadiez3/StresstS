@@ -29,7 +29,8 @@ public class TimeLocalZoneSetter {
 		Clock clock = Clock.systemDefaultZone();
 		ZonedDateTime dateTime = ZonedDateTime.now(); // Gets the current date and time, with your default time-zone
 		Integer day = dateTime.now(clock).getDayOfWeek().getValue();
-		String to_text_day="";
+		Integer month = dateTime.now(clock).getMonth().getValue();
+		String to_text_day="", to_text_mont="";
 		
 		if(day.equals(1)) {
 			to_text_day="Mon. ";
@@ -46,8 +47,33 @@ public class TimeLocalZoneSetter {
 		}else 
 			to_text_day="Sun. ";
 		
+		if(month.equals(1)) {
+			to_text_mont="Jan. ";
+		} else if(month.equals(2)) {
+			to_text_mont="Feb. ";
+		} else if(month.equals(3)) {
+			to_text_mont="Mar. ";
+		} else if(month.equals(4)) {
+			to_text_mont="Apr. ";
+		} else if(month.equals(5)) {
+			to_text_mont="May ";
+		} else if(month.equals(6)) {
+			to_text_mont="Jun. ";
+		} else if(month.equals(7)) {
+			to_text_mont="Jul. ";
+		}else if(month.equals(8)) {
+			to_text_mont="Aug. ";
+		}else if(month.equals(9)) {
+			to_text_mont="Sept. ";
+		} else if(month.equals(10)) {
+			to_text_mont="Oct. ";
+		} else if(month.equals(11)) {
+			to_text_mont="Nov. ";
+		} else 
+			to_text_mont="Dec. ";
 		
-		dateString=to_text_day + dateTime.now(clock).getDayOfMonth()+"-"+dateTime.now(clock).getMonth().getValue()+"-"+dateTime.now(clock).getYear();
+		
+		dateString=to_text_day + dateTime.now(clock).getDayOfMonth()+" "+to_text_mont+dateTime.now(clock).getYear();
 		timeString=dateTime.now(clock).getHour()+":"+dateTime.now(clock).getMinute();
 		
 	}

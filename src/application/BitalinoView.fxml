@@ -6,7 +6,9 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,7 +19,7 @@
 
 <AnchorPane fx:id="menuPane" prefHeight="682.0" prefWidth="1188.0" style="-fx-background-color: white;" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BitalinoController">
    <children>
-      <Group fx:id="allOptions" layoutX="123.0" layoutY="155.0" visible="false">
+      <Group fx:id="allOptions" layoutX="230.0" layoutY="156.0" visible="false">
          <children>
             <Group fx:id="edaTestButton" layoutY="261.0">
                <children>
@@ -25,25 +27,27 @@
                      <image>
                         <Image url="@icon/edaTest.png" />
                      </image>
+                     <effect>
+                        <ColorAdjust brightness="0.38" contrast="0.12" hue="1.0" saturation="-0.23" />
+                     </effect>
                   </ImageView>
-                  <Label layoutY="90.0" text="Electrodermal activity test" />
-                  <Label layoutX="14.0" layoutY="35.0" prefHeight="55.0" prefWidth="143.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Start recording EDA" textAlignment="CENTER" wrapText="true" />
+                  <Label layoutX="14.0" layoutY="56.0" prefHeight="55.0" prefWidth="143.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Start recording EDA" textAlignment="CENTER" wrapText="true" />
                </children>
             </Group>
             <Group fx:id="ecgTestButton" layoutX="13.0">
                <children>
-                  <Label layoutY="113.0" text="Electrocardiogram test" />
                   <ImageView fitHeight="192.0" fitWidth="200.0" layoutX="164.0">
                      <image>
                         <Image url="@icon/ecgTest.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="3.0" layoutY="58.0" prefHeight="55.0" prefWidth="143.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Start recording ECG" textAlignment="CENTER" wrapText="true" />
+                  <Label layoutX="3.0" layoutY="69.0" prefHeight="55.0" prefWidth="143.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Start recording ECG" textAlignment="CENTER" wrapText="true" />
                </children>
             </Group>
-            <Group layoutX="387.20001220703125" layoutY="85.5">
+            <Group fx:id="startButton" layoutX="387.20001220703125" layoutY="85.5">
                <children>
-                  <ImageView fx:id="startButton" fitHeight="166.0" fitWidth="170.0" layoutX="170.0" layoutY="48.0" preserveRatio="true">
+                  <Label layoutY="-45.0" prefHeight="53.0" prefWidth="139.0" text="Electrocardiogram test" />
+                  <ImageView fitHeight="166.0" fitWidth="170.0" layoutX="170.0" layoutY="48.0" preserveRatio="true">
                      <image>
                         <Image url="@icon/start.png" />
                      </image>
@@ -52,6 +56,7 @@
                   <Line endX="-99.5" endY="-77.5" layoutX="353.0" layoutY="77.0" startX="-99.5" startY="-30.399993896484375" stroke="#817e7e" />
                   <Line endX="159.0" endY="-0.899993896484375" layoutX="94.0" layoutY="263.0" startX="-84.29998779296875" startY="-0.899993896484375" stroke="#817e7e" />
                   <Line endX="-99.5" endY="-77.5" layoutX="353.0" layoutY="292.0" startX="-99.5" startY="-30.399993896484375" stroke="#817e7e" />
+                  <Label layoutY="251.0" prefHeight="54.0" prefWidth="171.0" text="Electrodermal activity test" />
                </children>
             </Group>
          </children>
@@ -67,12 +72,17 @@
             <Label layoutY="16.0" styleClass="text-style" stylesheets="@dark-theme.css" text="How to connect" />
          </children>
       </Group>
-      <ImageView fitHeight="73.0" fitWidth="56.0" layoutX="457.0" layoutY="39.0" onMouseClicked="#return_window" preserveRatio="true">
-         <image>
-            <Image url="@icon/back.png" />
-         </image>
-      </ImageView>
-      <LineChart fx:id="ecgGraph" layoutX="53.0" layoutY="136.0" prefHeight="232.0" prefWidth="854.0" title="Electrocardiogram test" visible="false">
+      <Group fx:id="proceedButton" layoutX="957.0" layoutY="40.0" visible="false">
+         <children>
+            <ImageView fitHeight="73.0" fitWidth="56.0" layoutX="155.0" layoutY="7.0" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@icon/back.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="14.0" layoutY="21.0" styleClass="main-text" text="Proceed to test" />
+         </children>
+      </Group>
+      <LineChart fx:id="ecgGraph" layoutX="64.0" layoutY="137.0" prefHeight="232.0" prefWidth="1060.0" title="Electrocardiogram test" visible="false">
         <xAxis>
           <CategoryAxis label="Time (in s)" side="BOTTOM" />
         </xAxis>
@@ -80,7 +90,7 @@
           <NumberAxis label="ECG (in mV)" side="LEFT" />
         </yAxis>
       </LineChart>
-      <LineChart fx:id="edaGraph" layoutX="53.0" layoutY="384.0" prefHeight="232.0" prefWidth="854.0" title="Electrodermal activity test" visible="false">
+      <LineChart fx:id="edaGraph" createSymbols="false" layoutX="64.0" layoutY="382.0" prefHeight="232.0" prefWidth="1060.0" title="Electrodermal activity test" visible="false">
          <xAxis>
             <CategoryAxis label="Time (in s)" side="BOTTOM" />
          </xAxis>
@@ -88,7 +98,7 @@
             <NumberAxis label="EDA (in mV)" side="LEFT" />
          </yAxis>
       </LineChart>
-      <Pane fx:id="configurationPane" layoutX="355.0" layoutY="192.0" prefHeight="353.0" prefWidth="462.0" style="-fx-background-color: -fx-degradation;">
+      <Pane fx:id="configurationPane" layoutX="370.0" layoutY="193.0" prefHeight="353.0" prefWidth="462.0" style="-fx-background-color: -fx-degradation;">
          <children>
             <Label layoutX="152.0" layoutY="40.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Board configuration step" />
             <ImageView fitHeight="55.0" fitWidth="47.0" layoutX="105.0" layoutY="32.0" preserveRatio="true">
@@ -141,5 +151,15 @@
             <Image url="@icon/bitalinoMac.jpg" />
          </image>
       </ImageView>
+      <Group fx:id="chargingIndicator" layoutX="478.0" layoutY="262.0" visible="false">
+         <children>
+            <ProgressIndicator layoutX="22.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="172.0" styleClass="progress-bar-main">
+               <effect>
+                  <ColorAdjust brightness="0.69" contrast="0.14" saturation="-0.14" />
+               </effect>
+            </ProgressIndicator>
+            <Label layoutY="179.0" prefHeight="35.0" prefWidth="219.0" style="-fx-font-size: 20;" styleClass="text-style" stylesheets="@dark-theme.css" text="Starting data acquisition" />
+         </children>
+      </Group>
    </children>
 </AnchorPane>
