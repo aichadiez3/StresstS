@@ -1,25 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <Pane id="0" fx:id="menuPane" prefHeight="682.0" prefWidth="1188.0" styleClass="pane-layout" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
    <children>
-      <Pane layoutX="65.0" layoutY="97.0" prefHeight="312.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
-      <Pane layoutX="689.0" layoutY="97.0" prefHeight="444.0" prefWidth="383.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
-      <Pane layoutX="65.0" layoutY="461.0" prefHeight="80.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
+      <Pane layoutX="59.0" layoutY="66.0" prefHeight="312.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
          <children>
-            <Label layoutX="179.0" layoutY="14.0" style="-fx-font-size: 23;" styleClass="text-style" text="Hi! How are you doing today?">
+            <Label fx:id="dayLabel" layoutX="54.0" layoutY="58.0" prefHeight="68.0" prefWidth="363.0" stylesheets="@dark-theme.css" text="DayTimer">
                <font>
-                  <Font size="23.0" />
+                  <Font name="System Bold" size="46.0" />
                </font>
-               <effect>
-                  <Reflection fraction="0.63" />
-               </effect>
             </Label>
+            <Label fx:id="timeLabel" layoutX="54.0" layoutY="122.0" prefHeight="47.0" prefWidth="324.0" stylesheets="@dark-theme.css" text="TimerClock">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane fx:id="testButton" layoutX="690.0" layoutY="205.0" prefHeight="450.0" prefWidth="429.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="152.0" layoutY="114.0" prefHeight="267.0" prefWidth="125.0" stylesheets="@dark-theme.css" text="Daily Test" textAlignment="CENTER" textFill="#585858" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8842105269432068" green="0.8711110949516296" blue="0.8711110949516296" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <font>
+                  <Font name="Georgia" size="34.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="195.0" fitWidth="225.0" layoutX="110.0" layoutY="264.0" preserveRatio="true">
+               <image>
+                  <Image url="@icon/flower.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="376.0" fitWidth="408.0" layoutX="53.0" layoutY="-58.0" preserveRatio="true">
+               <image>
+                  <Image url="@icon/flower2.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Pane layoutX="59.0" layoutY="386.0" prefHeight="88.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="81.0" focusTraversable="true" layoutX="502.0" layoutY="13.0" opacity="0.6" preserveRatio="true">
+               <image>
+                  <Image url="@icon/happyFace.png" />
+               </image>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8509804010391235" green="0.8509804010391235" blue="0.8509804010391235" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="75.0" layoutX="427.0" layoutY="13.0" opacity="0.6" preserveRatio="true">
+               <image>
+                  <Image url="@icon/cheerfulFace.png" />
+               </image>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8509804010391235" green="0.8509804010391235" blue="0.8509804010391235" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="74.0" layoutX="353.0" layoutY="13.0" opacity="0.6" preserveRatio="true">
+               <image>
+                  <Image url="@icon/unsureFace.png" />
+               </image>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8509804010391235" green="0.8509804010391235" blue="0.8509804010391235" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="73.0" layoutX="280.0" layoutY="13.0" opacity="0.6" preserveRatio="true">
+               <image>
+                  <Image url="@icon/downFace.png" />
+               </image>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8509804010391235" green="0.8509804010391235" blue="0.8509804010391235" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="60.0" fitWidth="125.0" layoutX="204.0" layoutY="13.0" opacity="0.6" preserveRatio="true">
+               <image>
+                  <Image url="@icon/cryingFace.png" />
+               </image>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8509804010391235" green="0.8509804010391235" blue="0.8509804010391235" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </ImageView>
+            <Label layoutX="33.0" layoutY="31.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Rate yourself today" />
          </children>
       </Pane>
+      <Pane fx:id="timeLabel" layoutX="689.0" layoutY="66.0" prefHeight="127.0" prefWidth="429.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
+         <children>
+            <Label fx:id="countCheckUpLabel" layoutX="41.0" layoutY="50.0" styleClass="main-text" stylesheets="@dark-theme.css" text="It's been " />
+            <Label layoutX="149.0" layoutY="50.0" styleClass="main-text" stylesheets="@dark-theme.css" text="days since your last check up" />
+         </children>
+      </Pane>
+      <Pane layoutX="59.0" layoutY="482.0" prefHeight="173.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
    </children>
 </Pane>

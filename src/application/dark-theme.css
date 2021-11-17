@@ -38,7 +38,7 @@
 
 
 .root{
-    -fx-background-color: -fx-primary;
+    -fx-background-color: white;
 }
 
 .anchorpane-style{
@@ -51,6 +51,16 @@
 	-fx-font-size: 15px;
 }
 
+
+.menu-button {
+ -fx-background-color:white;
+}
+
+.menu-button .label {
+ -fx-background-color:white; 
+ -fx-text-fill: -fx-primarytext-dark;
+ -fx-font-size:14px;
+ }
 
 .options-pane-layout{
 	-fx-background-color: white;
@@ -65,6 +75,7 @@
 	-fx-font-weight: normal;
 	-fx-font-size: 14px;
 }
+
 
 .title-text-style{
 	-fx-text-fill: -fx-primarytext-dark;

@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URL;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,6 +50,18 @@ public class PatientMenuController implements Initializable{
 
     @FXML
     private Label titlePane;
+    
+    @FXML
+    private Label dayLabel;
+    
+    @FXML
+    private Label timeLabel;
+    
+    @FXML
+    private Label countCheckUpLabel;
+    
+    @FXML
+    private Pane testButton;
 
     @FXML
     private Pane moreOptionsPane;
@@ -90,6 +107,11 @@ public class PatientMenuController implements Initializable{
 		
 		enable_all_buttons();
 		
+		TimeLocalZoneSetter time=new TimeLocalZoneSetter();
+		/*
+		this.timeLabel.setText(time.getTimeString());
+		this.dayLabel.setText(time.getDateString());
+		*/
 		optionsPane.setOnMouseEntered(new EventHandler<MouseEvent> () {
 			@Override
 			public void handle(MouseEvent event) {
@@ -181,6 +203,10 @@ public class PatientMenuController implements Initializable{
 					outputStream.flush();
 			        releaseResources(outputStream, socket);
 				*/
+				
+				
+				
+				
 				
 			} catch (IOException log_out_error) {
 				log_out_error.printStackTrace();

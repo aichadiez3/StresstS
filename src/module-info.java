@@ -7,6 +7,7 @@ module test {
 	requires bluecove;
 	requires java.logging;
 	requires java.sql;
+	requires jfoenix;
 	opens application to javafx.fxml;
 	exports application;
 }
