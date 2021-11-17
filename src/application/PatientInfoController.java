@@ -51,6 +51,9 @@ public class PatientInfoController implements Initializable{
 
     @FXML
     private ComboBox<String> genderSelection;
+    
+    @FXML
+    private ComboBox<String> insuranceSelection;
 
     @FXML
     private TextField nameLabel;
@@ -63,6 +66,12 @@ public class PatientInfoController implements Initializable{
 
     @FXML
     private Label ageLabel;
+    
+    @FXML
+    private TextField telephoneField;
+    
+    @FXML
+    private TextField emailField;
 
     @FXML
     private ImageView editImageButton;
@@ -86,9 +95,11 @@ public class PatientInfoController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		ObservableList<String> gender = FXCollections.observableArrayList( "Male","Female");
+		ObservableList<String> insurance_list = FXCollections.observableArrayList( "Anthem","Centene","UnitedHealth","Humana","HCSC","DKV","Sanitas","Maphre","AXA","Asisa","Adeslas","Caser","Allianz","Aegon","Other");
 		heightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(150, 250));
 		weightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(50, 200));
 		genderSelection.setItems(gender);
+		insuranceSelection.setItems(insurance_list);
 		
 		
 		/*
