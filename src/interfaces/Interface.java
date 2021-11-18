@@ -6,10 +6,9 @@ import pojos.MedicalRecord;
 import pojos.Symptom;
 import pojos.User;
 
-public interface MedicalRecordInterface {
+public interface Interface {
 	public boolean Connect();
 	public boolean CreateTables();
-	
 	
 	
 	public MedicalRecord Search_stored_record(User user);
