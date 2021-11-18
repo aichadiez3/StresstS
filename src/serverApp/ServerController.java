@@ -18,6 +18,10 @@ public class ServerController implements Initializable {
     @FXML
     private Group startButton;
     
+    @FXML
+    private Group stopButton;
+
+    
     private static Stage main_menu_stage;
 
 	@Override
@@ -29,6 +33,9 @@ public class ServerController implements Initializable {
 			main_menu_stage.close();
 		});
 		
+		stopButton.setOnMouseClicked((MouseEvent event) -> {
+			System.exit(0);
+		});
 	}
     
 }
