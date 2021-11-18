@@ -6,7 +6,7 @@ import pojos.MedicalRecord;
 import pojos.Symptom;
 import pojos.User;
 
-public interface Interface {
+public interface MedicalRecordInterface {
 	public boolean Connect();
 	public boolean CreateTables();
 	
