@@ -2,6 +2,8 @@ package pojos;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class MedicalRecord implements Serializable{
@@ -11,6 +13,7 @@ public class MedicalRecord implements Serializable{
 	private Date recordDate;
 	private Integer referenceNumber;
 	private Boolean bitalinoTestIncluded;
+	private List<String> symptoms_list = new LinkedList<String>();
 	
 	public MedicalRecord() {
 		super();
@@ -21,6 +24,13 @@ public class MedicalRecord implements Serializable{
 		super();
 		this.recordDate = recordDate;
 		this.bitalinoTestIncluded = bitalinoTestIncluded;
+	}
+	
+	public MedicalRecord(Date recordDate, Boolean bitalinoTestIncluded, List<String> symptoms_list) {
+		super();
+		this.recordDate = recordDate;
+		this.bitalinoTestIncluded = bitalinoTestIncluded;
+		this.symptoms_list = symptoms_list;
 	}
 
 	public Date getRecordDate() {
@@ -64,6 +74,22 @@ public class MedicalRecord implements Serializable{
 		return Objects.equals(medicalRecord_id, other.medicalRecord_id);
 	}
 
+	public List<String> getSymptoms_list() {
+		return symptoms_list;
+	}
+
+	public void setSymptoms_list(List<String> symptoms_list) {
+		this.symptoms_list = symptoms_list;
+	}
+	public void addSymptom(String symptom) {
+		symptoms_list.add(symptom);
+	}
+	
+	public void removeSymptom(String symptom) {
+		if(symptoms_list.contains(symptom)) {
+			symptoms_list.remove(symptom);
+		}
+	}
 	
 	
 	

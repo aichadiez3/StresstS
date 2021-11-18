@@ -25,7 +25,6 @@ public class Patient implements Serializable {
 	private String gender;
 	private Integer telephone;
 	private String insurance_company;
-	private List<String> symptoms_list = new LinkedList<String>();
 
 	public Patient() {
 		super();
@@ -37,21 +36,6 @@ public class Patient implements Serializable {
 		this.name = name;
 		this.surname = surname;
 		this.insurance_company = insurance_company;
-	}
-
-	public Patient(String name, String surname, LocalDate birth_date, Integer age, Integer height, Integer weight,
-			String gender, Integer telephone, String insurance_company, List<String> symptoms_list) {
-		super();
-		this.name = name;
-		this.surname = surname;
-		this.birth_date = birth_date;
-		this.age = age;
-		this.height = height;
-		this.weight = weight;
-		this.gender = gender;
-		this.telephone = telephone;
-		this.insurance_company = insurance_company;
-		this.symptoms_list = symptoms_list;
 	}
 
 	public Integer getPatient_id() {
@@ -66,15 +50,6 @@ public class Patient implements Serializable {
 		return user;
 	}
 	
-	public void setSymptoms_list(List<String> symptoms_list) {
-		this.symptoms_list = symptoms_list;
-	}
-	
-	public List<String> getSymptoms_list() {
-		return symptoms_list;
-	}
-
-
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -165,16 +140,6 @@ public class Patient implements Serializable {
 		this.gender = gender;
 	}
 	
-	
-	public void addSymptom(String symptom) {
-		symptoms_list.add(symptom);
-	}
-	
-	public void removeSymptom(String symptom) {
-		if(symptoms_list.contains(symptom)) {
-			symptoms_list.remove(symptom);
-		}
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
