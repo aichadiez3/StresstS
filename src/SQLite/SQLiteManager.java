@@ -5,13 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import db.sqlite.SQLiteAllergyManager;
-import db.sqlite.SQLiteClinicalHistoryManager;
-import db.sqlite.SQLiteMedicalPersonnelManager;
-import db.sqlite.SQLitePathologyManager;
-import db.sqlite.SQLitePatientManager;
-import db.sqlite.SQLiteSymptomManager;
-import db.sqlite.SQLiteTreatmentManager;
 import interfaces.DBManager;
 
 public class SQLiteManager implements DBManager{
