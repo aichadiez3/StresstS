@@ -8,6 +8,7 @@ module test {
 	requires java.logging;
 	requires java.sql;
 	requires jfoenix;
+	requires javax.persistence;
 	opens application to javafx.fxml;
 	exports application;
 }
