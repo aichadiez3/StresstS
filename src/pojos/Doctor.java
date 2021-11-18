@@ -1,14 +1,6 @@
 package pojos;
 
 import java.io.Serializable;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 
 public class Doctor implements Serializable {

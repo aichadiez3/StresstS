@@ -7,8 +7,6 @@ import java.time.ZonedDateTime;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Patient implements Serializable {
 
@@ -175,22 +173,7 @@ public class Patient implements Serializable {
 				+ ", gender=" + gender + ", telephone=" + telephone + ", insurance_company=" + insurance_company + "]";
 	}
 
-	public void Set_age_of_patient() {
-		//Converting Date to LocalDate type for using the getYears method
-		/*Instant instant = birth_date.toInstant();
-		ZonedDateTime zone =instant.atZone(ZoneId.systemDefault());
-		LocalDate givenDate = zone.toLocalDate();
-		*/
-		//Calculation of difference -> Age of the patient
-		//Period period = Period.between(givenDate, LocalDate.now());
-		Period period = Period.between(birth_date, LocalDate.now());
-		this.age = period.getYears();
-	}
 
 
-
-	
-	
-	
 
 }

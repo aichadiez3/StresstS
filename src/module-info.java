@@ -9,6 +9,7 @@ module test {
 	requires java.sql;
 	requires jfoenix;
 	requires javax.persistence;
+	requires jdk.jdi;
 	opens application to javafx.fxml;
 	exports application;
 }

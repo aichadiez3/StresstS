@@ -6,13 +6,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import application.BitalinoController;
+
 public class MedicalRecord implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Integer medicalRecord_id;
 	private Date recordDate;
 	private Integer referenceNumber;
-	private Boolean bitalinoTestIncluded;
+	private BitalinoController bitalinoTestIncluded;
 	private List<String> symptoms_list = new LinkedList<String>();
 	
 	public MedicalRecord() {
@@ -20,17 +22,27 @@ public class MedicalRecord implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public MedicalRecord(Date recordDate, Boolean bitalinoTestIncluded) {
+	public MedicalRecord(Date recordDate, BitalinoController bitalinoTestIncluded) {
 		super();
 		this.recordDate = recordDate;
 		this.bitalinoTestIncluded = bitalinoTestIncluded;
 	}
 	
-	public MedicalRecord(Date recordDate, Boolean bitalinoTestIncluded, List<String> symptoms_list) {
+	public MedicalRecord(Date recordDate, BitalinoController bitalinoTestIncluded, List<String> symptoms_list) {
 		super();
 		this.recordDate = recordDate;
 		this.bitalinoTestIncluded = bitalinoTestIncluded;
 		this.symptoms_list = symptoms_list;
+	}
+
+	
+	
+	public Integer getMedicalRecord_id() {
+		return medicalRecord_id;
+	}
+
+	public void setMedicalRecord_id(Integer medicalRecord_id) {
+		this.medicalRecord_id = medicalRecord_id;
 	}
 
 	public Date getRecordDate() {
@@ -49,11 +61,11 @@ public class MedicalRecord implements Serializable{
 		this.referenceNumber = referenceNumber;
 	}
 
-	public Boolean getBitalinoTestIncluded() {
+	public BitalinoController getBitalinoTestIncluded() {
 		return bitalinoTestIncluded;
 	}
 
-	public void setBitalinoTestIncluded(Boolean bitalinoTestIncluded) {
+	public void setBitalinoTestIncluded(BitalinoController bitalinoTestIncluded) {
 		this.bitalinoTestIncluded = bitalinoTestIncluded;
 	}
 
