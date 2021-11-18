@@ -1,5 +1,8 @@
 package interfaces;
 
-public class DBManager {
-
+public interface DBManager {
+	public void connect();
+	public void disconnect();
+	public void createTables();
+	
 }
