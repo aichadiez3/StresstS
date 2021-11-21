@@ -122,7 +122,7 @@ public class SQLiteManager implements Interface {
 	// -----> UPDATE METHODS <-----
 	
 	// -----> SEARCH STORED METHODS <-----
-	public MedicalRecord Search_stored_record(User user) {
+/*	public MedicalRecord Search_stored_record(User user) {
 		try {
 			String SQL_code = "SELECT * FROM medical_record WHERE medicalRecord_id LIKE ?";
 			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
@@ -140,14 +140,14 @@ public class SQLiteManager implements Interface {
 			search_record_error.printStackTrace();
 			return null;
 		}
-	}
+	}*/
 	
 	//NO VEO DIFERENCIA ENTRE Search_stored_record Y Search_record_by_id, aunque no estan programadas exactamente iguales
 		//linea a linea, entiendo que quieren hacer lo mismo no?
 	
 	
 	// -----> SEARCH BY ID METHODS <-----
-	public MedicalRecord Search_record_by_id(Integer record_id) {
+	public MedicalRecord Search_stored_record_by_id(Integer record_id) {
 		try {
 			String SQL_code = "SELECT * FROM medical_record WHERE medicalRecord_id LIKE ?";
 			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
@@ -157,7 +157,7 @@ public class SQLiteManager implements Interface {
 			record.setReferenceNumber(result_set.getInt("reference_number"));
 			record.setRecordDate(result_set.getDate("record_date"));
 			List<Symptom> symptoms_list = Search_all_symptoms_from_record(record_id);
-			//record.setSymptoms_list(symptoms_list);
+			record.setSymptoms_list(symptoms_list);
 			template.close();
 			return record;
 		} catch (SQLException search_record_error) {

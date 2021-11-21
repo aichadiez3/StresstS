@@ -15,7 +15,9 @@ public class MedicalRecord implements Serializable{
 	private Date recordDate;
 	private Integer referenceNumber;
 	private BitalinoController bitalinoTestIncluded;
-	private List<String> symptoms_list = new LinkedList<String>();
+	//private List<String> symptoms_list = new LinkedList<String>();
+	private List<Symptom> symptoms_list = new LinkedList<Symptom>();
+
 	
 	public MedicalRecord() {
 		super();
@@ -28,7 +30,7 @@ public class MedicalRecord implements Serializable{
 		this.bitalinoTestIncluded = bitalinoTestIncluded;
 	}
 	
-	public MedicalRecord(Date recordDate, BitalinoController bitalinoTestIncluded, List<String> symptoms_list) {
+	public MedicalRecord(Date recordDate, BitalinoController bitalinoTestIncluded, List<Symptom> symptoms_list) {
 		super();
 		this.recordDate = recordDate;
 		this.bitalinoTestIncluded = bitalinoTestIncluded;
@@ -86,18 +88,18 @@ public class MedicalRecord implements Serializable{
 		return Objects.equals(medicalRecord_id, other.medicalRecord_id);
 	}
 
-	public List<String> getSymptoms_list() {
+	public List<Symptom> getSymptoms_list() {
 		return symptoms_list;
 	}
 
-	public void setSymptoms_list(List<String> symptoms_list) {
+	public void setSymptoms_list(List<Symptom> symptoms_list) {
 		this.symptoms_list = symptoms_list;
 	}
-	public void addSymptom(String symptom) {
+	public void addSymptom(Symptom symptom) {
 		symptoms_list.add(symptom);
 	}
 	
-	public void removeSymptom(String symptom) {
+	public void removeSymptom(Symptom symptom) {
 		if(symptoms_list.contains(symptom)) {
 			symptoms_list.remove(symptom);
 		}
