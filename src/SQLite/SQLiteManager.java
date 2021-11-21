@@ -93,7 +93,13 @@ public class SQLiteManager implements Interface {
 					+ " PRIMARY KEY (patient_id, doctor_id))";
 			stmt8.execute(sql8);
 			stmt8.close();
-			
+		
+			Statement stmt9 = sqlite_connection.createStatement();
+			String sql9 = "CREATE TABLE medicalRecord_symptom " + "(medicalRecord_id INTEGER REFERENCES medical_record(medicalRecord_id), "
+					+ " symptom_id REFERENCES symptom(symptom_id),"
+					+ " PRIMARY KEY (medicalRecord_id, symptom_id))";
+			stmt9.execute(sql9);
+			stmt9.close();
 			
 			return true;
 		}catch (SQLException tables_error) {
@@ -136,6 +142,8 @@ public class SQLiteManager implements Interface {
 		}
 	}
 	
+	//NO VEO DIFERENCIA ENTRE Search_stored_record Y Search_record_by_id, aunque no estan programadas exactamente iguales
+		//linea a linea, entiendo que quieren hacer lo mismo no?
 	
 	
 	// -----> SEARCH BY ID METHODS <-----
@@ -163,7 +171,8 @@ public class SQLiteManager implements Interface {
 	// -----> LIST METHODS <-----
 	public List<Symptom> Search_all_symptoms_from_record(Integer record_id) {
 		try {
-			String SQL_code = "SELECT symptom_id FROM transaction_biomaterial WHERE transaction_id LIKE ?";
+			//String SQL_code = "SELECT symptom_id FROM transaction_biomaterial WHERE transaction_id LIKE ?";
+			String SQL_code = "SELECT * FROM medicalRecord_symptom WHERE medicalRecord_id LIKE ?";
 			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
 			template.setInt(1, record_id);
 			ResultSet result_set = template.executeQuery();
