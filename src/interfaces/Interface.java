@@ -11,7 +11,7 @@ public interface Interface {
 	public boolean CreateTables();
 	
 	
-	public MedicalRecord Search_stored_record(User user);
+	//public MedicalRecord Search_stored_record(User user);
 	
 	public MedicalRecord Search_stored_record_by_id(Integer record_id);
 	
