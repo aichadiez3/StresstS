@@ -36,9 +36,17 @@ public class MedicalRecord implements Serializable{
 		this.bitalinoTestIncluded = bitalinoTestIncluded;
 		this.symptoms_list = symptoms_list;
 	}
+	
+	public MedicalRecord(Integer medicalRecord_id, Date recordDate, Integer referenceNumber,
+			BitalinoController bitalinoTestIncluded, List<Symptom> symptoms_list) {
+		super();
+		this.medicalRecord_id = medicalRecord_id;
+		this.recordDate = recordDate;
+		this.referenceNumber = referenceNumber;
+		this.bitalinoTestIncluded = bitalinoTestIncluded;
+		this.symptoms_list = symptoms_list;
+	}
 
-	
-	
 	public Integer getMedicalRecord_id() {
 		return medicalRecord_id;
 	}

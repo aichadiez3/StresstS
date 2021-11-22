@@ -6,9 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import application.BitalinoController;
 import pojos.MedicalRecord;
 import pojos.Symptom;
 import pojos.User;
@@ -166,8 +168,73 @@ public class SQLiteManager implements Interface {
 		return null;
 	}
 	
+	// -----> SEARCH BY DATE ASCENDENT METHOD <-----
+	public List<MedicalRecord> Search_stored_record_by_date_ascendent() {
+		List<MedicalRecord> records = new LinkedList<MedicalRecord>();
+		try {
+			String SQL_code = "SELECT * FROM medical_record ORDER BY recordDate ASC";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
+			ResultSet rs = template.executeQuery();
+			
+			while(rs.next()) {
+				int id = rs.getInt("medicalRecord_id");
+				Date date = rs.getDate("recordDate");
+				int referenceNumber = rs.getInt("referenceNumber");
+				BitalinoController bitalinoController = (BitalinoController) rs.getObject("bitalinoTestIncluded");
+				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list");
+				records.add(new MedicalRecord(id, date, referenceNumber, bitalinoController, symptoms_list));
+			}
+		} catch (SQLException search_record_error) {
+			search_record_error.printStackTrace();
+			return null;
+		}
+		return records;
+	}
 	
+	// -----> SEARCH BY DATE DESCENDENT METHOD <-----
+	public List<MedicalRecord> Search_stored_record_by_date_descendent() {
+		List<MedicalRecord> records = new LinkedList<MedicalRecord>();
+		try {
+			String SQL_code = "SELECT * FROM medical_record ORDER BY recordDate DESC";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
+			ResultSet rs = template.executeQuery();
+			
+			while(rs.next()) {
+				int id = rs.getInt("medicalRecord_id");
+				Date date = rs.getDate("recordDate");
+				int referenceNumber = rs.getInt("referenceNumber");
+				BitalinoController bitalinoController = (BitalinoController) rs.getObject("bitalinoTestIncluded");
+				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list");
+				records.add(new MedicalRecord(id, date, referenceNumber, bitalinoController, symptoms_list));
+			}
+		} catch (SQLException search_record_error) {
+			search_record_error.printStackTrace();
+			return null;
+		}
+		return records;
+	}
 	
+	// -----> SEARCH BY ID METHODS <-----
+	public List<MedicalRecord> Search_stored_record_by_test(int test) {
+		List<MedicalRecord> records = new LinkedList<MedicalRecord>();
+		try {
+			String SQL_code = "SELECT * FROM medical_record WHERE referenceNumber LIKE ?";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
+			ResultSet rs = template.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("medicalRecord_id");
+				Date date = rs.getDate("recordDate");
+				int referenceNumber = rs.getInt("referenceNumber");
+				BitalinoController bitalinoController = (BitalinoController) rs.getObject("bitalinoTestIncluded");
+				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list");
+				records.add(new MedicalRecord(id, date, referenceNumber, bitalinoController, symptoms_list));
+			}
+		} catch (SQLException search_record_error) {
+			search_record_error.printStackTrace();
+			return null;
+		}
+		return records;
+	}
 	// -----> LIST METHODS <-----
 	public List<Symptom> Search_all_symptoms_from_record(Integer record_id) {
 		try {
