@@ -4,11 +4,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URL;
-import java.time.Clock;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +17,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BoxBlur;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -75,18 +69,6 @@ public class PatientMenuController implements Initializable{
     
     public static void setController(PatientMenuController controller) {
 		patient_controller = controller;
-	}
-
-	public AnchorPane getAnchorPane() {
-		return anchorPane;
-	}
-
-	public Pane getMenuPane() {
-		return menuPane;
-	}
-
-	public void setMenuPane(Pane menuPane) {
-		this.menuPane = menuPane;
 	}
 
 	@Override

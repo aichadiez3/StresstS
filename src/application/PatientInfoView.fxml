@@ -49,7 +49,7 @@
                </opaqueInsets>
             </ComboBox>
             <TextField fx:id="telephoneField" layoutX="266.0" layoutY="230.0" promptText="Phone number" styleClass="text-field-transparent" />
-            <ComboBox fx:id="insuranceSelection" layoutX="268.0" layoutY="316.0" opacity="0.37" prefHeight="33.0" prefWidth="184.0" promptText="Select an insurance" style="-fx-border-color: transparent;" styleClass="menu-layout">
+            <ComboBox fx:id="insuranceSelection" layoutX="266.0" layoutY="316.0" opacity="0.37" prefHeight="33.0" prefWidth="184.0" promptText="Select an insurance" style="-fx-border-color: transparent;" styleClass="menu-layout">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -68,12 +68,12 @@
             </Label>
             <Spinner fx:id="weightSpinner" layoutX="227.0" layoutY="111.0" stylesheets="@dark-theme.css" />
             <Spinner fx:id="heightSpinner" editable="true" layoutX="227.0" layoutY="37.0" prefHeight="34.0" prefWidth="187.0" stylesheets="@dark-theme.css" />
-            <Label layoutX="227.0" layoutY="16.0" styleClass="about-text" stylesheets="@dark-theme.css" text="Height (in kg)" textFill="#7b7979">
+            <Label layoutX="227.0" layoutY="16.0" styleClass="about-text" stylesheets="@dark-theme.css" text="Height (in cm)" textFill="#7b7979">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="227.0" layoutY="88.0" styleClass="about-text" stylesheets="@dark-theme.css" text="Weight (in cm)" textFill="#7b7979">
+            <Label layoutX="227.0" layoutY="88.0" styleClass="about-text" stylesheets="@dark-theme.css" text="Weight (in kg)" textFill="#7b7979">
                <font>
                   <Font size="14.0" />
                </font>

@@ -61,7 +61,7 @@
       </Pane>
       <Pane layoutX="882.0" layoutY="104.0" prefHeight="503.0" prefWidth="267.0" styleClass="bubble-pane-layout">
          <children>
-            <CheckBox fx:id="raising_thoughts" layoutX="36.0" layoutY="40.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Raising thoughts">
+            <CheckBox fx:id="raising_thoughts" layoutX="36.0" layoutY="40.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="159.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="Raising thoughts">
                <font>
                   <Font size="14.0" />
                </font>

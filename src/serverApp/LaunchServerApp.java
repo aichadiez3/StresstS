@@ -54,8 +54,8 @@ public class LaunchServerApp extends Application {
 			stage = primaryStage;
 			primaryStage.show();
 			
-		} catch(IOException fatal_error) {
-			fatal_error.printStackTrace();
+		} catch(IOException fatal_server_error) {
+			fatal_server_error.printStackTrace();
 			System.exit(0);
 		}
 	}
