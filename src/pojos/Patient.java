@@ -7,6 +7,7 @@ import java.time.ZonedDateTime;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 public class Patient implements Serializable {
 
@@ -137,13 +138,10 @@ public class Patient implements Serializable {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((patient_id == null) ? 0 : patient_id.hashCode());
-		return result;
+		return Objects.hash(patient_id);
 	}
 
 	@Override
@@ -155,23 +153,15 @@ public class Patient implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Patient other = (Patient) obj;
-		if (patient_id == null) {
-			if (other.patient_id != null)
-				return false;
-		} else if (!patient_id.equals(other.patient_id))
-			return false;
-		return true;
+		return Objects.equals(patient_id, other.patient_id);
 	}
+	
+	
 
 	
 	
 	
-	@Override
-	public String toString() {
-		return "Patient [patient_id=" + patient_id + ", user=" + user + ", name=" + name + ", surname=" + surname
-				+ ", birth_date=" + birth_date + ", age=" + age + ", height=" + height + ", weight=" + weight
-				+ ", gender=" + gender + ", telephone=" + telephone + ", insurance_company=" + insurance_company + "]";
-	}
+	
 
 
 

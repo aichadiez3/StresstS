@@ -1,6 +1,7 @@
 package pojos;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User implements Serializable {
 
@@ -55,31 +56,23 @@ public class User implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((user_id == null) ? 0 : user_id.hashCode());
-		return result;
+		return Objects.hash(user_id);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if ((obj == null) || (getClass() != obj.getClass()))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (user_id == null) {
-			if (other.user_id != null)
-				return false;
-		} else if (!user_id.equals(other.user_id))
-			return false;
-		return true;
+		return Objects.equals(user_id, other.user_id);
 	}
 
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", user_name=" + user_name + ", password=" + password + ", email=" + email
-				+ "]";
-	}
+	
+
+	
 
 }

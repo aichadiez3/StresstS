@@ -37,9 +37,10 @@ public class Doctor implements Serializable {
 	public Doctor() {
 		super();
 	}
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(doctor_id, name, telephone);
+		return Objects.hash(doctor_id);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -50,13 +51,10 @@ public class Doctor implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Doctor other = (Doctor) obj;
-		return Objects.equals(doctor_id, other.doctor_id) && Objects.equals(name, other.name)
-				&& Objects.equals(telephone, other.telephone);
+		return Objects.equals(doctor_id, other.doctor_id);
 	}
-	@Override
-	public String toString() {
-		return "Doctor [doctor_id=" + doctor_id + ", name=" + name + ", telephone=" + telephone + "]";
-	}
+	
+	
 		
 	
 	

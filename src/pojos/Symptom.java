@@ -46,15 +46,6 @@ public class Symptom implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "Symptom [name = " + name + "weight=" + weight + "]";
-	}
-
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -72,6 +63,12 @@ public class Symptom implements Serializable {
 		Symptom other = (Symptom) obj;
 		return Objects.equals(symptom_id, other.symptom_id);
 	}
+	
+	
+
+
+
+	
 
 	
 }

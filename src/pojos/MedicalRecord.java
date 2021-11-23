@@ -79,6 +79,8 @@ public class MedicalRecord implements Serializable{
 		this.bitalinoTestIncluded = bitalinoTestIncluded;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(medicalRecord_id);

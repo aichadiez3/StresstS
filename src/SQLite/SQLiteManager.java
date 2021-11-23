@@ -6,12 +6,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import application.BitalinoController;
+import db.pojos.Director;
+import pojos.Insurance_company;
+import pojos.Bitalino_test;
+import pojos.Doctor;
+import pojos.Patient;
 import pojos.MedicalRecord;
+import pojos.Role;
 import pojos.Symptom;
 import pojos.User;
 import interfaces.Interface;
@@ -130,6 +137,88 @@ public class SQLiteManager implements Interface {
 	
 	
 	// -----> INSERT METHODS <-----
+	
+	
+	// New_User(user_name, password)
+		public User Insert_new_user(String user_name, String password, String email) {
+			try {
+				String table = "INSERT INTO user (user_name, password,email) " + " VALUES(?,?,?);";
+				PreparedStatement template = this.sqlite_connection.prepareStatement(table);
+				template.setString(1, user_name);
+				template.setString(2, password);
+				template.setString(3, email);
+				template.executeUpdate();
+				
+				String SQL_code = "SELECT * FROM user WHERE user_name = ?";
+				template = this.sqlite_connection.prepareStatement(SQL_code);
+				template.setString(1, user_name);
+				ResultSet result_set = template.executeQuery();
+				User user = new User();
+			    user.setUserName(result_set.getString("user_name"));
+			    user.setPassword(result_set.getString("password"));
+			    user.setEmail(result_set.getString("email"));
+			    user.setUserId(result_set.getInt("user_id"));
+			    return user;
+			} catch (SQLException insert_user_error) {
+				return null;
+			}
+		}
+		
+		
+	    public Patient Insert_new_patient(User user, String name, String surname, LocalDate birth_date, Integer age, Integer height, Integer weight, String gender, Integer telephone, String insurance_company ) {
+			try {
+				String table = "INSERT INTO patient (user_id, name, surname, birth_date, age, height, weight, gender,telephone,insurance_company) " + "VALUES (?,?,?,?,?,?,?,?,?,?);";
+				PreparedStatement template = this.sqlite_connection.prepareStatement(table);
+				template.setInt(1, user.getUserId());
+				template.setString(2, user.getUserName());
+				template.executeUpdate();
+				
+				String SQL_code = "SELECT * FROM patient WHERE user_id = ?";
+				template = this.sqlite_connection.prepareStatement(SQL_code);
+				template.setInt(1, user.getUserId());
+				ResultSet result_set = template.executeQuery();
+				Patient patient = new Patient();
+				patient.setPatient_id(result_set.getInt("patient_id"));
+				patient.setName(result_set.getString("name"));
+				patient.setUser(user);
+				patient.setSurname(result_set.getString("surname"));
+				patient.setBirth_date(result_set.getDate("birth_date"));
+				patient.setAge(result_set.getInt("age"));
+				patient.setHeight(result_set.getInt("height"));
+				patient.setWeight(result_set.getInt("weight"));
+				patient.setGender(result_set.getString("gender"));
+				patient.setTelephone(result_set.getInt("telephone"));
+				patient.setInsurance_company(result_set.getString("insurance_company"));
+				
+				return patient;
+			} catch (SQLException new_client_account_error) {
+				new_client_account_error.printStackTrace();
+				return null;
+			}
+	    }
+	    
+	    public Doctor Insert_new_doctor(User user) {
+			try {
+				String table = "INSERT INTO doctor (user_id, name) " + "VALUES (?,?)";
+				PreparedStatement template = this.sqlite_connection.prepareStatement(table);
+				template.setInt(1, user.getUserId());
+				template.setString(2, user.getUserName());
+				template.executeUpdate();
+				
+				String SQL_code = "SELECT * FROM director WHERE user_id = ?";
+				template = this.sqlite_connection.prepareStatement(SQL_code);
+				template.setInt(1, user.getUserId());
+				ResultSet result_set = template.executeQuery();
+				Doctor doctor = new Doctor();
+				doctor.setDoctor_id(result_set.getInt("director_id"));
+				doctor.setName(result_set.getString("name"));
+				doctor.setTelephone(0);
+				return doctor;
+			} catch(SQLException new_director_error) {
+				return null;
+			}
+		}
+		
 	
 	// -----> UPDATE METHODS <-----
 	

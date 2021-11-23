@@ -1,6 +1,7 @@
 package pojos;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 public class Bitalino_test implements Serializable{
 	
 	/**
@@ -57,18 +58,8 @@ public class Bitalino_test implements Serializable{
 	}
 
 	@Override
-	public String toString() {
-		return "Bitalino_test [type=" + type + ", date=" + date + ", file=" + file + "]";
-	}
-
-	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((file == null) ? 0 : file.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
+		return Objects.hash(test_id);
 	}
 
 	@Override
@@ -80,22 +71,11 @@ public class Bitalino_test implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Bitalino_test other = (Bitalino_test) obj;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
-		if (file == null) {
-			if (other.file != null)
-				return false;
-		} else if (!file.equals(other.file))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
+		return Objects.equals(test_id, other.test_id);
 	}
+
+	
+
+	
 	
 }

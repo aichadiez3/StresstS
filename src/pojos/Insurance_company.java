@@ -31,7 +31,7 @@ public class Insurance_company implements Serializable {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(company_name, insurance_id);
+		return Objects.hash(insurance_id);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -42,12 +42,9 @@ public class Insurance_company implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Insurance_company other = (Insurance_company) obj;
-		return Objects.equals(company_name, other.company_name) && Objects.equals(insurance_id, other.insurance_id);
+		return Objects.equals(insurance_id, other.insurance_id);
 	}
-	@Override
-	public String toString() {
-		return "Insurance_company [insurance_id=" + insurance_id + ", company_name=" + company_name + "]";
-	}
+	
 	
 	
 	
