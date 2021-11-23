@@ -57,8 +57,7 @@ public class SQLiteManager implements Interface {
 			Statement stmt1 = sqlite_connection.createStatement();
 			String sql1 = "CREATE TABLE patient " + "(patient_id INTEGER PRIMARY KEY AUTOINCREMENT, " + " name TEXT NOT NULL, "
 					+ " surname TEXT NOT NULL, " + " birthdate DATETIME NOT NULL, " + " age INTEGER, " + " telephone INTEGER default NULL, "
-					+ " height INTEGER default NULL, " + " weight INTEGER default NULL, "   + " doctor_id REFERENCES doctor(doctor_id), "
-					+ " insurance_id REFERENCES insurance(insurance_id), " 
+					+ " height INTEGER default NULL, " + " weight INTEGER default NULL, " + " insurance_id FOREIGN KEY REFERENCES insurance(insurance_id), " 
 					+ " user_id FOREING KEY REFERENCES user(user_id) ON DELETE CASCADE)";
 			stmt1.execute(sql1);
 			stmt1.close();
@@ -73,7 +72,8 @@ public class SQLiteManager implements Interface {
 			
 			Statement stmt3 = sqlite_connection.createStatement();
 			String sql3 = "CREATE TABLE medical_record " + "(medicalRecord_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ " reference_number INTEGER UNIQUE, " + " record_date DATETIME NOT NULL, "
+					+ " reference_number INTEGER UNIQUE, " + " record_date DATETIME NOT NULL, " + " , bitalinoTestIncluded TEXT default NULL, "
+					+ " symptoms_list TEXT default NULL, "
 					+ " FOREING KEY (patient_id) REFERENCES patient (patient_id) ON UPDATE RESTRICT ON DELETE CASCADE)";
 			stmt3.execute(sql3);
 			stmt3.close();
@@ -85,7 +85,17 @@ public class SQLiteManager implements Interface {
 			stmt4.execute(sql4);
 			stmt4.close();
 			
+			Statement stmt5 = sqlite_connection.createStatement();
+			String sql5 = "CREATE TABLE insurance " + "(insurance_id INTEGER PRIMARY KEY AUTOINCREMENT, " + " name TEXT NOT NULL)";
+			stmt5.execute(sql5);
+			stmt5.close();
 			
+			Statement stmt6 = sqlite_connection.createStatement();
+			String sql6 = "CREATE TABLE doctor " + "(doctor_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+					+ " name TEXT NOT NULL, " + " telephone INTEGER default NULL, " + " insurance_id FOREING KEY REFERENCES insurance(insurance_id), "
+					+ " user_id FOREING KEY REFERENCES user(user_id) ON DELETE CASCADE)";
+			stmt6.execute(sql6);
+			stmt6.close();
 			
 			
 			// ManyToMany relation tables go here
@@ -123,32 +133,8 @@ public class SQLiteManager implements Interface {
 	
 	// -----> UPDATE METHODS <-----
 	
-	// -----> SEARCH STORED METHODS <-----
-/*	public MedicalRecord Search_stored_record(User user) {
-		try {
-			String SQL_code = "SELECT * FROM medical_record WHERE medicalRecord_id LIKE ?";
-			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
-			template.setInt(1, user.getUserId());
-			ResultSet result_set = template.executeQuery();
-			MedicalRecord record = new MedicalRecord();
-			record.setMedicalRecord_id(result_set.getInt("medicalRecord_id"));
-			record.setReferenceNumber(result_set.getInt("reference_number"));
-			record.setRecordDate(result_set.getDate("record_date"));
-			//record.setSymptoms_list(result_set.getArray(0));
-			
-			template.close();
-			return record;
-		} catch (SQLException search_record_error) {
-			search_record_error.printStackTrace();
-			return null;
-		}
-	}*/
-	
-	//NO VEO DIFERENCIA ENTRE Search_stored_record Y Search_record_by_id, aunque no estan programadas exactamente iguales
-		//linea a linea, entiendo que quieren hacer lo mismo no?
-	
-	
-	// -----> SEARCH BY ID METHODS <-----
+
+	// -----> SEARCH STORED ELEMENTS BY ID METHODS <-----
 	public MedicalRecord Search_stored_record_by_id(Integer record_id) {
 		try {
 			String SQL_code = "SELECT * FROM medical_record WHERE medicalRecord_id LIKE ?";
@@ -158,6 +144,7 @@ public class SQLiteManager implements Interface {
 			ResultSet result_set = template.executeQuery();
 			record.setReferenceNumber(result_set.getInt("reference_number"));
 			record.setRecordDate(result_set.getDate("record_date"));
+			record.setBitalinoTestIncluded((BitalinoController) result_set.getObject("bitalinoTestIncluded"));
 			List<Symptom> symptoms_list = Search_all_symptoms_from_record(record_id);
 			record.setSymptoms_list(symptoms_list);
 			template.close();
@@ -168,20 +155,61 @@ public class SQLiteManager implements Interface {
 		return null;
 	}
 	
-	// -----> SEARCH BY DATE ASCENDENT METHOD <-----
+	public List<MedicalRecord> Search_stored_record_by_test(Integer test) {
+		List<MedicalRecord> records = new LinkedList<MedicalRecord>();
+		try {
+			String SQL_code = "SELECT * FROM medical_record WHERE reference_number LIKE ?";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
+			ResultSet rs = template.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt("medicalRecord_id");
+				Date date = rs.getDate("record_date");
+				int referenceNumber = rs.getInt("reference_number");
+				BitalinoController bitalinoController = (BitalinoController) rs.getObject("bitalinoTestIncluded");
+				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list");
+				records.add(new MedicalRecord(id, date, referenceNumber, bitalinoController, symptoms_list));
+			}
+		} catch (SQLException search_record_error) {
+			search_record_error.printStackTrace();
+			return null;
+		}
+		return records;
+	}
+	
+	
+	public Symptom Search_symptom_by_id(Integer symptom_id) {
+		try {
+			String SQL_code = "SELECT * FROM medicalRecord_symptom WHERE symptom_id LIKE ?";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
+			template.setInt(1, symptom_id);
+			Symptom symptom = new Symptom();
+			ResultSet result_set = template.executeQuery();
+			symptom.setSymptom_id(symptom_id);
+			symptom.setName(result_set.getString("name"));
+			symptom.setWeight(result_set.getInt("weight"));
+			template.close(); 
+			return symptom;
+		} catch (SQLException search_symptom_error) {
+			search_symptom_error.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	// -----> SEARCH BY DATE METHODS <-----
 	public List<MedicalRecord> Search_stored_record_by_date_ascendent() {
 		List<MedicalRecord> records = new LinkedList<MedicalRecord>();
 		try {
-			String SQL_code = "SELECT * FROM medical_record ORDER BY recordDate ASC";
+			String SQL_code = "SELECT * FROM medical_record ORDER BY record_date ASC";
 			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
 			ResultSet rs = template.executeQuery();
 			
 			while(rs.next()) {
 				int id = rs.getInt("medicalRecord_id");
-				Date date = rs.getDate("recordDate");
-				int referenceNumber = rs.getInt("referenceNumber");
+				Date date = rs.getDate("record_date");
+				int referenceNumber = rs.getInt("reference_number");
 				BitalinoController bitalinoController = (BitalinoController) rs.getObject("bitalinoTestIncluded");
-				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list");
+				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list"); // PUEDE QUE ESTO VAYA A DAR UN ERROR CON EL TIPO DE DATO DE LA TABLA medical_record
 				records.add(new MedicalRecord(id, date, referenceNumber, bitalinoController, symptoms_list));
 			}
 		} catch (SQLException search_record_error) {
@@ -191,20 +219,20 @@ public class SQLiteManager implements Interface {
 		return records;
 	}
 	
-	// -----> SEARCH BY DATE DESCENDENT METHOD <-----
+	
 	public List<MedicalRecord> Search_stored_record_by_date_descendent() {
 		List<MedicalRecord> records = new LinkedList<MedicalRecord>();
 		try {
-			String SQL_code = "SELECT * FROM medical_record ORDER BY recordDate DESC";
+			String SQL_code = "SELECT * FROM medical_record ORDER BY record_date DESC";
 			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
 			ResultSet rs = template.executeQuery();
 			
 			while(rs.next()) {
 				int id = rs.getInt("medicalRecord_id");
-				Date date = rs.getDate("recordDate");
-				int referenceNumber = rs.getInt("referenceNumber");
+				Date date = rs.getDate("record_date");
+				int referenceNumber = rs.getInt("reference_number");
 				BitalinoController bitalinoController = (BitalinoController) rs.getObject("bitalinoTestIncluded");
-				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list");
+				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list"); // PUEDE QUE ESTO VAYA A DAR UN ERROR CON EL TIPO DE DATO DE LA TABLA medical_record
 				records.add(new MedicalRecord(id, date, referenceNumber, bitalinoController, symptoms_list));
 			}
 		} catch (SQLException search_record_error) {
@@ -214,39 +242,20 @@ public class SQLiteManager implements Interface {
 		return records;
 	}
 	
-	// -----> SEARCH BY ID METHODS <-----
-	public List<MedicalRecord> Search_stored_record_by_test(int test) {
-		List<MedicalRecord> records = new LinkedList<MedicalRecord>();
-		try {
-			String SQL_code = "SELECT * FROM medical_record WHERE referenceNumber LIKE ?";
-			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
-			ResultSet rs = template.executeQuery();
-			while(rs.next()) {
-				int id = rs.getInt("medicalRecord_id");
-				Date date = rs.getDate("recordDate");
-				int referenceNumber = rs.getInt("referenceNumber");
-				BitalinoController bitalinoController = (BitalinoController) rs.getObject("bitalinoTestIncluded");
-				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list");
-				records.add(new MedicalRecord(id, date, referenceNumber, bitalinoController, symptoms_list));
-			}
-		} catch (SQLException search_record_error) {
-			search_record_error.printStackTrace();
-			return null;
-		}
-		return records;
-	}
+	
+	
 	// -----> LIST METHODS <-----
 	public List<Symptom> Search_all_symptoms_from_record(Integer record_id) {
 		try {
-			//String SQL_code = "SELECT symptom_id FROM transaction_biomaterial WHERE transaction_id LIKE ?";
+			
 			String SQL_code = "SELECT * FROM medicalRecord_symptom WHERE medicalRecord_id LIKE ?";
 			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
 			template.setInt(1, record_id);
 			ResultSet result_set = template.executeQuery();
 			List<Symptom> symptom_list = new LinkedList<Symptom>();
 			while (result_set.next()) {
-				//Symptom symptom = Search_symptom_by_id(result_set.getInt("symptom_id"));
-				//symptom_list.add(symptom);
+				Symptom symptom = Search_symptom_by_id(result_set.getInt("symptom_id"));
+				symptom_list.add(symptom);
 			}
 			template.close();
 			return symptom_list;
