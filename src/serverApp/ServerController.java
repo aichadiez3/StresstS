@@ -10,14 +10,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+
 public class ServerController implements Initializable {
 
-    @FXML
+	@FXML
     private Pane serverScene;
 
     @FXML
     private Group startButton;
-    
+
     @FXML
     private Group stopButton;
 

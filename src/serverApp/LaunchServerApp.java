@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+
 //This server can manage several clients simultaneously by using Threads
 
 public class LaunchServerApp extends Application {
@@ -45,7 +46,7 @@ public class LaunchServerApp extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			//BorderPane root = new BorderPane();
-			Parent root = FXMLLoader.load(getClass().getResource("ServerView.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("serverView.fxml"));
 			primaryStage.setTitle("Log in page");
 			Scene scene = new Scene(root);
 			scene.getStylesheets().addAll(getClass().getResource("dark-theme.css").toExternalForm());

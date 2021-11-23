@@ -85,10 +85,10 @@ public class BitalinoController implements Initializable{
     private Group chargingIndicator;
 
     @FXML
-    private LineChart<Integer, Integer> ecgGraph;
+    private LineChart<String, String> ecgGraph;
 
     @FXML
-    private LineChart<Integer, Integer> edaGraph;
+    private LineChart<String, String> edaGraph;
     
     @FXML
     private ComboBox<String> freqSelection;
@@ -162,15 +162,15 @@ public class BitalinoController implements Initializable{
 	                for (int i = 0; i < frame.length; i++) {
 	                	// To get a JavaFX LineChart component to display any lines, you must provide it with a data series.
 	                	// A data series is a list of data points. Each data point contains an X value and a Y value.
-	                	XYChart.Series dataECG=new XYChart.Series<>();
-	                	int x_axis=(j * block_size + i)/SamplingRate;
+	                	XYChart.Series<String,String> dataECG=new XYChart.Series<>();
+	                	Integer x_axis=(j * block_size + i)/SamplingRate;
 	                	
-	                	dataECG.getData().add(new XYChart.Data<Integer, Integer>(x_axis, frame[i].analog[1]));
-	                	ecgGraph.getData().add(dataECG);
+	                	dataECG.getData().add(new XYChart.Data<String, String>(x_axis.toString(), String.valueOf(frame[i].analog[1])));
+	                	ecgGraph.getData().addAll(dataECG);
 	                	
-	                	XYChart.Series<Integer,Integer> dataEDA=new XYChart.Series<>();
-	                	dataEDA.getData().add(new XYChart.Data<Integer, Integer>(x_axis, frame[i].analog[2]));
-	                	edaGraph.getData().add(dataEDA);
+	                	XYChart.Series<String,String> dataEDA=new XYChart.Series<>();
+	                	dataEDA.getData().add(new XYChart.Data<String, String>(x_axis.toString(), String.valueOf(frame[i].analog[2])));
+	                	edaGraph.getData().addAll(dataEDA);
 	                }
 	            }
 	            //stop acquisition
@@ -239,9 +239,9 @@ public class BitalinoController implements Initializable{
 	                //Print the samples
 	                for (int i = 0; i < frame.length; i++) {
 	                	
-	                	XYChart.Series<Integer,Integer> dataEDA=new XYChart.Series<>();
-	                	dataEDA.getData().add(new XYChart.Data<Integer, Integer>((j * block_size + i)/this.SamplingRate, frame[i].analog[2]));
-	                	edaGraph.getData().add(dataEDA);
+	                	XYChart.Series<String,String> dataEDA=new XYChart.Series<>();
+	                	dataEDA.getData().add(new XYChart.Data<String, String>(String.valueOf((j * block_size + i)/this.SamplingRate), String.valueOf(frame[i].analog[2])));
+	                	edaGraph.getData().addAll(dataEDA);
 	                }
 	            }
 	            //stop acquisition
@@ -305,8 +305,8 @@ public class BitalinoController implements Initializable{
 	                //Print the samples
 	                for (int i = 0; i < frame.length; i++) {
 	                	
-	                	XYChart.Series<Integer,Integer> dataECG=new XYChart.Series<>();
-	                	dataECG.getData().add(new XYChart.Data<Integer, Integer>((j * block_size + i)/this.SamplingRate, frame[i].analog[1]));
+	                	XYChart.Series<String,String> dataECG=new XYChart.Series<>();
+	                	dataECG.getData().add(new XYChart.Data<String, String>(String.valueOf((j * block_size + i)/this.SamplingRate), String.valueOf(frame[i].analog[1])));
 	                	ecgGraph.getData().add(dataECG);
 	                }
 	            }

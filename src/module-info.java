@@ -12,4 +12,5 @@ module test {
 	requires jdk.jdi;
 	opens application to javafx.fxml;
 	exports application;
+	exports serverApp;
 }
