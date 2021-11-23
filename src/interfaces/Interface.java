@@ -12,7 +12,7 @@ import pojos.User;
 public interface Interface {
 	
 	public User Insert_new_user(String user_name, String password, String email);
-	public Patient Insert_new_patient(User user, String name, String surname, LocalDate birth_date, Integer age, Integer height, Integer weight, String gender, Integer telephone, String insurance_company);
+	public Patient Insert_new_patient(User user, String name, String surname, LocalDate birth_date, Integer height, Integer weight, String gender, Integer telephone, String insurance_company);
 	public Doctor Insert_new_doctor(User user);
 	
 	

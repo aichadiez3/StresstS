@@ -54,9 +54,9 @@ public class SQLiteMethods implements Interface {
 	}
 	
 	
-    public Patient Insert_new_patient(User user, String name, String surname, LocalDate birth_date, Integer age, Integer height, Integer weight, String gender, Integer telephone, String insurance_company ) {
+    public Patient Insert_new_patient(User user, String name, String surname, LocalDate birth_date, Integer height, Integer weight, String gender, Integer telephone, String insurance_company ) {
 		try {
-			String table = "INSERT INTO patient (user_id, name, surname, birth_date, age, height, weight, gender,telephone,insurance_company) " + "VALUES (?,?,?,?,?,?,?,?,?,?);";
+			String table = "INSERT INTO patient (user_id, name, surname, birth_date, age, height, weight, gender, telephone, insurance_company) " + "VALUES (?,?,?,?,?,?,?,?,?,?);";
 			PreparedStatement template = this.sqlite_connection.prepareStatement(table);
 			template.setInt(1, user.getUserId());
 			template.setString(2, user.getUserName());
@@ -101,7 +101,7 @@ public class SQLiteMethods implements Interface {
 			Doctor doctor = new Doctor();
 			doctor.setDoctor_id(result_set.getInt("director_id"));
 			doctor.setName(result_set.getString("name"));
-			doctor.setTelephone(0);
+			doctor.setTelephone(result_set.getInt("telephone"));
 			return doctor;
 		} catch(SQLException new_director_error) {
 			return null;

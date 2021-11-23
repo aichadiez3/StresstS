@@ -10,6 +10,7 @@ public class Doctor implements Serializable {
 	private Integer doctor_id;
 	private String name;
 	private Integer telephone;
+	
 	public Integer getDoctor_id() {
 		return doctor_id;
 	}

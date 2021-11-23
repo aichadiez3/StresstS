@@ -30,10 +30,15 @@ public class Patient implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Patient(String name, String surname, String insurance_company) {
+	public Patient(String name, String surname, LocalDate birth_date, Integer height, Integer weight, String gender, Integer telephone, String insurance_company) {
 		super();
 		this.name = name;
 		this.surname = surname;
+		this.birth_date = birth_date;
+		this.height = height;
+		this.weight = weight;
+		this.gender = gender;
+		this.telephone = telephone;
 		this.insurance_company = insurance_company;
 	}
 
@@ -73,9 +78,6 @@ public class Patient implements Serializable {
 		return birth_date;
 	}
 	
-	public void setBirth_date(LocalDate birth_date) {
-			this.birth_date = birth_date;
-	}
 	
 	public void setBirth_date(Date birth_date) {
 		Instant instant = birth_date.toInstant();
@@ -87,7 +89,6 @@ public class Patient implements Serializable {
 	public Date convert_LocalDate_to_Date(LocalDate localDate) {
 		return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 	}
-	
 	
 
 	public Integer getAge() {
