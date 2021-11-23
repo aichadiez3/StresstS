@@ -22,7 +22,6 @@ public class LaunchServerApp extends Application {
 	private static Stage stage;
 	
 	
-	
 	public static void main(String[] args) throws IOException {
 		
 		launch(args);
@@ -46,10 +45,10 @@ public class LaunchServerApp extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			//BorderPane root = new BorderPane();
-			Parent root = FXMLLoader.load(getClass().getResource("serverView.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("ServerApplicationView.fxml"));
 			primaryStage.setTitle("Log in page");
 			Scene scene = new Scene(root);
-			scene.getStylesheets().addAll(getClass().getResource("dark-theme.css").toExternalForm());
+			//scene.getStylesheets().addAll(getClass().getResource("dark-theme.css").toExternalForm());
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setScene(scene);
 			stage = primaryStage;
