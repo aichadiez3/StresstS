@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import application.BitalinoController;
-import db.pojos.Director;
 import pojos.Insurance_company;
 import pojos.Bitalino_test;
 import pojos.Doctor;
