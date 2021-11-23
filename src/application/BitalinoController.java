@@ -95,7 +95,7 @@ public class BitalinoController implements Initializable{
     
 	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1) { // que es lo que quiero poner al iniciar ese panel
 		
 		ecgGraph.resize(1060, 232);
 		edaGraph.resize(1060, 232);
@@ -103,7 +103,7 @@ public class BitalinoController implements Initializable{
 		ObservableList<String> freqs = FXCollections.observableArrayList( "10","100","1000" );
 		freqSelection.setItems(freqs);
 		macAddressField.setText("20:17:11:20:50:75");
-		
+		//pasarle el MAC address
 		infoMACaddress.setOnMouseEntered(new EventHandler<MouseEvent> () {
 			@Override
 			public void handle(MouseEvent arg0) {
@@ -193,7 +193,7 @@ public class BitalinoController implements Initializable{
 	            }
 	        }
 	        
-	        
+	        //te abre el menu del test psicologico que lo haces visible cuando aabas de grabar el bitlino
 	        proceedButton.setVisible(true); //<----------- ESTO HAY Q QUITARLO
 	        
 	        proceedButton.setOnMouseClicked((MouseEvent e)->{
@@ -209,6 +209,8 @@ public class BitalinoController implements Initializable{
 	        });
 
 		});
+		
+		//cuando solo quieres hacer EDA y no ambos---> Hay que hacer dos tablas, uno para el EDA y otro para ECG
 		
 		edaTestButton.setOnMouseClicked((MouseEvent event) -> {
 			this.SamplingRate=Integer.parseInt(freqSelection.getValue());
