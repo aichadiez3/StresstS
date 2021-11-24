@@ -172,8 +172,6 @@ public class SQLiteMethods implements Interface {
     }
     
     
-    
-    
 
 	// -----> SEARCH STORED ELEMENTS BY ID METHODS <-----
 	public MedicalRecord Search_stored_record_by_id(Integer record_id) {
