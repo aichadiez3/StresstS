@@ -9,7 +9,7 @@ There are two main applictions in this project: a main client application (Launc
 1. A patient can create and access to its personal account and can start several psychological and physiological tests that end-up on a proper axiety or stress diagnosis. For that, he can measure the O2 saturation and it heart rate pulse using a pulsioxymeter, and can also perform some ECG (Electrocardiogram) and EDA (Electrodermal activity) test with the help of a Bitalino board and some electrodes, in addition to a psychological test that analyzes the patient's daily activities and behaviours that may increase the possibility of feeling anxious or stressed. 
 2. A server handles the connections of several clients at the same time to the same host. Its functionality consists only on starting and ending the server when needed. 
 
-## Hhat is required for a correct application running
+## What is required for a correct application running
 The application runs in a PC device. If a problem occurs when running this application you may need to proceed as follows:
 1. Download jre 17 (from Oracle)
 2. Run configurations > JRE > Select or import the jre 7 you have already installed in directory "C:\Program Files\Java"
