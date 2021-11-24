@@ -53,6 +53,18 @@ public class SQLiteMethods implements Interface {
 		}
 	}
 	
+	public void Insert_new_medical_record(Date recordDate, Integer referenceNumber, BitalinoController bitalinoTestIncluded) {
+		try {
+			String table = "INSERT INTO medical_record (recordDate, referenceNumber, bitalinoTestIncluded) " + " VALUES(?,?,?);";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(table);
+			template.setObject(1, recordDate);
+			template.setInt(2, referenceNumber);
+			template.setObject(3, bitalinoTestIncluded);
+			template.executeUpdate();
+		} catch (SQLException insert_user_error) {
+			return;
+		}
+	}
 	
     public Patient Insert_new_patient(User user, String name, String surname, LocalDate birth_date, Integer height, Integer weight, String gender, Integer telephone, String insurance_company ) {
 		try {
