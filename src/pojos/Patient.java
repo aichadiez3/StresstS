@@ -23,14 +23,14 @@ public class Patient implements Serializable {
 	private Integer weight;
 	private String gender;
 	private Integer telephone;
-	private String insurance_company;
+	private Insurance_company insurance;
 
 	public Patient() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Patient(String name, String surname, LocalDate birth_date, Integer height, Integer weight, String gender, Integer telephone, String insurance_company) {
+	public Patient(String name, String surname, LocalDate birth_date, Integer height, Integer weight, String gender, Integer telephone, Insurance_company insurance) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -39,7 +39,7 @@ public class Patient implements Serializable {
 		this.weight = weight;
 		this.gender = gender;
 		this.telephone = telephone;
-		this.insurance_company = insurance_company;
+		this.insurance = insurance;
 	}
 
 	public Integer getPatient_id() {
@@ -74,8 +74,9 @@ public class Patient implements Serializable {
 		this.surname = surname;
 	}
 
-	public LocalDate getBirth_date() {
-		return birth_date;
+	public Date getBirth_date() {
+		Date birthday = convert_LocalDate_to_Date(birth_date);
+		return birthday;
 	}
 	
 	
@@ -124,12 +125,12 @@ public class Patient implements Serializable {
 		this.telephone = telephone;
 	}
 
-	public String getInsurance_company() {
-		return insurance_company;
+	public Insurance_company getInsurance() {
+		return insurance;
 	}
 
-	public void setInsurance_company(String insurance_company) {
-		this.insurance_company = insurance_company;
+	public void setInsurance(Insurance_company insurance) {
+		this.insurance = insurance;
 	}
 
 	public String getGender() {

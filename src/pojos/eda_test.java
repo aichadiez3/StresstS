@@ -1,0 +1,61 @@
+package pojos;
+
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.Objects;
+
+public class eda_test implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer eda_id;
+	private LinkedList<Integer> eda_values = new LinkedList<Integer>();
+	
+	public eda_test() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public eda_test(LinkedList<Integer> eda_values) {
+		super();
+		this.eda_values = eda_values;
+	}
+
+	public Integer getEda_id() {
+		return eda_id;
+	}
+
+	public void setEda_id(Integer eda_id) {
+		this.eda_id = eda_id;
+	}
+
+	public LinkedList<Integer> getEda_values() {
+		return eda_values;
+	}
+
+	public void setEda_values(LinkedList<Integer> eda_values) {
+		this.eda_values = eda_values;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(eda_id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		eda_test other = (eda_test) obj;
+		return Objects.equals(eda_id, other.eda_id);
+	}
+	
+	
+	
+}

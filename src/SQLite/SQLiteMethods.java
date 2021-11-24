@@ -5,12 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import application.BitalinoController;
 import interfaces.Interface;
 import pojos.Doctor;
 import pojos.MedicalRecord;
@@ -31,7 +29,7 @@ public class SQLiteMethods implements Interface {
 	
 	public User Insert_new_user(String user_name, String password, String email) {
 		try {
-			String table = "INSERT INTO user (user_name, password,email) " + " VALUES(?,?,?);";
+			String table = "INSERT INTO user (user_name, password, email) " + " VALUES(?,?,?);";
 			PreparedStatement template = this.sqlite_connection.prepareStatement(table);
 			template.setString(1, user_name);
 			template.setString(2, password);
@@ -49,26 +47,37 @@ public class SQLiteMethods implements Interface {
 		    user.setUserId(result_set.getInt("user_id"));
 		    return user;
 		} catch (SQLException insert_user_error) {
+			insert_user_error.printStackTrace();
 			return null;
 		}
 	}
 	
-	public void Insert_new_medical_record(Date recordDate, Integer referenceNumber, BitalinoController bitalinoTestIncluded) {
+	public Integer Insert_new_medical_record(MedicalRecord record) {
 		try {
-			String table = "INSERT INTO medical_record (recordDate, referenceNumber, bitalinoTestIncluded) " + " VALUES(?,?,?);";
+			String table = "INSERT INTO medical_record (reference_number, record_date, bitalino_test_id) " + " VALUES(?,?,?);";
 			PreparedStatement template = this.sqlite_connection.prepareStatement(table);
-			template.setObject(1, recordDate);
-			template.setInt(2, referenceNumber);
-			template.setObject(3, bitalinoTestIncluded);
+			template.setDate(1, (Date) record.getRecordDate());
+			template.setInt(2, record.getReferenceNumber());
+			template.setInt(3, record.getBitalinoTestId());
 			template.executeUpdate();
-		} catch (SQLException insert_user_error) {
-			return;
+			
+			String SQL_code = "SELECT last_insert_rowid() AS record_id";
+			template = this.sqlite_connection.prepareStatement(SQL_code);
+			ResultSet result_set = template.executeQuery();
+			Integer record_id = result_set.getInt("record_id");
+			template.close();
+			return record_id;
+			
+		} catch (SQLException insert_record_error) {
+			insert_record_error.printStackTrace();
+			return null;
 		}
 	}
 	
-    public Patient Insert_new_patient(User user, String name, String surname, LocalDate birth_date, Integer height, Integer weight, String gender, Integer telephone, String insurance_company ) {
-		try {
-			String table = "INSERT INTO patient (user_id, name, surname, birth_date, age, height, weight, gender, telephone, insurance_company) " + "VALUES (?,?,?,?,?,?,?,?,?,?);";
+    
+    public Patient Insert_new_patient(User user) {
+    	try {
+			String table = "INSERT INTO patient (user_id, name, surname) " + "VALUES (?,?);";
 			PreparedStatement template = this.sqlite_connection.prepareStatement(table);
 			template.setInt(1, user.getUserId());
 			template.setString(2, user.getUserName());
@@ -81,15 +90,15 @@ public class SQLiteMethods implements Interface {
 			Patient patient = new Patient();
 			patient.setPatient_id(result_set.getInt("patient_id"));
 			patient.setName(result_set.getString("name"));
-			patient.setUser(user);
 			patient.setSurname(result_set.getString("surname"));
-			patient.setBirth_date(result_set.getDate("birth_date"));
-			patient.setAge(result_set.getInt("age"));
-			patient.setHeight(result_set.getInt("height"));
-			patient.setWeight(result_set.getInt("weight"));
-			patient.setGender(result_set.getString("gender"));
-			patient.setTelephone(result_set.getInt("telephone"));
-			patient.setInsurance_company(result_set.getString("insurance_company"));
+			patient.setUser(user);
+			patient.setBirth_date(null);
+			patient.setAge(null);
+			patient.setHeight(null);
+			patient.setWeight(null);
+			patient.setGender(null);
+			patient.setTelephone(null);
+			patient.setInsurance(null);
 			
 			return patient;
 		} catch (SQLException new_client_account_error) {
@@ -97,6 +106,8 @@ public class SQLiteMethods implements Interface {
 			return null;
 		}
     }
+    
+    
     
     public Doctor Insert_new_doctor(User user) {
 		try {
@@ -123,6 +134,46 @@ public class SQLiteMethods implements Interface {
 	
 	// -----> UPDATE METHODS <-----
 	
+    public void Change_password(String password, Integer user_id) {
+		try {
+			String SQL_code = "UPDATE user SET password = ? WHERE user_id = ?";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
+			template.setString(1, password);
+			template.setInt(2, user_id);
+			template.executeUpdate();
+			template.close();
+		} catch (SQLException update_password_error) {
+			update_password_error.printStackTrace();
+		}
+	}
+    
+    public boolean Update_patient_info(Patient patient) {
+    	try {
+    		String SQL_code = "UPDATE patient SET name = ?, surname = ?, birthdate = ?, age = ?, telephone = ?, height = ?, weight = ?, gender = ?, insurance_id = ? WHERE patient_id = ?";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
+			template.setString(1, patient.getName());
+			template.setString(2, patient.getSurname());
+			template.setDate(3, (Date) patient.getBirth_date());
+			template.setInt(4, patient.getAge());
+			template.setInt(5, patient.getTelephone());
+			template.setInt(6, patient.getHeight());
+			template.setInt(7, patient.getWeight());
+			template.setString(8, patient.getGender());
+			template.setInt(9, patient.getInsurance().getInsurance_id());
+			template.setInt(10, patient.getPatient_id());
+			template.executeUpdate();
+			template.close();
+    		
+			return true;
+		} catch (SQLException update_patient_error) {
+			update_patient_error.printStackTrace();
+			return false;
+		}
+    }
+    
+    
+    
+    
 
 	// -----> SEARCH STORED ELEMENTS BY ID METHODS <-----
 	public MedicalRecord Search_stored_record_by_id(Integer record_id) {
@@ -134,7 +185,7 @@ public class SQLiteMethods implements Interface {
 			ResultSet result_set = template.executeQuery();
 			record.setReferenceNumber(result_set.getInt("reference_number"));
 			record.setRecordDate(result_set.getDate("record_date"));
-			record.setBitalinoTestIncluded((BitalinoController) result_set.getObject("bitalinoTestIncluded"));
+			record.setBitalinoTestId(result_set.getInt("bitalino_test_id"));
 			List<Symptom> symptoms_list = Search_all_symptoms_from_record(record_id);
 			record.setSymptoms_list(symptoms_list);
 			template.close();
@@ -155,9 +206,9 @@ public class SQLiteMethods implements Interface {
 				int id = rs.getInt("medicalRecord_id");
 				Date date = rs.getDate("record_date");
 				int referenceNumber = rs.getInt("reference_number");
-				BitalinoController bitalinoController = (BitalinoController) rs.getObject("bitalinoTestIncluded");
+				Integer bitalino_test_id = rs.getInt("bitalino_test_id");
 				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list");
-				records.add(new MedicalRecord(id, date, referenceNumber, bitalinoController, symptoms_list));
+				records.add(new MedicalRecord(id, date, referenceNumber, bitalino_test_id, symptoms_list));
 			}
 		} catch (SQLException search_record_error) {
 			search_record_error.printStackTrace();
@@ -198,9 +249,9 @@ public class SQLiteMethods implements Interface {
 				int id = rs.getInt("medicalRecord_id");
 				Date date = rs.getDate("record_date");
 				int referenceNumber = rs.getInt("reference_number");
-				BitalinoController bitalinoController = (BitalinoController) rs.getObject("bitalinoTestIncluded");
+				Integer bitalino_test_id = rs.getInt("bitalino_test_id");
 				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list"); // PUEDE QUE ESTO VAYA A DAR UN ERROR CON EL TIPO DE DATO DE LA TABLA medical_record
-				records.add(new MedicalRecord(id, date, referenceNumber, bitalinoController, symptoms_list));
+				records.add(new MedicalRecord(id, date, referenceNumber, bitalino_test_id, symptoms_list));
 			}
 		} catch (SQLException search_record_error) {
 			search_record_error.printStackTrace();
@@ -221,9 +272,9 @@ public class SQLiteMethods implements Interface {
 				int id = rs.getInt("medicalRecord_id");
 				Date date = rs.getDate("record_date");
 				int referenceNumber = rs.getInt("reference_number");
-				BitalinoController bitalinoController = (BitalinoController) rs.getObject("bitalinoTestIncluded");
+				Integer bitalino_test_id = rs.getInt("bitalino_test_id");
 				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list"); // PUEDE QUE ESTO VAYA A DAR UN ERROR CON EL TIPO DE DATO DE LA TABLA medical_record
-				records.add(new MedicalRecord(id, date, referenceNumber, bitalinoController, symptoms_list));
+				records.add(new MedicalRecord(id, date, referenceNumber, bitalino_test_id, symptoms_list));
 			}
 		} catch (SQLException search_record_error) {
 			search_record_error.printStackTrace();

@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import pojos.Doctor;
@@ -12,9 +13,12 @@ import pojos.User;
 public interface Interface {
 	
 	public User Insert_new_user(String user_name, String password, String email);
-	public Patient Insert_new_patient(User user, String name, String surname, LocalDate birth_date, Integer height, Integer weight, String gender, Integer telephone, String insurance_company);
+	public Patient Insert_new_patient(User user);
 	public Doctor Insert_new_doctor(User user);
+	public Integer Insert_new_medical_record(MedicalRecord record);
 	
+	public void Change_password(String password, Integer user_id);
+	public boolean Update_patient_info(Patient patient);
 	
 	public MedicalRecord Search_stored_record_by_id(Integer record_id);
 	public List<MedicalRecord> Search_stored_record_by_test(Integer test);

@@ -14,8 +14,7 @@ public class MedicalRecord implements Serializable{
 	private Integer medicalRecord_id;
 	private Date recordDate;
 	private Integer referenceNumber;
-	private BitalinoController bitalinoTestIncluded;
-	//private List<String> symptoms_list = new LinkedList<String>();
+	private Integer bitalino_test_id;
 	private List<Symptom> symptoms_list = new LinkedList<Symptom>();
 
 	
@@ -24,26 +23,26 @@ public class MedicalRecord implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public MedicalRecord(Date recordDate, BitalinoController bitalinoTestIncluded) {
+	public MedicalRecord(Date recordDate, Integer bitalino_test_id) {
 		super();
 		this.recordDate = recordDate;
-		this.bitalinoTestIncluded = bitalinoTestIncluded;
+		this.bitalino_test_id = bitalino_test_id;
 	}
 	
-	public MedicalRecord(Date recordDate, BitalinoController bitalinoTestIncluded, List<Symptom> symptoms_list) {
+	public MedicalRecord(Date recordDate, Integer bitalino_test_id, List<Symptom> symptoms_list) {
 		super();
 		this.recordDate = recordDate;
-		this.bitalinoTestIncluded = bitalinoTestIncluded;
+		this.bitalino_test_id = bitalino_test_id;
 		this.symptoms_list = symptoms_list;
 	}
 	
 	public MedicalRecord(Integer medicalRecord_id, Date recordDate, Integer referenceNumber,
-			BitalinoController bitalinoTestIncluded, List<Symptom> symptoms_list) {
+			Integer bitalino_test_id, List<Symptom> symptoms_list) {
 		super();
 		this.medicalRecord_id = medicalRecord_id;
 		this.recordDate = recordDate;
 		this.referenceNumber = referenceNumber;
-		this.bitalinoTestIncluded = bitalinoTestIncluded;
+		this.bitalino_test_id = bitalino_test_id;
 		this.symptoms_list = symptoms_list;
 	}
 
@@ -71,16 +70,23 @@ public class MedicalRecord implements Serializable{
 		this.referenceNumber = referenceNumber;
 	}
 
-	public BitalinoController getBitalinoTestIncluded() {
-		return bitalinoTestIncluded;
+	public Integer getBitalinoTestId() {
+		return bitalino_test_id;
 	}
 
-	public void setBitalinoTestIncluded(BitalinoController bitalinoTestIncluded) {
-		this.bitalinoTestIncluded = bitalinoTestIncluded;
+	public void setBitalinoTestId(Integer bitalino_test_id) {
+		this.bitalino_test_id = bitalino_test_id;
+	}
+
+	public List<Symptom> getSymptoms_list() {
+		return symptoms_list;
+	}
+
+	public void setSymptoms_list(List<Symptom> symptoms_list) {
+		this.symptoms_list = symptoms_list;
 	}
 
 	
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(medicalRecord_id);
@@ -98,13 +104,11 @@ public class MedicalRecord implements Serializable{
 		return Objects.equals(medicalRecord_id, other.medicalRecord_id);
 	}
 
-	public List<Symptom> getSymptoms_list() {
-		return symptoms_list;
-	}
-
-	public void setSymptoms_list(List<Symptom> symptoms_list) {
-		this.symptoms_list = symptoms_list;
-	}
+	
+	
+	
+	
+	
 	public void addSymptom(Symptom symptom) {
 		symptoms_list.add(symptom);
 	}
