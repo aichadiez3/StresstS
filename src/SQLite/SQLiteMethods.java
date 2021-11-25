@@ -1,5 +1,6 @@
 package SQLite;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,8 +12,12 @@ import java.util.List;
 
 import interfaces.Interface;
 import pojos.Doctor;
+import pojos.EcgTest;
+import pojos.EdaTest;
 import pojos.MedicalRecord;
 import pojos.Patient;
+import pojos.PhysicalTest;
+import pojos.PsychoTest;
 import pojos.Symptom;
 import pojos.User;
 
@@ -127,9 +132,118 @@ public class SQLiteMethods implements Interface {
 			doctor.setTelephone(result_set.getInt("telephone"));
 			return doctor;
 		} catch(SQLException new_director_error) {
+			new_director_error.printStackTrace();
 			return null;
 		}
 	}
+    
+    
+    public Integer Insert_new_ecg(EcgTest ecg) {
+		try {
+			String table = "INSERT INTO ecg_test (values, test_id) " + "VALUES (?,?)";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(table);
+			template.setArray(1, (Array) ecg.getEcg_values());
+			template.setInt(2, ecg.getTest_id());
+			template.executeUpdate();
+			
+			String SQL_code = "SELECT last_insert_rowid() AS ecg_id";
+			template = this.sqlite_connection.prepareStatement(SQL_code);
+			ResultSet result_set = template.executeQuery();
+			Integer ecg_id = result_set.getInt("ecg_id");
+			template.close();
+			return ecg_id;
+		} catch(SQLException new_ecg_error) {
+			new_ecg_error.printStackTrace();
+			return null;
+		}
+	}
+
+    public Integer Insert_new_eda(EdaTest eda) {
+		try {
+			String table = "INSERT INTO eda_test (values, test_id) " + "VALUES (?,?)";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(table);
+			template.setArray(1, (Array) eda.getEda_values());
+			template.setInt(2, eda.getTest_id());
+			template.executeUpdate();
+			
+			String SQL_code = "SELECT last_insert_rowid() AS eda_id";
+			template = this.sqlite_connection.prepareStatement(SQL_code);
+			ResultSet result_set = template.executeQuery();
+			Integer eda_id = result_set.getInt("eda_id");
+			template.close();
+			return eda_id;
+		} catch(SQLException new_eda_error) {
+			new_eda_error.printStackTrace();
+			return null;
+		}
+	}
+    
+    public Integer Insert_new_psycho_test(PsychoTest psycho) {
+		try {
+			String table = "INSERT INTO psycho_test (positive_res, negative_res, medicalRecord_id) " + "VALUES (?,?,?)";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(table);
+			template.setArray(1, (Array) psycho.getPositive_res());
+			template.setArray(2, (Array) psycho.getNegative_res());
+			template.setInt(3, psycho.getMedicalRecord_id());
+			template.executeUpdate();
+			
+			
+			String SQL_code = "SELECT last_insert_rowid() AS queries_id";
+			template = this.sqlite_connection.prepareStatement(SQL_code);
+			ResultSet result_set = template.executeQuery();
+			Integer queries_id = result_set.getInt("queries_id");
+			template.close();
+			
+			/*
+			LinkedList<Boolean> positive_res = psycho.getPositive_res();
+			for() {
+				
+			}
+			
+			
+			List<Biomaterial> biomaterial_list = transaction.getBiomaterial_list();
+			for(Biomaterial biomaterial: biomaterial_list) {
+				table = "INSERT INTO transaction_biomaterial (transaction_id, biomaterial_id) " 
+						+ "VALUES (?,?);";
+				template = this.sqlite_connection.prepareStatement(table);
+				template.setInt(1, transaction_id);
+				template.setInt(2, biomaterial.getBiomaterial_id());
+				template.executeUpdate();
+				template.close();
+			}
+			
+			*/
+			
+			return queries_id;
+		} catch(SQLException new_psycho_test_error) {
+			new_psycho_test_error.printStackTrace();
+			return null;
+		}
+	}
+    
+    public Integer Insert_new_physical_test(PhysicalTest physical) {
+		try {
+			String table = "INSERT INTO physical_test (saturation, pulse, breathingRate, medicalRecord_id) " + "VALUES (?,?,?,?)";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(table);
+			template.setInt(1, physical.getSaturation());
+			template.setInt(2, physical.getPulse());
+			template.setInt(3, physical.getBreathingRate());
+			template.setInt(4, physical.getMedicalRecord_id());
+			template.executeUpdate();
+			
+			String SQL_code = "SELECT last_insert_rowid() AS test_id";
+			template = this.sqlite_connection.prepareStatement(SQL_code);
+			ResultSet result_set = template.executeQuery();
+			Integer test_id = result_set.getInt("test_id");
+			template.close();
+			return test_id;
+		} catch(SQLException new_physical_test_error) {
+			new_physical_test_error.printStackTrace();
+			return null;
+		}
+	}
+    
+    
 	
 	
 	// -----> UPDATE METHODS <-----

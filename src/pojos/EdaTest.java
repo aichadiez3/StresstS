@@ -4,21 +4,21 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Objects;
 
-public class eda_test implements Serializable {
-
+public class EdaTest implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer eda_id;
+	private Integer test_id;
 	private LinkedList<Integer> eda_values = new LinkedList<Integer>();
 	
-	public eda_test() {
+	public EdaTest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public eda_test(LinkedList<Integer> eda_values) {
+	public EdaTest(LinkedList<Integer> eda_values) {
 		super();
 		this.eda_values = eda_values;
 	}
@@ -39,6 +39,15 @@ public class eda_test implements Serializable {
 		this.eda_values = eda_values;
 	}
 
+	public Integer getTest_id() {
+		return test_id;
+	}
+
+	public void setTest_id(Integer test_id) {
+		this.test_id = test_id;
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(eda_id);
@@ -52,10 +61,11 @@ public class eda_test implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		eda_test other = (eda_test) obj;
+		EdaTest other = (EdaTest) obj;
 		return Objects.equals(eda_id, other.eda_id);
 	}
+
 	
-	
+
 	
 }

@@ -4,21 +4,22 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Objects;
 
-public class ecg_test implements Serializable {
 
+public class EcgTest implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer ecg_id;
+	private Integer test_id;
 	private LinkedList<Integer> ecg_values = new LinkedList<Integer>();
 	
-	public ecg_test() {
+	public EcgTest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ecg_test(LinkedList<Integer> ecg_values) {
+	public EcgTest(LinkedList<Integer> ecg_values) {
 		super();
 		this.ecg_values = ecg_values;
 	}
@@ -38,6 +39,16 @@ public class ecg_test implements Serializable {
 	public void setEcg_values(LinkedList<Integer> ecg_values) {
 		this.ecg_values = ecg_values;
 	}
+	
+	public Integer getTest_id() {
+		return test_id;
+	}
+
+	public void setTest_id(Integer test_id) {
+		this.test_id = test_id;
+	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -52,11 +63,12 @@ public class ecg_test implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ecg_test other = (ecg_test) obj;
+		EcgTest other = (EcgTest) obj;
 		return Objects.equals(ecg_id, other.ecg_id);
 	}
+
 	
-	
+
 	
 	
 }
