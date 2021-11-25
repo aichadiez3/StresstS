@@ -304,8 +304,9 @@ public class SQLiteMethods implements Interface {
 			return record;
 		} catch (SQLException search_record_error) {
 			search_record_error.printStackTrace();
+			return null;
 		}
-		return null;
+		
 	}
 	
 	public List<MedicalRecord> Search_stored_record_by_test(Integer test) {
@@ -322,11 +323,12 @@ public class SQLiteMethods implements Interface {
 				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list");
 				records.add(new MedicalRecord(id, date, referenceNumber, bitalino_test_id, symptoms_list));
 			}
+			return records;
 		} catch (SQLException search_record_error) {
 			search_record_error.printStackTrace();
 			return null;
 		}
-		return records;
+		
 	}
 	
 	
@@ -365,11 +367,12 @@ public class SQLiteMethods implements Interface {
 				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list"); // PUEDE QUE ESTO VAYA A DAR UN ERROR CON EL TIPO DE DATO DE LA TABLA medical_record
 				records.add(new MedicalRecord(id, date, referenceNumber, bitalino_test_id, symptoms_list));
 			}
+			return records;
 		} catch (SQLException search_record_error) {
 			search_record_error.printStackTrace();
 			return null;
 		}
-		return records;
+		
 	}
 	
 	
@@ -388,11 +391,12 @@ public class SQLiteMethods implements Interface {
 				List<Symptom> symptoms_list = (List<Symptom>) rs.getArray("symptoms_list"); // PUEDE QUE ESTO VAYA A DAR UN ERROR CON EL TIPO DE DATO DE LA TABLA medical_record
 				records.add(new MedicalRecord(id, date, referenceNumber, bitalino_test_id, symptoms_list));
 			}
+			return records;
 		} catch (SQLException search_record_error) {
 			search_record_error.printStackTrace();
 			return null;
 		}
-		return records;
+		
 	}
 	
 	
