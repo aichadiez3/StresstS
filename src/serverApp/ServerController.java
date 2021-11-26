@@ -90,7 +90,7 @@ public class ServerController implements Initializable {
     
 	
 	
-	public void releaseResources(Socket socket) {
+	private static void releaseResources(Socket socket) {
 		try {
             socket.close();
         } catch (IOException ex) {
@@ -98,7 +98,7 @@ public class ServerController implements Initializable {
         }
 	}
 	
-	public void releaseResourcesServer(Socket socket, ServerSocket serverSocket) {
+	private static void releaseResourcesServer(Socket socket, ServerSocket serverSocket) {
 		try {
             socket.close();
         } catch (IOException ex) {
