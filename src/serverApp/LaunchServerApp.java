@@ -23,21 +23,7 @@ public class LaunchServerApp extends Application {
 	
 	
 	public static void main(String[] args) throws IOException {
-		
 		launch(args);
-		
-		ServerSocket serverSocket = new ServerSocket(9000);
-		
-		try {
-            while (true) {
-                //This executes when we have a client
-                Socket socket = serverSocket.accept();
-                new Thread(new ServerClient(socket)).start();
-                
-            }
-        } catch (IOException e) {
-        	Logger.getLogger(LaunchServerApp.class.getName()).log(Level.SEVERE, null, e);
-		}
 	}
 
 	

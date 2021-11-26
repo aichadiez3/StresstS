@@ -1,8 +1,13 @@
 package serverApp;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
 
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import SQLite.SQLiteManager;
 import javafx.fxml.FXML;
@@ -30,16 +35,28 @@ public class ServerController implements Initializable {
     private static Stage main_menu_stage;
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1){
 		
 		controller = new SQLiteManager();
 		
 		startButton.setOnMouseClicked((MouseEvent event) -> {
 			
 			
+			try {
+				ServerSocket serverSocket = new ServerSocket(9000);
+	            while (true) {
+	                //This executes when we have a client
+	                Socket socket = serverSocket.accept();
+	                new Thread(new ServerClient(socket)).start();
+	                
+	            }
+	        } catch (IOException e) {
+	        	Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, e);
+			}
+			
 			controller.Connect();
 			controller.CreateTables();
-			//controller = null;
+			controller = null;
 			
 			
 			// close the scene but the server still waiting for connections
@@ -49,6 +66,7 @@ public class ServerController implements Initializable {
 		
 		stopButton.setOnMouseClicked((MouseEvent event) -> {
 			controller.Close_connection();
+			//incluir aqui las release resources
 			System.exit(0);
 		});
 	}
