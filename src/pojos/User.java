@@ -71,6 +71,12 @@ public class User implements Serializable {
 		return Objects.equals(user_id, other.user_id);
 	}
 
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", user_name=" + user_name + ", password=" + password + ", email=" + email
+				+ "]";
+	}
+
 	
 
 	

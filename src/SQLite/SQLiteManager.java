@@ -14,12 +14,23 @@ public class SQLiteManager {
 	}
 
 	
+	public Connection getSqlite_connection() {
+		return sqlite_connection;
+	}
+
+
+	public void setSqlite_connection(Connection sqlite_connection) {
+		this.sqlite_connection = sqlite_connection;
+	}
+
+
 	public boolean Connect() {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName("org.sqlite.JDBC");
 			this.sqlite_connection = DriverManager.getConnection("jdbc:sqlite:./db/database.db");//hay que poner nuestra database
-			sqlite_connection.createStatement().execute("PRAGMA foreign_keys=ON");
+			this.sqlite_connection.createStatement().execute("PRAGMA foreign_keys=ON");
+			//CreateTables();
 			return true;
 			// create Managers
 
@@ -29,11 +40,6 @@ public class SQLiteManager {
 		}
 	}
 
-	protected Connection getConnection() {
-		return sqlite_connection;
-	}
-
-	
 
 	public boolean CreateTables() {
 		try {
@@ -47,7 +53,7 @@ public class SQLiteManager {
 			String sql1 = "CREATE TABLE patient " + "(patient_id INTEGER PRIMARY KEY AUTOINCREMENT, " + " name TEXT NOT NULL, "
 					+ " surname TEXT NOT NULL, " + " birthdate DATETIME default NULL, " + " age INTEGER default NULL, " + " telephone INTEGER default NULL, "
 					+ " height INTEGER default NULL, " + " weight INTEGER default NULL, " + " gender TEXT default NULL, "
-					+ " insurance_id FOREIGN KEY REFERENCES insurance(insurance_id), " 
+					+ " insurance_id FOREING KEY REFERENCES insurance(insurance_id), " 
 					+ " user_id FOREING KEY REFERENCES user(user_id) ON DELETE CASCADE)";
 			stmt1.execute(sql1);
 			stmt1.close();
@@ -62,9 +68,9 @@ public class SQLiteManager {
 			
 			Statement stmt3 = sqlite_connection.createStatement();
 			String sql3 = "CREATE TABLE medical_record " + "(medicalRecord_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ " reference_number INTEGER UNIQUE, " + " record_date DATETIME NOT NULL, " + " , bitalino_test_id FOREIGN KEY REFERENCES bitalino_test(test_id), "
+					+ " reference_number INTEGER UNIQUE, " + " record_date DATETIME NOT NULL, " + " bitalino_test_id FOREING KEY REFERENCES bitalino_test(test_id), "
 					+ " symptoms_list TEXT default NULL, "
-					+ " FOREING KEY (patient_id) REFERENCES patient (patient_id) ON UPDATE RESTRICT ON DELETE CASCADE)";
+					+ " patient_id FOREING KEY REFERENCES patient(patient_id) ON UPDATE RESTRICT ON DELETE CASCADE)";
 			stmt3.execute(sql3);
 			stmt3.close();
 			
@@ -73,20 +79,21 @@ public class SQLiteManager {
 			stmt4.execute(sql4);
 			stmt4.close();
 			
-			
+			/*
 			Statement stmt5 = sqlite_connection.createStatement();
 			String sql5 = "CREATE TABLE ecg_test " + "(ecg_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ " values TEXT default null, "
+					+ " values TEXT default NULL, "
 					+ " test_id FOREING KEY REFERENCES bitalino_test(test_id))";
 			stmt5.execute(sql5);
 			stmt5.close();
 			
 			Statement stmt6 = sqlite_connection.createStatement();
 			String sql6 = "CREATE TABLE eda_test " + "(eda_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-					+ " values TEXT default null, "
+					+ " values TEXT default NULL, "
 					+ " test_id FOREING KEY REFERENCES bitalino_test(test_id))";
 			stmt6.execute(sql6);
 			stmt6.close();
+			*/
 			
 			Statement stmt7 = sqlite_connection.createStatement();
 			String sql7 = "CREATE TABLE insurance " + "(insurance_id INTEGER PRIMARY KEY AUTOINCREMENT, " 
@@ -148,7 +155,7 @@ public class SQLiteManager {
 				tables_error.printStackTrace();
 				return false;
 			}
-			
+			System.out.println("No puedo crear tablas");
 			return false;
 		}
 	}

@@ -123,6 +123,8 @@ public class AnxietyTestController implements Initializable {
 				 * SAVE HERE ALL DATA FROM TESTS FOR FURTHER EVALUATION AND ASSOCIATE THE SYMPTOMS TO THE PATIEND MEDICAL RECORD
 				 */
 				
+				//this.yes_sport.getId()
+				
 				Pane home_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
 				testPane.getChildren().removeAll();
 				testPane.getChildren().setAll(home_pane_fxml);
