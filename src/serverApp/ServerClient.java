@@ -38,13 +38,13 @@ public class ServerClient implements Runnable{
         try {
             inputStream.close();
         } catch (IOException ex) {
-            Logger.getLogger(LaunchServerApp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
             socket.close();
         } catch (IOException ex) {
-            Logger.getLogger(LaunchServerApp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 	

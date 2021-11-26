@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 
 public class ServerController implements Initializable {
 
-	private SQLiteManager controller;
 	
 	@FXML
     private Pane serverScene;
@@ -33,6 +32,9 @@ public class ServerController implements Initializable {
 
     
     private static Stage main_menu_stage;
+    private SQLiteManager controller;
+    private ServerSocket serverSocket;
+    private Socket socket;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
@@ -41,34 +43,73 @@ public class ServerController implements Initializable {
 		
 		startButton.setOnMouseClicked((MouseEvent event) -> {
 			
-			
-			try {
-				ServerSocket serverSocket = new ServerSocket(9000);
-	            while (true) {
-	                //This executes when we have a client
-	                Socket socket = serverSocket.accept();
-	                new Thread(new ServerClient(socket)).start();
-	                
-	            }
-	        } catch (IOException e) {
-	        	Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, e);
-			}
-			
-			controller.Connect();
-			controller.CreateTables();
-			controller = null;
-			
-			
 			// close the scene but the server still waiting for connections
 			main_menu_stage = (Stage) serverScene.getScene().getWindow();
 			main_menu_stage.setIconified(true);
+			
+			/*
+			controller.Connect();
+			controller.CreateTables();
+			controller = null;
+			*/
+			
+			serverSocket = null;
+		
+			while(true){
+	            //This executes when we have a client
+	            socket = null;
+	            
+				try {
+					serverSocket = new ServerSocket(9000);
+		            while (true) {
+		                //This executes when we have a patient
+		                socket = serverSocket.accept();
+		                new Thread(new ServerClient(socket)).start();
+		                
+		                
+		                // condition receive a message from a close instruction from client application (button x, log_out..)
+		                releaseResources(socket);
+		            }
+		        } catch (IOException e) {
+		        	Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, e);
+				}
+				finally {
+					releaseResourcesServer(socket, serverSocket);
+				}
+			}
+			
+			
 		});
 		
 		stopButton.setOnMouseClicked((MouseEvent event) -> {
 			controller.Close_connection();
-			//incluir aqui las release resources
+			releaseResourcesServer(socket,serverSocket);
 			System.exit(0);
 		});
 	}
     
+	
+	
+	public void releaseResources(Socket socket) {
+		try {
+            socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+	}
+	
+	public void releaseResourcesServer(Socket socket, ServerSocket serverSocket) {
+		try {
+            socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		
+		try {
+			serverSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+	}
+	
 }
