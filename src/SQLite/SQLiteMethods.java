@@ -32,6 +32,10 @@ public class SQLiteMethods implements Interface {
 
 	// -----> INSERT METHODS <-----
 	
+	public SQLiteMethods(Connection sqlite_connection) {
+		this.sqlite_connection = sqlite_connection;
+	}
+
 	public User Insert_new_user(String user_name, String password, String email) {
 		try {
 			String table = "INSERT INTO user (user_name, password, email) " + " VALUES(?,?,?);";

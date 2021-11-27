@@ -8,12 +8,23 @@ import java.sql.Statement;
 
 public class SQLiteManager {
 	private Connection sqlite_connection;
+	private SQLiteMethods methods;
 	
 	public SQLiteManager() {
 		super();
 	}
 
 	
+	public SQLiteMethods getMethods() {
+		return methods;
+	}
+
+
+	public void setMethods(SQLiteMethods methods) {
+		this.methods = methods;
+	}
+
+
 	public Connection getSqlite_connection() {
 		return sqlite_connection;
 	}
@@ -29,7 +40,8 @@ public class SQLiteManager {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			this.sqlite_connection = DriverManager.getConnection("jdbc:sqlite:./db/database.db");//hay que poner nuestra database
-			this.sqlite_connection.createStatement().execute("PRAGMA foreign_keys=ON");
+			sqlite_connection.createStatement().execute("PRAGMA foreign_keys=ON");
+			this.methods = new SQLiteMethods(sqlite_connection);
 			//CreateTables();
 			return true;
 			// create Managers
