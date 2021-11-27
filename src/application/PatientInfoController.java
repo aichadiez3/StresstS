@@ -69,6 +69,9 @@ public class PatientInfoController implements Initializable{
     private Label ageLabel;
     
     @FXML
+    private Label doctorLabel;
+    
+    @FXML
     private TextField telephoneField;
     
     @FXML
