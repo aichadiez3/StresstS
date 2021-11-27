@@ -19,7 +19,7 @@ public class intiateDB {
 		
 		
 		SQLiteMethods methods = manager.getMethods();
-		User user = methods.Insert_new_user("name", "123", "aa@aa");
+		User user = methods.Insert_new_user("namee", "123", "ab@aa");
 		
 		System.out.println(methods.List_all_users());
 		

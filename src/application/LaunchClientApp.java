@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import serverApp.ServerToDB;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
@@ -71,15 +72,34 @@ public class LaunchClientApp extends Application{
 	public static void main(String[] args) throws IOException {
 		launch(args);
 			
-		/* -------> Here goes the code for the client connection to server
-		 * 
+		// -------> Here goes the code for the client connection to server
+		// * 
 		Socket socket = new Socket("localhost", 9000);
         OutputStream outputStream = socket.getOutputStream();
         
-         * ............
+        releaseResources(outputStream, socket);
+
+        
+        /* * ............
          * 
 		*/
 	}
+	
+	private static void releaseResources(OutputStream outputStream, Socket socket) {
+		 try {
+	            try {
+	                outputStream.close();
+
+	            } catch (IOException ex) {
+	                Logger.getLogger(LaunchClientApp.class
+	                        .getName()).log(Level.SEVERE, null, ex);
+	            }
+	            socket.close();
+
+	        } catch (IOException ex) {
+	            Logger.getLogger(LaunchClientApp.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	    }
 	
 	
 	

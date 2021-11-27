@@ -1,5 +1,7 @@
 package serverApp;
 
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -19,13 +21,43 @@ public class ServerToDB {
 		Socket socket = null;
             
             //This executes when we have a client
+        	InputStream inputStream = null;
+            byte[] byteRead;
+            String instruction;
+            SQLiteMethods methods;
+
             try {
             	serverSocket = new ServerSocket(9001);
                 socket = serverSocket.accept();
+                methods = new SQLiteMethods();
                 
                 //while true, lee el mensaje y hacemos los métodos que nos pida el mensaje
-                InputStream inputStream = socket.getInputStream();
+                	
+                try {
+                	DataInputStream in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            		// inputStream = socket.getInputStream(); 
+            		boolean stopClient = false;
+                    while (!stopClient) {
+                    	instruction = in.readLine();
+                        //byteRead = in.readLine();
+                        //We read until is finished the connection or character 'x'
+                        if (instruction.equals("end_client")) {
+                            //System.out.println("Client character reception finished");
+                            stopClient = true;
+                        }
+                        if (instruction.equals("new_user")) {
+                        	//aqui hay que ver cómo recibir distintos mensajes con los parametros ooooo separar el mensaje basandonos en espacios o comas por ejemplo
+                        		//y en la instruccion mandada pues que sea "new_user,roberto,123,aa@aa" o algo asi
+                            methods.Insert_new_user(instruction, instruction, instruction);
+                        }
+                        
+                    }
                 
+                }  catch (IOException ex) {
+                    Logger.getLogger(ServerToDB.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    releaseResourcesClient(inputStream, socket);
+                }
                 
                 byte[] bytes = String.valueOf(inputStream.read()).getBytes();
                 
@@ -39,7 +71,7 @@ public class ServerToDB {
                   
                 
             } catch (IOException e) {
-            	releaseResourcesClient(socket);
+            	releaseResourcesClient(inputStream, socket);
                 System.out.println("\n\n\nClient finished");
             } finally {
             	releaseResourcesServer(socket, serverSocket);
@@ -50,8 +82,14 @@ public class ServerToDB {
 		
 	}
 	
-	private static void releaseResourcesClient(Socket socket) {
-   	 try {
+	private static void releaseResourcesClient(InputStream inputStream, Socket socket) {
+		try {
+            inputStream.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerToDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
             socket.close();
         } catch (IOException ex) {
             Logger.getLogger(ServerToDB.class.getName()).log(Level.SEVERE, null, ex);
