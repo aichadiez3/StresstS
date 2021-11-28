@@ -2,6 +2,7 @@ package application;
 	
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -83,12 +84,23 @@ public class LaunchClientApp extends Application{
         OutputStream outputStream = socket.getOutputStream();
         // create a data output stream from the output stream so we can send data through it
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+        // create an object output stream from the output stream so we can send an object through it
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 
+        //no se si puedo hacer esas dos cosas a la vez con el outputStream la verdad
+        
         // write the message we want to send
         //aqui tal vez pondria un while(true) o while(stopClient == false)
         //y luego un if(instruction != null)
         dataOutputStream.writeUTF(instruction);
-        dataOutputStream.flush();        
+        dataOutputStream.flush();   
+        
+        //no le pasaria instruction, le pasaria un objecto, el que toque dependiendo de cada instruccion
+        	//se me ocurre solo comprobar aqui tambien con ifs qué instruccion es cada una y dependiendo
+        	//de la instruccion pasarle X objeto de X tipo
+        objectOutputStream.writeObject(instruction);
+        //no he visto que se haga nada tipo objectOutputstream.close(), no se si habra que hacerlo
+        
         
         releaseResources(dataOutputStream, outputStream, socket);
         

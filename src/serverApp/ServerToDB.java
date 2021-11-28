@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import SQLite.SQLiteMethods;
+import pojos.EcgTest;
+import pojos.EdaTest;
+import pojos.MedicalRecord;
+import pojos.User;
 
 public class ServerToDB {
 
@@ -25,6 +30,11 @@ public class ServerToDB {
             byte[] byteRead;
             String instruction;
             SQLiteMethods methods;
+            User user = null;
+            MedicalRecord record = null;
+            EcgTest ecg = null;
+            EdaTest eda = null;
+
 
             try {
             	serverSocket = new ServerSocket(9001);
@@ -35,7 +45,8 @@ public class ServerToDB {
                 	
                 try {
                 	DataInputStream dataInputStream  = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-            		// inputStream = socket.getInputStream(); 
+                	ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+                	// inputStream = socket.getInputStream(); 
             		boolean stopClient = false;
                     while (!stopClient) {
                     	//instruction = dataInputStream.readLine();
@@ -47,8 +58,7 @@ public class ServerToDB {
                             stopClient = true;
                         }
                         
-                        //aqui hay que ver cómo recibir distintos mensajes con los parametros ooooo separar el mensaje basandonos en espacios o comas por ejemplo
-                			//y en la instruccion mandada pues que sea "new_user,roberto,123,aa@aa" o algo asi
+                        //todo lo que he hecho, aïcha habia puesto esto mas adelante, donde comentare **!**, no se donde habrá que colocarlo para que funcione
                         String[] parameters = instruction.split(",");
                         if (parameters[0].equals("new_user")) {
                         	String user_name = parameters[1];
@@ -56,24 +66,57 @@ public class ServerToDB {
                         	String email = parameters[3];
                             methods.Insert_new_user(user_name, password, email);
                         }
-                        /*if (parameters[0].equals("new_patient")) {
-                        	String user_name = parameters[1];
-                        	String password = parameters[2];
-                        	String email = parameters[3];
-                            methods.Insert_new_user(user_name, password, email);
+                        if (parameters[0].equals("new_patient")) {
+                        	try {
+								user = (User) objectInputStream.readObject();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+                            methods.Insert_new_patient(user);
                         }
-                        if (parameters[0].equals("new_user")) {
-                        	String user_name = parameters[1];
-                        	String password = parameters[2];
-                        	String email = parameters[3];
-                            methods.Insert_new_user(user_name, password, email);
+                        if (parameters[0].equals("new_doctor")) {
+                        	try {
+								user = (User) objectInputStream.readObject();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+                            methods.Insert_new_doctor(user);
                         }
-                        if (parameters[0].equals("new_user")) {
-                        	String user_name = parameters[1];
-                        	String password = parameters[2];
-                        	String email = parameters[3];
-                            methods.Insert_new_user(user_name, password, email);
-                        }*/
+                        if (parameters[0].equals("new_medical_record")) {
+                        	try {
+								record = (MedicalRecord) objectInputStream.readObject();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+                            methods.Insert_new_medical_record(record);
+                        }
+                        if (parameters[0].equals("new_ecg")) {
+                        	try {
+                        		ecg = (EcgTest) objectInputStream.readObject();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+                            methods.Insert_new_ecg(ecg);
+                        }
+                        if (parameters[0].equals("new_eda")) {
+                        	try {
+                        		eda = (EdaTest) objectInputStream.readObject();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+                            methods.Insert_new_eda(eda);
+                        }
+                        
                         
                     }
                 
@@ -83,7 +126,9 @@ public class ServerToDB {
                     releaseResourcesClient(inputStream, socket);
                 }
                 
-                byte[] bytes = String.valueOf(inputStream.read()).getBytes();
+                //aqui aïcha es donde decia de poner lo que yo he puesto donde esta el **!**, yo no se donde ponerlo, me acabo de dar cuenta
+                
+                /*byte[] bytes = String.valueOf(inputStream.read()).getBytes();
                 
                 String message = new String(bytes, StandardCharsets.UTF_8);
                 
@@ -91,7 +136,7 @@ public class ServerToDB {
                 	//SQLiteMethods.Insert_new_user(); // Parámetros se tienen que introducir a través de los sockets desde cliente 
                 										//-> son los datos q envía el cliente al server, y el server al manejador de db
                 	
-                }
+                }*/
                   
                 
             } catch (IOException e) {
