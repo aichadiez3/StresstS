@@ -56,6 +56,24 @@ public class ServerToDB {
                         	String email = parameters[3];
                             methods.Insert_new_user(user_name, password, email);
                         }
+                        /*if (parameters[0].equals("new_patient")) {
+                        	String user_name = parameters[1];
+                        	String password = parameters[2];
+                        	String email = parameters[3];
+                            methods.Insert_new_user(user_name, password, email);
+                        }
+                        if (parameters[0].equals("new_user")) {
+                        	String user_name = parameters[1];
+                        	String password = parameters[2];
+                        	String email = parameters[3];
+                            methods.Insert_new_user(user_name, password, email);
+                        }
+                        if (parameters[0].equals("new_user")) {
+                        	String user_name = parameters[1];
+                        	String password = parameters[2];
+                        	String email = parameters[3];
+                            methods.Insert_new_user(user_name, password, email);
+                        }*/
                         
                     }
                 
