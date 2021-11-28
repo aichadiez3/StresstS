@@ -48,7 +48,11 @@ public class ServerToDB {
                         if (instruction.equals("new_user")) {
                         	//aqui hay que ver cómo recibir distintos mensajes con los parametros ooooo separar el mensaje basandonos en espacios o comas por ejemplo
                         		//y en la instruccion mandada pues que sea "new_user,roberto,123,aa@aa" o algo asi
-                            methods.Insert_new_user(instruction, instruction, instruction);
+                        	String[] parameters = instruction.split(",");
+                        	String user_name = parameters[1];
+                        	String password = parameters[2];
+                        	String email = parameters[3];
+                            methods.Insert_new_user(user_name, password, email);
                         }
                         
                     }
