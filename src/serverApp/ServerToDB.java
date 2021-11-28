@@ -15,6 +15,9 @@ import SQLite.SQLiteMethods;
 import pojos.EcgTest;
 import pojos.EdaTest;
 import pojos.MedicalRecord;
+import pojos.Patient;
+import pojos.PhysicalTest;
+import pojos.PsychoTest;
 import pojos.User;
 
 public class ServerToDB {
@@ -34,7 +37,9 @@ public class ServerToDB {
             MedicalRecord record = null;
             EcgTest ecg = null;
             EdaTest eda = null;
-
+            PsychoTest psycho = null;
+            PhysicalTest physical = null;
+            Patient patient = null;
 
             try {
             	serverSocket = new ServerSocket(9001);
@@ -116,8 +121,66 @@ public class ServerToDB {
 
                             methods.Insert_new_eda(eda);
                         }
-                        
-                        
+                        if (parameters[0].equals("new_psycho")) {
+                        	try {
+                        		psycho = (PsychoTest) objectInputStream.readObject();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+                            methods.Insert_new_psycho_test(psycho);
+                        }
+                        if (parameters[0].equals("new_physical")) {
+                        	try {
+                        		physical = (PhysicalTest) objectInputStream.readObject();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+                            methods.Insert_new_physical_test(physical);
+                        }
+                        if (parameters[0].equals("change_password")) {
+                        	String password = parameters[1];
+                        	int user_id = Integer.parseInt(parameters[2]);
+                            methods.Change_password(password, user_id);
+                        }
+                        if (parameters[0].equals("update_patient")) {
+                        	try {
+                        		patient = (Patient) objectInputStream.readObject();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+                            methods.Update_patient_info(patient);
+                        }
+                        if (parameters[0].equals("search_record_by_id")) {
+                        	int record_id = Integer.parseInt(parameters[1]);
+                            methods.Search_stored_record_by_id(record_id);
+                        }
+                        if (parameters[0].equals("search_record_by_test")) {
+                        	int test_id = Integer.parseInt(parameters[1]);
+                            methods.Search_stored_record_by_test(test_id);
+                        }
+                        if (parameters[0].equals("search_symptom_by_id")) {
+                        	int symptom_id = Integer.parseInt(parameters[1]);
+                            methods.Search_symptom_by_id(symptom_id);
+                        }
+                        if (parameters[0].equals("search_record_by_date_ascendent")) {
+                            methods.Search_stored_record_by_date_ascendent();
+                        }
+                        if (parameters[0].equals("search_record_by_date_descendent")) {
+                            methods.Search_stored_record_by_date_descendent();
+                        }
+                        if (parameters[0].equals("search_symptoms_from_record")) {
+                        	int record_id = Integer.parseInt(parameters[1]);
+                            methods.Search_all_symptoms_from_record(record_id);
+                        }
+                        if (parameters[0].equals("list_users")) {
+                            methods.List_all_users();
+                        }
                     }
                 
                 }  catch (IOException ex) {
