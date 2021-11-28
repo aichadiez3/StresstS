@@ -58,15 +58,12 @@ public class ServerController implements Initializable {
 			while(true){
 	            //This executes when we have a client
 	            socket = null;
-	            
 				try {
 					serverSocket = new ServerSocket(9000);
 		            while (true) {
 		                //This executes when we have a patient
 		                socket = serverSocket.accept();
-		                new Thread(new ServerClient(socket)).start();
-		                
-		                
+		                new Thread(new ServerClient(socket)).start();		                
 		                // condition receive a message from a close instruction from client application (button x, log_out..)
 		                releaseResources(socket);
 		            }
@@ -77,8 +74,6 @@ public class ServerController implements Initializable {
 					releaseResourcesServer(socket, serverSocket);
 				}
 			}
-			
-			
 		});
 		
 		stopButton.setOnMouseClicked((MouseEvent event) -> {
