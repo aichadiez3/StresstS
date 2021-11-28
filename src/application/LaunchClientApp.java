@@ -1,5 +1,6 @@
 package application;
 	
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -22,6 +23,10 @@ public class LaunchClientApp extends Application{
 	private static Stage stage;
 	private double xOffset = 0;
 	private double yOffset = 0;
+	
+	//esto es el la instruccion que voy a recibir de cada boton o lo que sea y que quiero que este client
+		//le mande al server y ese al otro server para que haga las cosas en la DB
+	public static String instruction = null;
 	
 	public static Stage getStage() {
 		return stage;
@@ -76,18 +81,33 @@ public class LaunchClientApp extends Application{
 		// * 
 		Socket socket = new Socket("localhost", 9000);
         OutputStream outputStream = socket.getOutputStream();
-        
-        releaseResources(outputStream, socket);
+        // create a data output stream from the output stream so we can send data through it
+        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
+        // write the message we want to send
+        //aqui tal vez pondria un while(true) o while(stopClient == false)
+        //y luego un if(instruction != null)
+        dataOutputStream.writeUTF(instruction);
+        dataOutputStream.flush();        
+        
+        releaseResources(dataOutputStream, outputStream, socket);
         
         /* * ............
          * 
 		*/
 	}
 	
-	private static void releaseResources(OutputStream outputStream, Socket socket) {
+	private static void releaseResources(DataOutputStream dataOutputStream, OutputStream outputStream, Socket socket) {
 		 try {
-	            try {
+			 try {
+	                dataOutputStream.close();
+
+	            } catch (IOException ex) {
+	                Logger.getLogger(LaunchClientApp.class
+	                        .getName()).log(Level.SEVERE, null, ex);
+	            }
+			 	
+			 try {
 	                outputStream.close();
 
 	            } catch (IOException ex) {

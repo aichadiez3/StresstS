@@ -31,6 +31,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import application.LaunchClientApp;
+
 public class RegistrationController implements Initializable{
 
 	private logInController controller;
@@ -99,6 +101,9 @@ public class RegistrationController implements Initializable{
 					/*
 					Class.forName("com.mysql.jdbc.Driver");
 					Connection dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/anxipharma","root","");
+					
+					//esto de abajo es el metodo Insert_new_user que ya tenemos en el SQLiteMethods
+					
 					PreparedStatement ps_user = dbConnection.prepareStatement("insert into user(user_name,password,email) values(?,?,?);");
 					ps_user.setString(1,usernameField.getText());
 					ps_user.setString(2,passwordField.getText());
@@ -111,6 +116,9 @@ public class RegistrationController implements Initializable{
 					ps_patient.executeUpdate();
 					
 					*/
+					
+					LaunchClientApp.instruction = "new_user," + usernameField.getText() + "," + passwordField.getText() + "," + emailField.getText();
+					
 				}
 				
 			// ---> Load new patient menu scene

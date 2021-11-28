@@ -34,21 +34,23 @@ public class ServerToDB {
                 //while true, lee el mensaje y hacemos los métodos que nos pida el mensaje
                 	
                 try {
-                	DataInputStream in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                	DataInputStream dataInputStream  = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             		// inputStream = socket.getInputStream(); 
             		boolean stopClient = false;
                     while (!stopClient) {
-                    	instruction = in.readLine();
-                        //byteRead = in.readLine();
+                    	//instruction = dataInputStream.readLine();
+                    	instruction = dataInputStream.readUTF();
+                        //byteRead = dataInputStream.readLine();
                         //We read until is finished the connection or character 'x'
                         if (instruction.equals("end_client")) {
                             //System.out.println("Client character reception finished");
                             stopClient = true;
                         }
-                        if (instruction.equals("new_user")) {
-                        	//aqui hay que ver cómo recibir distintos mensajes con los parametros ooooo separar el mensaje basandonos en espacios o comas por ejemplo
-                        		//y en la instruccion mandada pues que sea "new_user,roberto,123,aa@aa" o algo asi
-                        	String[] parameters = instruction.split(",");
+                        
+                        //aqui hay que ver cómo recibir distintos mensajes con los parametros ooooo separar el mensaje basandonos en espacios o comas por ejemplo
+                			//y en la instruccion mandada pues que sea "new_user,roberto,123,aa@aa" o algo asi
+                        String[] parameters = instruction.split(",");
+                        if (parameters[0].equals("new_user")) {
                         	String user_name = parameters[1];
                         	String password = parameters[2];
                         	String email = parameters[3];
