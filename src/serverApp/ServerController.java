@@ -53,6 +53,8 @@ public class ServerController implements Initializable {
 			controller = null;
 			*/
 			
+			//hagamos este server
+			
 			serverSocket = null;
 		
 			while(true){
