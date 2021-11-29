@@ -2,6 +2,7 @@ package application;
 	
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -28,6 +29,8 @@ public class LaunchClientApp extends Application{
 	//esto es el la instruccion que voy a recibir de cada boton o lo que sea y que quiero que este client
 		//le mande al server y ese al otro server para que haga las cosas en la DB
 	public static String instruction = null;
+	public static Object object = null;
+	public static Object object2 = null;
 	
 	public static Stage getStage() {
 		return stage;
@@ -86,6 +89,7 @@ public class LaunchClientApp extends Application{
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
         // create an object output stream from the output stream so we can send an object through it
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
         //no se si puedo hacer esas dos cosas a la vez con el outputStream la verdad
         
@@ -95,12 +99,17 @@ public class LaunchClientApp extends Application{
         dataOutputStream.writeUTF(instruction);
         dataOutputStream.flush();   
         
-        //no le pasaria instruction, le pasaria un objecto, el que toque dependiendo de cada instruccion
-        	//se me ocurre solo comprobar aqui tambien con ifs qué instruccion es cada una y dependiendo
-        	//de la instruccion pasarle X objeto de X tipo
-        objectOutputStream.writeObject(instruction);
-        //no he visto que se haga nada tipo objectOutputstream.close(), no se si habra que hacerlo
-        
+        objectOutputStream.writeObject(object);
+        //no he visto que se haga nada tipo objectOutputStream.close(), no se si habra que hacerlo
+        try {
+			object2 = objectInputStream.readObject();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         releaseResources(dataOutputStream, outputStream, socket);
         

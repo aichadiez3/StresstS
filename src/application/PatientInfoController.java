@@ -33,9 +33,12 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
+import pojos.Insurance_company;
 import pojos.MedicalRecord;
+import pojos.Patient;
 
 public class PatientInfoController implements Initializable{
 
@@ -105,7 +108,13 @@ public class PatientInfoController implements Initializable{
 		genderSelection.setItems(gender);
 		insuranceSelection.setItems(insurance_list);
 		
+		Insurance_company insurance = null;
+		LaunchClientApp.instruction = ("search_insurance_by_name,"+insuranceSelection.getValue());
+		insurance = (Insurance_company) LaunchClientApp.object2;
+		Patient patient = new Patient(nameLabel.getText(),surnameLabel.getText(),birthDatePicker.getValue(),heightSpinner.getValue(),weightSpinner.getValue(),genderSelection.getValue(),Integer.valueOf(telephoneField.getText()),insurance);
 		
+		LaunchClientApp.instruction = ("update_patient");
+		LaunchClientApp.object = patient;
 		/*
 		
 		// ---------> Tree List View <--------
@@ -157,6 +166,11 @@ public class PatientInfoController implements Initializable{
 				
 				
 		*/
+		
+		saveButton.setOnMouseClicked((MouseEvent event) -> {
+			LaunchClientApp.instruction = "update_patient";
+		});
+		
 	}
 	
 	

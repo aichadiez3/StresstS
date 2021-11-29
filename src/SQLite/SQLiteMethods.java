@@ -14,6 +14,7 @@ import interfaces.Interface;
 import pojos.Doctor;
 import pojos.EcgTest;
 import pojos.EdaTest;
+import pojos.Insurance_company;
 import pojos.MedicalRecord;
 import pojos.Patient;
 import pojos.PhysicalTest;
@@ -350,6 +351,23 @@ public class SQLiteMethods implements Interface {
 			return symptom;
 		} catch (SQLException search_symptom_error) {
 			search_symptom_error.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Insurance_company Search_insurance_by_name(String insurance_name) {
+		try {
+			String SQL_code = "SELECT * FROM insurance WHERE name LIKE ?";
+			PreparedStatement template = this.sqlite_connection.prepareStatement(SQL_code);
+			template.setString(1, insurance_name);
+			Insurance_company insurance = new Insurance_company();
+			ResultSet result_set = template.executeQuery();
+			insurance.setInsurance_id(result_set.getInt("insurance_id"));
+			insurance.setCompany_name(insurance_name);
+			template.close(); 
+			return insurance;
+		} catch (SQLException search_insurance_error) {
+			search_insurance_error.printStackTrace();
 			return null;
 		}
 	}

@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
 import SQLite.SQLiteMethods;
 import pojos.EcgTest;
 import pojos.EdaTest;
+import pojos.Insurance_company;
 import pojos.MedicalRecord;
 import pojos.Patient;
 import pojos.PhysicalTest;
@@ -30,6 +32,7 @@ public class ServerToDB {
             
             //This executes when we have a client
         	InputStream inputStream = null;
+    		ObjectOutputStream objectOutputStream = null;
             byte[] byteRead;
             String instruction;
             SQLiteMethods methods;
@@ -51,6 +54,9 @@ public class ServerToDB {
                 try {
                 	DataInputStream dataInputStream  = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
                 	ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+                	
+        			objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                	
                 	// inputStream = socket.getInputStream(); 
             		boolean stopClient = false;
                     while (!stopClient) {
@@ -180,6 +186,12 @@ public class ServerToDB {
                         }
                         if (parameters[0].equals("list_users")) {
                             methods.List_all_users();
+                        }
+                        if (parameters[0].equals("search_insurance_by_name")) {
+                        	String name = parameters[1];
+                        	Insurance_company insurance = null;
+                            insurance = methods.Search_insurance_by_name(name);
+                			objectOutputStream.writeObject(insurance);
                         }
                     }
                 
