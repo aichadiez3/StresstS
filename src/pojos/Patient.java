@@ -11,6 +11,8 @@ import java.util.Objects;
 
 public class Patient implements Serializable {
 
+
+
 	private static final long serialVersionUID = 1L;
 
 	private Integer patient_id;
@@ -158,10 +160,13 @@ public class Patient implements Serializable {
 		return Objects.equals(patient_id, other.patient_id);
 	}
 	
-	
 
-	
-	
+	@Override
+	public String toString() {
+		return "Patient [patient_id=" + patient_id + ", user=" + user + ", name=" + name + ", surname=" + surname
+				+ ", birth_date=" + birth_date + ", age=" + age + ", height=" + height + ", weight=" + weight
+				+ ", gender=" + gender + ", telephone=" + telephone + ", insurance=" + insurance + "]";
+	}
 	
 	
 

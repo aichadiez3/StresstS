@@ -163,6 +163,7 @@ public class SQLiteManager {
 			return true;
 		}catch (SQLException tables_error) {
 			if (tables_error.getMessage().contains("already exists")) {
+				System.out.println("Ya existe la DB");
 			} else {
 				tables_error.printStackTrace();
 				return false;
