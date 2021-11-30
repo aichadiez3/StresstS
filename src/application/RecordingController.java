@@ -50,34 +50,8 @@ public class RecordingController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		
-		if (dataECG==null) {
-			ecgGraph.setVisible(false);
-			
-			edaGraph = new LineChart(new CategoryAxis(), new NumberAxis());
-			edaGraph.getData().clear();
-			edaGraph.getData().add(dataEDA);
-			
-		} else if(dataEDA==null) {
-			edaGraph.setVisible(false);
-			
-			ecgGraph = new LineChart(new CategoryAxis(), new NumberAxis());
-			ecgGraph.getData().clear();
-			ecgGraph.getData().add(dataECG);
-			
-			System.out.println(dataECG.getData().toString());
-		} else {
-			ecgGraph = new LineChart(new CategoryAxis(), new NumberAxis());
-			edaGraph = new LineChart(new CategoryAxis(), new NumberAxis());
-			
-			ecgGraph.getData().clear();
-			edaGraph.getData().clear();
-			
-			ecgGraph.getData().add(dataECG);
-			edaGraph.getData().add(dataEDA);
-			
-			System.out.println(dataECG.getData().toString());
-		}
+			ecgPlot(dataECG);
+			edaPlot(dataEDA);
 		
 		
         proceedButton.setOnMouseClicked((MouseEvent e)->{
@@ -94,11 +68,42 @@ public class RecordingController implements Initializable {
 		
 	}
 
-	@Override
-	public String toString() {
-		return "RecordingController [dataECG=" + dataECG.getData().toString() + ", dataEDA=" + dataEDA.getData().toString() + "]";
+	public LineChart ecgPlot(Series dataECG) {
+		try {
+			ecgGraph = new LineChart(new CategoryAxis(), new NumberAxis());
+			
+			ecgGraph.getData().clear();
+			ecgGraph.setCreateSymbols(false);
+			ecgGraph.getData().add(dataECG);
+			
+			return ecgGraph;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 	
+	
+	public LineChart edaPlot(Series dataEDA) {
+		try {
+			edaGraph = new LineChart(new CategoryAxis(), new NumberAxis());
+			
+			edaGraph.getData().clear();
+			edaGraph.setCreateSymbols(false);
+			edaGraph.getData().add(dataEDA);
+			
+			return edaGraph;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 	
 
 }
