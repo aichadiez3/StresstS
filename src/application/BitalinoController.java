@@ -198,6 +198,9 @@ public class BitalinoController implements Initializable{
 	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
 	            
+	            ecgGraph.getData().addAll(dataECG);
+	            edaGraph.getData().addAll(dataEDA);
+	            
 	            
 	        } catch (BitalinoException ex) {
 	            Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -219,9 +222,9 @@ public class BitalinoController implements Initializable{
 	        
 	        proceedButton.setOnMouseClicked((MouseEvent e)->{
 	        	try {
-	    			Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
-	    			menuPane.getChildren().setAll(health_pane_fxml);
+	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    			
 	    		} catch (IOException ev1) {
 	    			// TODO Auto-generated catch block
@@ -270,6 +273,9 @@ public class BitalinoController implements Initializable{
 	            //stop acquisition
 	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
+	            
+	            edaGraph.getData().addAll(dataEDA);
+	            
 	        } catch (BitalinoException ex) {
 	            Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
 	        } catch (Throwable ex) {
@@ -289,9 +295,9 @@ public class BitalinoController implements Initializable{
 	        
 	        proceedButton.setOnMouseClicked((MouseEvent ev)->{
 	        	try {
-	    			Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
-	    			menuPane.getChildren().setAll(health_pane_fxml);
+	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    			
 	    		} catch (IOException ev1) {
 	    			// TODO Auto-generated catch block
@@ -338,6 +344,9 @@ public class BitalinoController implements Initializable{
 	            //stop acquisition
 	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
+	            
+	            ecgGraph.getData().addAll(dataECG);
+	            
 	        } catch (BitalinoException ex) {
 	            Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
 	        } catch (Throwable ex) {
@@ -358,9 +367,9 @@ public class BitalinoController implements Initializable{
 	        proceedButton.setOnMouseClicked((MouseEvent e)->{
 	        	//Close the stage
 	    		try {
-	    			Pane health_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
-	    			menuPane.getChildren().setAll(health_pane_fxml);
+	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    			
 	    		} catch (IOException ev1) {
 	    			// TODO Auto-generated catch block
