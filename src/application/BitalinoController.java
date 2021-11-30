@@ -23,7 +23,9 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BoxBlur;
@@ -41,9 +43,17 @@ public class BitalinoController implements Initializable{
 	public HelpConnectionController help_controller;
 	@SuppressWarnings("exports")
 	public static Frame[] frame;
-	public String macAddress;
-	public Integer SamplingRate;
+	private String macAddress;
+	private Integer SamplingRate;
 	Bitalino bitalino = null;
+	
+	@SuppressWarnings("rawtypes")
+	private Series dataECG = new XYChart.Series();
+	@SuppressWarnings("rawtypes")
+	private Series dataEDA = new XYChart.Series();
+	private Float x_axis;
+	private Integer medianValue=500;
+	
 	
 	@FXML
     private AnchorPane menuPane;
@@ -85,15 +95,16 @@ public class BitalinoController implements Initializable{
     private Group chargingIndicator;
 
     @FXML
-    private LineChart<String, String> ecgGraph;
+    private LineChart<Number, Number> ecgGraph;
 
     @FXML
-    private LineChart<String, String> edaGraph;
+    private LineChart<Number, Number> edaGraph;
     
     @FXML
     private ComboBox<String> freqSelection;
     
 	
+	@SuppressWarnings({ "unchecked", "removal", "rawtypes" })
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) { // que es lo que quiero poner al iniciar ese panel
 		
@@ -135,42 +146,52 @@ public class BitalinoController implements Initializable{
 		
 		
 		startButton.setOnMouseClicked((MouseEvent event) -> {
-			this.SamplingRate=Integer.parseInt(freqSelection.getValue());
+			
+			chargingIndicator.setVisible(true);
 			ecgGraph.setVisible(true);
 			edaGraph.setVisible(true);
 			
 	        try {
 	        	set_buttons_invisible();
 	        	
+	        	final NumberAxis xAxis = new NumberAxis();
+	            final NumberAxis yAxis = new NumberAxis();
+	            //creating the chart
+	            ecgGraph = new LineChart<Number, Number>(xAxis, yAxis);
+	            edaGraph = new LineChart<Number,Number>(xAxis,yAxis);
+	        	
+	        	
 	            bitalino = new Bitalino();
 	            Vector<RemoteDevice> devices = bitalino.findDevices();
 
-	            bitalino.open(macAddress, this.SamplingRate);
+	            bitalino.open(this.macAddress, this.SamplingRate);
 	            
 	            // ----> Start acquisition on analog channels A2 (ECG) and A3 (EDA)
-	            int[] channelsToAcquire = {1, 2};
+	            int[] channelsToAcquire = {1,2};
 	            bitalino.start(channelsToAcquire);
 	            
-
+	            ecgGraph.getData().clear();
+	            edaGraph.getData().clear();
+	            
+	            dataECG=new XYChart.Series();
+	            dataEDA=new XYChart.Series();
+	            
 	            //Read in total 100 times
 	            for (int j = 0; j < 100; j++) {
 
 	                //Each time read a block of 10 samples 
 	                int block_size=10;
+	                frame = bitalino.read(block_size);
 
 	                //Print the samples
 	                for (int i = 0; i < frame.length; i++) {
 	                	// To get a JavaFX LineChart component to display any lines, you must provide it with a data series.
 	                	// A data series is a list of data points. Each data point contains an X value and a Y value.
-	                	XYChart.Series<String,String> dataECG=new XYChart.Series<>();
-	                	Integer x_axis=(j * block_size + i)/SamplingRate;
+	                	x_axis= new Float((j * block_size + i + 0.16667)/SamplingRate);
+
+	                	dataECG.getData().add(new XYChart.Data(x_axis.floatValue(), frame[i].analog[0] - medianValue));
 	                	
-	                	dataECG.getData().add(new XYChart.Data<String, String>(x_axis.toString(), String.valueOf(frame[i].analog[1])));
-	                	ecgGraph.getData().addAll(dataECG);
-	                	
-	                	XYChart.Series<String,String> dataEDA=new XYChart.Series<>();
-	                	dataEDA.getData().add(new XYChart.Data<String, String>(x_axis.toString(), String.valueOf(frame[i].analog[2])));
-	                	edaGraph.getData().addAll(dataEDA);
+	                	dataEDA.getData().add(new XYChart.Data(x_axis.floatValue(), frame[i].analog[1]));
 	                }
 	            }
 	            //stop acquisition
@@ -210,12 +231,11 @@ public class BitalinoController implements Initializable{
 
 		});
 		
-		//cuando solo quieres hacer EDA y no ambos---> Hay que hacer dos tablas, uno para el EDA y otro para ECG
-		
 		edaTestButton.setOnMouseClicked((MouseEvent event) -> {
-			this.SamplingRate=Integer.parseInt(freqSelection.getValue());
+
 			edaGraph.setVisible(true);
 			edaGraph.resize(1060, 477);
+			chargingIndicator.setVisible(true);
 			
 	        try {
 	        	
@@ -224,12 +244,14 @@ public class BitalinoController implements Initializable{
 	            
 	            Vector<RemoteDevice> devices = bitalino.findDevices();
 				
-	            bitalino.open(macAddress, this.SamplingRate);
+	            bitalino.open(this.macAddress, this.SamplingRate);
 	            
 	            // ----> Start acquisition on analog channel A3 (EDA)
 	            int[] channelsToAcquire = {2};
 	            bitalino.start(channelsToAcquire);
 	            
+	            edaGraph.getData().clear();
+	            dataEDA=new XYChart.Series();
 	            
 	            //Read in total 100 times
 	            for (int j = 0; j < 100; j++) {
@@ -241,9 +263,8 @@ public class BitalinoController implements Initializable{
 	                //Print the samples
 	                for (int i = 0; i < frame.length; i++) {
 	                	
-	                	XYChart.Series<String,String> dataEDA=new XYChart.Series<>();
-	                	dataEDA.getData().add(new XYChart.Data<String, String>(String.valueOf((j * block_size + i)/this.SamplingRate), String.valueOf(frame[i].analog[2])));
-	                	edaGraph.getData().addAll(dataEDA);
+	                	x_axis= new Float((j * block_size + i + 0.16667)/SamplingRate);	                	
+	                	dataEDA.getData().add(new XYChart.Data(x_axis.floatValue(), frame[i].analog[1]));
 	                }
 	            }
 	            //stop acquisition
@@ -280,9 +301,10 @@ public class BitalinoController implements Initializable{
 		});
 		
 		ecgTestButton.setOnMouseClicked((MouseEvent event) -> {
-			this.SamplingRate=Integer.parseInt(freqSelection.getValue());
+			 
 			ecgGraph.setVisible(true);
 			ecgGraph.resize(1060, 477);
+			chargingIndicator.setVisible(true);
 			
 	        try {
 	            set_buttons_invisible();
@@ -296,6 +318,8 @@ public class BitalinoController implements Initializable{
 	            int[] channelsToAcquire = {1};
 	            bitalino.start(channelsToAcquire);
 	            
+	            ecgGraph.getData().clear();
+	            dataECG=new XYChart.Series();
 	            
 	            //Read in total 100 times
 	            for (int j = 0; j < 100; j++) {
@@ -307,9 +331,8 @@ public class BitalinoController implements Initializable{
 	                //Print the samples
 	                for (int i = 0; i < frame.length; i++) {
 	                	
-	                	XYChart.Series<String,String> dataECG=new XYChart.Series<>();
-	                	dataECG.getData().add(new XYChart.Data<String, String>(String.valueOf((j * block_size + i)/this.SamplingRate), String.valueOf(frame[i].analog[1])));
-	                	ecgGraph.getData().add(dataECG);
+	                	x_axis= new Float((j * block_size + i + 0.16667)/SamplingRate);
+	                	dataECG.getData().add(new XYChart.Data(x_axis.floatValue(), frame[i].analog[0] - medianValue));
 	                }
 	            }
 	            //stop acquisition
@@ -373,7 +396,6 @@ public class BitalinoController implements Initializable{
 		ecgTestButton.setVisible(false);
 		edaTestButton.setVisible(false);
 		startButton.setVisible(false);
-		chargingIndicator.setVisible(true);
 	}
 	 
 	 
