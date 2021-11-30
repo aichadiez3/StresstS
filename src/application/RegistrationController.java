@@ -32,8 +32,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import pojos.Patient;
-import pojos.User;
 import application.LaunchClientApp;
 
 public class RegistrationController implements Initializable{

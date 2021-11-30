@@ -23,7 +23,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import pojos.User;
 
 public class logInController implements Initializable {
 

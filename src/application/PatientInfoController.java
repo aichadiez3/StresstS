@@ -38,9 +38,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
-import pojos.Insurance_company;
-import pojos.MedicalRecord;
-import pojos.Patient;
 
 public class PatientInfoController implements Initializable{
 
