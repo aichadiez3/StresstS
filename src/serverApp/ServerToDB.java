@@ -45,7 +45,7 @@ public class ServerToDB {
             Patient patient = null;
 
             try {
-            	serverSocket = new ServerSocket(9001);
+            	serverSocket = new ServerSocket(9000);
                 socket = serverSocket.accept();
                 methods = new SQLiteMethods();
                 
@@ -215,6 +215,7 @@ public class ServerToDB {
                   
                 
             } catch (IOException e) {
+            	e.printStackTrace();
             	releaseResourcesClient(inputStream, socket);
                 System.out.println("\n\n\nClient finished");
             } finally {

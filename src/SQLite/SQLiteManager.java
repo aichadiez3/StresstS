@@ -11,7 +11,7 @@ public class SQLiteManager {
 	private SQLiteMethods methods;
 	
 	public SQLiteManager() {
-		super();
+		
 	}
 
 	

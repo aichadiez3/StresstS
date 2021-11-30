@@ -61,7 +61,7 @@ public class ServerClient implements Runnable{
 			dataOutputStream.writeUTF(instruction);
 			
 			object = objectInputStream.readObject();
-			objectOutputStream2.writeObject(object); //esto deberia ser el objectOutputStream2 verdad?
+			objectOutputStream2.writeObject(object); 
 			
 			object2 = objectInputStream2.readObject();
 			objectOutputStream.writeObject(object);
