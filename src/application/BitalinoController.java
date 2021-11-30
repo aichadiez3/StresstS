@@ -39,7 +39,6 @@ public class BitalinoController implements Initializable{
 
 	private static Stage main_stage;
 	public HelpConnectionController help_controller;
-	public RecordingController controller;
 	@SuppressWarnings("exports")
 	public static Frame[] frame;
 	private String macAddress;
@@ -120,7 +119,6 @@ public class BitalinoController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) { // que es lo que quiero poner al iniciar ese panel
 		
-		this.controller = new RecordingController();
 		
 		ObservableList<String> freqs = FXCollections.observableArrayList( "10","100","1000" );
 		freqSelection.setItems(freqs);
@@ -205,7 +203,7 @@ public class BitalinoController implements Initializable{
 	            bitalino.stop();
 	            
 	            
-	            this.controller.setSeriesValues(dataECG, dataEDA);
+	            RecordingController.setSeriesValues(dataECG, dataEDA);
 	            
 	            // Once the recording stops, it opens the linecharts corresponding to the tests
 	            
@@ -274,7 +272,7 @@ public class BitalinoController implements Initializable{
 	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
 	            
-	            this.controller.setSeriesValues(null, dataEDA);
+	            RecordingController.setSeriesValues(null, dataEDA);
 	            
 	            // Once the recording stops, it opens the linecharts corresponding to the tests
 	            
@@ -345,8 +343,7 @@ public class BitalinoController implements Initializable{
 	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
 	            
-	            this.controller.setSeriesValues(dataECG, null);
-	            System.out.println(controller);
+	            RecordingController.setSeriesValues(dataECG, null);
 	            
 	            // Once the recording stops, it opens the linecharts corresponding to the tests
 	            

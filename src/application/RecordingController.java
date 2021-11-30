@@ -18,15 +18,15 @@ import javafx.scene.layout.Pane;
 public class RecordingController implements Initializable {
 	
 	@SuppressWarnings("rawtypes")
-	private Series dataECG;
+	private static  Series dataECG;
 	@SuppressWarnings("rawtypes")
-	private Series dataEDA;
+	private static Series dataEDA;
 	
 	
 	@SuppressWarnings({ "exports", "rawtypes" })
-	 public void setSeriesValues(Series dataECG, Series dataEDA) {
-		this.dataECG = dataECG;
-		this.dataEDA = dataEDA;
+	 public static void setSeriesValues(Series ECG, Series EDA) {
+		dataECG = ECG;
+		dataEDA = EDA;
 	}
 	
 	public RecordingController() {
