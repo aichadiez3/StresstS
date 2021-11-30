@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="1188.0" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RecordingController">
+   <children>
+      <LineChart fx:id="ecgGraph" layoutX="74.0" layoutY="117.0" prefHeight="262.0" prefWidth="1060.0" title="Electrocardiogram test">
+         <xAxis>
+            <CategoryAxis label="Time (in s)" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis label="ECG (in mV)" side="LEFT" />
+         </yAxis>
+      </LineChart>
+      <LineChart fx:id="edaGraph" createSymbols="false" layoutX="74.0" layoutY="392.0" prefHeight="262.0" prefWidth="1060.0" title="Electrodermal activity test">
+         <xAxis>
+            <CategoryAxis label="Time (in s)" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis label="EDA (in mV)" side="LEFT" />
+         </yAxis>
+      </LineChart>
+      <Label layoutX="505.0" layoutY="54.0" styleClass="title-text-style" stylesheets="@dark-theme.css" text="Bitalino Test Recording" />
+      <Group fx:id="proceedButton" layoutX="949.0" layoutY="19.0">
+         <children>
+            <ImageView fitHeight="73.0" fitWidth="56.0" layoutX="155.0" layoutY="7.0" preserveRatio="true">
+               <image>
+                  <Image url="@icon/proceed.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="61.0" layoutY="25.0" styleClass="text-style" stylesheets="@dark-theme.css" text="Proceed to test" />
+         </children>
+      </Group>
+   </children>
+</Pane>
