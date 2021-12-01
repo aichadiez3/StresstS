@@ -90,7 +90,8 @@ public class logInController implements Initializable {
 					main_menu_stage = (Stage) anchorPane.getScene().getWindow();
 					main_menu_stage.close();
 					
-					
+					LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
+					//AQUI FALTA RECIBIR DE VUELTA EL USER_ID QUE LA FUNCION HA ENCONTRADO
 					
 				}
 			} catch (Exception log_in_error) {

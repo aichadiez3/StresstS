@@ -105,31 +105,6 @@ public class PatientInfoController implements Initializable{
 		genderSelection.setItems(gender);
 		insuranceSelection.setItems(insurance_list);
 		
-		//this is with the sockets and all of that
-		/*
-		Insurance_company insurance = null;
-		LaunchClientApp.instruction = ("search_insurance_by_name,"+insuranceSelection.getValue());
-		insurance = (Insurance_company) LaunchClientApp.object2;
-		Patient patient = new Patient(nameLabel.getText(),surnameLabel.getText(),birthDatePicker.getValue(),heightSpinner.getValue(),weightSpinner.getValue(),genderSelection.getValue(),Integer.valueOf(telephoneField.getText()),insurance);
-		
-		LaunchClientApp.instruction = ("update_patient");
-		LaunchClientApp.object = patient;
-		*/
-		
-		//send instruction through sockets
-		LaunchClientApp.instruction = ("update_patient");
-		
-		//this is without sockets and all of that 
-		/*SQLiteMethods methods = null;
-		SQLiteManager manager = new SQLiteManager();
-		methods = manager.getMethods();
-		
-		Insurance_company insurance = methods.Search_insurance_by_name(insuranceSelection.getValue());
-		Patient patient = new Patient(nameLabel.getText(),surnameLabel.getText(),birthDatePicker.getValue(),heightSpinner.getValue(),weightSpinner.getValue(),genderSelection.getValue(),Integer.valueOf(telephoneField.getText()),insurance);
-		
-		methods.Update_patient_info(patient);
-		*/
-		
 		/*
 		
 		// ---------> Tree List View <--------
@@ -183,7 +158,7 @@ public class PatientInfoController implements Initializable{
 		*/
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
-			LaunchClientApp.instruction = "update_patient";
+			LaunchClientApp.instruction = ("update_patient," + logInController.user_id);
 		});
 		
 	}
