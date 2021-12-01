@@ -9,8 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import SQLite.SQLiteManager;
-import SQLite.SQLiteMethods;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -118,16 +116,8 @@ public class RegistrationController implements Initializable{
 					
 					*/
 					
-					//this is with sockets
-					//LaunchClientApp.instruction = "new_user," + usernameField.getText() + "," + passwordField.getText() + "," + emailField.getText();
-					
-					//this is with no sockets
-					SQLiteManager manager = new SQLiteManager();
-					SQLiteMethods methods = manager.getMethods();
-					User user = methods.Insert_new_user(usernameField.getText(), passwordField.getText(), emailField.getText());
-					Patient patient = methods.Insert_new_patient(user);
-					methods.List_all_users();
-					System.out.println(patient);
+					//send the instruction through sockets
+					LaunchClientApp.instruction = "new_user," + usernameField.getText() + "," + passwordField.getText() + "," + emailField.getText();
 				}
 				
 			// ---> Load new patient menu scene

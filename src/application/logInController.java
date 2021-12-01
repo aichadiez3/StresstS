@@ -54,7 +54,7 @@ public class logInController implements Initializable {
     @FXML
     private ImageView exitButton;
     
-    
+    public static Integer user_id;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -89,6 +89,7 @@ public class logInController implements Initializable {
 					// ---> To close the log in stage icon 
 					main_menu_stage = (Stage) anchorPane.getScene().getWindow();
 					main_menu_stage.close();
+					
 					
 					
 				}

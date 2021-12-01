@@ -10,8 +10,6 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-import SQLite.SQLiteManager;
-import SQLite.SQLiteMethods;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -118,8 +116,11 @@ public class PatientInfoController implements Initializable{
 		LaunchClientApp.object = patient;
 		*/
 		
+		//send instruction through sockets
+		LaunchClientApp.instruction = ("update_patient");
+		
 		//this is without sockets and all of that 
-		SQLiteMethods methods = null;
+		/*SQLiteMethods methods = null;
 		SQLiteManager manager = new SQLiteManager();
 		methods = manager.getMethods();
 		
@@ -127,7 +128,7 @@ public class PatientInfoController implements Initializable{
 		Patient patient = new Patient(nameLabel.getText(),surnameLabel.getText(),birthDatePicker.getValue(),heightSpinner.getValue(),weightSpinner.getValue(),genderSelection.getValue(),Integer.valueOf(telephoneField.getText()),insurance);
 		
 		methods.Update_patient_info(patient);
-		
+		*/
 		
 		/*
 		
