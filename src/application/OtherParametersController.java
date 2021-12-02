@@ -124,6 +124,12 @@ public class OtherParametersController implements Initializable {
 			heartRateSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(50, 200));
 		});
 		
+		
+		saveButton.setOnMouseClicked((MouseEvent event3) -> {
+			int user_id = logInController.user_id;
+			LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + timeCounter.getText());
+		});
+		
 	}
 
 	

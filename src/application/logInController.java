@@ -54,7 +54,7 @@ public class logInController implements Initializable {
     @FXML
     private ImageView exitButton;
     
-    public static Integer user_id;
+    public static Integer user_id = 0;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
