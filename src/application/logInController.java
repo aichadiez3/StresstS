@@ -91,6 +91,7 @@ public class logInController implements Initializable {
 					main_menu_stage.close();
 					
 					LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
+					user_id = Integer.parseInt(LaunchClientApp.feedback);
 					//AQUI FALTA RECIBIR DE VUELTA EL USER_ID QUE LA FUNCION HA ENCONTRADO
 					
 				}

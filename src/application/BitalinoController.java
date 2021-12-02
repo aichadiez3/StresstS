@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -154,6 +155,10 @@ public class BitalinoController implements Initializable{
             this. macAddress = macAddressField.getText();
             this.SamplingRate = Integer.parseInt(this.freqSelection.getValue());
             menuPane.setEffect(null);
+            
+            //A VER COMO CONVERTIMOS ESTOS DATOS DE Series A LinkedList<Integer> Y QUE HACER CON LA TABLA BITALINO TEST Y DEMAS
+            	//PORQUE NO SE COMO VAMOS A CONSEGUIR EL TEST_ID
+            //LaunchClientApp.instruction = ("new_ecg,");
             
 		});
 		

@@ -2,6 +2,9 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +33,12 @@ public class OtherParametersController implements Initializable {
 	private Integer counter;
 	private double timelapse;
 	private double progress;
+	Random random = new Random();
+	String ref_number = null;
+	public Integer record_id;
+			
+
+
 	
 	 @FXML
 	    private Pane mainPane;
@@ -85,6 +94,10 @@ public class OtherParametersController implements Initializable {
 			
 			
 			startButton.setOnMouseClicked((MouseEvent event2) -> {
+				ref_number = String.format("%04d", random.nextInt(10000));
+				LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number + "," + null;
+				record_id = Integer.parseInt(LaunchClientApp.feedback);
+				
 				startButton.setVisible(false);
 				timerGroup.setVisible(true);
 				
@@ -126,9 +139,7 @@ public class OtherParametersController implements Initializable {
 		
 		
 		saveButton.setOnMouseClicked((MouseEvent event3) -> {
-			//int user_id = Integer.parseInt(LaunchClientApp.feedback);
-			//le tengo que buscar el medical_record id
-			//LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + timeCounter.getText());
+			LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + Date.valueOf(LocalDate.now()) + "," + record_id);
 		});
 		
 	}
