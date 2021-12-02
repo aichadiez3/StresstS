@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -18,6 +20,7 @@ import javafx.stage.StageStyle;
 
 public class PatientHealthController implements Initializable{
 
+	@SuppressWarnings("unused")
 	private OtherParametersController parameters_controller;
 	private PatientHealthController health_controller;
 	private static Stage main_stage;
@@ -37,6 +40,8 @@ public class PatientHealthController implements Initializable{
     @FXML
     private ProgressBar progressBar;
 	
+    @FXML
+    private Button startButton;
 
 
 	public static Stage getMain_stage() {
@@ -80,8 +85,27 @@ public class PatientHealthController implements Initializable{
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		//bitalinoButton.setDisable(true);
-		//testButton.setDisable(true);
+		progressBar.setVisible(false);
+		
+		basicParametersButton.setDisable(true);
+			basicParametersButton.setOpacity(0.3);
+		bitalinoButton.setDisable(true);
+			bitalinoButton.setOpacity(0.3);
+		testButton.setDisable(true);
+			testButton.setOpacity(0.3);
+		
+		startButton.setOnMouseClicked((MouseEvent event) -> {
+			
+			basicParametersButton.setDisable(false);
+				basicParametersButton.setOpacity(1);
+			bitalinoButton.setDisable(false);
+				bitalinoButton.setOpacity(1);
+			testButton.setDisable(false);
+				testButton.setOpacity(1);
+			startButton.setVisible(false);
+			progressBar.setVisible(true);
+		});
+		
 		
 		bitalinoButton.setOnMouseClicked((MouseEvent event) -> {
 			
