@@ -126,8 +126,9 @@ public class OtherParametersController implements Initializable {
 		
 		
 		saveButton.setOnMouseClicked((MouseEvent event3) -> {
-			int user_id = logInController.user_id;
-			LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + timeCounter.getText());
+			//int user_id = Integer.parseInt(LaunchClientApp.feedback);
+			//le tengo que buscar el medical_record id
+			//LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + timeCounter.getText());
 		});
 		
 	}

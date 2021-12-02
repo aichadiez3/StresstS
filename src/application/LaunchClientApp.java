@@ -1,5 +1,7 @@
 package application;
 	
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -28,6 +30,7 @@ public class LaunchClientApp extends Application{
 	//esto es el la instruccion que voy a recibir de cada boton o lo que sea y que quiero que este client
 		//le mande al server y ese al otro server para que haga las cosas en la DB
 	public static String instruction = null;
+	public static String feedback = null;
 	public static Object object = null;
 	public static Object object2 = null;
 	
@@ -87,11 +90,8 @@ public class LaunchClientApp extends Application{
         OutputStream outputStream = socket.getOutputStream();
         // create a data output stream from the output stream so we can send data through it
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-        // create an object output stream from the output stream so we can send an object through it
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-        ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-        //no se si puedo hacer esas dos cosas a la vez con el outputStream la verdad
+    	DataInputStream dataInputStream  = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         
         // write the message we want to send
         //aqui tal vez pondria un while(true) o while(stopClient == false)
@@ -99,18 +99,8 @@ public class LaunchClientApp extends Application{
         dataOutputStream.writeUTF(instruction);
         dataOutputStream.flush();   
         
-        objectOutputStream.writeObject(object);
-        //no he visto que se haga nada tipo objectOutputStream.close(), no se si habra que hacerlo
-        try {
-			object2 = objectInputStream.readObject();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+        feedback = dataInputStream.readUTF();
+          
         releaseResources(dataOutputStream, outputStream, socket);
         
         /* * ............
