@@ -32,11 +32,7 @@ public class OtherParametersController implements Initializable {
 	private static Stage main_stage;
 	private Integer counter;
 	private double timelapse;
-	private double progress;
-	Random random = new Random();
-	Integer ref_number;
-	public Integer record_id;
-			
+	private double progress;	
 
 
 	
@@ -94,19 +90,7 @@ public class OtherParametersController implements Initializable {
 			
 			
 			startButton.setOnMouseClicked((MouseEvent event2) -> {
-				
-				
-				ref_number = (int)Math.floor(Math.random()*(2147483647-1000000000)+1000000000);
-				
-				LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number.toString() + "," + null;
-				//LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number.toString();
-				System.out.println(LaunchClientApp.instruction);
-				
-				
-				//ESTO DEVUELVE NULL
-				record_id = Integer.parseInt(LaunchClientApp.feedback);
-				System.out.println(LaunchClientApp.feedback);
-				
+												
 				startButton.setVisible(false);
 				timerGroup.setVisible(true);
 				
@@ -153,8 +137,9 @@ public class OtherParametersController implements Initializable {
 		
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
+			//GUARDO EL NUEVO PHYSICAL TEST CON EL MED_RECORD ID EN EL QUE ESTOY
 			//record_id ES NULL DE MOMENTO
-			LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + Date.valueOf(LocalDate.now()) + "," + record_id); 
+			LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + Date.valueOf(LocalDate.now()) + "," + PatientHealthController.record_id); 
 			//System.out.println(LaunchClientApp.instruction);
 			
 			// Get all values

@@ -2,6 +2,9 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -24,7 +27,10 @@ public class PatientHealthController implements Initializable{
 	private OtherParametersController parameters_controller;
 	private PatientHealthController health_controller;
 	private static Stage main_stage;
-	private Integer test_id;
+	public static Integer test_id;
+	Random random = new Random();
+	Integer ref_number;
+	public static Integer record_id;
 	
 	@FXML
     private Pane healthPane;
@@ -96,6 +102,17 @@ public class PatientHealthController implements Initializable{
 			testButton.setOpacity(0.3);
 		
 		startButton.setOnMouseClicked((MouseEvent event) -> {
+			
+			//CREO UN REF_NUMBER RANDOM Y ME CREO UN NUEVO MED_RECORD DONDE GRABAR LOS DATOS QUE VOY A MEDIR
+			ref_number = (int)Math.floor(Math.random()*(2147483647-1000000000)+1000000000);
+			
+			LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number.toString() + "," + null;
+			System.out.println(LaunchClientApp.instruction);
+			
+			//ESTO DEVUELVE NULL porque el server no nos esta devolviendo datos, algo falla con ese dataOutputStream
+			record_id = Integer.parseInt(LaunchClientApp.feedback);
+			System.out.println(LaunchClientApp.feedback);
+
 			
 			basicParametersButton.setDisable(false);
 				basicParametersButton.setOpacity(1);
