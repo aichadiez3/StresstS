@@ -74,8 +74,6 @@ public class PatientInfoController implements Initializable{
     @FXML
     private TextField telephoneField;
     
-    @FXML
-    private TextField emailField;
 
     @FXML
     private ImageView editImageButton;

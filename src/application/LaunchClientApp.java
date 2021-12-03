@@ -46,6 +46,8 @@ public class LaunchClientApp extends Application{
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setScene(scene);
 			stage = primaryStage;
+			
+			
 			primaryStage.show();
 			
 			
@@ -79,6 +81,7 @@ public class LaunchClientApp extends Application{
 	}
 	
 	public static void main(String[] args) throws IOException {
+		
 		launch(args);
 			
 		// -------> Here goes the code for the client connection to server
