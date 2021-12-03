@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 public class SettingsController implements Initializable {
@@ -35,23 +37,36 @@ public class SettingsController implements Initializable {
     
     @FXML
     private Group warning;
+    
+    @FXML
+    private Group okayVerification;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		//------> No implementado q espere a que todos los campos estén rellenados para hacerlo habil
+		saveButton.setDisable(true);
 		
-		Boolean check = validate_password();
-		System.out.println(check);
 		
 		saveButton.setOnAction((ActionEvent event) -> {
 			try {
+				
+				
+				
+				LaunchClientApp.instruction = ("search_user_by_id, " + logInController.user_id);
+				user_id = Integer.parseInt(LaunchClientApp.feedback);
+				
+			// QUEDA VERIFICAR SI EL NUEVO NOMBRE DE USUARIO NO EXISTE !!
+			
 				LaunchClientApp.instruction = ("change_user_info, " + passwordField.getText() + ", " + emailField.getText() + ", " + logInController.user_id);
 				user_id = Integer.parseInt(LaunchClientApp.feedback);
+				
+				
 				
 				Pane home_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
 				mainPane.getChildren().removeAll();
 				mainPane.getChildren().setAll(home_pane_fxml);
+				
+				
 			
 			} catch (IOException home_error) {
 				home_error.printStackTrace();
@@ -60,20 +75,19 @@ public class SettingsController implements Initializable {
 		
 	}
 
-	
-	public boolean validate_password() {
+	@FXML
+	private void validate_password(MouseEvent event) {
 		
-		while(true) {
+		if(passwordField.getText()!=null & confirmPasswordField.getText()!=null & passwordField.getText().equals(confirmPasswordField.getText())) {
+			okayVerification.setVisible(true);
+			warning.setVisible(false);
+			saveButton.setDisable(false);
 			
-			if(passwordField.getText()!=null & confirmPasswordField.getText()!=null & passwordField.getText().equals(confirmPasswordField.getText())) {
-			
-				saveButton.setDisable(false);
-				return true;
-				
-			} else {
-				warning.setVisible(true);
-				return false;
-			}
+		} else {
+			saveButton.setDisable(true);
+			okayVerification.setVisible(false);
+			warning.setVisible(true);
 		}
+		
 	}
 }
