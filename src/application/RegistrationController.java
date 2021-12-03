@@ -37,6 +37,8 @@ public class RegistrationController implements Initializable{
 	private logInController controller;
 	private PatientMenuController patient_controller;
 	private static Stage main_menu_stage;
+    public static Integer user_id;
+
 	
 	@FXML
     private Pane registrationPane;
@@ -118,6 +120,8 @@ public class RegistrationController implements Initializable{
 					
 					//send the instruction through sockets
 					LaunchClientApp.instruction = "new_user," + usernameField.getText() + "," + passwordField.getText() + "," + emailField.getText();
+					user_id = Integer.parseInt(LaunchClientApp.feedback);
+					LaunchClientApp.instruction = "new_patient,"  + user_id + "," + nameField.getText() + "," + surnameField.getText();
 				}
 				
 			// ---> Load new patient menu scene

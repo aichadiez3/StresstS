@@ -94,6 +94,7 @@ public class OtherParametersController implements Initializable {
 			
 			
 			startButton.setOnMouseClicked((MouseEvent event2) -> {
+				
 				ref_number = String.format("%04d", random.nextInt(10000));
 				LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number + "," + null;
 				record_id = Integer.parseInt(LaunchClientApp.feedback);
