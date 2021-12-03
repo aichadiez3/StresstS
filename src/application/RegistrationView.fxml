@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegistrationController">
@@ -22,17 +23,17 @@
                   <Image url="@icon/new_user.png" />
                </image>
             </ImageView>
-            <TextField fx:id="nameField" layoutX="42.0" layoutY="249.0" prefHeight="31.0" prefWidth="185.0" promptText="Name" styleClass="text-field" stylesheets="@dark-theme.css" />
-            <TextField fx:id="surnameField" layoutX="42.0" layoutY="290.0" prefHeight="31.0" prefWidth="185.0" promptText="Second name" styleClass="text-field" stylesheets="@dark-theme.css" />
-            <TextField fx:id="usernameField" layoutX="42.0" layoutY="333.0" prefHeight="31.0" prefWidth="185.0" promptText="Username" styleClass="text-field" stylesheets="@dark-theme.css" />
+            <TextField fx:id="nameField" layoutX="42.0" layoutY="266.0" prefHeight="31.0" prefWidth="185.0" promptText="Name" styleClass="text-field" stylesheets="@dark-theme.css" />
+            <TextField fx:id="surnameField" layoutX="42.0" layoutY="307.0" prefHeight="31.0" prefWidth="185.0" promptText="Second name" styleClass="text-field" stylesheets="@dark-theme.css" />
+            <TextField fx:id="usernameField" layoutX="42.0" layoutY="350.0" prefHeight="31.0" prefWidth="185.0" promptText="Username" styleClass="text-field" stylesheets="@dark-theme.css" />
             <Label layoutX="270.0" layoutY="136.0" onMouseClicked="#return_window" style="-fx-text-fill: -fx-pale-blue; -fx-font-size: 24;" styleClass="title-text-style" stylesheets="@dark-theme.css" text="Registration" />
-            <Button fx:id="signInButton" layoutX="212.0" layoutY="398.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="102.0" styleClass="sign-in-button" stylesheets="@dark-theme.css" text="Sign up" />
+            <Button fx:id="signInButton" disable="true" layoutX="212.0" layoutY="415.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="102.0" styleClass="sign-in-button" stylesheets="@dark-theme.css" text="Sign up" />
             <Label fx:id="warning_email" layoutX="184.0" layoutY="415.0" text="Email already exists" textFill="RED" visible="false">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="emailField" layoutX="287.0" layoutY="249.0" prefHeight="31.0" prefWidth="197.0" promptText="Email" styleClass="text-field" stylesheets="@dark-theme.css" />
+            <TextField fx:id="emailField" layoutX="287.0" layoutY="266.0" prefHeight="31.0" prefWidth="197.0" promptText="Email" styleClass="text-field" stylesheets="@dark-theme.css" />
             <Label fx:id="warning_username" layoutX="138.0" layoutY="360.0" text="Username already exists" textFill="RED" visible="false">
                <font>
                   <Font name="System Italic" size="12.0" />
@@ -58,11 +59,45 @@
                   <Image url="@icon/back.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="passwordField" layoutX="287.0" layoutY="290.0" prefHeight="31.0" prefWidth="197.0" promptText="Password" styleClass="text-field" stylesheets="@dark-theme.css" />
-            <PasswordField fx:id="passwordField2" layoutX="287.0" layoutY="333.0" prefHeight="31.0" prefWidth="197.0" promptText="Confirm your password" styleClass="text-field" stylesheets="@dark-theme.css" />
+            <PasswordField fx:id="passwordField" layoutX="287.0" layoutY="307.0" onMouseMoved="#validate_password" prefHeight="31.0" prefWidth="197.0" promptText="Password" styleClass="text-field" stylesheets="@dark-theme.css" />
+            <PasswordField fx:id="passwordField2" layoutX="287.0" layoutY="350.0" onMouseMoved="#validate_password" prefHeight="31.0" prefWidth="197.0" promptText="Confirm your password" styleClass="text-field" stylesheets="@dark-theme.css" />
+            <Group fx:id="okayVerification" layoutX="235.0" layoutY="268.0">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="39.0" layoutX="256.0" layoutY="86.0" preserveRatio="true">
+                     <image>
+                        <Image url="@icon/ok.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="39.0" layoutX="256.0" layoutY="41.0" preserveRatio="true">
+                     <image>
+                        <Image url="@icon/ok.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="39.0" layoutX="256.0" preserveRatio="true">
+                     <image>
+                        <Image url="@icon/ok.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="39.0" layoutY="84.0" preserveRatio="true">
+                     <image>
+                        <Image url="@icon/ok.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group fx:id="warning" layoutX="42.0" layoutY="217.0">
+               <children>
+                  <Label layoutX="116.0" layoutY="8.0" text="ERROR! The password must match" textFill="#ff0000c7">
+                     <font>
+                        <Font name="System Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff69694c" height="36.0" layoutX="42.0" stroke="#ff1f1fb5" strokeType="INSIDE" width="370.0" />
+               </children>
+            </Group>
          </children>
       </Pane>
-      <Group fx:id="loadingAnimation" layoutX="193.0" layoutY="150.0">
+      <Group fx:id="loadingAnimation" layoutX="193.0" layoutY="150.0" visible="false">
          <children>
             <Label layoutX="18.0" layoutY="162.0" prefHeight="35.0" prefWidth="157.0" style="-fx-font-size: 20;" styleClass="text-style" stylesheets="@dark-theme.css" text="Creating account" />
             <ProgressIndicator minHeight="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="172.0" styleClass="progress-bar-main">
