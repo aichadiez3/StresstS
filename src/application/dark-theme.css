@@ -226,8 +226,8 @@
 .spinner > .text-field{
 	-fx-background-color: white;
 	-fx-border-color: -fx-gray;
+	-fx-text-fill: -fx-primarytext-dark;
 }
-
 
 .image-layout{
 	-fx-border-radius: 20px;
