@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="healthPane" prefHeight="682.0" prefWidth="1188.0" style="-fx-background-color: -fx-gray;" styleClass="subpane-layout" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientHealthController">
+<Pane fx:id="mainPane" prefHeight="682.0" prefWidth="1188.0" style="-fx-background-color: -fx-gray;" styleClass="subpane-layout" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SettingsController">
    <children>
       <Label layoutX="174.0" layoutY="103.0" style="-fx-font-size: 25;" styleClass="main-text" text="Account settings" />
       <ImageView fitHeight="54.0" fitWidth="59.0" layoutX="102.0" layoutY="94.0" preserveRatio="true">
@@ -29,10 +29,10 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <PasswordField layoutX="214.0" layoutY="166.0" prefHeight="34.0" prefWidth="232.0" promptText="Confirm your password" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
-            <PasswordField layoutX="214.0" layoutY="114.0" prefHeight="34.0" prefWidth="232.0" promptText="Change your password" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
-            <Button layoutX="205.0" layoutY="240.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" styleClass="sign-in-button" stylesheets="@dark-theme.css" text="Save" />
-            <TextField layoutX="214.0" layoutY="65.0" promptText="Change your email" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
+            <PasswordField fx:id="confirmPasswordField" layoutX="214.0" layoutY="166.0" prefHeight="34.0" prefWidth="232.0" promptText="Confirm your password" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
+            <PasswordField fx:id="passwordField" layoutX="214.0" layoutY="114.0" prefHeight="34.0" prefWidth="232.0" promptText="Change your password" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
+            <Button fx:id="saveButton" layoutX="205.0" layoutY="240.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" styleClass="sign-in-button" stylesheets="@dark-theme.css" text="Save" />
+            <TextField fx:id="emailField" layoutX="214.0" layoutY="65.0" promptText="Change your email" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
          </children>
       </Pane>
       <ImageView fitHeight="102.0" fitWidth="120.0" layoutX="889.0" layoutY="379.0" preserveRatio="true" rotate="159.7">

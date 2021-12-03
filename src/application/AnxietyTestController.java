@@ -124,7 +124,7 @@ public class AnxietyTestController implements Initializable {
 				 * SAVE HERE ALL DATA FROM TESTS FOR FURTHER EVALUATION AND ASSOCIATE THE SYMPTOMS TO THE PATIEND MEDICAL RECORD
 				 */
 				//LO MISMO, NO SE HACER LOS DATOS DEL LinkedList<Boolean> A String Y ADEMAS AQUI NO ESTAMOS HACIENDO NADA AUN
-				LaunchClientApp.instruction = ("new_psycho," );
+				LaunchClientApp.instruction = ("change_user_info, ");
 				
 				//this.yes_sport.getId()
 				

@@ -152,6 +152,21 @@ public class PatientMenuController implements Initializable{
 		});
 		
 		
+		settingsButton.setOnMouseClicked((MouseEvent event) -> {
+			titlePane.setText("Settings");
+			enable_all_buttons();
+			settingsButton.setDisable(true);
+			try {
+				Pane settings_pane_fxml = FXMLLoader.load(getClass().getResource("SettingsView.fxml"));
+				menuPane.getChildren().removeAll();
+				menuPane.getChildren().setAll(settings_pane_fxml);
+				
+			} catch (IOException settings_error) {
+				settings_error.printStackTrace();
+			}
+		});
+		
+		
 		logoutButton.setOnMouseClicked((MouseEvent event) -> {
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInView.fxml"));
