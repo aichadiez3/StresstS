@@ -59,9 +59,9 @@
                   <Image url="@icon/back.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="passwordField" layoutX="287.0" layoutY="307.0" onMouseMoved="#validate_password" prefHeight="31.0" prefWidth="197.0" promptText="Password" styleClass="text-field" stylesheets="@dark-theme.css" />
-            <PasswordField fx:id="passwordField2" layoutX="287.0" layoutY="350.0" onMouseMoved="#validate_password" prefHeight="31.0" prefWidth="197.0" promptText="Confirm your password" styleClass="text-field" stylesheets="@dark-theme.css" />
-            <Group fx:id="okayVerification" layoutX="235.0" layoutY="268.0">
+            <PasswordField fx:id="passwordField" layoutX="287.0" layoutY="307.0" onMouseExited="#validate_password" prefHeight="31.0" prefWidth="197.0" promptText="Password" styleClass="text-field" stylesheets="@dark-theme.css" />
+            <PasswordField fx:id="passwordField2" layoutX="287.0" layoutY="350.0" onMouseExited="#validate_password" prefHeight="31.0" prefWidth="197.0" promptText="Confirm your password" styleClass="text-field" stylesheets="@dark-theme.css" />
+            <Group fx:id="okayVerification" layoutX="235.0" layoutY="268.0" visible="false">
                <children>
                   <ImageView fitHeight="25.0" fitWidth="39.0" layoutX="256.0" layoutY="86.0" preserveRatio="true">
                      <image>
@@ -85,7 +85,7 @@
                   </ImageView>
                </children>
             </Group>
-            <Group fx:id="warning" layoutX="42.0" layoutY="217.0">
+            <Group fx:id="warning" layoutX="42.0" layoutY="217.0" visible="false">
                <children>
                   <Label layoutX="116.0" layoutY="8.0" text="ERROR! The password must match" textFill="#ff0000c7">
                      <font>
