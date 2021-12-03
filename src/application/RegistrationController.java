@@ -80,6 +80,12 @@ public class RegistrationController implements Initializable{
     private Group loadingAnimation;
     
     @FXML
+    private Group okayVerification;
+    
+    @FXML
+    private Group warning;
+    
+    @FXML
     private PasswordField passwordField;
     
     @FXML
@@ -166,6 +172,22 @@ public class RegistrationController implements Initializable{
 		
 	}
     
+	
+	@FXML
+	private void validate_password(MouseEvent event) {
+		
+		if(passwordField.getText()!=null & passwordField2.getText()!=null & passwordField.getText().equals(passwordField2.getText())) {
+			okayVerification.setVisible(true);
+			warning.setVisible(false);
+			signInButton.setDisable(false);
+			
+		} else {
+			signInButton.setDisable(true);
+			okayVerification.setVisible(false);
+			warning.setVisible(true);
+		}
+		
+	}
 	
 	
 	@FXML

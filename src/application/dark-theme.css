@@ -73,14 +73,14 @@
 }
 
 .text-field{
-	-fx-text-fill: -fx-gray;
+	-fx-text-fill: -fx-primarytext-dark;
 	-fx-font-size: 15px;
 	-fx-background-color:  transparent;
 	-fx-border-color:  -fx-secondary;
 }
 
 .text-field-login{
-	-fx-text-fill: -fx-primarytext-dark;
+	-fx-text-fill: -fx-gray;
 	-fx-font-size: 15px;
 	-fx-background-color:  transparent;
 	-fx-border-color:  -fx-secondary;
