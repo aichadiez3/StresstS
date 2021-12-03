@@ -24,6 +24,7 @@ public class PatientHealthController implements Initializable{
 	private OtherParametersController parameters_controller;
 	private PatientHealthController health_controller;
 	private static Stage main_stage;
+	private Integer test_id;
 	
 	@FXML
     private Pane healthPane;
@@ -113,6 +114,11 @@ public class PatientHealthController implements Initializable{
 				Pane bitalino_pane_fxml = FXMLLoader.load(getClass().getResource("BitalinoView.fxml"));
 				healthPane.getChildren().removeAll();
 				healthPane.getChildren().setAll(bitalino_pane_fxml);
+				
+				
+				// CUANDO ABRE ESTE NUEVO PANEL, AUTOMÁTICAMENTE DEBE CREAR UN NUEVO BITALINO_TEST
+				LaunchClientApp.instruction = "new_bitalino_test";
+				test_id = Integer.parseInt(LaunchClientApp.feedback);
 				
 			} catch (IOException open_bitalino_error) {
 				open_bitalino_error.printStackTrace();

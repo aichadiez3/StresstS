@@ -4,8 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -29,10 +27,10 @@ public class LaunchClientApp extends Application{
 	
 	//esto es el la instruccion que voy a recibir de cada boton o lo que sea y que quiero que este client
 		//le mande al server y ese al otro server para que haga las cosas en la DB
-	public static String instruction = null;
-	public static String feedback = null;
-	public static Object object = null;
-	public static Object object2 = null;
+	public static String instruction;
+	public static String feedback;
+	public static Object object;
+	public static Object object2;
 	
 	public static Stage getStage() {
 		return stage;

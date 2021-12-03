@@ -34,7 +34,7 @@ public class OtherParametersController implements Initializable {
 	private double timelapse;
 	private double progress;
 	Random random = new Random();
-	String ref_number = null;
+	Integer ref_number;
 	public Integer record_id;
 			
 
@@ -95,9 +95,17 @@ public class OtherParametersController implements Initializable {
 			
 			startButton.setOnMouseClicked((MouseEvent event2) -> {
 				
-				ref_number = String.format("%04d", random.nextInt(10000));
-				LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number + "," + null;
+				
+				ref_number = (int)Math.floor(Math.random()*(2147483647-1000000000)+1000000000);
+				
+				LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number.toString() + "," + null;
+				//LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number.toString();
+				System.out.println(LaunchClientApp.instruction);
+				
+				
+				//ESTO DEVUELVE NULL
 				record_id = Integer.parseInt(LaunchClientApp.feedback);
+				System.out.println(LaunchClientApp.feedback);
 				
 				startButton.setVisible(false);
 				timerGroup.setVisible(true);
@@ -118,13 +126,18 @@ public class OtherParametersController implements Initializable {
 			            } else {
 			            	progress += (double) timelapse;
 			            	Platform.runLater(() -> timerIndicator.setProgress(progress*3.33)); //for simulating 30secs of recording
+			            	
+			            	if(progress==100) {
+			            		timerIndicator.setDisable(true);
+			            		tapButton.setDisable(true);
+			            	}
 			            }
 			                
 			        }
 			    }, 0, 1000);
 			
 		
-				tapButton.setOnAction((ActionEvent event) -> {
+				tapButton.setOnAction((ActionEvent event3) -> {
 					counter();
 				});
 			});
@@ -139,42 +152,39 @@ public class OtherParametersController implements Initializable {
 		});
 		
 		
-		saveButton.setOnMouseClicked((MouseEvent event3) -> {
-			LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + Date.valueOf(LocalDate.now()) + "," + record_id);
+		saveButton.setOnMouseClicked((MouseEvent event) -> {
+			//record_id ES NULL DE MOMENTO
+			LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + Date.valueOf(LocalDate.now()) + "," + record_id); 
+			//System.out.println(LaunchClientApp.instruction);
+			
+			// Get all values
+			oxygenSatSpinner.getValue();
+			heartRateSpinner.getValue();
+			
+			// Enable buttons and images as in restart
+			timerGroup.setVisible(false);
+			startButton.setVisible(true);
+			breathingRateImage.setVisible(true);
+			pulseOximeterImage.setVisible(true);
+
+			//Close the emergent window
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
+				main_stage = (Stage) mainPane.getScene().getWindow();
+				main_stage.close();
+				LaunchClientApp.getStage().getScene().setRoot(root);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		});
 		
 	}
 
 	
-	
-	// ------> INCOMPLETE METHOD
-	
-	@FXML
-    void save_parameters(ActionEvent event) {
-		// Get all values
-		oxygenSatSpinner.getValue();
-		heartRateSpinner.getValue();
-		
-		// Enable buttons and images as in restart
-		timerGroup.setVisible(false);
-		startButton.setVisible(true);
-		breathingRateImage.setVisible(true);
-		pulseOximeterImage.setVisible(true);
-
-		//Close the emergent window
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
-			main_stage = (Stage) mainPane.getScene().getWindow();
-			main_stage.close();
-			LaunchClientApp.getStage().getScene().setRoot(root);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-    }
 	
 	@FXML
     void return_window(MouseEvent event) throws IOException {
