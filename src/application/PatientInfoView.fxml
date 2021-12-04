@@ -83,7 +83,6 @@
         <items>
           <MenuItem mnemonicParsing="false" onAction="#sort_date_ascendent" text="Date - Newer to older" />
           <MenuItem mnemonicParsing="false" onAction="#sort_date_descendent" text="Date - Older to newer" />
-            <MenuItem mnemonicParsing="false" text="Bitalino is included" />
         </items>
       </MenuButton>
       <Label layoutX="680.0" layoutY="307.0" prefHeight="91.0" prefWidth="425.0" text="This is a TreeTableView to visualize the medical recods saved for this patient" wrapText="true" />
