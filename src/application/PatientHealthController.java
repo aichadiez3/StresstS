@@ -27,7 +27,7 @@ public class PatientHealthController implements Initializable{
 	private OtherParametersController parameters_controller;
 	private PatientHealthController health_controller;
 	private static Stage main_stage;
-	public static Integer test_id;
+	public static Integer bitalino_id;
 	Random random = new Random();
 	Integer ref_number;
 	public static Integer record_id;
@@ -106,13 +106,14 @@ public class PatientHealthController implements Initializable{
 			//CREO UN REF_NUMBER RANDOM Y ME CREO UN NUEVO MED_RECORD DONDE GRABAR LOS DATOS QUE VOY A MEDIR
 			ref_number = (int)Math.floor(Math.random()*(2147483647-1000000000)+1000000000);
 			
+		/*
 			LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number.toString() + "," + null;
 			System.out.println(LaunchClientApp.instruction);
 			
 			//ESTO DEVUELVE NULL porque el server no nos esta devolviendo datos, algo falla con ese dataOutputStream
 			record_id = Integer.parseInt(LaunchClientApp.feedback);
 			System.out.println(LaunchClientApp.feedback);
-
+		*/
 			
 			basicParametersButton.setDisable(false);
 				basicParametersButton.setOpacity(1);
@@ -135,7 +136,7 @@ public class PatientHealthController implements Initializable{
 				
 				// CUANDO ABRE ESTE NUEVO PANEL, AUTOMÁTICAMENTE DEBE CREAR UN NUEVO BITALINO_TEST
 				LaunchClientApp.instruction = "new_bitalino_test";
-				test_id = Integer.parseInt(LaunchClientApp.feedback);
+				bitalino_id = Integer.parseInt(LaunchClientApp.feedback);
 				
 			} catch (IOException open_bitalino_error) {
 				open_bitalino_error.printStackTrace();

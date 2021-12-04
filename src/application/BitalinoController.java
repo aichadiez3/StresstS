@@ -156,10 +156,6 @@ public class BitalinoController implements Initializable{
             this.SamplingRate = Integer.parseInt(this.freqSelection.getValue());
             menuPane.setEffect(null);
             
-            //A VER COMO CONVERTIMOS ESTOS DATOS DE Series A LinkedList<Integer> Y QUE HACER CON LA TABLA BITALINO TEST Y DEMAS
-            	//PORQUE NO SE COMO VAMOS A CONSEGUIR EL TEST_ID
-            //LaunchClientApp.instruction = ("new_ecg,");
-            
 		});
 		
 		
@@ -206,7 +202,6 @@ public class BitalinoController implements Initializable{
 	            //stop acquisition
 	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
-	            
 	            
 	            RecordingController.setSeriesValues(dataECG, dataEDA);
 	            
