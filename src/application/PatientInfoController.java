@@ -4,14 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -29,14 +26,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.TreeTableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -102,6 +96,7 @@ public class PatientInfoController implements Initializable{
     private Spinner<Integer> heightSpinner;
 
 	
+	@SuppressWarnings("unchecked")
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		ObservableList<String> gender = FXCollections.observableArrayList( "Male","Female");
@@ -124,6 +119,7 @@ public class PatientInfoController implements Initializable{
 						return param.getValue().getValue().referenceNumber;
 					}
 				});
+		reference_column.getStyleClass().add("tree-table-column");
 		reference_column.setResizable(false);
 		
 		TreeTableColumn<MedicalRecordObject, String> ref_date = new TreeTableColumn<>("Date");
@@ -135,35 +131,62 @@ public class PatientInfoController implements Initializable{
 						return param.getValue().getValue().recordDate;
 					}
 				});
+		ref_date.getStyleClass().add("tree-table-column");
 		ref_date.setResizable(false);
 		
-		TreeTableColumn<MedicalRecordObject, Object> ecg_column = new TreeTableColumn<>("ECG");
+		TreeTableColumn<MedicalRecordObject, String> ecg_column = new TreeTableColumn<>("ECG");
 		ecg_column.setPrefWidth(100);
-		//ecg_column.setCellValueFactory({});
+		ecg_column.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<MedicalRecordObject, String> param) {
+				return param.getValue().getValue().ecgURL;
+			}
+		});
+		ecg_column.getStyleClass().add("tree-table-column");
 		ecg_column.setResizable(false);
 		
 		TreeTableColumn<MedicalRecordObject, String> eda_column = new TreeTableColumn<>("EDA");
 		eda_column.setPrefWidth(100);
-		//eda_column.setCellValueFactory();
+		eda_column.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<MedicalRecordObject, String> param) {
+				return param.getValue().getValue().edaURL;
+			}
+		});
+		eda_column.getStyleClass().add("tree-table-column");
 		eda_column.setResizable(false);
 		
-		/*
 		
-		// El server nos devuelve el id de un medical record
-		//---> search medical record by id y lo devolvemos y asignamos a class MedicalRecordObject (ver clase debajo) que son todo string
+		LaunchClientApp.instruction = "list_all_medical_records";
 		
-		List<MedicalRecord> records_list // = manager_object.List_all_medicalrecords();
-				
+		/*	List<MedicalRecord> records_list = LaunchClientApp.feedback;
 			for(MedicalRecord medical_record: records_list) {
-				records_objects.add(new MedicalRecordObject(medical_record.getReferenceNumber().toString(), medical_record.getRecordDate().toString(), medical_record.getBitalinoTestIncluded().toString()));//here goes the getters for each attribute
+				records_objects.add(new MedicalRecordObject(medical_record.getReferenceNumber().toString(), medical_record.getRecordDate().toString(), 
+		//---> ESTO NO ES CORRECTO	//medical_record.getBitalinoTestId().toString()));
+				
+ // Get el bitalino_id no nos sirve. Lo necesitamos para llamar a servidor y obtener el ecg y el eda asociados a ese id
+				
+				LaunchClientApp.instruction = "search_associated_ecg, " + medical_record.getBitalinoTestId().toString();
+				Integer ecg_id = Integer.parseInt(LaunchClientApp.feedback);
+				
+				LaunchClientApp.instruction = "search_associated_eda, " + medical_record.getBitalinoTestId().toString();
+				Integer eda_id = Integer.parseInt(LaunchClientApp.feedback);
 			}
+		*/	
 			
+		/* 
+		 --------------> Posible solución para List? 
+		 * Bucle con una lita de feedback que separe por cada 4 parámetros y asigne un elemento de cada vez a la lista
+		 * El tamaño debería ser de 4 parámetros (id, date, referenceNumber, bitalino_test_id)
+		 */
+		
+	
 			final TreeItem<MedicalRecordObject> root_records = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
-			recordsTreeView.getColumns().setAll(reference_column, ref_date, ecg_column, eda_column);
+			recordsTreeView.getColumns().setAll(ref_date, reference_column, ecg_column, eda_column);
 			recordsTreeView.setRoot(root_records);
 			recordsTreeView.setShowRoot(false);
 				
-		*/
+		
 		
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
@@ -198,11 +221,16 @@ public class PatientInfoController implements Initializable{
 	  @FXML
 	    void sort_date_ascendent(ActionEvent event) {
 		  	sortByButton.setText("Date - Newer to older");
+		  	//LaunchClientApp.instruction="search_record_by_date_ascendent";
+		  	//LaunchClientApp.feedback; //--> Doesn't return data (void type)
+		  	
 	    }
 
 	    @FXML
 	    void sort_date_descendent(ActionEvent event) {
 	    	sortByButton.setText("Date - Older to newer");
+	    	//LaunchClientApp.instruction="search_record_by_date_descendent";
+		  	//LaunchClientApp.feedback; //--> Doesn't return data (void type)
 	    }
 	
 	
@@ -212,12 +240,14 @@ class MedicalRecordObject extends RecursiveTreeObject<MedicalRecordObject> {
 	
 	StringProperty referenceNumber;
 	StringProperty recordDate;
-	StringProperty empty;
+	StringProperty ecgURL;
+	StringProperty edaURL;
 	
-    public MedicalRecordObject(String referenceNumber, String recordDate, String empty) {
+    public MedicalRecordObject(String referenceNumber, String recordDate, String ecgURL, String edaURL) {
     	this.referenceNumber = new SimpleStringProperty(referenceNumber);
     	this.recordDate = new SimpleStringProperty(recordDate);
-    	this.empty = new SimpleStringProperty(empty);
+    	this.ecgURL = new SimpleStringProperty(ecgURL);
+    	this.edaURL = new SimpleStringProperty(edaURL);
     }
     
 }
