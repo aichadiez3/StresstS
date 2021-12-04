@@ -1,5 +1,7 @@
 package application;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 import java.util.List;
@@ -19,7 +21,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -32,9 +36,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class PatientInfoController implements Initializable{
@@ -163,6 +170,27 @@ public class PatientInfoController implements Initializable{
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
 			LaunchClientApp.instruction = ("update_patient," + logInController.user_id);
 		});
+		
+	}
+	
+	
+	@FXML
+	private void change_image(MouseEvent event) throws IOException{
+		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files","*.bmp", "*.png", "*.jpg", "*.gif")); // limit chooser options to image files
+		File file = fileChooser.showOpenDialog(new Stage());
+		if(file != null) {
+			String imagepath = file.toURI().toURL().toString();
+			Image image = new Image(imagepath);
+			userImage.setImage(image);
+			
+		} else {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	        alert.setTitle("Information Dialog");
+	        alert.setHeaderText("Please Select a File");
+	        alert.showAndWait();
+		}
 		
 	}
 	

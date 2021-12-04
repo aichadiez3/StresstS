@@ -38,7 +38,7 @@
             <TextField fx:id="surnameLabel" layoutX="257.0" layoutY="71.0" promptText="Surname" styleClass="text-field-transparent" />
             <DatePicker fx:id="birthDatePicker" editable="false" layoutX="259.0" layoutY="207.0" prefHeight="27.0" prefWidth="184.0" promptText="Date of birth" stylesheets="@dark-theme.css" />
             <Label fx:id="ageLabel" layoutX="390.0" layoutY="155.0" prefHeight="46.0" prefWidth="88.0" style="-fx-text-fill: #B2B2B2;" styleClass="text-style" text=", Age:" textFill="#b2b2b2" />
-            <ImageView fx:id="editImageButton" fitHeight="98.0" fitWidth="25.0" layoutX="194.0" layoutY="129.0" opacity="0.67" preserveRatio="true">
+            <ImageView fx:id="editImageButton" fitHeight="98.0" fitWidth="25.0" layoutX="194.0" layoutY="129.0" onMouseClicked="#change_image" opacity="0.67" preserveRatio="true">
                <image>
                   <Image url="@icon/edit.png" />
                </image>
