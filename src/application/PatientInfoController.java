@@ -7,21 +7,19 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -29,14 +27,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -111,17 +111,12 @@ public class PatientInfoController implements Initializable{
 		genderSelection.setItems(gender);
 		insuranceSelection.setItems(insurance_list);
 		
-		/*
+		
 		
 		// ---------> Tree List View <--------
 		
-		
-		// El server nos devuelve el id de un medical record
-		
-		//---> search medical record by id y lo devolvemos y asignamos a class MedicalRecordObject (ver clase debajo) que son todo string
-		
 		TreeTableColumn<MedicalRecordObject, String> reference_column = new TreeTableColumn<>("Reference number");
-		reference_column.setPrefWidth(120);
+		reference_column.setPrefWidth(160);
 		reference_column.setCellValueFactory(
 				new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {
 					@Override
@@ -131,8 +126,8 @@ public class PatientInfoController implements Initializable{
 				});
 		reference_column.setResizable(false);
 		
-		TreeTableColumn<MedicalRecordObject, String> ref_date = new TreeTableColumn<>("Test date");
-		ref_date.setPrefWidth(120);
+		TreeTableColumn<MedicalRecordObject, String> ref_date = new TreeTableColumn<>("Date");
+		ref_date.setPrefWidth(135);
 		ref_date.setCellValueFactory(
 				new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {
 					@Override
@@ -142,17 +137,20 @@ public class PatientInfoController implements Initializable{
 				});
 		ref_date.setResizable(false);
 		
-		TreeTableColumn<MedicalRecordObject, String> bitalino_column = new TreeTableColumn<>("Includes Bitalino test");
-		bitalino_column.setPrefWidth(100);
-		bitalino_column.setCellValueFactory(
-				new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {
-					@Override
-					public ObservableValue<String> call(CellDataFeatures<MedicalRecordObject, String> param) {
-						return param.getValue().getValue().hasBitalinoTest;
-					}
-				});
-		bitalino_column.setResizable(false);
+		TreeTableColumn<MedicalRecordObject, Object> ecg_column = new TreeTableColumn<>("ECG");
+		ecg_column.setPrefWidth(100);
+		//ecg_column.setCellValueFactory({});
+		ecg_column.setResizable(false);
 		
+		TreeTableColumn<MedicalRecordObject, String> eda_column = new TreeTableColumn<>("EDA");
+		eda_column.setPrefWidth(100);
+		//eda_column.setCellValueFactory();
+		eda_column.setResizable(false);
+		
+		/*
+		
+		// El server nos devuelve el id de un medical record
+		//---> search medical record by id y lo devolvemos y asignamos a class MedicalRecordObject (ver clase debajo) que son todo string
 		
 		List<MedicalRecord> records_list // = manager_object.List_all_medicalrecords();
 				
@@ -161,12 +159,12 @@ public class PatientInfoController implements Initializable{
 			}
 			
 			final TreeItem<MedicalRecordObject> root_records = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
-			recordsTreeView.getColumns().setAll(reference_column, ref_date, bitalino_column);
+			recordsTreeView.getColumns().setAll(reference_column, ref_date, ecg_column, eda_column);
 			recordsTreeView.setRoot(root_records);
 			recordsTreeView.setShowRoot(false);
 				
-				
 		*/
+		
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
 			LaunchClientApp.instruction = ("update_patient," + logInController.user_id);
@@ -177,6 +175,7 @@ public class PatientInfoController implements Initializable{
 	
 	@FXML
 	private void change_image(MouseEvent event) throws IOException{
+		
 		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files","*.bmp", "*.png", "*.jpg", "*.gif")); // limit chooser options to image files
@@ -189,11 +188,22 @@ public class PatientInfoController implements Initializable{
 		} else {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 	        alert.setTitle("Information Dialog");
-	        alert.setHeaderText("Please Select a File");
+	        alert.setHeaderText("No File was selected. Please Select a File");
 	        alert.showAndWait();
 		}
 		
 	}
+	
+	
+	  @FXML
+	    void sort_date_ascendent(ActionEvent event) {
+		  	sortByButton.setText("Date - Newer to older");
+	    }
+
+	    @FXML
+	    void sort_date_descendent(ActionEvent event) {
+	    	sortByButton.setText("Date - Older to newer");
+	    }
 	
 	
 }
@@ -202,12 +212,12 @@ class MedicalRecordObject extends RecursiveTreeObject<MedicalRecordObject> {
 	
 	StringProperty referenceNumber;
 	StringProperty recordDate;
-	StringProperty hasBitalinoTest;
+	StringProperty empty;
 	
-    public MedicalRecordObject(String referenceNumber, String recordDate, String hasBitalinoTest) {
+    public MedicalRecordObject(String referenceNumber, String recordDate, String empty) {
     	this.referenceNumber = new SimpleStringProperty(referenceNumber);
     	this.recordDate = new SimpleStringProperty(recordDate);
-    	this.hasBitalinoTest = new SimpleStringProperty(hasBitalinoTest);
+    	this.empty = new SimpleStringProperty(empty);
     }
     
 }

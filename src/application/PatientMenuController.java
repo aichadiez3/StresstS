@@ -70,7 +70,7 @@ public class PatientMenuController implements Initializable{
     public static void setController(PatientMenuController controller) {
 		patient_controller = controller;
 	}
-
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		

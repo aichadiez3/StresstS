@@ -10,6 +10,7 @@ module test {
 	requires jfoenix;
 	requires javax.persistence;
 	requires jdk.jdi;
+	requires java.desktop;
 	opens application to javafx.fxml;
 	exports application;
 }

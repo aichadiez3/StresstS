@@ -9,7 +9,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -39,7 +38,7 @@
             <TextField fx:id="surnameLabel" layoutX="257.0" layoutY="71.0" promptText="Surname" styleClass="text-field-transparent" />
             <DatePicker fx:id="birthDatePicker" editable="false" layoutX="259.0" layoutY="207.0" prefHeight="27.0" prefWidth="184.0" promptText="Date of birth" stylesheets="@dark-theme.css" />
             <Label fx:id="ageLabel" layoutX="390.0" layoutY="155.0" prefHeight="46.0" prefWidth="88.0" style="-fx-text-fill: #B2B2B2;" styleClass="text-style" text=", Age:" textFill="#b2b2b2" />
-            <ImageView fx:id="editImageButton" fitHeight="98.0" fitWidth="25.0" layoutX="194.0" layoutY="129.0" opacity="0.67" preserveRatio="true">
+            <ImageView fx:id="editImageButton" fitHeight="98.0" fitWidth="25.0" layoutX="194.0" layoutY="129.0" onMouseClicked="#change_image" opacity="0.67" preserveRatio="true">
                <image>
                   <Image url="@icon/edit.png" />
                </image>
@@ -79,18 +78,11 @@
             </Label>
          </children>
       </Pane>
-      <TreeTableView fx:id="recordsTreeView" layoutX="624.0" layoutY="101.0" prefHeight="542.0" prefWidth="495.0" stylesheets="@dark-theme.css">
-         <columns>
-            <TreeTableColumn editable="false" prefWidth="161.0" styleClass="tree-table-column" text="Reference number" />
-            <TreeTableColumn editable="false" prefWidth="138.0" styleClass="tree-table-column" text="Date" />
-            <TreeTableColumn editable="false" prefWidth="101.0" styleClass="tree-table-column" text="ECG" />
-            <TreeTableColumn prefWidth="94.0" styleClass="tree-table-column" text="EDA" />
-         </columns>
-      </TreeTableView>
+      <TreeTableView fx:id="recordsTreeView" layoutX="624.0" layoutY="101.0" prefHeight="542.0" prefWidth="495.0" stylesheets="@dark-theme.css" />
       <MenuButton fx:id="sortByButton" layoutX="826.0" layoutY="59.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="292.0" stylesheets="@dark-theme.css" text="Sort medical records by parameter">
         <items>
-          <MenuItem mnemonicParsing="false" text="Date - Newer to older" />
-          <MenuItem mnemonicParsing="false" text="Date - Older to newer" />
+          <MenuItem mnemonicParsing="false" onAction="#sort_date_ascendent" text="Date - Newer to older" />
+          <MenuItem mnemonicParsing="false" onAction="#sort_date_descendent" text="Date - Older to newer" />
             <MenuItem mnemonicParsing="false" text="Bitalino is included" />
         </items>
       </MenuButton>
