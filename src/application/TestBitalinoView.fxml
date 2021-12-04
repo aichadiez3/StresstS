@@ -11,7 +11,7 @@
 
 <Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="1188.0" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RecordingController">
    <children>
-      <LineChart fx:id="ecgGraph" layoutX="74.0" layoutY="117.0" onMouseMoved="#updateChartEcg" prefHeight="262.0" prefWidth="1060.0" title="Electrocardiogram test">
+      <LineChart fx:id="ecgGraph" layoutX="74.0" layoutY="117.0" onMouseClicked="#updateChartEcg" prefHeight="262.0" prefWidth="1060.0" title="Electrocardiogram test">
          <xAxis>
             <CategoryAxis label="Time (in s)" side="BOTTOM" />
          </xAxis>
@@ -19,7 +19,7 @@
             <NumberAxis label="ECG (in mV)" side="LEFT" />
          </yAxis>
       </LineChart>
-      <LineChart fx:id="edaGraph" createSymbols="false" layoutX="74.0" layoutY="392.0" onMouseClicked="#plot_graphs" onMouseMoved="#updateChartEda" prefHeight="262.0" prefWidth="1060.0" title="Electrodermal activity test">
+      <LineChart fx:id="edaGraph" createSymbols="false" layoutX="74.0" layoutY="392.0" onMouseClicked="#updateChartEda" prefHeight="262.0" prefWidth="1060.0" title="Electrodermal activity test">
          <xAxis>
             <CategoryAxis label="Time (in s)" side="BOTTOM" />
          </xAxis>

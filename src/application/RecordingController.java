@@ -59,13 +59,13 @@ public class RecordingController implements Initializable {
 		
 		try {
 			
-			ecgGraph = new LineChart(new CategoryAxis(), new NumberAxis());
+			ecgGraph = new LineChart(new NumberAxis(), new NumberAxis());
 			
 			ecgGraph.getData().clear();
 			ecgGraph.setCreateSymbols(false);
 			ecgGraph.getData().add(dataECG);
 			
-			edaGraph = new LineChart(new CategoryAxis(), new NumberAxis());
+			edaGraph = new LineChart(new NumberAxis(), new NumberAxis());
 			
 			edaGraph.getData().clear();
 			edaGraph.setCreateSymbols(false);
