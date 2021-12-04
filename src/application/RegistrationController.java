@@ -176,7 +176,7 @@ public class RegistrationController implements Initializable{
 	@FXML
 	private void validate_password(MouseEvent event) {
 		
-		if(passwordField.getText()!=null & passwordField2.getText()!=null & passwordField.getText().equals(passwordField2.getText())) {
+		if(!passwordField.getText().contentEquals("") & !passwordField2.getText().contentEquals("") & passwordField.getText().equals(passwordField2.getText())) {
 			okayVerification.setVisible(true);
 			warning.setVisible(false);
 			signInButton.setDisable(false);

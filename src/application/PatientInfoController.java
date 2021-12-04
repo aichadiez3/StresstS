@@ -107,6 +107,11 @@ public class PatientInfoController implements Initializable{
 		
 		// ---------> Tree List View <--------
 		
+		
+		// El server nos devuelve el id de un medical record
+		
+		//---> search medical record by id y lo devolvemos y asignamos a class MedicalRecordObject (ver clase debajo) que son todo string
+		
 		JFXTreeTableColumn<MedicalRecordObject, String> reference_column = new JFXTreeTableColumn<>("Reference number");
 		reference_column.setPrefWidth(120);
 		reference_column.setCellValueFactory(

@@ -63,16 +63,12 @@ public class logInController implements Initializable {
 				
 				if (!usernameField.getText().equals("") && !passwordField.getText().equals("")) {
 					
-					// Connection to web database
-					/*
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/anxipharma","root","");
-					PreparedStatement ps = dbConnection.prepareStatement("insert into user(user_name,password) values(?,?);");
-					ps.setString(1,usernameField.getText());
-					ps.setString(2,passwordField.getText());
-					ps.executeUpdate();
-					*/
 					// ---> Condition if the name exists in the database to load the next scene
+					LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
+					user_id = Integer.parseInt(LaunchClientApp.feedback);
+					//AQUI FALTA RECIBIR DE VUELTA EL USER_ID QUE LA FUNCION HA ENCONTRADO y la comprobación
+					
+					
 					
 					// Charge the new Menu scene
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientMenuView.fxml"));
@@ -89,10 +85,6 @@ public class logInController implements Initializable {
 					// ---> To close the log in stage icon 
 					main_menu_stage = (Stage) anchorPane.getScene().getWindow();
 					main_menu_stage.close();
-					
-					LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
-					user_id = Integer.parseInt(LaunchClientApp.feedback);
-					//AQUI FALTA RECIBIR DE VUELTA EL USER_ID QUE LA FUNCION HA ENCONTRADO
 					
 				}
 			} catch (Exception log_in_error) {
