@@ -65,29 +65,25 @@ public class logInController implements Initializable {
 					
 					// ---> Condition if the name exists in the database to load the next scene
 					
-					/*
 					LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
 					user_id = Integer.parseInt(LaunchClientApp.feedback);
-					//AQUI FALTA RECIBIR DE VUELTA EL USER_ID QUE LA FUNCION HA ENCONTRADO y la comprobación
-					*/
-					
-					
-					// Charge the new Menu scene
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientMenuView.fxml"));
-					Parent root = (Parent) loader.load();
-					this.patient_controller = new PatientMenuController();
-					this.patient_controller = loader.getController();
-					Stage stage = new Stage();
-					stage.setAlwaysOnTop(true);
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.initModality(Modality.APPLICATION_MODAL);
-					stage.setScene(new Scene(root));
-					stage.show();
-					
-					// ---> To close the log in stage icon 
-					main_menu_stage = (Stage) anchorPane.getScene().getWindow();
-					main_menu_stage.close();
-					
+					if(user_id != null) {												
+						// Charge the new Menu scene
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientMenuView.fxml"));
+						Parent root = (Parent) loader.load();
+						this.patient_controller = new PatientMenuController();
+						this.patient_controller = loader.getController();
+						Stage stage = new Stage();
+						stage.setAlwaysOnTop(true);
+						stage.initStyle(StageStyle.UNDECORATED);
+						stage.initModality(Modality.APPLICATION_MODAL);
+						stage.setScene(new Scene(root));
+						stage.show();
+						
+						// ---> To close the log in stage icon 
+						main_menu_stage = (Stage) anchorPane.getScene().getWindow();
+						main_menu_stage.close();
+					}
 				}
 			} catch (Exception log_in_error) {
 				log_in_error.printStackTrace();
