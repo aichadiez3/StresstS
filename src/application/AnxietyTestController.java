@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
@@ -111,7 +112,9 @@ public class AnxietyTestController implements Initializable {
 
     @FXML
     private Button submitButton;
-
+  
+    private LinkedList<Boolean> positive_res;
+    private LinkedList<Boolean> negative_res;
     
     
 	@Override
@@ -123,8 +126,17 @@ public class AnxietyTestController implements Initializable {
 				/*
 				 * SAVE HERE ALL DATA FROM TESTS FOR FURTHER EVALUATION AND ASSOCIATE THE SYMPTOMS TO THE PATIEND MEDICAL RECORD
 				 */
+				
+			    Boolean[] positive = {yes_sport.isSelected(), yes_socialize.isSelected(), yes_read.isSelected(), yes_sleep.isSelected(), yes_meditation.isSelected(), yes_hobbies.isSelected()};
+			    Boolean[] negative = {yes_raising_thoughts.isSelected(), yes_stress.isSelected(), yes_overthinker.isSelected(), raising_thoughts.isSelected(), panic_attacks.isSelected(), sleeping_troubles.isSelected(),
+			    		appetite_alterations.isSelected(), dissociation.isSelected(), heavy_fast_breathing.isSelected(), shaking.isSelected(), dizziness.isSelected(), fainting.isSelected(), no_sport.isSelected(), no_socialize.isSelected(), no_read.isSelected(),
+			    		no_sleep.isSelected(), no_meditation.isSelected(), no_hobbies.isSelected(), no_raising_thoughts.isSelected(), no_stress.isSelected(), no_overthinker.isSelected()};
+
+			    positive_res = (LinkedList<Boolean>) Arrays.asList(positive);
+			    negative_res = (LinkedList<Boolean>) Arrays.asList(negative);
+			    
 				//LO MISMO, NO SE HACER LOS DATOS DEL LinkedList<Boolean> A String Y ADEMAS AQUI NO ESTAMOS HACIENDO NADA AUN
-				LaunchClientApp.instruction = ("change_user_info, ");
+				LaunchClientApp.instruction = ("new_psycho," + positive_res.toString() + "," + negative_res.toString() + "," + PatientHealthController.record_id);
 				
 				//this.yes_sport.getId()
 				
