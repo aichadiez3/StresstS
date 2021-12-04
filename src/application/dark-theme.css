@@ -289,8 +289,8 @@
 /*Menu bar Styling*/
 .menu-bar{
     -fx-font-size: 14;
-    -fx-base : -fx-primary;
-    -fx-background-color: -fx-primary;
+    -fx-base : white;
+    -fx-background-color: white;
 }
 
 .menu-bar >  *.button-bar > *.container{
@@ -298,7 +298,7 @@
 }
 
 .context-menu {
-    -fx-background-color:  derive(-fx-primary, 20%);
+    -fx-background-color:  derive(white, 20%);
     -fx-font-size: 14;
     -fx-min-width: 150px;
 }
@@ -560,5 +560,55 @@
 
 .colored-context-menu .menu-item:focused .label {
     -fx-text-fill: black;
+}
+
+
+/* Tree table */
+.tree-table-view
+{
+    -fx-background-color: white;
+    -fx-border-color: -fx-pale-green;
+    -fx-font-weight: 100;
+    -fx-text-fill: -fx-primarytext-dark;
+}
+
+.tree-table-view .scroll-bar
+{
+    -fx-background-color: -fx-pale-green;
+}
+
+.tree-table-view *.column-header-background *.show-hide-columns-button
+{
+    -fx-background-color: white;
+}
+
+.tree-table-column
+{
+    -fx-background-color: -fx-pale-green;
+    -fx-border-color: white;
+    -fx-border-width: 0px 1px 0px 0px;
+    -fx-font-weight: 100;
+    
+}
+
+.tree-table-column .label
+{
+    -fx-border-color: transparent;
+    -fx-border-insets: 4px 5px 4px 5px;
+    -fx-border-width: 0px 0px 3px 0px;
+    -fx-font-size: 15px;
+    -fx-font-weight: 100;
+}
+
+.tree-table-cell
+{
+    -fx-text-fill: #e6e6e6;
+    -fx-padding: 0px 5px 0px 5px;
+    -fx-font-size: 14px;
+}
+
+.tree-table-row-cell .arrow
+{
+  -fx-background-color: -fx-primary;
 }
 

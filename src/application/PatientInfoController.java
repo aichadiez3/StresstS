@@ -36,6 +36,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -86,7 +87,7 @@ public class PatientInfoController implements Initializable{
     private ImageView editImageButton;
 
     @FXML
-    private JFXTreeTableView<MedicalRecordObject> recordsTreeView;
+    private TreeTableView<MedicalRecordObject> recordsTreeView;
     
     @FXML
     private final ObservableList<MedicalRecordObject> records_objects = FXCollections.observableArrayList();
@@ -119,7 +120,7 @@ public class PatientInfoController implements Initializable{
 		
 		//---> search medical record by id y lo devolvemos y asignamos a class MedicalRecordObject (ver clase debajo) que son todo string
 		
-		JFXTreeTableColumn<MedicalRecordObject, String> reference_column = new JFXTreeTableColumn<>("Reference number");
+		TreeTableColumn<MedicalRecordObject, String> reference_column = new TreeTableColumn<>("Reference number");
 		reference_column.setPrefWidth(120);
 		reference_column.setCellValueFactory(
 				new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {
@@ -130,7 +131,7 @@ public class PatientInfoController implements Initializable{
 				});
 		reference_column.setResizable(false);
 		
-		JFXTreeTableColumn<MedicalRecordObject, String> ref_date = new JFXTreeTableColumn<>("Test date");
+		TreeTableColumn<MedicalRecordObject, String> ref_date = new TreeTableColumn<>("Test date");
 		ref_date.setPrefWidth(120);
 		ref_date.setCellValueFactory(
 				new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {
@@ -141,7 +142,7 @@ public class PatientInfoController implements Initializable{
 				});
 		ref_date.setResizable(false);
 		
-		JFXTreeTableColumn<MedicalRecordObject, String> bitalino_column = new JFXTreeTableColumn<>("Includes Bitalino test");
+		TreeTableColumn<MedicalRecordObject, String> bitalino_column = new TreeTableColumn<>("Includes Bitalino test");
 		bitalino_column.setPrefWidth(100);
 		bitalino_column.setCellValueFactory(
 				new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {

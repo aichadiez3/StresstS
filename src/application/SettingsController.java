@@ -50,8 +50,6 @@ public class SettingsController implements Initializable {
 		saveButton.setOnAction((ActionEvent event) -> {
 			try {
 				
-				
-				
 				LaunchClientApp.instruction = ("search_user_by_id, " + logInController.user_id);
 				user_id = Integer.parseInt(LaunchClientApp.feedback);
 				
@@ -78,7 +76,7 @@ public class SettingsController implements Initializable {
 	@FXML
 	private void validate_password(MouseEvent event) {
 		
-		if(passwordField.getText()!=null & confirmPasswordField.getText()!=null & passwordField.getText().equals(confirmPasswordField.getText())) {
+		if(!passwordField.getText().equals(null) & !confirmPasswordField.getText().equals(null) & passwordField.getText().equals(confirmPasswordField.getText())) {
 			okayVerification.setVisible(true);
 			warning.setVisible(false);
 			saveButton.setDisable(false);
