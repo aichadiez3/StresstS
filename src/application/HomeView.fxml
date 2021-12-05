@@ -22,7 +22,7 @@
                   <Font size="28.0" />
                </font>
             </Label>
-            <ImageView fitHeight="195.0" fitWidth="225.0" layoutX="26.0" layoutY="138.0" preserveRatio="true">
+            <ImageView fitHeight="195.0" fitWidth="225.0" layoutX="366.0" layoutY="86.0" preserveRatio="true">
                <image>
                   <Image url="@icon/flower.png" />
                </image>

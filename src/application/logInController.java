@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.sql.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -118,18 +117,24 @@ public class logInController implements Initializable {
 	
 	
 	@FXML
-    void check_user_existence(MouseEvent event) {
-		//LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
-		//user_id = Integer.parseInt(LaunchClientApp.feedback);
+    void check_user_existence(MouseEvent event) throws IOException {
+		LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
+		LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+		user_id = Integer.parseInt(LaunchClientApp.feedback);
 		
-		
-		
-		if (!usernameField.getText().contentEquals(null) & !passwordField.getText().contentEquals(null) & user_id!=null) {
+		if (!usernameField.getText().equals(null) & !passwordField.getText().equals(null) & !user_id.equals(null)) {
+			System.out.println("The user exists! id: "+ user_id);
 			logInButton.setDisable(false);
 			warning.setVisible(false);
 		} else {
-			warning.setVisible(true);
-			logInButton.setDisable(true);
+			
+			if (user_id.equals(null)) {
+				warning.setVisible(true);
+				logInButton.setDisable(true);
+			}
+			
+			
 		}
     }
 	
