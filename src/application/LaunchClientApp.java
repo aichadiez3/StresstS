@@ -52,6 +52,7 @@ public class LaunchClientApp extends Application{
 	        // write the message we want to send
 	        //aqui tal vez pondria un while(true) o while(stopClient == false)
 	        //y luego un if(instruction != null)
+	    	instruction="new_patient,1,Marta,Diaz";
 	        dataOutputStream.writeUTF(instruction);
 	        dataOutputStream.flush();   
 	        
