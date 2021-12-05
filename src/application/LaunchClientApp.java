@@ -39,6 +39,30 @@ public class LaunchClientApp extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
+			
+			// -------> Here goes the code for the client connection to server
+			
+			Socket socket = new Socket("localhost", 9000);
+			System.out.println("tengo un socket");
+	        OutputStream outputStream = socket.getOutputStream();
+	        // create a data output stream from the output stream so we can send data through it
+	        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+
+	    	DataInputStream dataInputStream  = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+	        
+	        // write the message we want to send
+	        //aqui tal vez pondria un while(true) o while(stopClient == false)
+	        //y luego un if(instruction != null)
+	        dataOutputStream.writeUTF(instruction);
+	        dataOutputStream.flush();   
+	        
+	        feedback = dataInputStream.readUTF();
+	          
+	        releaseResources(dataOutputStream, outputStream, socket);
+			
+			// AFTER CREATING THE CONNECTION TO THE SERVER, WE START THE VISUAL CONTENT
+			
 			Parent root = FXMLLoader.load(getClass().getResource("LogInView.fxml"));
 			primaryStage.setTitle("Log in page");
 			Scene scene = new Scene(root);
@@ -49,7 +73,6 @@ public class LaunchClientApp extends Application{
 			
 			
 			primaryStage.show();
-			
 			
 			
 			// ----> This is to be able to move the window
@@ -81,28 +104,6 @@ public class LaunchClientApp extends Application{
 	}
 	
 	public static void main(String[] args) throws IOException {
-		
-		// -------> Here goes the code for the client connection to server
-		
-		Socket socket = new Socket("localhost", 9000);
-		System.out.println("tengo un socket");
-        OutputStream outputStream = socket.getOutputStream();
-        // create a data output stream from the output stream so we can send data through it
-        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-
-    	DataInputStream dataInputStream  = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-        
-        // write the message we want to send
-        //aqui tal vez pondria un while(true) o while(stopClient == false)
-        //y luego un if(instruction != null)
-        dataOutputStream.writeUTF(instruction);
-        dataOutputStream.flush();   
-        
-        feedback = dataInputStream.readUTF();
-          
-        releaseResources(dataOutputStream, outputStream, socket);
-
-        // AFTER CREATING THE CONNECTION WITH SERVER, LAUNCH THE VISUAL APPLICATION
         
 		launch(args);
 		
