@@ -121,24 +121,24 @@ public class logInController implements Initializable {
 	
 	@FXML
     void check_user_existence(MouseEvent event) throws IOException {
-		LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
-		LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
 		
-		if (!usernameField.getText().equals(null) & !passwordField.getText().equals(null)) {
 		
-			//if(LaunchClientApp.feedback == String.valueOf(-1)) {
+		if (!usernameField.getText().isEmpty() & !passwordField.getText().isEmpty()) {
+		
+			LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
+			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+			LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+			
 			if(LaunchClientApp.feedback.equals(String.valueOf(-1))) {
-				System.out.println("The user doesn't exist in DB");
 				user_id = -1;
 				warning.setVisible(true);
 				logInButton.setDisable(true);
 				
 			} else {
 				user_id = Integer.parseInt(LaunchClientApp.feedback);
-				System.out.println("The user exists! id: "+ user_id);
 				logInButton.setDisable(false);
 				warning.setVisible(false);
+				errorLabel.setText("ERROR! User does not exist");
 			}
 			
 		} else {
