@@ -58,7 +58,7 @@ public class LaunchClientApp extends Application{
 	        dataOutputStream.flush();   
 	        
 	        feedback = dataInputStream.readUTF();
-	          */
+	         */
 	        
 	        // ----------> CONDICIONES DE SALIDA DE LA APP PARA LIBERAR LOS RECURSOS
 	        //releaseResources(dataInputStream, dataOutputStream, outputStream, socket);
