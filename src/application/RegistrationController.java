@@ -125,9 +125,14 @@ public class RegistrationController implements Initializable{
 					*/
 					
 					//send the instruction through sockets
-					LaunchClientApp.instruction = "new_user," + usernameField.getText() + "," + passwordField.getText() + "," + emailField.getText();
+					/*LaunchClientApp.instruction = "new_user," + usernameField.getText() + "," + passwordField.getText() + "," + emailField.getText();
 					user_id = Integer.parseInt(LaunchClientApp.feedback);
 					LaunchClientApp.instruction = "new_patient,"  + user_id + "," + nameField.getText() + "," + surnameField.getText();
+					*/
+					LaunchClientApp.dataOutputStream.writeUTF("new_user," + usernameField.getText() + "," + passwordField.getText() + "," + emailField.getText());
+					user_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+					LaunchClientApp.dataOutputStream.writeUTF("new_patient,"  + user_id + "," + nameField.getText() + "," + surnameField.getText());
+					
 				}
 				
 			// ---> Load new patient menu scene
