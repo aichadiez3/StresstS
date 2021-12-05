@@ -52,7 +52,7 @@ public class LaunchClientApp extends Application{
 	        // write the message we want to send
 	        //aqui tal vez pondria un while(true) o while(stopClient == false)
 	        //y luego un if(instruction != null)
-	    	instruction="new_patient,1,Marta,Diaz";
+	    	instruction="new_patient,1,Aicha,Diez";
 	        dataOutputStream.writeUTF(instruction);
 	        dataOutputStream.flush();   
 	        
@@ -74,7 +74,6 @@ public class LaunchClientApp extends Application{
 			
 			
 			primaryStage.show();
-			
 			
 			// ----> This is to be able to move the window
 			
@@ -100,8 +99,7 @@ public class LaunchClientApp extends Application{
 		
 	}
 	
-	public static void main(String[] args) throws IOException {
-        
+	public static void main(String[] args) throws IOException {        
 		launch(args);
 		
 	}
