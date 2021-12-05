@@ -141,7 +141,7 @@ public class OtherParametersController implements Initializable {
 			//record_id ES NULL DE MOMENTO
 			//LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + Date.valueOf(LocalDate.now()) + "," + PatientHealthController.record_id); 
 			try {
-				LaunchClientApp.dataOutputStream.writeUTF("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + Date.valueOf(LocalDate.now()) + "," + PatientHealthController.record_id);
+				LaunchClientApp.dataOutputStream.writeUTF("new_physical," + oxygenSatSpinner.getValue() + "," + heartRateSpinner.getValue() + "," + counter + "," + PatientHealthController.record_id);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
