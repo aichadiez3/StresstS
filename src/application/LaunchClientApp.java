@@ -29,8 +29,10 @@ public class LaunchClientApp extends Application{
 		//le mande al server y ese al otro server para que haga las cosas en la DB
 	public static String instruction;
 	public static String feedback;
-	public static Object object;
-	public static Object object2;
+	//public static Object object;
+	//public static Object object2;
+	DataOutputStream dataOutputStream;
+	DataInputStream dataInputStream;
 	
 	public static Stage getStage() {
 		return stage;
@@ -45,9 +47,9 @@ public class LaunchClientApp extends Application{
 			System.out.println("tengo un socket");
 	        OutputStream outputStream = socket.getOutputStream();
 	        // create a data output stream from the output stream so we can send data through it
-	        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+	        dataOutputStream = new DataOutputStream(outputStream);
 
-	    	DataInputStream dataInputStream  = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+	    	dataInputStream  = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 	        
 	        // write the message we want to send
 	        //aqui tal vez pondria un while(true) o while(stopClient == false)

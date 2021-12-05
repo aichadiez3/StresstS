@@ -119,8 +119,10 @@ public class logInController implements Initializable {
 	
 	@FXML
     void check_user_existence(MouseEvent event) {
-		LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
-		user_id = Integer.parseInt(LaunchClientApp.feedback);
+		//LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
+		//user_id = Integer.parseInt(LaunchClientApp.feedback);
+		
+		
 		
 		if (!usernameField.getText().contentEquals(null) & !passwordField.getText().contentEquals(null) & user_id!=null) {
 			logInButton.setDisable(false);
