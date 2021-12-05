@@ -31,8 +31,8 @@ public class LaunchClientApp extends Application{
 	public static String feedback;
 	//public static Object object;
 	//public static Object object2;
-	DataOutputStream dataOutputStream;
-	DataInputStream dataInputStream;
+	public static DataOutputStream dataOutputStream;
+	public static DataInputStream dataInputStream;
 	
 	public static Stage getStage() {
 		return stage;
