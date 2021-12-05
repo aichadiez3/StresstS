@@ -55,10 +55,11 @@ public class SettingsController implements Initializable {
 				
 			// QUEDA VERIFICAR SI EL NUEVO NOMBRE DE USUARIO NO EXISTE !!
 			
-				LaunchClientApp.instruction = ("change_user_info, " + passwordField.getText() + ", " + emailField.getText() + ", " + logInController.user_id);
-				user_id = Integer.parseInt(LaunchClientApp.feedback);
+				//LaunchClientApp.instruction = ("change_user_info, " + passwordField.getText() + ", " + emailField.getText() + ", " + logInController.user_id);
+				//user_id = Integer.parseInt(LaunchClientApp.feedback);
 				
-				
+				LaunchClientApp.dataOutputStream.writeUTF("change_user_info, " + passwordField.getText() + ", " + emailField.getText() + ", " + logInController.user_id);
+				user_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 				
 				Pane home_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
 				mainPane.getChildren().removeAll();

@@ -115,6 +115,14 @@ public class PatientHealthController implements Initializable{
 			System.out.println(LaunchClientApp.feedback);
 		*/
 			
+			try {
+				LaunchClientApp.dataOutputStream.writeUTF("new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number.toString() + "," + null);
+				record_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			basicParametersButton.setDisable(false);
 				basicParametersButton.setOpacity(1);
 			bitalinoButton.setDisable(false);
@@ -135,8 +143,11 @@ public class PatientHealthController implements Initializable{
 				
 				
 				// CUANDO ABRE ESTE NUEVO PANEL, AUTOMÁTICAMENTE DEBE CREAR UN NUEVO BITALINO_TEST
-				LaunchClientApp.instruction = "new_bitalino_test";
-				bitalino_id = Integer.parseInt(LaunchClientApp.feedback);
+				//LaunchClientApp.instruction = "new_bitalino_test";
+				//bitalino_id = Integer.parseInt(LaunchClientApp.feedback);
+				
+				LaunchClientApp.dataOutputStream.writeUTF("new_bitalino_test");
+				bitalino_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 				
 			} catch (IOException open_bitalino_error) {
 				open_bitalino_error.printStackTrace();

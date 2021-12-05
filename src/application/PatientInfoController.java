@@ -157,7 +157,13 @@ public class PatientInfoController implements Initializable{
 		eda_column.setResizable(false);
 		
 		
-		LaunchClientApp.instruction = "list_all_medical_records";
+		//LaunchClientApp.instruction = "list_all_medical_records";
+		try {
+			LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		/*	List<MedicalRecord> records_list = LaunchClientApp.feedback;
 			for(MedicalRecord medical_record: records_list) {
@@ -190,7 +196,15 @@ public class PatientInfoController implements Initializable{
 		
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
-			LaunchClientApp.instruction = ("update_patient," + logInController.user_id);
+			//LaunchClientApp.instruction = ("update_patient," + logInController.user_id);
+			
+			try {
+				LaunchClientApp.dataOutputStream.writeUTF("update_patient," + logInController.user_id);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		});
 		
 	}

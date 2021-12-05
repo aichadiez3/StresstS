@@ -136,7 +136,8 @@ public class AnxietyTestController implements Initializable {
 			    negative_res = (LinkedList<Boolean>) Arrays.asList(negative);
 			    
 				//LO MISMO, NO SE HACER LOS DATOS DEL LinkedList<Boolean> A String Y ADEMAS AQUI NO ESTAMOS HACIENDO NADA AUN
-				LaunchClientApp.instruction = ("new_psycho," + positive_res.toString() + "," + negative_res.toString() + "," + PatientHealthController.record_id);
+				//LaunchClientApp.instruction = ("new_psycho," + positive_res.toString() + "," + negative_res.toString() + "," + PatientHealthController.record_id);
+				LaunchClientApp.dataOutputStream.writeUTF("new_psycho," + positive_res.toString() + "," + negative_res.toString() + "," + PatientHealthController.record_id);
 				
 				//this.yes_sport.getId()
 				
