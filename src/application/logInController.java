@@ -47,6 +47,9 @@ public class logInController implements Initializable {
 
     @FXML
     private Label signInButton;
+    
+    @FXML
+    private Label errorLabel;
 
     @FXML
     private TextField usernameField;
@@ -121,21 +124,28 @@ public class logInController implements Initializable {
 		LaunchClientApp.instruction = ("search_user_by_userName," + usernameField.getText());
 		LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
-		user_id = Integer.parseInt(LaunchClientApp.feedback);
 		
-		if (!usernameField.getText().equals(null) & !passwordField.getText().equals(null) & !user_id.equals(null)) {
-			System.out.println("The user exists! id: "+ user_id);
-			logInButton.setDisable(false);
-			warning.setVisible(false);
-		} else {
-			
-			if (user_id.equals(null)) {
+		if (!usernameField.getText().equals(null) & !passwordField.getText().equals(null)) {
+		
+			//if(LaunchClientApp.feedback == String.valueOf(-1)) {
+			if(LaunchClientApp.feedback.equals(String.valueOf(-1))) {
+				System.out.println("The user doesn't exist in DB");
+				user_id = -1;
 				warning.setVisible(true);
 				logInButton.setDisable(true);
+				
+			} else {
+				user_id = Integer.parseInt(LaunchClientApp.feedback);
+				System.out.println("The user exists! id: "+ user_id);
+				logInButton.setDisable(false);
+				warning.setVisible(false);
 			}
 			
-			
+		} else {
+			warning.setVisible(true);
+			errorLabel.setText("ERROR! Fields are empty");
 		}
+		
     }
 	
 	@FXML

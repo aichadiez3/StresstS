@@ -52,17 +52,18 @@
                </image>
             </ImageView>
             <Pane fx:id="registerPane" layoutX="-1.0" prefHeight="536.0" prefWidth="390.0" stylesheets="@dark-theme.css" visible="false" />
-            <PasswordField fx:id="passwordField" layoutX="121.0" layoutY="375.0" onMouseExited="#check_user_existence" promptText="Password" styleClass="text-field-login" />
+            <PasswordField fx:id="passwordField" layoutX="121.0" layoutY="375.0" promptText="Password" styleClass="text-field-login" />
             <Group fx:id="warning" layoutX="26.0" layoutY="57.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff69694c" height="42.0" stroke="#ff1f1fb5" strokeType="INSIDE" width="336.0" />
-                  <Label layoutX="68.0" layoutY="11.0" prefHeight="21.0" prefWidth="199.0" text="ERROR! This user doesn't exist" textFill="#ff0000c7">
+                  <Label fx:id="errorLabel" layoutX="68.0" layoutY="11.0" prefHeight="21.0" prefWidth="199.0" text="ERROR! This user doesn't exist" textFill="#ff0000c7">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
                   </Label>
                </children>
             </Group>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2a2e37" height="6.0" layoutX="143.0" layoutY="455.0" onMouseEntered="#check_user_existence" stroke="#2a2e37" strokeType="INSIDE" width="111.0" />
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
