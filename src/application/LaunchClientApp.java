@@ -82,10 +82,8 @@ public class LaunchClientApp extends Application{
 	
 	public static void main(String[] args) throws IOException {
 		
-		launch(args);
-			
 		// -------> Here goes the code for the client connection to server
-		// * 
+		
 		Socket socket = new Socket("localhost", 9000);
 		System.out.println("tengo un socket");
         OutputStream outputStream = socket.getOutputStream();
@@ -103,30 +101,28 @@ public class LaunchClientApp extends Application{
         feedback = dataInputStream.readUTF();
           
         releaseResources(dataOutputStream, outputStream, socket);
+
+        // AFTER CREATING THE CONNECTION WITH SERVER, LAUNCH THE VISUAL APPLICATION
         
-        /* * ............
-         * 
-		*/
+		launch(args);
+		
 	}
 	
 	private static void releaseResources(DataOutputStream dataOutputStream, OutputStream outputStream, Socket socket) {
 		 try {
 			 try {
-	                dataOutputStream.close();
-
-	            } catch (IOException ex) {
-	                Logger.getLogger(LaunchClientApp.class
-	                        .getName()).log(Level.SEVERE, null, ex);
+				 dataOutputStream.close();
+	         } catch (IOException ex) {
+	             Logger.getLogger(LaunchClientApp.class.getName()).log(Level.SEVERE, null, ex);
 	            }
 			 	
 			 try {
-	                outputStream.close();
-
-	            } catch (IOException ex) {
-	                Logger.getLogger(LaunchClientApp.class
-	                        .getName()).log(Level.SEVERE, null, ex);
+	             outputStream.close();
+			 } catch (IOException ex) {
+	                Logger.getLogger(LaunchClientApp.class.getName()).log(Level.SEVERE, null, ex);
 	            }
-	            socket.close();
+	            
+			 socket.close();
 
 	        } catch (IOException ex) {
 	            Logger.getLogger(LaunchClientApp.class.getName()).log(Level.SEVERE, null, ex);
