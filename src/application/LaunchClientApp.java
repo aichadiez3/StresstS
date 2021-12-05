@@ -37,10 +37,8 @@ public class LaunchClientApp extends Application{
 	}
 	
 	@Override
-	public void start(Stage primaryStage) {
-		try {
-			
-			
+	public void start(Stage primaryStage) throws IOException {
+		
 			// -------> Here goes the code for the client connection to server
 			
 			Socket socket = new Socket("localhost", 9000);
@@ -59,7 +57,9 @@ public class LaunchClientApp extends Application{
 	        
 	        feedback = dataInputStream.readUTF();
 	          
-	        releaseResources(dataOutputStream, outputStream, socket);
+	        
+	        // ----------> CONDICIONES DE SALIDA DE LA APP PARA LIBERAR LOS RECURSOS
+	        //releaseResources(dataInputStream, dataOutputStream, outputStream, socket);
 			
 			// AFTER CREATING THE CONNECTION TO THE SERVER, WE START THE VISUAL CONTENT
 			
@@ -96,11 +96,7 @@ public class LaunchClientApp extends Application{
 				}
 				
 			});
-			
-		} catch(IOException fatal_error) {
-			fatal_error.printStackTrace();
-			System.exit(0);
-		}
+		
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -109,13 +105,19 @@ public class LaunchClientApp extends Application{
 		
 	}
 	
-	private static void releaseResources(DataOutputStream dataOutputStream, OutputStream outputStream, Socket socket) {
+	private static void releaseResources(DataInputStream dataInputStream, DataOutputStream dataOutputStream, OutputStream outputStream, Socket socket) {
 		 try {
+			 try {
+				 dataInputStream.close();
+	         } catch (IOException ex) {
+	             Logger.getLogger(LaunchClientApp.class.getName()).log(Level.SEVERE, null, ex);
+	         }
+			 
 			 try {
 				 dataOutputStream.close();
 	         } catch (IOException ex) {
 	             Logger.getLogger(LaunchClientApp.class.getName()).log(Level.SEVERE, null, ex);
-	            }
+	         }
 			 	
 			 try {
 	             outputStream.close();
