@@ -52,12 +52,13 @@ public class LaunchClientApp extends Application{
 	        // write the message we want to send
 	        //aqui tal vez pondria un while(true) o while(stopClient == false)
 	        //y luego un if(instruction != null)
+	    	/*
 	    	instruction="new_patient,1,Aicha,Diez";
 	        dataOutputStream.writeUTF(instruction);
 	        dataOutputStream.flush();   
 	        
 	        feedback = dataInputStream.readUTF();
-	          
+	          */
 	        
 	        // ----------> CONDICIONES DE SALIDA DE LA APP PARA LIBERAR LOS RECURSOS
 	        //releaseResources(dataInputStream, dataOutputStream, outputStream, socket);
@@ -65,14 +66,12 @@ public class LaunchClientApp extends Application{
 			// AFTER CREATING THE CONNECTION TO THE SERVER, WE START THE VISUAL CONTENT
 			
 			Parent root = FXMLLoader.load(getClass().getResource("LogInView.fxml"));
-			primaryStage.setTitle("Log in page");
+			primaryStage.setTitle("AnxiPharma");
 			Scene scene = new Scene(root);
 			scene.getStylesheets().addAll(getClass().getResource("dark-theme.css").toExternalForm());
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setScene(scene);
 			stage = primaryStage;
-			
-			
 			primaryStage.show();
 			
 			// ----> This is to be able to move the window
