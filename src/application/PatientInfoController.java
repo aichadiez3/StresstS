@@ -3,7 +3,10 @@ package application;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -157,9 +160,9 @@ public class PatientInfoController implements Initializable{
 		eda_column.setResizable(false);
 		
 		
-		//LaunchClientApp.instruction = "list_all_medical_records";
 		try {
-			LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
+			LaunchClientApp.instruction = "list_all_medical_records";
+			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -196,14 +199,20 @@ public class PatientInfoController implements Initializable{
 		
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
-			//LaunchClientApp.instruction = ("update_patient," + logInController.user_id);
 			
-			try {
-				LaunchClientApp.dataOutputStream.writeUTF("update_patient," + logInController.user_id);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+				LaunchClientApp.instruction = "update_patient," + logInController.user_id +","+nameLabel.getText()+","+surnameLabel.getText()
+				+ "," + java.sql.Date.valueOf(birthDatePicker.getValue()).toString() + "," +ageLabel.getText()
+				+ "," + String.valueOf(heightSpinner.getValue())+","+ String.valueOf(weightSpinner.getValue())
+				+","+genderSelection.getValue()+","+telephoneField.getText() + ","+insuranceSelection.getValue();
+						
+						
+				try {
+					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			
 		});
 		
@@ -230,6 +239,17 @@ public class PatientInfoController implements Initializable{
 		}
 		
 	}
+	
+		@FXML
+		void set_age() {	// ESTA FUNCION DA ERROR
+			
+			if(!ageLabel.getText().equals("")) {
+				LocalDate birth_date = birthDatePicker.getValue();
+				Instant instant = Instant.from(birth_date.atStartOfDay(ZoneId.systemDefault()));
+				//LocalDate date = birth_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				Period period = Period.between(birth_date, LocalDate.now());
+			}
+		}
 	
 	
 	  @FXML

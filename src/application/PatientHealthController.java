@@ -1,5 +1,6 @@
 package application;
 
+import java.io.DataInput;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -30,6 +31,7 @@ public class PatientHealthController implements Initializable{
 	public static Integer bitalino_id;
 	Random random = new Random();
 	Integer ref_number;
+	public static Integer patient_id;
 	public static Integer record_id;
 	
 	@FXML
@@ -106,20 +108,24 @@ public class PatientHealthController implements Initializable{
 			//CREO UN REF_NUMBER RANDOM Y ME CREO UN NUEVO MED_RECORD DONDE GRABAR LOS DATOS QUE VOY A MEDIR
 			ref_number = (int)Math.floor(Math.random()*(2147483647-1000000000)+1000000000);
 			
-		/*
-			LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number.toString() + "," + null;
-			System.out.println(LaunchClientApp.instruction);
-			
-			//ESTO DEVUELVE NULL porque el server no nos esta devolviendo datos, algo falla con ese dataOutputStream
-			record_id = Integer.parseInt(LaunchClientApp.feedback);
-			System.out.println(LaunchClientApp.feedback);
-		*/
-			
 			try {
-				LaunchClientApp.dataOutputStream.writeUTF("new_medical_record," + Date.valueOf(LocalDate.now()) + "," + ref_number.toString() + "," + null);
-				record_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+		
+			LaunchClientApp.instruction = "search_patient_by_user_id,"+ logInController.user_id;
+			System.out.println(LaunchClientApp.instruction);
+			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+			patient_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+			System.out.println("Patient_id: "+patient_id);
+			
+			LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()).toString() + "," + ref_number.toString() + "," + patient_id;
+			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+			System.out.println(LaunchClientApp.instruction);
+			/*
+			LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+			record_id = Integer.parseInt(LaunchClientApp.feedback);
+			System.out.println("Medical record creado id: " + record_id);
+			*/
+		
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

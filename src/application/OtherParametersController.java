@@ -138,35 +138,30 @@ public class OtherParametersController implements Initializable {
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
 			//GUARDO EL NUEVO PHYSICAL TEST CON EL MED_RECORD ID EN EL QUE ESTOY
-			//record_id ES NULL DE MOMENTO
-			//LaunchClientApp.instruction = ("new_physical," + oxygenSatSpinner + "," + heartRateSpinner + "," + Date.valueOf(LocalDate.now()) + "," + PatientHealthController.record_id); 
 			try {
-				LaunchClientApp.dataOutputStream.writeUTF("new_physical," + oxygenSatSpinner.getValue() + "," + heartRateSpinner.getValue() + "," + counter.toString() + "," + PatientHealthController.record_id);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			//System.out.println(LaunchClientApp.instruction);
+				
+				LaunchClientApp.instruction = "new_physical," + oxygenSatSpinner.getValue() + "," + heartRateSpinner.getValue() + "," + timeCounter.getText() + "," + PatientHealthController.record_id;
+				LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+				LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+				System.out.println(LaunchClientApp.feedback);
 			
-			// Get all values
-			oxygenSatSpinner.getValue();
-			heartRateSpinner.getValue();
-			
-			// Enable buttons and images as in restart
-			timerGroup.setVisible(false);
-			startButton.setVisible(true);
-			breathingRateImage.setVisible(true);
-			pulseOximeterImage.setVisible(true);
-
-			//Close the emergent window
-			try {
+				// Get all values
+				oxygenSatSpinner.getValue();
+				heartRateSpinner.getValue();
+				
+				// Enable buttons and images as in restart
+				timerGroup.setVisible(false);
+				startButton.setVisible(true);
+				breathingRateImage.setVisible(true);
+				pulseOximeterImage.setVisible(true);
+		
+				//Close the emergent window
 				Parent root = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
 				main_stage = (Stage) mainPane.getScene().getWindow();
 				main_stage.close();
 				LaunchClientApp.getStage().getScene().setRoot(root);
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

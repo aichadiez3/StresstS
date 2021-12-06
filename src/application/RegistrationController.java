@@ -98,39 +98,13 @@ public class RegistrationController implements Initializable{
 		signInButton.setOnAction((ActionEvent event) -> {
 			try {
 				
-				// queda añadir una funcion que compruebe en la database que no existe este usuario
-				
 				if (passwordField.getText().equals(passwordField2.getText()) & !usernameField.equals(null) & !emailField.equals(null) & !nameField.equals(null) 
 						& !surnameField.equals(null)) {
 					
 
-					// Connection to web database
-					/*
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/anxipharma","root","");
-					
-					//esto de abajo es el metodo Insert_new_user que ya tenemos en el SQLiteMethods
-					
-					PreparedStatement ps_user = dbConnection.prepareStatement("insert into user(user_name,password,email) values(?,?,?);");
-					ps_user.setString(1,usernameField.getText());
-					ps_user.setString(2,passwordField.getText());
-					ps_user.setString(3,emailField.getText());
-					ps_user.executeUpdate();
-					
-					PreparedStatement ps_patient = dbConnection.prepareStatement("insert into patient(name,surname) values(?,?);");
-					ps_patient.setString(1,nameField.getText());
-					ps_patient.setString(2,surnameField.getText());
-					ps_patient.executeUpdate();
-					
-					*/
-					
-					//send the instruction through sockets
-					/*LaunchClientApp.instruction = "new_user," + usernameField.getText() + "," + passwordField.getText() + "," + emailField.getText();
-					user_id = Integer.parseInt(LaunchClientApp.feedback);
-					LaunchClientApp.instruction = "new_patient,"  + user_id + "," + nameField.getText() + "," + surnameField.getText();
-					*/
 					LaunchClientApp.dataOutputStream.writeUTF("new_user," + usernameField.getText() + "," + passwordField.getText() + "," + emailField.getText());
 					user_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+					logInController.user_id = user_id;
 					LaunchClientApp.dataOutputStream.writeUTF("new_patient,"  + user_id + "," + nameField.getText() + "," + surnameField.getText());
 					
 				}
