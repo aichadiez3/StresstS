@@ -24,7 +24,7 @@
             <Image url="@icon/user.png" />
          </image>
       </ImageView>
-      <Pane layoutX="297.0" layoutY="296.0" prefHeight="295.0" prefWidth="509.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
+      <Pane layoutX="305.0" layoutY="297.0" prefHeight="295.0" prefWidth="509.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
          <children>
             <Label layoutX="29.0" layoutY="85.0" prefHeight="127.0" prefWidth="127.0" style="-fx-font-size: 23;" styleClass="title-text-style" text="Modify" wrapText="true">
                <font>
@@ -32,12 +32,12 @@
                </font>
             </Label>
             <PasswordField fx:id="confirmPasswordField" layoutX="214.0" layoutY="166.0" onMouseExited="#validate_password" prefHeight="34.0" prefWidth="232.0" promptText="Confirm your password" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
-            <PasswordField fx:id="passwordField" layoutX="214.0" layoutY="114.0" prefHeight="34.0" prefWidth="232.0" promptText="Change your password" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
+            <PasswordField fx:id="passwordField" layoutX="214.0" layoutY="114.0" onMouseEntered="#validate_email" prefHeight="34.0" prefWidth="232.0" promptText="Change your password" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
             <Button fx:id="saveButton" layoutX="205.0" layoutY="240.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" styleClass="sign-in-button" stylesheets="@dark-theme.css" text="Save" />
             <TextField fx:id="emailField" layoutX="214.0" layoutY="65.0" promptText="Change your email" styleClass="text-field-transparent" stylesheets="@dark-theme.css" />
             <Group fx:id="warning" layoutX="29.0" layoutY="22.0" visible="false">
                <children>
-                  <Label layoutX="116.0" layoutY="8.0" text="ERROR! The password must match" textFill="#ff0000c7">
+                  <Label fx:id="warningText" alignment="CENTER" layoutX="116.0" layoutY="8.0" text="ERROR! The password must match" textFill="#ff0000c7">
                      <font>
                         <Font name="System Italic" size="15.0" />
                      </font>
@@ -62,6 +62,16 @@
                         <Image url="@icon/ok.png" />
                      </image>
                   </ImageView>
+               </children>
+            </Group>
+            <Group fx:id="okayMessage" layoutX="29.0" layoutY="22.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutX="175.0" layoutY="8.0" text="The email is valid" textFill="#0a6b0fc7">
+                     <font>
+                        <Font name="System Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6bff814d" height="36.0" stroke="#0b8c07b5" strokeType="INSIDE" width="443.0" />
                </children>
             </Group>
          </children>
