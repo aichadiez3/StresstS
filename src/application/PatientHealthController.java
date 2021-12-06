@@ -116,7 +116,7 @@ public class PatientHealthController implements Initializable{
 			patient_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 			System.out.println("Patient_id: "+patient_id);
 			
-			LaunchClientApp.instruction = "new_medical_record," + Date.valueOf(LocalDate.now()).toString() + "," + ref_number.toString() + "," + patient_id;
+			LaunchClientApp.instruction = "new_medical_record," + LocalDate.now().toString() + "," + ref_number.toString() + "," + patient_id;
 			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 			System.out.println(LaunchClientApp.instruction);
 			/*
