@@ -42,17 +42,17 @@
                   <Font size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="yes_raising_thoughts" layoutX="13.0" layoutY="345.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="360.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I sometimes have rasing thoughts during the day">
+            <CheckBox fx:id="no_stress" layoutX="13.0" layoutY="383.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="267.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I usually feel confortable under stress">
                <font>
                   <Font size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="yes_stress" layoutX="12.0" layoutY="379.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="267.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I usually feel confortable under stress">
+            <CheckBox fx:id="no_raising_thoughts" layoutX="12.0" layoutY="349.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="255.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I never have rasing thoughts">
                <font>
                   <Font size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="yes_overthinker" layoutX="12.0" layoutY="414.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="327.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I consider that I tend to overthink too much">
+            <CheckBox fx:id="no_overthinker" layoutX="12.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="209.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I rarely overthink too much">
                <font>
                   <Font size="14.0" />
                </font>
@@ -159,17 +159,17 @@
                   <Font size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="no_raising_thoughts" layoutX="14.0" layoutY="343.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="255.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I never have rasing thoughts">
+            <CheckBox fx:id="yes_stress" layoutX="14.0" layoutY="379.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="305.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I often panic when I'm under a lot of stress">
                <font>
                   <Font size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="no_stress" layoutX="14.0" layoutY="379.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="305.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I often panic when I'm under a lot of stress">
+            <CheckBox fx:id="yes_raising_thoughts" layoutX="14.0" layoutY="344.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="360.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I sometimes have rasing thoughts during the day">
                <font>
                   <Font size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="no_overthinker" layoutX="14.0" layoutY="413.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="209.0" styleClass="check-box2" stylesheets="@dark-theme.css" text="I rarely overthink too much">
+            <CheckBox fx:id="yes_overthinker" layoutX="14.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="327.0" styleClass="check-box1" stylesheets="@dark-theme.css" text="I consider that I tend to overthink too much">
                <font>
                   <Font size="14.0" />
                </font>
