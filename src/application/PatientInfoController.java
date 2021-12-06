@@ -200,13 +200,29 @@ public class PatientInfoController implements Initializable{
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
 			
-			
+				/*
 				LaunchClientApp.instruction = "update_patient," + logInController.user_id +","+nameLabel.getText()+","+surnameLabel.getText()
 				+ "," + java.sql.Date.valueOf(birthDatePicker.getValue()).toString() + "," +ageLabel.getText()
 				+ "," + String.valueOf(heightSpinner.getValue())+","+ String.valueOf(weightSpinner.getValue())
 				+","+genderSelection.getValue()+","+telephoneField.getText() + ","+insuranceSelection.getValue();
+				*/
+				Integer insurance_id = null;
+			
+				try {
+					LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_name," + insuranceSelection.getValue());
+					insurance_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 						
-						
+				LaunchClientApp.instruction = "update_patient," + logInController.user_id +","+nameLabel.getText()+","+surnameLabel.getText()
+				+ "," + (birthDatePicker.getValue()).toString()
+				+ "," + String.valueOf(heightSpinner.getValue())+","+ String.valueOf(weightSpinner.getValue())
+				+","+genderSelection.getValue()+","+telephoneField.getText() + ","+ insurance_id.toString();
+				
+				System.out.println(LaunchClientApp.instruction);
+				
 				try {
 					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 				} catch (IOException e) {
