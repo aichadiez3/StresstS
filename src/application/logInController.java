@@ -138,7 +138,7 @@ public class logInController implements Initializable {
 				
 			} else {
 				LaunchClientApp.dataOutputStream.writeUTF("compare_passwords," + usernameField.getText() + "," + passwordField.getText());
-				if(LaunchClientApp.feedback.equals("okay")) {
+				if(LaunchClientApp.dataInputStream.readUTF().equals("okay")) {
 					user_id = Integer.parseInt(LaunchClientApp.feedback);
 					logInButton.setDisable(false);
 					warning.setVisible(false);
