@@ -81,7 +81,7 @@ public class SettingsController implements Initializable {
 	@FXML
 	void validate_password(MouseEvent event) {
 		
-		if(!passwordField.getText().equals(null) & !confirmPasswordField.getText().equals(null) & passwordField.getText().equals(confirmPasswordField.getText())) {
+		if(!passwordField.getText().equals("") & !confirmPasswordField.getText().equals("") & passwordField.getText().equals(confirmPasswordField.getText())) {
 			okayVerification.setVisible(true);
 			warningText.setText("ERROR! The password must match");
 			warning.setVisible(false);
