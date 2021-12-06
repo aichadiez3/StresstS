@@ -129,16 +129,25 @@ public class logInController implements Initializable {
 			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 			LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
 			
+			
+			
 			if(LaunchClientApp.feedback.equals(String.valueOf(-1))) {
 				user_id = -1;
 				warning.setVisible(true);
 				logInButton.setDisable(true);
 				
 			} else {
-				user_id = Integer.parseInt(LaunchClientApp.feedback);
-				logInButton.setDisable(false);
-				warning.setVisible(false);
-				errorLabel.setText("ERROR! User does not exist");
+				LaunchClientApp.dataOutputStream.writeUTF("compare_passwords," + usernameField.getText() + "," + passwordField.getText());
+				if(LaunchClientApp.feedback.equals("okay")) {
+					user_id = Integer.parseInt(LaunchClientApp.feedback);
+					logInButton.setDisable(false);
+					warning.setVisible(false);
+					errorLabel.setText("ERROR! User does not exist");
+				} else {
+					user_id = -1;
+					warning.setVisible(true);
+					logInButton.setDisable(true);
+				}
 			}
 			
 		} else {
