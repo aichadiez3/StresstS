@@ -48,16 +48,16 @@ public class AnxietyTestController implements Initializable {
     private CheckBox yes_hobbies;
 
     @FXML
-    private CheckBox yes_raising_thoughts;
+    private CheckBox no_stress;
 
     @FXML
-    private CheckBox yes_stress;
+    private CheckBox no_racing_thoughts;
 
     @FXML
-    private CheckBox yes_overthinker;
+    private CheckBox no_overthinker;
 
     @FXML
-    private CheckBox raising_thoughts;
+    private CheckBox racing_thoughts;
 
     @FXML
     private CheckBox panic_attacks;
@@ -102,13 +102,13 @@ public class AnxietyTestController implements Initializable {
     private CheckBox no_hobbies;
 
     @FXML
-    private CheckBox no_raising_thoughts;
+    private CheckBox yes_stress;
 
     @FXML
-    private CheckBox no_stress;
+    private CheckBox yes_racing_thoughts;
 
     @FXML
-    private CheckBox no_overthinker;
+    private CheckBox yes_overthinker;
 
     @FXML
     private Button submitButton;
@@ -128,9 +128,9 @@ public class AnxietyTestController implements Initializable {
 				 */
 				
 			    Boolean[] positive = {yes_sport.isSelected(), yes_socialize.isSelected(), yes_read.isSelected(), yes_sleep.isSelected(), yes_meditation.isSelected(), yes_hobbies.isSelected()};
-			    Boolean[] negative = {yes_raising_thoughts.isSelected(), yes_stress.isSelected(), yes_overthinker.isSelected(), raising_thoughts.isSelected(), panic_attacks.isSelected(), sleeping_troubles.isSelected(),
+			    Boolean[] negative = {yes_racing_thoughts.isSelected(), yes_stress.isSelected(), yes_overthinker.isSelected(), racing_thoughts.isSelected(), panic_attacks.isSelected(), sleeping_troubles.isSelected(),
 			    		appetite_alterations.isSelected(), dissociation.isSelected(), heavy_fast_breathing.isSelected(), shaking.isSelected(), dizziness.isSelected(), fainting.isSelected(), no_sport.isSelected(), no_socialize.isSelected(), no_read.isSelected(),
-			    		no_sleep.isSelected(), no_meditation.isSelected(), no_hobbies.isSelected(), no_raising_thoughts.isSelected(), no_stress.isSelected(), no_overthinker.isSelected()};
+			    		no_sleep.isSelected(), no_meditation.isSelected(), no_hobbies.isSelected(), no_racing_thoughts.isSelected(), no_stress.isSelected(), no_overthinker.isSelected()};
 
 			    positive_res = (LinkedList<Boolean>) Arrays.asList(positive);
 			    negative_res = (LinkedList<Boolean>) Arrays.asList(negative);
