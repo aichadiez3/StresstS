@@ -199,7 +199,7 @@ public class BitalinoController implements Initializable{
 	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
 	            
-	            RecordingController.setSeriesValues(dataECG, dataEDA);
+	            //RecordingController.setSeriesValues(dataECG, dataEDA);
 	            
 	            
 	            try {
@@ -274,17 +274,14 @@ public class BitalinoController implements Initializable{
 	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
 	            
-	            RecordingController.setSeriesValues(null, dataEDA);
+	            //RecordingController.setSeriesValues(null, dataEDA);
 	            
 	            root = auto_save_bitalino_data(null, dataEDA.getData().toString()).split(";");
 	            LaunchClientApp.dataOutputStream.writeUTF("new_eda, " + root[1].toString() + "," + PatientHealthController.bitalino_id);
 	            
 	            
-	            System.out.println(edaId);
-	            // Once the recording stops, it opens the linecharts corresponding to the tests
-	            
 	            try {
-	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTextView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    		} catch (IOException init_error) {
@@ -350,7 +347,7 @@ public class BitalinoController implements Initializable{
 	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
 	            
-	            RecordingController.setSeriesValues(dataECG, null);
+	            //RecordingController.setSeriesValues(dataECG, null);
 	            
 	            root = auto_save_bitalino_data(dataECG.getData().toString(), null).split(";");
 	       
@@ -359,7 +356,7 @@ public class BitalinoController implements Initializable{
 	            
 	            
 	            try {
-	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    		} catch (IOException init_error) {
