@@ -358,10 +358,6 @@ public class BitalinoController implements Initializable{
 	            LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 	            
 	            
-	            System.out.println(ecgId);
-	            
-	            // Once the recording stops, it opens the linecharts corresponding to the tests
-	            
 	            try {
 	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
