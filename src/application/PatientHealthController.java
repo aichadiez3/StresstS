@@ -107,14 +107,15 @@ public class PatientHealthController implements Initializable{
 			
 			basicParametersButton.setDisable(false);
 			basicParametersButton.setOpacity(1);
+			bitalinoButton.setDisable(false);
+			bitalinoButton.setOpacity(1);
+			testButton.setDisable(false);
+			testButton.setOpacity(1);
 			
 		});
 		
 		
 		bitalinoButton.setOnMouseClicked((MouseEvent event) -> {
-			
-			//bitalinoButton.setDisable(true);
-			//bitalinoButton.setOpacity(0.3);
 			
 			try {
 				Pane bitalino_pane_fxml = FXMLLoader.load(getClass().getResource("BitalinoView.fxml"));
@@ -131,18 +132,11 @@ public class PatientHealthController implements Initializable{
 				open_bitalino_error.printStackTrace();
 			}
 			
-			//testButton.setDisable(false);
-			//testButton.setOpacity(1);
 			
 		});
 		
 		
 		basicParametersButton.setOnMouseClicked((MouseEvent event) -> {
-			
-			basicParametersButton.setDisable(true);
-			basicParametersButton.setOpacity(0.3);
-			bitalinoButton.setDisable(false);
-			bitalinoButton.setOpacity(1);
 			
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("OtherParametersView.fxml"));
