@@ -7,6 +7,10 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -99,14 +103,27 @@ public class PatientInfoController implements Initializable{
 	@SuppressWarnings("unchecked")
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		ObservableList<String> gender = FXCollections.observableArrayList( "Male","Female");
 		
-		// ---------> PROBAR AQUI A EXTRAER TODAS LAS INSURANCES
-		ObservableList<String> insurance_list = FXCollections.observableArrayList( "Anthem","Centene","UnitedHealth","Humana","HCSC","DKV","Sanitas","Maphre","AXA","Asisa","Adeslas","Caser","Allianz","Aegon","Other");
+		
+		
+		try {
+		LaunchClientApp.dataOutputStream.writeUTF("list_all_insurances");
+		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+		List<String> names = new ArrayList<String>();
+		names = Arrays.asList(LaunchClientApp.feedback.split(","));
+		
+		ObservableList<String> insurance_list = FXCollections.observableArrayList(names);
+		insuranceSelection.setItems(insurance_list);	
+		
+		} catch (IOException list_error) {
+			list_error.printStackTrace();
+		}
+		
+		ObservableList<String> gender = FXCollections.observableArrayList( "Male","Female");
 		heightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(150, 250));
-		weightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(50, 200));
+		weightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(30, 200));
 		genderSelection.setItems(gender);
-		insuranceSelection.setItems(insurance_list);
+		
 		/*
 		 
 		try {
