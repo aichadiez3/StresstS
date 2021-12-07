@@ -80,7 +80,6 @@ public class PatientInfoController implements Initializable{
     @FXML
     private TextField telephoneField;
     
-
     @FXML
     private ImageView editImageButton;
 
@@ -88,7 +87,7 @@ public class PatientInfoController implements Initializable{
     private TreeTableView<MedicalRecordObject> recordsTreeView;
     
     @FXML
-    private final ObservableList<MedicalRecordObject> records_objects = FXCollections.observableArrayList();
+    private ObservableList<MedicalRecordObject> records_objects;
 
     @FXML
     private MenuButton sortByButton;
@@ -198,30 +197,27 @@ public class PatientInfoController implements Initializable{
 			e.printStackTrace();
 		}
 		
-		/*	List<MedicalRecord> records_list = LaunchClientApp.feedback;
-			for(MedicalRecord medical_record: records_list) {
-				records_objects.add(new MedicalRecordObject(medical_record.getReferenceNumber().toString(), medical_record.getRecordDate().toString(), 
-		//---> ESTO NO ES CORRECTO	//medical_record.getBitalinoTestId().toString()));
-				
- // Get el bitalino_id no nos sirve. Lo necesitamos para llamar a servidor y obtener el ecg y el eda asociados a ese id
-				
-				LaunchClientApp.instruction = "search_associated_ecg, " + medical_record.getBitalinoTestId().toString();
-				Integer ecg_id = Integer.parseInt(LaunchClientApp.feedback);
-				
-				LaunchClientApp.instruction = "search_associated_eda, " + medical_record.getBitalinoTestId().toString();
-				Integer eda_id = Integer.parseInt(LaunchClientApp.feedback);
-			}
-		*/	
-			
-		/* 
-		 --------------> Posible solución para List? 
-		 * Bucle con una lita de feedback que separe por cada 4 parámetros y asigne un elemento de cada vez a la lista
-		 * El tamaño debería ser de 4 parámetros (id, date, referenceNumber, bitalino_test_id)
-		 */
 		
+		try {
+			LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
+			LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+			List<String> records = new ArrayList<String>();
+			records= Arrays.asList(LaunchClientApp.feedback.split(","));
+			
+			
+			MedicalRecordObject objects;
+			
+			//records_objects = new MedicalRecordObject(records.get(0), records.get(1), records.get(2), records.get(3));
+			// --------------> Heeeeeeeeeeeeeeeeeeelp
+			
+			
+		} catch (IOException list_records_error) {
+			list_records_error.printStackTrace();
+		}
+			
 	
 			final TreeItem<MedicalRecordObject> root_records = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
-			recordsTreeView.getColumns().setAll(ref_date, reference_column, ecg_column, eda_column);
+			recordsTreeView.getColumns().setAll(reference_column, ref_date, ecg_column, eda_column);
 			recordsTreeView.setRoot(root_records);
 			recordsTreeView.setShowRoot(false);
 				
@@ -230,12 +226,6 @@ public class PatientInfoController implements Initializable{
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
 			
-				/*
-				LaunchClientApp.instruction = "update_patient," + logInController.user_id +","+nameLabel.getText()+","+surnameLabel.getText()
-				+ "," + java.sql.Date.valueOf(birthDatePicker.getValue()).toString() + "," +ageLabel.getText()
-				+ "," + String.valueOf(heightSpinner.getValue())+","+ String.valueOf(weightSpinner.getValue())
-				+","+genderSelection.getValue()+","+telephoneField.getText() + ","+insuranceSelection.getValue();
-				*/
 				Integer insurance_id = null;
 			
 				try {

@@ -127,17 +127,12 @@ public class OtherParametersController implements Initializable {
 		
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
-			//GUARDO EL NUEVO PHYSICAL TEST CON EL MED_RECORD ID EN EL QUE ESTOY
+			
 			try {
 				
-				LaunchClientApp.instruction = "new_physical," + oxygenSatSpinner.getValue() + "," + heartRateSpinner.getValue() + "," + timeCounter.getText() + "," + PatientHealthController.record_id;
+				LaunchClientApp.instruction = "new_physical," + String.valueOf(oxygenSatSpinner.getValue()) + "," + String.valueOf(heartRateSpinner.getValue()) + "," + timeCounter.getText() + "," + PatientHealthController.record_id;
 				LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-				LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
 			
-				// Get all values
-				oxygenSatSpinner.getValue();
-				heartRateSpinner.getValue();
-				
 				// Enable buttons and images as in restart
 				timerGroup.setVisible(false);
 				startButton.setVisible(true);
