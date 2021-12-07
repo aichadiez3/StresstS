@@ -23,8 +23,6 @@ public class PatientHealthController implements Initializable{
 
 	@SuppressWarnings("unused")
 	private OtherParametersController parameters_controller;
-	private PatientHealthController health_controller;
-	private static Stage main_stage;
 	public static Integer bitalino_id;
 	Random random = new Random();
 	Integer ref_number;
@@ -75,28 +73,24 @@ public class PatientHealthController implements Initializable{
 			do {
 				
 				ref_number = (int)Math.floor(Math.random()*(2147483647-1000000000)+1000000000);
-				System.out.println(ref_number);
 				LaunchClientApp.dataOutputStream.writeUTF("search_existent_refNumber," + String.valueOf(ref_number));
 				temporalRef = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
-				System.out.println(temporalRef);
 				
+				if (temporalRef==0) {
+					LaunchClientApp.instruction = "search_patient_by_user_id,"+ logInController.user_id;
+					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+					patient_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 				
-			} while (temporalRef!=0) ;
-			
-			//if (ref_number.equals(temporalRef)) {
-				LaunchClientApp.instruction = "search_patient_by_user_id,"+ logInController.user_id;
-				LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-				patient_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
-			
-				LaunchClientApp.instruction = "new_medical_record," + LocalDate.now().toString() + "," + ref_number.toString() + "," + patient_id;
-				LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-				record_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+					LaunchClientApp.instruction = "new_medical_record," + LocalDate.now().toString() + "," + String.valueOf(ref_number) + "," + patient_id;
+					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+					record_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+					break;
+				}
 				
-			//}
+			} while (temporalRef==1) ;
 			
 			
-			
-			
+		
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
