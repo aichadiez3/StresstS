@@ -100,14 +100,30 @@ public class PatientInfoController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		ObservableList<String> gender = FXCollections.observableArrayList( "Male","Female");
+		
+		// ---------> PROBAR AQUI A EXTRAER TODAS LAS INSURANCES
 		ObservableList<String> insurance_list = FXCollections.observableArrayList( "Anthem","Centene","UnitedHealth","Humana","HCSC","DKV","Sanitas","Maphre","AXA","Asisa","Adeslas","Caser","Allianz","Aegon","Other");
 		heightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(150, 250));
 		weightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(50, 200));
 		genderSelection.setItems(gender);
 		insuranceSelection.setItems(insurance_list);
+		/*
+		 
+		try {
+			// SHOW NAME AND SURNAME OF THE PATIENT IN THE VISUAL TEXTFIELD OF THE APP, already not null parameters of patient 
+			
+			LaunchClientApp.dataOutputStream.writeUTF("search_patient_by_user_id,"+logInController.user_id);
+			String patient_id = LaunchClientApp.dataInputStream.readUTF();
+			//nameLabel.setText();
+			
+			LaunchClientApp.dataOutputStream.writeUTF("");
+			
 		
+		} catch (IOException read_info_error) {
+			read_info_error.printStackTrace();
+		}
 		
-		
+		*/
 		// ---------> Tree List View <--------
 		
 		TreeTableColumn<MedicalRecordObject, String> reference_column = new TreeTableColumn<>("Reference number");
