@@ -25,9 +25,9 @@ public class PatientHealthController implements Initializable{
 	private OtherParametersController parameters_controller;
 	public static Integer bitalino_id;
 	Random random = new Random();
-	Integer ref_number;
 	public static Integer patient_id;
 	public static Integer record_id;
+	public static Integer ref_number;
 	
 	@FXML
     private Pane healthPane;
@@ -115,11 +115,9 @@ public class PatientHealthController implements Initializable{
 				
 				
 				// CUANDO ABRE ESTE NUEVO PANEL, AUTOMÁTICAMENTE DEBE CREAR UN NUEVO BITALINO_TEST
-				//LaunchClientApp.instruction = "new_bitalino_test";
-				//bitalino_id = Integer.parseInt(LaunchClientApp.feedback);
-				
 				LaunchClientApp.dataOutputStream.writeUTF("new_bitalino_test");
 				bitalino_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+				
 				
 			} catch (IOException open_bitalino_error) {
 				open_bitalino_error.printStackTrace();

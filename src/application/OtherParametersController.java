@@ -2,9 +2,6 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,7 +25,6 @@ import javafx.application.Platform;
 
 public class OtherParametersController implements Initializable {
 
-	private PatientHealthController health_controller;
 	private static Stage main_stage;
 	private Integer counter;
 	private double timelapse;
@@ -74,12 +70,6 @@ public class OtherParametersController implements Initializable {
 
 	    @FXML
 	    private Button tapButton;
-
-
-		public void setHealt_controller(PatientHealthController health_controller) {
-			this.health_controller = health_controller;
-		}
-
 
 
 	@Override

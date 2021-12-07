@@ -1,15 +1,16 @@
 package application;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.bluetooth.RemoteDevice;
+import javax.persistence.criteria.Root;
 
 import Bitalino.Bitalino;
 import Bitalino.BitalinoException;
@@ -23,6 +24,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.ComboBox;
@@ -38,13 +41,15 @@ import javafx.scene.image.*;
 
 public class BitalinoController implements Initializable{
 
-	private static Stage main_stage;
 	public HelpConnectionController help_controller;
 	@SuppressWarnings("exports")
 	public static Frame[] frame;
 	private String macAddress;
 	private Integer SamplingRate;
 	Bitalino bitalino = null;
+	Integer ecgId, edaId;
+	private String[] root;
+	
 	
 	@SuppressWarnings("rawtypes")
 	private Series dataECG = new XYChart.Series();
@@ -105,14 +110,6 @@ public class BitalinoController implements Initializable{
 	}
 	public Integer getSamplingRate() {
 		return SamplingRate;
-	}
-
-
-	public Series getDataECG() {
-		return dataECG;
-	}
-	public Series getDataEDA() {
-		return dataEDA;
 	}
 	
 	
@@ -176,8 +173,6 @@ public class BitalinoController implements Initializable{
 	            int[] channelsToAcquire = {1,2};
 	            bitalino.start(channelsToAcquire);
 	            
-	            
-	            
 	            dataECG=new XYChart.Series();
 	            dataEDA=new XYChart.Series();
 	            
@@ -205,10 +200,23 @@ public class BitalinoController implements Initializable{
 	            
 	            RecordingController.setSeriesValues(dataECG, dataEDA);
 	            
-	            // Once the recording stops, it opens the linecharts corresponding to the tests
 	            
 	            try {
-	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("TestBitalinoView.fxml"));
+	            	
+	            root = auto_save_bitalino_data(dataECG.getData().toString(), dataEDA.getData().toString()).split(";");
+	            System.out.println(root[0].toString()+"\n"+root[1].toString());
+	            
+	            LaunchClientApp.instruction="new_ecg" + root[0].toString() + "," + PatientHealthController.bitalino_id;
+	            System.out.println(LaunchClientApp.instruction);
+	            LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+	            ecgId = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+	            LaunchClientApp.dataOutputStream.writeUTF("new_eda" + root[1].toString() + "," + PatientHealthController.bitalino_id);
+	            edaId = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+	            
+	            System.out.println(ecgId + "  " + edaId);
+	            
+	    			//Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("TestBitalinoView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    		} catch (IOException init_error) {
@@ -274,10 +282,17 @@ public class BitalinoController implements Initializable{
 	            
 	            RecordingController.setSeriesValues(null, dataEDA);
 	            
+	            root = auto_save_bitalino_data(null, dataEDA.getData().toString()).split(";");
+	            
+	            LaunchClientApp.dataOutputStream.writeUTF("new_eda" + root[1].toString() + "," + PatientHealthController.bitalino_id);
+	            edaId = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+	            
+	            
+	            System.out.println(edaId);
 	            // Once the recording stops, it opens the linecharts corresponding to the tests
 	            
 	            try {
-	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("TestBitalinoView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTextView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    		} catch (IOException init_error) {
@@ -345,10 +360,20 @@ public class BitalinoController implements Initializable{
 	            
 	            RecordingController.setSeriesValues(dataECG, null);
 	            
+	            root = auto_save_bitalino_data(dataECG.getData().toString(), null).split(";");
+	            
+	            LaunchClientApp.instruction="new_ecg" + root[0].toString() + "," + PatientHealthController.bitalino_id;
+	            System.out.println(LaunchClientApp.instruction);
+	            LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+	            ecgId = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+	            
+	            
+	            System.out.println(ecgId);
+	            
 	            // Once the recording stops, it opens the linecharts corresponding to the tests
 	            
 	            try {
-	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("TestBitalinoView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    		} catch (IOException init_error) {
@@ -401,4 +426,33 @@ public class BitalinoController implements Initializable{
 	}
 	 
 	 
+	String auto_save_bitalino_data(String dataEcg, String dataEda) {
+		try {
+			FileWriter writer1,writer2;
+			String ecg_root="", eda_root="";
+			
+			if(dataEcg!=null) {
+			  ecg_root ="./src/.bitalinoResults/ecg_results_" +PatientHealthController.ref_number +".txt";
+			  writer1 = new FileWriter(ecg_root);
+		      writer1.write(dataEcg);
+		      writer1.close();
+			}
+		      
+			if(dataEda!=null) {
+				eda_root = "./src/.bitalinoResults/eda_results_" +PatientHealthController.ref_number +".txt";
+		      writer2 = new FileWriter(eda_root);
+		      writer2.write(dataEda);
+		      writer2.close();
+			} 
+		      System.out.println("Successfully wrote to the file.");
+		      String output=ecg_root+";"+eda_root;
+		    return output;
+		    
+		} catch (IOException file_creation_error) {
+		      System.out.println("An error occurred.");
+		      file_creation_error.printStackTrace();
+		      return null;
+		}
+	}
+	
 }

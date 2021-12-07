@@ -51,52 +51,39 @@ public class RecordingController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		
 		try {
+		      FileWriter writer1 = new FileWriter("./src/.bitalinoResults/ecg_results_" +PatientHealthController.ref_number +".txt");
+		      writer1.write(dataECG.toString());
+		      writer1.close();
+		      
+		      FileWriter writer2 = new FileWriter("./src/.bitalinoResults/eda_results_" +PatientHealthController.ref_number +".txt");
+		      writer2.write(dataEDA.toString());
+		      writer2.close();
+		      
+		      System.out.println("Successfully wrote to the file.");
+		    
+		
 			
 			ecgGraph = new LineChart(new NumberAxis(), new NumberAxis());
 			
 			ecgGraph.getData().clear();
-			ecgGraph.setCreateSymbols(false);
-			ecgGraph.getData().add(dataECG);
+			//ecgGraph.setCreateSymbols(false);
+			//ecgGraph.getData().add(dataECG);
 			
 			edaGraph = new LineChart(new NumberAxis(), new NumberAxis());
 			
 			edaGraph.getData().clear();
-			edaGraph.setCreateSymbols(false);
-			edaGraph.getData().add(dataEDA);
+			//edaGraph.setCreateSymbols(false);
+			//edaGraph.getData().add(dataEDA);
 			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException file_creation_error) {
+		      System.out.println("An error occurred.");
+		      file_creation_error.printStackTrace();
 		}
 		
 			
         proceedButton.setOnMouseClicked((MouseEvent e)->{
         	try {
-        		
-        		// Here, it creates a csv file to a hidden directory for registering in the database the respective ecg and eda tests results
-        		//Path path = Paths.get("./src", ".textrecordings/");
-        		
-        		
-        		try {
-	    		      FileWriter writer1 = new FileWriter("./src/.bitalinoResults/ecg_results.txt");
-	    		      writer1.write(dataECG.toString()+"\n");
-	    		      writer1.close();
-	    		      
-	    		      FileWriter writer2 = new FileWriter("./src/.bitalinoResults/eda_results.txt");
-	    		      writer2.write(dataEDA.toString()+"\n");
-	    		      writer2.close();
-	    		      
-	    		      System.out.println("Successfully wrote to the file.");
-        		    } catch (IOException file_creation_error) {
-        		      System.out.println("An error occurred.");
-        		      file_creation_error.printStackTrace();
-        		    }
-        		
-        		// STORE THE IMAGE IN THE DATABASE
-        		//LaunchClientApp.instruction = ("new_ecg," + ecgRoot);
-        		//LaunchClientApp.instruction = ("new_eda," + edaRoot);
         		
     			Pane psico_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
     			mainPane.getChildren().removeAll();
