@@ -150,6 +150,9 @@ public class OtherParametersController implements Initializable {
 				main_stage.close();
 				LaunchClientApp.getStage().getScene().setRoot(root);
 				
+				PatientHealthController.controller.getBasicParametersButton().setDisable(true);
+				PatientHealthController.controller.getBasicParametersButton().setOpacity(0.5);
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

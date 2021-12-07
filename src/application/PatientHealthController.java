@@ -28,6 +28,7 @@ public class PatientHealthController implements Initializable{
 	public static Integer patient_id;
 	public static Integer record_id;
 	public static Integer ref_number;
+	public static PatientHealthController controller;
 	
 	@FXML
     private Pane healthPane;
@@ -49,16 +50,20 @@ public class PatientHealthController implements Initializable{
 
 	
 
+	public Pane getBasicParametersButton() {
+		return basicParametersButton;
+	}
+	public Pane getBitalinoButton() {
+		return bitalinoButton;
+	}
+	public Pane getTestButton() {
+		return testButton;
+	}
+
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		progressBar.setVisible(false);
 		
-		basicParametersButton.setDisable(true);
-			basicParametersButton.setOpacity(0.3);
-		bitalinoButton.setDisable(true);
-			bitalinoButton.setOpacity(0.3);
-		testButton.setDisable(true);
-			testButton.setOpacity(0.3);
 		
 		startButton.setOnMouseClicked((MouseEvent event) -> {
 			

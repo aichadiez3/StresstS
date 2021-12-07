@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -206,17 +207,12 @@ public class BitalinoController implements Initializable{
 	            root = auto_save_bitalino_data(dataECG.getData().toString(), dataEDA.getData().toString()).split(";");
 	            System.out.println(root[0].toString()+"\n"+root[1].toString());
 	            
-	            LaunchClientApp.instruction="new_ecg" + root[0].toString() + "," + PatientHealthController.bitalino_id;
-	            System.out.println(LaunchClientApp.instruction);
+	            
+	            LaunchClientApp.instruction="new_ecg, " + root[0].toString() + "," + PatientHealthController.bitalino_id;
 	            LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-	            ecgId = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
-	            LaunchClientApp.dataOutputStream.writeUTF("new_eda" + root[1].toString() + "," + PatientHealthController.bitalino_id);
-	            edaId = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
-	            
-	            System.out.println(ecgId + "  " + edaId);
-	            
-	    			//Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("TestBitalinoView.fxml"));
-	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
+	            LaunchClientApp.dataOutputStream.writeUTF("new_eda, " + root[1].toString() + "," + PatientHealthController.bitalino_id);
+
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    		} catch (IOException init_error) {
@@ -361,6 +357,7 @@ public class BitalinoController implements Initializable{
 	            RecordingController.setSeriesValues(dataECG, null);
 	            
 	            root = auto_save_bitalino_data(dataECG.getData().toString(), null).split(";");
+	       
 	            
 	            LaunchClientApp.instruction="new_ecg" + root[0].toString() + "," + PatientHealthController.bitalino_id;
 	            System.out.println(LaunchClientApp.instruction);
