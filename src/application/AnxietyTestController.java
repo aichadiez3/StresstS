@@ -164,29 +164,19 @@ public class AnxietyTestController implements Initializable {
 
 			    
 			    for(int i = 0; i<positive.length; i++) {
-			    	if(positive[i]==true && i==0) {
-			    		positive_res.add("["+positive_things.get(i));
-			    	}
-			    	else if(positive[i]==true && i!=0) {
-			    		positive_res.add(positive_things.get(i)+",");
-			    	}else if(positive[i]==true && i==positive.length-1) {
-			    		positive_res.add(positive_things.get(i)+"]");
+			    	if(positive[i]==true) {
+			    		positive_res.add(positive_things.get(i));
 			    	}
 			    }
 			    
 			    for(int i = 0; i<negative.length; i++) {
-			    	if(negative[i]==true && i==0) {
-			    		negative_res.add("["+negative_things.get(i));
-			    	}
-			    	else if(negative[i]==true && i!=0) {
-			    		negative_res.add(negative_things.get(i)+",");
-			    	}else if(negative[i]==true && i==negative.length-1) {
-			    		negative_res.add(negative_things.get(i)+"]");
+			    	if(negative[i]==true) {
+			    		negative_res.add(negative_things.get(i));
 			    	}
 			    }
 				//LO MISMO, NO SE HACER LOS DATOS DEL LinkedList<Boolean> A String Y ADEMAS AQUI NO ESTAMOS HACIENDO NADA AUN
 				//LaunchClientApp.instruction = ("new_psycho," + positive_res.toString() + "," + negative_res.toString() + "," + PatientHealthController.record_id);
-				LaunchClientApp.dataOutputStream.writeUTF("new_psycho," + positive_res + "," + negative_res + "," + PatientHealthController.record_id);
+				LaunchClientApp.dataOutputStream.writeUTF("new_psycho," + positive_res + negative_res + "," + PatientHealthController.record_id);
 				
 				//this.yes_sport.getId()
 				
