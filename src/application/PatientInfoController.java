@@ -209,7 +209,7 @@ public class PatientInfoController implements Initializable{
 				Integer insurance_id = null;
 			
 				try {
-					LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_name," + insuranceSelection.getValue());
+					LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_name," + String.valueOf(insuranceSelection.getValue()));
 					insurance_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
