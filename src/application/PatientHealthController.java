@@ -23,7 +23,7 @@ public class PatientHealthController implements Initializable{
 
 	@SuppressWarnings("unused")
 	private OtherParametersController parameters_controller;
-	public static Integer bitalino_id;
+	public static Integer bitalino_id=-1;
 	Random random = new Random();
 	public static Integer patient_id;
 	public static Integer record_id;
@@ -91,7 +91,7 @@ public class PatientHealthController implements Initializable{
 					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 					patient_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 				
-					LaunchClientApp.instruction = "new_medical_record," + LocalDate.now().toString() + "," + String.valueOf(ref_number) + "," + patient_id;
+					LaunchClientApp.instruction = "new_medical_record," + LocalDate.now().toString() + "," + String.valueOf(ref_number) +"," + String.valueOf(patient_id);
 					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 					record_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 					break;
@@ -126,6 +126,9 @@ public class PatientHealthController implements Initializable{
 				// CUANDO ABRE ESTE NUEVO PANEL, AUTOMÁTICAMENTE DEBE CREAR UN NUEVO BITALINO_TEST
 				LaunchClientApp.dataOutputStream.writeUTF("new_bitalino_test");
 				bitalino_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+				
+				LaunchClientApp.dataOutputStream.writeUTF("update_medRecord_bitalino," + String.valueOf(record_id));
+				
 				
 				
 			} catch (IOException open_bitalino_error) {

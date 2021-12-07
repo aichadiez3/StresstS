@@ -207,9 +207,9 @@ public class PatientInfoController implements Initializable{
 		}
 			
 	
-			final TreeItem<MedicalRecordObject> root_records = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
+			//final TreeItem<MedicalRecordObject> root_records = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
 			recordsTreeView.getColumns().setAll(reference_column, ref_date, ecg_column, eda_column);
-			recordsTreeView.setRoot(root_records);
+			//recordsTreeView.setRoot(root_records);
 			recordsTreeView.setShowRoot(false);
 				
 		
