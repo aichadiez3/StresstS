@@ -1,10 +1,7 @@
 package application;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,14 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 public class RecordingController implements Initializable {
 	
@@ -80,8 +75,24 @@ public class RecordingController implements Initializable {
         proceedButton.setOnMouseClicked((MouseEvent e)->{
         	try {
         		
-        		// Here, it creates an image to a hidden directory for registering in the database the respective ecg and eda tests results
+        		// Here, it creates a csv file to a hidden directory for registering in the database the respective ecg and eda tests results
+        		//Path path = Paths.get("./src", ".textrecordings/");
         		
+        		
+        		try {
+	    		      FileWriter writer1 = new FileWriter("./src/.bitalinoResults/ecg_results.txt");
+	    		      writer1.write(dataECG.toString()+"\n");
+	    		      writer1.close();
+	    		      
+	    		      FileWriter writer2 = new FileWriter("./src/.bitalinoResults/eda_results.txt");
+	    		      writer2.write(dataEDA.toString()+"\n");
+	    		      writer2.close();
+	    		      
+	    		      System.out.println("Successfully wrote to the file.");
+        		    } catch (IOException file_creation_error) {
+        		      System.out.println("An error occurred.");
+        		      file_creation_error.printStackTrace();
+        		    }
         		
         		// STORE THE IMAGE IN THE DATABASE
         		//LaunchClientApp.instruction = ("new_ecg," + ecgRoot);

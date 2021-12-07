@@ -143,7 +143,6 @@ public class OtherParametersController implements Initializable {
 				LaunchClientApp.instruction = "new_physical," + oxygenSatSpinner.getValue() + "," + heartRateSpinner.getValue() + "," + timeCounter.getText() + "," + PatientHealthController.record_id;
 				LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 				LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
-				System.out.println(LaunchClientApp.feedback);
 			
 				// Get all values
 				oxygenSatSpinner.getValue();
