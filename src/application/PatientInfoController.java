@@ -69,9 +69,6 @@ public class PatientInfoController implements Initializable{
 
     @FXML
     private DatePicker birthDatePicker;
-
-    @FXML
-    private Label ageLabel;
     
     @FXML
     private Label doctorLabel;
@@ -255,17 +252,6 @@ public class PatientInfoController implements Initializable{
 		}
 		
 	}
-	
-		@FXML
-		void set_age() {	// ESTA FUNCION DA ERROR
-			
-			if(!ageLabel.getText().equals("")) {
-				LocalDate birth_date = birthDatePicker.getValue();
-				Instant instant = Instant.from(birth_date.atStartOfDay(ZoneId.systemDefault()));
-				//LocalDate date = birth_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				Period period = Period.between(birth_date, LocalDate.now());
-			}
-		}
 	
 	
 	  @FXML
