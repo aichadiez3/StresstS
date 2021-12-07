@@ -105,22 +105,39 @@ public class PatientHealthController implements Initializable{
 		
 		startButton.setOnMouseClicked((MouseEvent event) -> {
 			
-			//CREO UN REF_NUMBER RANDOM Y ME CREO UN NUEVO MED_RECORD DONDE GRABAR LOS DATOS QUE VOY A MEDIR
-			ref_number = (int)Math.floor(Math.random()*(2147483647-1000000000)+1000000000);
 			
 			try {
-		
-			LaunchClientApp.instruction = "search_patient_by_user_id,"+ logInController.user_id;
-			System.out.println(LaunchClientApp.instruction);
-			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-			patient_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+				
+			//CREO UN REF_NUMBER RANDOM Y ME CREO UN NUEVO MED_RECORD DONDE GRABAR LOS DATOS QUE VOY A MEDIR
+			Integer temporalRef=0;
 			
-			LaunchClientApp.instruction = "new_medical_record," + LocalDate.now().toString() + "," + ref_number.toString() + "," + patient_id;
-			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+			// if this generated ref_number already exists in database, it creates another
 			
-			record_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+			do {
+				
+				ref_number = (int)Math.floor(Math.random()*(2147483647-1000000000)+1000000000);
+				System.out.println(ref_number);
+				LaunchClientApp.dataOutputStream.writeUTF("search_existent_refNumber," + String.valueOf(ref_number));
+				temporalRef = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+				System.out.println(temporalRef);
+				
+				
+			} while (temporalRef!=0) ;
 			
-		
+			//if (ref_number.equals(temporalRef)) {
+				LaunchClientApp.instruction = "search_patient_by_user_id,"+ logInController.user_id;
+				LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+				patient_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+			
+				LaunchClientApp.instruction = "new_medical_record," + LocalDate.now().toString() + "," + ref_number.toString() + "," + patient_id;
+				LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+				record_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+				
+			//}
+			
+			
+			
+			
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
