@@ -190,20 +190,11 @@ public class PatientInfoController implements Initializable{
 		
 		
 		try {
-			LaunchClientApp.instruction = "list_all_medical_records";
-			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		try {
 			LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
 			LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
 			List<String> records = new ArrayList<String>();
-			records= Arrays.asList(LaunchClientApp.feedback.split(","));
-			
+			records= Arrays.asList(LaunchClientApp.feedback.split(";"));
+			System.out.println(records.toString());
 			
 			MedicalRecordObject objects;
 			
