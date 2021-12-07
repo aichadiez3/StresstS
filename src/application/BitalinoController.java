@@ -205,8 +205,6 @@ public class BitalinoController implements Initializable{
 	            try {
 	            	
 	            root = auto_save_bitalino_data(dataECG.getData().toString(), dataEDA.getData().toString()).split(";");
-	            System.out.println(root[0].toString()+"\n"+root[1].toString());
-	            
 	            
 	            LaunchClientApp.instruction="new_ecg, " + root[0].toString() + "," + PatientHealthController.bitalino_id;
 	            LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
@@ -279,9 +277,7 @@ public class BitalinoController implements Initializable{
 	            RecordingController.setSeriesValues(null, dataEDA);
 	            
 	            root = auto_save_bitalino_data(null, dataEDA.getData().toString()).split(";");
-	            
-	            LaunchClientApp.dataOutputStream.writeUTF("new_eda" + root[1].toString() + "," + PatientHealthController.bitalino_id);
-	            edaId = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+	            LaunchClientApp.dataOutputStream.writeUTF("new_eda, " + root[1].toString() + "," + PatientHealthController.bitalino_id);
 	            
 	            
 	            System.out.println(edaId);
@@ -358,11 +354,8 @@ public class BitalinoController implements Initializable{
 	            
 	            root = auto_save_bitalino_data(dataECG.getData().toString(), null).split(";");
 	       
-	            
-	            LaunchClientApp.instruction="new_ecg" + root[0].toString() + "," + PatientHealthController.bitalino_id;
-	            System.out.println(LaunchClientApp.instruction);
+	            LaunchClientApp.instruction="new_ecg, " + root[0].toString() + "," + PatientHealthController.bitalino_id;
 	            LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-	            ecgId = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 	            
 	            
 	            System.out.println(ecgId);
