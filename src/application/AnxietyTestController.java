@@ -174,11 +174,9 @@ public class AnxietyTestController implements Initializable {
 			    		negative_res.add(negative_things.get(i));
 			    	}
 			    }
-				//LO MISMO, NO SE HACER LOS DATOS DEL LinkedList<Boolean> A String Y ADEMAS AQUI NO ESTAMOS HACIENDO NADA AUN
-				//LaunchClientApp.instruction = ("new_psycho," + positive_res.toString() + "," + negative_res.toString() + "," + PatientHealthController.record_id);
-				LaunchClientApp.dataOutputStream.writeUTF("new_psycho," + positive_res + negative_res + "," + PatientHealthController.record_id);
+
+			    LaunchClientApp.dataOutputStream.writeUTF("new_psycho," + positive_res + negative_res + "," + PatientHealthController.record_id);
 				
-				//this.yes_sport.getId()
 				
 				Pane home_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
 				testPane.getChildren().removeAll();

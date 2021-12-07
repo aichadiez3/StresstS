@@ -310,7 +310,6 @@ public class BitalinoController implements Initializable{
 			try { 
 			
 			chargingIndicator.setVisible(true);
-			
 	        
 	            set_buttons_invisible();
 	            bitalino = new Bitalino();
@@ -437,5 +436,6 @@ public class BitalinoController implements Initializable{
 		      return null;
 		}
 	}
+	
 	
 }
