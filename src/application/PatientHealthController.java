@@ -72,6 +72,7 @@ public class PatientHealthController implements Initializable{
 		
 		startButton.setOnMouseClicked((MouseEvent event) -> {
 			
+			
 			try {
 				
 			//CREO UN REF_NUMBER RANDOM Y ME CREO UN NUEVO MED_RECORD DONDE GRABAR LOS DATOS QUE VOY A MEDIR
@@ -112,8 +113,8 @@ public class PatientHealthController implements Initializable{
 		
 		bitalinoButton.setOnMouseClicked((MouseEvent event) -> {
 			
-			bitalinoButton.setDisable(true);
-			bitalinoButton.setOpacity(0.3);
+			//bitalinoButton.setDisable(true);
+			//bitalinoButton.setOpacity(0.3);
 			
 			try {
 				Pane bitalino_pane_fxml = FXMLLoader.load(getClass().getResource("BitalinoView.fxml"));
@@ -130,8 +131,8 @@ public class PatientHealthController implements Initializable{
 				open_bitalino_error.printStackTrace();
 			}
 			
-			testButton.setDisable(false);
-			testButton.setOpacity(1);
+			//testButton.setDisable(false);
+			//testButton.setOpacity(1);
 			
 		});
 		
