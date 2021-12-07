@@ -1,14 +1,11 @@
 package application;
 
-import java.io.DataInput;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,45 +49,7 @@ public class PatientHealthController implements Initializable{
     @FXML
     private Button startButton;
 
-
-	public static Stage getMain_stage() {
-		return main_stage;
-	}
-
 	
-	// ----------> GETTERS AND SETTERS <-------------
-	
-	public PatientHealthController getHealth_controller() {
-		return health_controller;
-	}
-
-	public void setHealth_controller(PatientHealthController health_controller) {
-		this.health_controller = health_controller;
-	}
-
-
-
-	public Pane getBasicParametersButton() {
-		return basicParametersButton;
-	}
-	public void setBasicParametersButton(Pane basicParametersButton) {
-		this.basicParametersButton = basicParametersButton;
-	}
-
-	public Pane getBitalinoButton() {
-		return bitalinoButton;
-	}
-	public void setBitalinoButton(Pane bitalinoButton) {
-		this.bitalinoButton = bitalinoButton;
-	}
-
-	public Pane getTestButton() {
-		return testButton;
-	}
-	public void setTestButton(Pane testButton) {
-		this.testButton = testButton;
-	}
-
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
