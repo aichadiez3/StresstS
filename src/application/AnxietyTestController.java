@@ -113,8 +113,8 @@ public class AnxietyTestController implements Initializable {
     @FXML
     private Button submitButton;
   
-    private LinkedList<String> positive_things;
-    private LinkedList<String> negative_things;
+    private LinkedList<String> positive_things = new LinkedList<String>();
+    private LinkedList<String> negative_things = new LinkedList<String>();
     
     
 	@Override
