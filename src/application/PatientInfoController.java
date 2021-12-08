@@ -222,17 +222,15 @@ public class PatientInfoController implements Initializable{
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
 			
-				//Integer insurance_id = 0;
 			
 				try {
-					System.out.println(String.valueOf(insuranceSelection.getValue()));
 					LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_name," + String.valueOf(insuranceSelection.getValue()));
 					Integer insurance_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 					
 					LaunchClientApp.instruction = "update_patient," + String.valueOf(logInController.user_id)
 					+ "," + (birthDatePicker.getValue()).toString()
 					+ "," + String.valueOf(heightSpinner.getValue())+","+ String.valueOf(weightSpinner.getValue())
-					+","+ String.valueOf(genderSelection.getValue())+","+telephoneField.getText() + ","+ String.valueOf(insurance_id);
+					+","+ String.valueOf(genderSelection.getValue())+","+telephoneField.getText()+ ","+ String.valueOf(insurance_id);
 					
 					System.out.println(LaunchClientApp.instruction);
 					
