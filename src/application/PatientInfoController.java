@@ -147,50 +147,22 @@ public class PatientInfoController implements Initializable{
 		eda_column.setResizable(false);
 		
 		
-
-		try {
-			LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
-			LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
-			
-			String[] elements = LaunchClientApp.feedback.split(" ");
-			
-			List<MedicalRecordObject> list = new ArrayList<MedicalRecordObject>();
-			
-			for (int i = 0; i < elements.length; i++) {
-				String[] parameter = elements[i].split(",");		
-				if(i==0) {
-					parameter[0] = parameter[0].replace("[", "");
-				}
-				if(i==elements.length-1) {
-					parameter[3]= parameter[3].replace("]", "");
-				}
-				MedicalRecordObject object = new MedicalRecordObject(parameter[0], parameter[1], parameter[2], parameter[3]);
-				list.add(object);
-			}
-			
-			records_objects = FXCollections.observableArrayList(list);
-			
+			list_all_medical_records();
 			
 			TreeItem<MedicalRecordObject> root = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
 			recordsTreeView.getColumns().setAll(ref_date, reference_column, ecg_column, eda_column);
 			recordsTreeView.setRoot(root);
 			recordsTreeView.setShowRoot(false);
 
-			
-			
-		} catch (IOException list_records_error) {
-			list_records_error.printStackTrace();
-		}
-		
 		
 		display_insurances();
 		
 		// ----------------> Predetermined parameters <----------------
-		
+		/*
 		try {
+			
 			LaunchClientApp.dataOutputStream.writeUTF("search_patient_by_user_id,"+logInController.user_id);
 			patient_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
-			
 			
 			
 			LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_patient_id, " + String.valueOf(patient_id));
@@ -200,9 +172,7 @@ public class PatientInfoController implements Initializable{
 			doctorLabel.setText("Doctor: " + LaunchClientApp.dataInputStream.readUTF());
 		
 			// SHOW NAME AND SURNAME OF THE PATIENT IN THE VISUAL TEXTFIELD OF THE APP, already not null parameters of patient 
-			
-			
-			//nameLabel.setText();
+		
 			
 			
 			
@@ -210,7 +180,7 @@ public class PatientInfoController implements Initializable{
 		} catch (IOException read_info_error) {
 			read_info_error.printStackTrace();
 		}
-		
+		*/
 		
 		
 		
@@ -292,6 +262,34 @@ public class PatientInfoController implements Initializable{
 			}
 	}
 	
+	void list_all_medical_records() {
+		String[] elements = null, parameter=null;
+		try {
+		LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
+		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+		
+		elements = LaunchClientApp.feedback.split(" ");
+		
+		List<MedicalRecordObject> list = new ArrayList<MedicalRecordObject>();
+		
+		for (int i = 0; i < elements.length; i++) {
+			parameter = elements[i].split(",");		
+			if(i==0) {
+				parameter[0] = parameter[0].replace("[", "");
+			}
+			if(i==elements.length-1) {
+				parameter[3]= parameter[3].replace("]", "");
+			}
+			MedicalRecordObject object = new MedicalRecordObject(parameter[0], parameter[1], parameter[2], parameter[3]);
+			list.add(object);
+		}
+		
+		records_objects = FXCollections.observableArrayList(list);
+		
+		} catch(IOException list_error) {
+			list_error.printStackTrace();
+		}
+	}
 	
 }
 

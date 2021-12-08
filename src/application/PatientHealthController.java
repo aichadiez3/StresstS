@@ -178,8 +178,8 @@ public class PatientHealthController implements Initializable{
 		basicParametersButton.setOpacity(1);
 		bitalinoButton.setDisable(false);
 		bitalinoButton.setOpacity(1);
-		testButton.setDisable(true);
-		testButton.setOpacity(0.3);
+		testButton.setDisable(false);
+		testButton.setOpacity(1);
 		startButton.setDisable(true);
 
 	}

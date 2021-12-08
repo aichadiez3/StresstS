@@ -6,12 +6,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.bluetooth.RemoteDevice;
-import javax.persistence.criteria.Root;
 
 import Bitalino.Bitalino;
 import Bitalino.BitalinoException;
@@ -25,8 +23,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.ComboBox;
@@ -206,11 +202,11 @@ public class BitalinoController implements Initializable{
 	            	
 	            root = auto_save_bitalino_data(dataECG.getData().toString(), dataEDA.getData().toString()).split(";");
 	            
-	            LaunchClientApp.instruction="new_ecg, " + root[0].toString() + "," + PatientHealthController.bitalino_id;
+	            LaunchClientApp.instruction="new_ecg, " + root[0].toString() + "," + String.valueOf(PatientHealthController.bitalino_id);
 	            LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-	            LaunchClientApp.dataOutputStream.writeUTF("new_eda, " + root[1].toString() + "," + PatientHealthController.bitalino_id);
+	            LaunchClientApp.dataOutputStream.writeUTF("new_eda, " + root[1].toString() + "," + String.valueOf(PatientHealthController.bitalino_id));
 
-	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    		} catch (IOException init_error) {
@@ -277,11 +273,11 @@ public class BitalinoController implements Initializable{
 	            //RecordingController.setSeriesValues(null, dataEDA);
 	            
 	            root = auto_save_bitalino_data(null, dataEDA.getData().toString()).split(";");
-	            LaunchClientApp.dataOutputStream.writeUTF("new_eda, " + root[1].toString() + "," + PatientHealthController.bitalino_id);
+	            LaunchClientApp.dataOutputStream.writeUTF("new_eda, " + root[1].toString() + "," + String.valueOf(PatientHealthController.bitalino_id));
 	            
 	            
 	            try {
-	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    		} catch (IOException init_error) {
@@ -350,12 +346,12 @@ public class BitalinoController implements Initializable{
 	            
 	            root = auto_save_bitalino_data(dataECG.getData().toString(), null).split(";");
 	       
-	            LaunchClientApp.instruction="new_ecg, " + root[0].toString() + "," + PatientHealthController.bitalino_id;
+	            LaunchClientApp.instruction="new_ecg, " + root[0].toString() + "," + String.valueOf(PatientHealthController.bitalino_id);
 	            LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 	            
 	            
 	            try {
-	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("PatientHealthView.fxml"));
+	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
 	    		} catch (IOException init_error) {

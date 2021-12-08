@@ -24,7 +24,7 @@ import javafx.scene.layout.Pane;
 
 public class AnxietyTestController implements Initializable {
 
-	private PatientMenuController menu_controller;
+	private Boolean[] positive;
 	
 	@FXML
     private Pane testPane;
@@ -120,43 +120,41 @@ public class AnxietyTestController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		positive_things.add("I sport weekly");
+		positive_things.add("I usually socialize everyday (family, friends...)");
+		positive_things.add("I often have time to read or to watch movies");
+		positive_things.add("I sleep between 7-8 hours everyday");
+		positive_things.add("I sometimes do meditation before or after sleep");
+		positive_things.add("I can make some time during the week for my hobbies");
+		
+		negative_things.add("I sometimes have racing thoughts during the day");
+		negative_things.add("I often panic when I'm under a lot of stress");
+		negative_things.add("I consider that I tend to overthink too much");
+		negative_things.add("Racing thoughts");
+		negative_things.add("Panic attacks");
+		negative_things.add("Sleeping troubles");
+		negative_things.add("Appetite alterations");
+		negative_things.add("Dissociation");
+		negative_things.add("Heavy and fast breathing");
+		negative_things.add("Shaking");
+		negative_things.add("Dizziness");
+		negative_things.add("Fainting");
+		negative_things.add("I don't practice any sport");
+		negative_things.add("I usually prefer to be on my own");
+		negative_things.add("I never read or watch movies");
+		negative_things.add("I sleep less than 7-8 hours everyday");
+		negative_things.add("I never meditate");
+		negative_things.add("I never make some time during the week for my hobbies");
+		negative_things.add("I never have racing thoughts");
+		negative_things.add("I usually feel confortable under stress");
+		negative_things.add("I never have racing thoughts");
+		
+		LinkedList<String> positive_res = new LinkedList<String>();
+		LinkedList<String> negative_res = new LinkedList<String>();
+		
 		submitButton.setOnMouseClicked((MouseEvent event) -> {
 			try {
 				
-				/*
-				 * SAVE HERE ALL DATA FROM TESTS FOR FURTHER EVALUATION AND ASSOCIATE THE SYMPTOMS TO THE PATIEND MEDICAL RECORD
-				 */
-				positive_things.add("I sport weekly");
-				positive_things.add("I usually socialize everyday (family, friends...)");
-				positive_things.add("I often have time to read or to watch movies");
-				positive_things.add("I sleep between 7-8 hours everyday");
-				positive_things.add("I sometimes do meditation before or after sleep");
-				positive_things.add("I can make some time during the week for my hobbies");
-				
-				negative_things.add("I sometimes have racing thoughts during the day");
-				negative_things.add("I often panic when I'm under a lot of stress");
-				negative_things.add("I consider that I tend to overthink too much");
-				negative_things.add("Racing thoughts");
-				negative_things.add("Panic attacks");
-				negative_things.add("Sleeping troubles");
-				negative_things.add("Appetite alterations");
-				negative_things.add("Dissociation");
-				negative_things.add("Heavy and fast breathing");
-				negative_things.add("Shaking");
-				negative_things.add("Dizziness");
-				negative_things.add("Fainting");
-				negative_things.add("I don't practice any sport");
-				negative_things.add("I usually prefer to be on my own");
-				negative_things.add("I never read or watch movies");
-				negative_things.add("I sleep less than 7-8 hours everyday");
-				negative_things.add("I never meditate");
-				negative_things.add("I never make some time during the week for my hobbies");
-				negative_things.add("I never have racing thoughts");
-				negative_things.add("I usually feel confortable under stress");
-				negative_things.add("I never have racing thoughts");
-				
-				LinkedList<String> positive_res = new LinkedList<String>();
-				LinkedList<String> negative_res = new LinkedList<String>();
 			    Boolean[] positive = {yes_sport.isSelected(), yes_socialize.isSelected(), yes_read.isSelected(), yes_sleep.isSelected(), yes_meditation.isSelected(), yes_hobbies.isSelected()};
 			    Boolean[] negative = {yes_racing_thoughts.isSelected(), yes_stress.isSelected(), yes_overthinker.isSelected(), racing_thoughts.isSelected(), panic_attacks.isSelected(), sleeping_troubles.isSelected(),
 			    		appetite_alterations.isSelected(), dissociation.isSelected(), heavy_fast_breathing.isSelected(), shaking.isSelected(), dizziness.isSelected(), fainting.isSelected(), no_sport.isSelected(), no_socialize.isSelected(), no_read.isSelected(),
@@ -175,16 +173,22 @@ public class AnxietyTestController implements Initializable {
 			    	}
 			    }
 
-			    LaunchClientApp.dataOutputStream.writeUTF("new_psycho," + positive_res + negative_res + "," + PatientHealthController.record_id);
+			    LaunchClientApp.dataOutputStream.writeUTF("new_psycho," + positive_res + negative_res + "," + String.valueOf(PatientHealthController.record_id));
 				
-				
-				Pane home_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
-				testPane.getChildren().removeAll();
-				testPane.getChildren().setAll(home_pane_fxml);
 				
 			} catch (IOException home_error) {
 				home_error.printStackTrace();
 			}
+			
+			
+			try {
+				Pane home_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
+				testPane.getChildren().removeAll();
+				testPane.getChildren().setAll(home_pane_fxml);
+			} catch (IOException open_home_error) {
+				open_home_error.printStackTrace();
+			}
+			
 		});
 		
 	}
