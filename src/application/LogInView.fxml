@@ -15,11 +15,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="585.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.logInController">
+<AnchorPane fx:id="anchorPane" prefHeight="356.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.logInController">
    <children>
-      <Pane fx:id="logInPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="390.0" style="-fx-background-color: -fx-primary;" stylesheets="@dark-theme.css">
+      <Pane fx:id="logInPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="356.0" prefWidth="640.0" style="-fx-background-color: -fx-primary;" stylesheets="@dark-theme.css">
          <children>
-            <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="83.0" layoutY="317.0" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="309.0" layoutY="132.0" preserveRatio="true">
                <image>
                   <Image url="@icon/user.png" />
                </image>
@@ -27,7 +27,7 @@
                   <GaussianBlur radius="1.3" />
                </effect>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="38.0" layoutX="81.0" layoutY="372.0" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="38.0" layoutX="307.0" layoutY="187.0" preserveRatio="true">
                <image>
                   <Image url="@icon/key.png" />
                </image>
@@ -35,25 +35,16 @@
                   <GaussianBlur radius="1.3" />
                </effect>
             </ImageView>
-            <Label fx:id="signInButton" layoutX="121.0" layoutY="516.0" style="-fx-text-fill: #dcdacd;" styleClass="text-style" stylesheets="@dark-theme.css" text="Not registered? Sign up" textFill="#dcdacd" />
-            <ImageView fitHeight="173.0" fitWidth="170.0" layoutX="108.0" layoutY="107.0" preserveRatio="true">
-               <image>
-                  <Image url="@icon/menu_icon.png" />
-               </image>
-               <effect>
-                  <Bloom threshold="0.41" />
-               </effect>
-            </ImageView>
-            <TextField fx:id="usernameField" layoutX="121.0" layoutY="319.0" promptText="Username" styleClass="text-field-login" stylesheets="@dark-theme.css" />
-            <Button fx:id="logInButton" disable="true" layoutX="147.0" layoutY="461.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="92.0" styleClass="login-button" stylesheets="@dark-theme.css" text="Login" />
-            <ImageView fx:id="exitButton" fitHeight="31.0" fitWidth="31.0" layoutX="345.0" layoutY="14.0" onMouseClicked="#close_app" preserveRatio="true">
+            <Label fx:id="signInButton" layoutX="363.0" layoutY="312.0" style="-fx-text-fill: #dcdacd;" styleClass="text-style" stylesheets="@dark-theme.css" text="Not registered? Sign up" textFill="#dcdacd" />
+            <TextField fx:id="usernameField" layoutX="347.0" layoutY="134.0" promptText="Username" styleClass="text-field-login" stylesheets="@dark-theme.css" />
+            <Button fx:id="logInButton" disable="true" layoutX="389.0" layoutY="257.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="92.0" styleClass="login-button" stylesheets="@dark-theme.css" text="Login" />
+            <ImageView fx:id="exitButton" fitHeight="31.0" fitWidth="31.0" layoutX="595.0" layoutY="14.0" onMouseClicked="#close_app" preserveRatio="true">
                <image>
                   <Image url="@icon/transparent_cross.png" />
                </image>
             </ImageView>
-            <Pane fx:id="registerPane" layoutX="-1.0" prefHeight="536.0" prefWidth="390.0" stylesheets="@dark-theme.css" visible="false" />
-            <PasswordField fx:id="passwordField" layoutX="121.0" layoutY="375.0" promptText="Password" styleClass="text-field-login" />
-            <Group fx:id="warning" layoutX="26.0" layoutY="57.0" visible="false">
+            <PasswordField fx:id="passwordField" layoutX="347.0" layoutY="190.0" promptText="Password" styleClass="text-field-login" />
+            <Group fx:id="warning" layoutX="253.0" layoutY="58.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff69694c" height="42.0" stroke="#ff1f1fb5" strokeType="INSIDE" width="336.0" />
                   <Label fx:id="errorLabel" layoutX="68.0" layoutY="11.0" prefHeight="21.0" prefWidth="199.0" text="ERROR! This user doesn't exist" textFill="#ff0000c7">
@@ -63,11 +54,24 @@
                   </Label>
                </children>
             </Group>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2a2e37" height="6.0" layoutX="143.0" layoutY="455.0" onMouseEntered="#check_user_existence" stroke="#2a2e37" strokeType="INSIDE" width="111.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2a2e37" height="6.0" layoutX="389.0" layoutY="251.0" onMouseEntered="#check_user_existence" stroke="#2a2e37" strokeType="INSIDE" width="111.0" />
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Pane>
+      <ImageView fitHeight="194.0" fitWidth="199.0" layoutX="17.0" layoutY="48.0" preserveRatio="true">
+         <image>
+            <Image url="@icon/menu_icon.png" />
+         </image>
+         <effect>
+            <Bloom threshold="0.41" />
+         </effect>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="29.0" layoutY="246.0" prefHeight="90.0" prefWidth="187.0" text="StresstS" textFill="#eee5ae">
+         <font>
+            <Font name="Impact" size="48.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -60,9 +60,6 @@ public class PatientMenuController implements Initializable{
     private Group settingsButton;
 
     @FXML
-    private Group statisticsButton;
-
-    @FXML
     private Group homeButton;
 
     
@@ -233,7 +230,6 @@ public class PatientMenuController implements Initializable{
 		healthParametersButton.setDisable(false);
 		userInfoButton.setDisable(false);
 		homeButton.setDisable(false);
-		statisticsButton.setDisable(false);
 		settingsButton.setDisable(false);
 	}
 	
