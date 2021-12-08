@@ -3,13 +3,8 @@ package application;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -189,36 +184,40 @@ public class PatientInfoController implements Initializable{
 		eda_column.setResizable(false);
 		
 		
+
 		try {
 			LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
 			LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
 			
-			/* CURRRENTLY WORKING THIS ON LIST BRANCH (NOT MAIN)
-			 * 
+			String[] elements = LaunchClientApp.feedback.split(" ");
 			
-			List<String> records = new ArrayList<String>();
-			records= Arrays.asList(LaunchClientApp.feedback.split(";"));
-			System.out.println(records.toString());
+			List<MedicalRecordObject> list = new ArrayList<MedicalRecordObject>();
 			
-			MedicalRecordObject objects;
+			for (int i = 0; i < elements.length; i++) {
+				String[] parameter = elements[i].split(",");		
+				if(i==0) {
+					parameter[0] = parameter[0].replace("[", "");
+				}
+				if(i==elements.length-1) {
+					parameter[3]= parameter[3].replace("]", "");
+				}
+				MedicalRecordObject object = new MedicalRecordObject(parameter[0], parameter[1], parameter[2], parameter[3]);
+				list.add(object);
+			}
 			
-			objects = new MedicalRecordObject(records.get(0), records.get(1), records.get(2), records.get(3));
-			records_objects = FXCollections.observableArrayList(objects);
-			// --------------> Heeeeeeeeeeeeeeeeeeelp
+			records_objects = FXCollections.observableArrayList(list);
 			
-			 */
+			
+			TreeItem<MedicalRecordObject> root = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
+			recordsTreeView.getColumns().setAll(ref_date, reference_column, ecg_column, eda_column);
+			recordsTreeView.setRoot(root);
+			recordsTreeView.setShowRoot(false);
+
+			
 			
 		} catch (IOException list_records_error) {
 			list_records_error.printStackTrace();
 		}
-			
-	
-			//final TreeItem<MedicalRecordObject> root_records = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
-			recordsTreeView.getColumns().setAll(reference_column, ref_date, ecg_column, eda_column);
-			//recordsTreeView.setRoot(root_records);
-			recordsTreeView.setShowRoot(false);
-				
-		
 		
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
@@ -295,7 +294,7 @@ class MedicalRecordObject extends RecursiveTreeObject<MedicalRecordObject> {
 	StringProperty ecgURL;
 	StringProperty edaURL;
 	
-    public MedicalRecordObject(String referenceNumber, String recordDate, String ecgURL, String edaURL) {
+    public MedicalRecordObject(String recordDate, String referenceNumber, String ecgURL, String edaURL) {
     	this.referenceNumber = new SimpleStringProperty(referenceNumber);
     	this.recordDate = new SimpleStringProperty(recordDate);
     	this.ecgURL = new SimpleStringProperty(ecgURL);
