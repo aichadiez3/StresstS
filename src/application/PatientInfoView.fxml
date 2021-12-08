@@ -5,8 +5,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeTableView?>
@@ -63,7 +61,7 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Spinner fx:id="weightSpinner" layoutX="227.0" layoutY="111.0" stylesheets="@dark-theme.css" />
+            <Spinner fx:id="weightSpinner" editable="true" layoutX="227.0" layoutY="111.0" stylesheets="@dark-theme.css" />
             <Spinner fx:id="heightSpinner" editable="true" layoutX="227.0" layoutY="37.0" prefHeight="34.0" prefWidth="187.0" stylesheets="@dark-theme.css" />
             <Label layoutX="227.0" layoutY="16.0" styleClass="about-text" stylesheets="@dark-theme.css" text="Height (in cm)" textFill="#7b7979">
                <font>
@@ -77,12 +75,6 @@
             </Label>
          </children>
       </Pane>
-      <TreeTableView fx:id="recordsTreeView" layoutX="624.0" layoutY="101.0" prefHeight="542.0" prefWidth="495.0" stylesheets="@dark-theme.css" />
-      <MenuButton fx:id="sortByButton" layoutX="826.0" layoutY="59.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="292.0" stylesheets="@dark-theme.css" text="Sort medical records by parameter">
-        <items>
-          <MenuItem mnemonicParsing="false" onAction="#sort_date_ascendent" text="Date - Newer to older" />
-          <MenuItem mnemonicParsing="false" onAction="#sort_date_descendent" text="Date - Older to newer" />
-        </items>
-      </MenuButton>
+      <TreeTableView fx:id="recordsTreeView" layoutX="605.0" layoutY="59.0" prefHeight="588.0" prefWidth="513.0" stylesheets="@dark-theme.css" />
    </children>
 </Pane>

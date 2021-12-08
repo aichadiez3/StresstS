@@ -61,8 +61,6 @@ public class PatientHealthController implements Initializable{
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		progressBar.setVisible(false);
-		
 		basicParametersButton.setDisable(true);
 			basicParametersButton.setOpacity(0.3);
 		bitalinoButton.setDisable(true);
@@ -72,14 +70,7 @@ public class PatientHealthController implements Initializable{
 		
 		startButton.setOnMouseClicked((MouseEvent event) -> {
 			
-			basicParametersButton.setDisable(false);
-			basicParametersButton.setOpacity(1);
-			bitalinoButton.setDisable(false);
-			bitalinoButton.setOpacity(1);
-			testButton.setDisable(false);
-			testButton.setOpacity(1);
-			
-			startButton.setVisible(false);
+			enable_all_buttons();
 			
 			try {
 				
@@ -182,4 +173,15 @@ public class PatientHealthController implements Initializable{
 		
 	}
 
+	void enable_all_buttons() {
+		basicParametersButton.setDisable(false);
+		basicParametersButton.setOpacity(1);
+		bitalinoButton.setDisable(false);
+		bitalinoButton.setOpacity(1);
+		testButton.setDisable(true);
+		testButton.setOpacity(0.3);
+		startButton.setDisable(true);
+
+	}
+	
 }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -17,7 +16,6 @@ import javafx.beans.value.ObservableValue;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -25,7 +23,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
@@ -43,7 +40,8 @@ import javafx.util.Callback;
 
 public class PatientInfoController implements Initializable{
 
-	private static TreeItem<MedicalRecordObject> medical_record;
+	public static Integer insurance_id;
+	public static Integer patient_id;
 
 	@FXML
     private Pane infoPane;
@@ -85,9 +83,6 @@ public class PatientInfoController implements Initializable{
     private ObservableList<MedicalRecordObject> records_objects;
 
     @FXML
-    private MenuButton sortByButton;
-
-    @FXML
     private Spinner<Integer> weightSpinner;
 
     @FXML
@@ -96,45 +91,13 @@ public class PatientInfoController implements Initializable{
 	
 	@SuppressWarnings("unchecked")
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
-		
-		
-		try {
-		LaunchClientApp.dataOutputStream.writeUTF("list_all_insurances");
-		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
-		List<String> names = new ArrayList<String>();
-		names = Arrays.asList(LaunchClientApp.feedback.split(", "));
-		
-		ObservableList<String> insurance_list = FXCollections.observableArrayList(names);
-		insuranceSelection.setItems(insurance_list);	
-		
-		} catch (IOException list_error) {
-			list_error.printStackTrace();
-		}
-		
+
 		ObservableList<String> gender = FXCollections.observableArrayList( "Male","Female");
 		heightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(150, 250));
 		weightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(30, 200));
 		genderSelection.setItems(gender);
 		
-		/*
-		 
-		try {
-			// SHOW NAME AND SURNAME OF THE PATIENT IN THE VISUAL TEXTFIELD OF THE APP, already not null parameters of patient 
-			
-			LaunchClientApp.dataOutputStream.writeUTF("search_patient_by_user_id,"+logInController.user_id);
-			String patient_id = LaunchClientApp.dataInputStream.readUTF();
-			//nameLabel.setText();
-			
-			LaunchClientApp.dataOutputStream.writeUTF("");
-			
 		
-		} catch (IOException read_info_error) {
-			read_info_error.printStackTrace();
-		}
-		
-		*/
 		// ---------> Tree List View <--------
 		
 		TreeTableColumn<MedicalRecordObject, String> reference_column = new TreeTableColumn<>("Reference number");
@@ -162,7 +125,7 @@ public class PatientInfoController implements Initializable{
 		ref_date.setResizable(false);
 		
 		TreeTableColumn<MedicalRecordObject, String> ecg_column = new TreeTableColumn<>("ECG");
-		ecg_column.setPrefWidth(100);
+		ecg_column.setPrefWidth(300);
 		ecg_column.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<MedicalRecordObject, String> param) {
@@ -173,7 +136,7 @@ public class PatientInfoController implements Initializable{
 		ecg_column.setResizable(false);
 		
 		TreeTableColumn<MedicalRecordObject, String> eda_column = new TreeTableColumn<>("EDA");
-		eda_column.setPrefWidth(100);
+		eda_column.setPrefWidth(300);
 		eda_column.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<MedicalRecordObject, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<MedicalRecordObject, String> param) {
@@ -220,25 +183,61 @@ public class PatientInfoController implements Initializable{
 		}
 		
 		
+		display_insurances();
+		
+		// ----------------> Predetermined parameters <----------------
+		
+		try {
+			LaunchClientApp.dataOutputStream.writeUTF("search_patient_by_user_id,"+logInController.user_id);
+			patient_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+			
+			
+			
+			LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_patient_id, " + String.valueOf(patient_id));
+			insurance_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+			LaunchClientApp.instruction = "search_doctor_by_insurance," + String.valueOf(insurance_id);
+			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+			doctorLabel.setText("Doctor: " + LaunchClientApp.dataInputStream.readUTF());
+		
+			// SHOW NAME AND SURNAME OF THE PATIENT IN THE VISUAL TEXTFIELD OF THE APP, already not null parameters of patient 
+			
+			
+			//nameLabel.setText();
+			
+			
+			
+		
+		} catch (IOException read_info_error) {
+			read_info_error.printStackTrace();
+		}
+		
+		
+		
+		
+		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
 			
+			doctorLabel.setText("");
 			
 				try {
 					LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_name," + String.valueOf(insuranceSelection.getValue()));
-					Integer insurance_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+					insurance_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+					System.out.println("insurance returned: "+insurance_id);
+					
+					LaunchClientApp.instruction = "search_doctor_by_insurance," + String.valueOf(insurance_id);
+					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+					String doctor_name = LaunchClientApp.dataInputStream.readUTF();
+					doctorLabel.setText("Doctor: " + doctor_name);
 					
 					LaunchClientApp.instruction = "update_patient," + String.valueOf(logInController.user_id)
 					+ "," + (birthDatePicker.getValue()).toString()
 					+ "," + String.valueOf(heightSpinner.getValue())+","+ String.valueOf(weightSpinner.getValue())
 					+","+ String.valueOf(genderSelection.getValue())+","+telephoneField.getText()+ ","+ String.valueOf(insurance_id);
 					
-					System.out.println(LaunchClientApp.instruction);
-					
 					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 					
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (IOException update_patient_error) {
+					update_patient_error.printStackTrace();
 				}	
 		});
 		
@@ -267,20 +266,31 @@ public class PatientInfoController implements Initializable{
 	}
 	
 	
-	  @FXML
-	    void sort_date_ascendent(ActionEvent event) {
-		  	sortByButton.setText("Date - Newer to older");
-		  	//LaunchClientApp.instruction="search_record_by_date_ascendent";
-		  	//LaunchClientApp.feedback; //--> Doesn't return data (void type)
-		  	
-	    }
-
-	    @FXML
-	    void sort_date_descendent(ActionEvent event) {
-	    	sortByButton.setText("Date - Older to newer");
-	    	//LaunchClientApp.instruction="search_record_by_date_descendent";
-		  	//LaunchClientApp.feedback; //--> Doesn't return data (void type)
-	    }
+	void display_insurances() {
+		try {
+			LaunchClientApp.dataOutputStream.writeUTF("list_all_insurances");
+			LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+			
+			List<String> names = new ArrayList<String>();
+			String[] insurances = LaunchClientApp.feedback.split(", ");
+			
+			for(int j=0; j <= insurances.length-1; j++) {
+				if(j==0) {
+					insurances[j] = insurances[j].replace("[", "");
+				}
+				if(j==insurances.length-1) {
+					insurances[j]= insurances[j].replace("]", "");
+				}
+				names.add(insurances[j]);
+			}
+			
+			ObservableList<String> insurance_list = FXCollections.observableArrayList(names);
+			insuranceSelection.setItems(insurance_list);	
+			
+			} catch (IOException list_error) {
+				list_error.printStackTrace();
+			}
+	}
 	
 	
 }

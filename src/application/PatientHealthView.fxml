@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
@@ -50,8 +51,12 @@
             <Image url="@icon/small_arrow.png" />
          </image>
       </ImageView>
-      <ProgressBar fx:id="progressBar" layoutX="513.0" layoutY="609.0" prefWidth="200.0" progress="0.33" styleClass="progress-bar-main" stylesheets="@dark-theme.css" />
-      <Label layoutX="754.0" layoutY="604.0" styleClass="main-text" text="\%" />
-      <Button fx:id="startButton" layoutX="542.0" layoutY="54.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="142.0" style="-fx-background-color: WHITE;" styleClass="login-button" stylesheets="@dark-theme.css" text="START TESTS" />
+      <Group layoutX="513.0" layoutY="604.0" visible="false">
+         <children>
+            <ProgressBar fx:id="progressBar" layoutY="5.0" prefWidth="200.0" progress="0.33" styleClass="progress-bar-main" stylesheets="@dark-theme.css" />
+            <Label layoutX="241.0" styleClass="main-text" text="\%" />
+         </children>
+      </Group>
+      <Button fx:id="startButton" layoutX="542.0" layoutY="578.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="127.0" style="-fx-background-color: WHITE;" styleClass="login-button" stylesheets="@dark-theme.css" text="START TESTS" />
    </children>
 </Pane>
