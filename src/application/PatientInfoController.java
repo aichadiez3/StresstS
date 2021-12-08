@@ -192,6 +192,10 @@ public class PatientInfoController implements Initializable{
 		try {
 			LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
 			LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+			
+			/* CURRRENTLY WORKING THIS ON LIST BRANCH (NOT MAIN)
+			 * 
+			
 			List<String> records = new ArrayList<String>();
 			records= Arrays.asList(LaunchClientApp.feedback.split(";"));
 			System.out.println(records.toString());
@@ -202,15 +206,16 @@ public class PatientInfoController implements Initializable{
 			records_objects = FXCollections.observableArrayList(objects);
 			// --------------> Heeeeeeeeeeeeeeeeeeelp
 			
+			 */
 			
 		} catch (IOException list_records_error) {
 			list_records_error.printStackTrace();
 		}
 			
 	
-			final TreeItem<MedicalRecordObject> root_records = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
+			//final TreeItem<MedicalRecordObject> root_records = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
 			recordsTreeView.getColumns().setAll(reference_column, ref_date, ecg_column, eda_column);
-			recordsTreeView.setRoot(root_records);
+			//recordsTreeView.setRoot(root_records);
 			recordsTreeView.setShowRoot(false);
 				
 		
