@@ -29,8 +29,6 @@ public class LaunchClientApp extends Application{
 		//le mande al server y ese al otro server para que haga las cosas en la DB
 	public static String instruction;
 	public static String feedback;
-	//public static Object object;
-	//public static Object object2;
 	public static DataOutputStream dataOutputStream;
 	public static DataInputStream dataInputStream;
 	
@@ -51,16 +49,6 @@ public class LaunchClientApp extends Application{
 
 	    	dataInputStream  = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 	        
-	        // write the message we want to send
-	        //aqui tal vez pondria un while(true) o while(stopClient == false)
-	        //y luego un if(instruction != null)
-	    	/*
-	    	instruction="new_patient,1,Aicha,Diez";
-	        dataOutputStream.writeUTF(instruction);
-	        dataOutputStream.flush();   
-	        
-	        feedback = dataInputStream.readUTF();
-	         */
 	        
 	        // ----------> CONDICIONES DE SALIDA DE LA APP PARA LIBERAR LOS RECURSOS
 	        //releaseResources(dataInputStream, dataOutputStream, outputStream, socket);
