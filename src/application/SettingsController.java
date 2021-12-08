@@ -57,13 +57,8 @@ public class SettingsController implements Initializable {
 			try {
 				
 				// COMPROBATIONS ARE ALREADY DONE IN FXML FUNCTIONS
-				
-				LaunchClientApp.instruction = ("search_user_by_id, " + logInController.user_id);
-				LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-				user_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
-				System.out.println(user_id);
-				
-				LaunchClientApp.dataOutputStream.writeUTF("change_user_info, " + passwordField.getText() + "," + emailField.getText() + "," + logInController.user_id);
+		
+				LaunchClientApp.dataOutputStream.writeUTF("change_user_info," + passwordField.getText() + "," + emailField.getText() + "," + logInController.user_id);
 				System.out.println("User updated " + LaunchClientApp.dataInputStream.readUTF());
 				
 				Pane home_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
