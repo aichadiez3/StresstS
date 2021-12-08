@@ -72,6 +72,14 @@ public class PatientHealthController implements Initializable{
 		
 		startButton.setOnMouseClicked((MouseEvent event) -> {
 			
+			basicParametersButton.setDisable(false);
+			basicParametersButton.setOpacity(1);
+			bitalinoButton.setDisable(false);
+			bitalinoButton.setOpacity(1);
+			testButton.setDisable(false);
+			testButton.setOpacity(1);
+			
+			startButton.setVisible(false);
 			
 			try {
 				
@@ -105,17 +113,12 @@ public class PatientHealthController implements Initializable{
 				e.printStackTrace();
 			}
 			
-			basicParametersButton.setDisable(false);
-			basicParametersButton.setOpacity(1);
-			bitalinoButton.setDisable(false);
-			bitalinoButton.setOpacity(1);
-			testButton.setDisable(false);
-			testButton.setOpacity(1);
-			
 		});
 		
 		
 		bitalinoButton.setOnMouseClicked((MouseEvent event) -> {
+			
+			startButton.setVisible(false);
 			
 			try {
 				Pane bitalino_pane_fxml = FXMLLoader.load(getClass().getResource("BitalinoView.fxml"));
@@ -142,6 +145,8 @@ public class PatientHealthController implements Initializable{
 		
 		basicParametersButton.setOnMouseClicked((MouseEvent event) -> {
 			
+			startButton.setVisible(false);
+			
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("OtherParametersView.fxml"));
 				Parent root = (Parent) loader.load();
@@ -161,6 +166,9 @@ public class PatientHealthController implements Initializable{
 		});
 		
 		testButton.setOnMouseClicked((MouseEvent event) -> {
+			
+			startButton.setVisible(false);
+			
 			try {
 				Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 				healthPane.getChildren().removeAll();

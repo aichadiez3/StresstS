@@ -198,7 +198,8 @@ public class PatientInfoController implements Initializable{
 			
 			MedicalRecordObject objects;
 			
-			//records_objects = new MedicalRecordObject(records.get(0), records.get(1), records.get(2), records.get(3));
+			objects = new MedicalRecordObject(records.get(0), records.get(1), records.get(2), records.get(3));
+			records_objects = FXCollections.observableArrayList(objects);
 			// --------------> Heeeeeeeeeeeeeeeeeeelp
 			
 			
@@ -207,9 +208,9 @@ public class PatientInfoController implements Initializable{
 		}
 			
 	
-			//final TreeItem<MedicalRecordObject> root_records = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
+			final TreeItem<MedicalRecordObject> root_records = new RecursiveTreeItem<MedicalRecordObject>(records_objects, RecursiveTreeObject::getChildren);
 			recordsTreeView.getColumns().setAll(reference_column, ref_date, ecg_column, eda_column);
-			//recordsTreeView.setRoot(root_records);
+			recordsTreeView.setRoot(root_records);
 			recordsTreeView.setShowRoot(false);
 				
 		

@@ -75,6 +75,10 @@ public class OtherParametersController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		oxygenSatSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
+		heartRateSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(50, 200));
+		
+		
 		breathingRateImage.setOnMouseClicked((MouseEvent event1) -> {
 			breathingRateImage.setVisible(false);
 			
@@ -121,18 +125,17 @@ public class OtherParametersController implements Initializable {
 		
 		pulseOximeterImage.setOnMouseClicked((MouseEvent event) -> {
 			pulseOximeterImage.setVisible(false);
-			oxygenSatSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100));
-			heartRateSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(50, 200));
+			
 		});
 		
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
 			
 			try {
-				
-				LaunchClientApp.instruction = "new_physical," + String.valueOf(oxygenSatSpinner.getValue()) + "," + String.valueOf(heartRateSpinner.getValue()) + "," + timeCounter.getText() + "," + PatientHealthController.record_id;
+				LaunchClientApp.instruction = "new_physical," + String.valueOf(oxygenSatSpinner.getValue()) + "," + String.valueOf(heartRateSpinner.getValue()) + "," + timeCounter.getText() + "," + String.valueOf(PatientHealthController.record_id);
 				LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-			
+				
+				
 				// Enable buttons and images as in restart
 				timerGroup.setVisible(false);
 				startButton.setVisible(true);
