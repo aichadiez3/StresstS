@@ -75,11 +75,15 @@ public class PatientMenuController implements Initializable{
 			Pane initialize_pane_fxml = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
 			menuPane.getChildren().removeAll();
 			menuPane.getChildren().setAll(initialize_pane_fxml);
+			
+			enable_all_buttons();
+			homeButton.setDisable(true);
+			
 		} catch (IOException init_error) {
 			init_error.printStackTrace();
 		}
 		
-		enable_all_buttons();
+		
 		
 		
 		optionsPane.setOnMouseEntered(new EventHandler<MouseEvent> () {
@@ -103,6 +107,7 @@ public class PatientMenuController implements Initializable{
 		
 		homeButton.setOnMouseClicked((MouseEvent event) -> {
 			titlePane.setText("MENU");
+
 			enable_all_buttons();
 			homeButton.setDisable(true);
 			try {
