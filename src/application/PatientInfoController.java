@@ -109,7 +109,7 @@ public class PatientInfoController implements Initializable{
 		LaunchClientApp.dataOutputStream.writeUTF("list_all_insurances");
 		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
 		List<String> names = new ArrayList<String>();
-		names = Arrays.asList(LaunchClientApp.feedback.split(","));
+		names = Arrays.asList(LaunchClientApp.feedback.split(", "));
 		
 		ObservableList<String> insurance_list = FXCollections.observableArrayList(names);
 		insuranceSelection.setItems(insurance_list);	
@@ -223,30 +223,26 @@ public class PatientInfoController implements Initializable{
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
 			
-				Integer insurance_id = null;
+				//Integer insurance_id = 0;
 			
 				try {
+					System.out.println(String.valueOf(insuranceSelection.getValue()));
 					LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_name," + String.valueOf(insuranceSelection.getValue()));
-					insurance_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+					Integer insurance_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
+					
+					LaunchClientApp.instruction = "update_patient," + String.valueOf(logInController.user_id)
+					+ "," + (birthDatePicker.getValue()).toString()
+					+ "," + String.valueOf(heightSpinner.getValue())+","+ String.valueOf(weightSpinner.getValue())
+					+","+ String.valueOf(genderSelection.getValue())+","+telephoneField.getText() + ","+ String.valueOf(insurance_id);
+					
+					System.out.println(LaunchClientApp.instruction);
+					
+					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+					
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
-						
-				LaunchClientApp.instruction = "update_patient," + logInController.user_id +","+nameLabel.getText()+","+surnameLabel.getText()
-				+ "," + (birthDatePicker.getValue()).toString()
-				+ "," + String.valueOf(heightSpinner.getValue())+","+ String.valueOf(weightSpinner.getValue())
-				+","+genderSelection.getValue()+","+telephoneField.getText() + ","+ insurance_id.toString();
-				
-				System.out.println(LaunchClientApp.instruction);
-				
-				try {
-					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			
-			
+				}	
 		});
 		
 	}
