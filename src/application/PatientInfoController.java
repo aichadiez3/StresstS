@@ -269,14 +269,14 @@ public class PatientInfoController implements Initializable{
 		
 		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
 		System.out.println("The feedback is: " + LaunchClientApp.feedback);
-		System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
+		//System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
 		/*System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
 		System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
 		System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
 		System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
 		System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
 		*/
-		elements = LaunchClientApp.feedback.split(" ");
+		elements = LaunchClientApp.feedback.split(", ");
 		
 		List<MedicalRecordObject> list = new ArrayList<MedicalRecordObject>();
 		
