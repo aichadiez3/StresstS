@@ -205,7 +205,6 @@ public class PatientInfoController implements Initializable{
 				try {
 					LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_name," + String.valueOf(insuranceSelection.getValue()));
 					insurance_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
-					System.out.println("insurance returned: "+insurance_id);
 					
 					LaunchClientApp.instruction = "search_doctor_by_insurance," + String.valueOf(insurance_id);
 					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
@@ -281,13 +280,11 @@ public class PatientInfoController implements Initializable{
 		LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
 		
 		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
-		//System.out.println("The feedback is: " + LaunchClientApp.feedback);
 		elements = LaunchClientApp.feedback.split(".;,");
 		
 		List<MedicalRecordObject> list = new ArrayList<MedicalRecordObject>();
 		
 		for (int i = 0; i < elements.length; i++) {
-			//System.out.println("element " + i +" -> " + elements[i]);
 			parameter = elements[i].split(",");		
 			if(i==0) {
 				parameter[0] = parameter[0].replace("[", "");
