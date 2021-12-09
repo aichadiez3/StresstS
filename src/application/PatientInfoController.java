@@ -269,31 +269,25 @@ public class PatientInfoController implements Initializable{
 		
 		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
 		System.out.println("The feedback is: " + LaunchClientApp.feedback);
-		//System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
-		/*System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
-		System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
-		System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
-		System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
-		System.out.println("The feedback is: " + LaunchClientApp.dataInputStream.readUTF());
-		*/
-		elements = LaunchClientApp.feedback.split(", ");
+		elements = LaunchClientApp.feedback.split(".;,");
 		
 		List<MedicalRecordObject> list = new ArrayList<MedicalRecordObject>();
 		
 		for (int i = 0; i < elements.length; i++) {
-			System.out.println("element " + i +" -> " + elements[i]);
+			//System.out.println("element " + i +" -> " + elements[i]);
 			parameter = elements[i].split(",");		
 			if(i==0) {
 				parameter[0] = parameter[0].replace("[", "");
 			}
 			if(i==elements.length-1) {
-				parameter[3]= parameter[3].replace("]", "");
+				parameter[3]= parameter[3].replace(";]", "");
 			}
 			MedicalRecordObject object = new MedicalRecordObject(parameter[0], parameter[1], parameter[2], parameter[3]);
 			list.add(object);
 		}
 		
 		records_objects = FXCollections.observableArrayList(list);
+		System.out.println(records_objects.toString());
 		
 		} catch(IOException list_error) {
 			list_error.printStackTrace();
