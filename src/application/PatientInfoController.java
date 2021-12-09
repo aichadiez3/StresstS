@@ -266,13 +266,15 @@ public class PatientInfoController implements Initializable{
 		String[] elements = null, parameter=null;
 		try {
 		LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
-		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
 		
+		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+		System.out.println("The feedback is: " + LaunchClientApp.feedback);
 		elements = LaunchClientApp.feedback.split(" ");
 		
 		List<MedicalRecordObject> list = new ArrayList<MedicalRecordObject>();
 		
 		for (int i = 0; i < elements.length; i++) {
+			System.out.println("element " + i +" -> " + elements[i]);
 			parameter = elements[i].split(",");		
 			if(i==0) {
 				parameter[0] = parameter[0].replace("[", "");
