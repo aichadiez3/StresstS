@@ -31,6 +31,8 @@ public class LaunchClientApp extends Application{
 	public static String feedback;
 	public static DataOutputStream dataOutputStream;
 	public static DataInputStream dataInputStream;
+	public static OutputStream outputStream;
+	public static Socket socket;
 	
 	public static Stage getStage() {
 		return stage;
@@ -41,8 +43,8 @@ public class LaunchClientApp extends Application{
 		
 			// -------> Here goes the code for the client connection to server
 			
-			Socket socket = new Socket("localhost", 9000);
-	        OutputStream outputStream = socket.getOutputStream();
+			socket = new Socket("localhost", 9000);
+	        outputStream = socket.getOutputStream();
 	        // create a data output stream from the output stream so we can send data through it
 	        dataOutputStream = new DataOutputStream(outputStream);
 
@@ -92,7 +94,7 @@ public class LaunchClientApp extends Application{
 		
 	}
 	
-	private static void releaseResources(DataInputStream dataInputStream, DataOutputStream dataOutputStream, OutputStream outputStream, Socket socket) {
+	public static void releaseResources(DataInputStream dataInputStream, DataOutputStream dataOutputStream, OutputStream outputStream, Socket socket) {
 		 try {
 			 try {
 				 dataInputStream.close();

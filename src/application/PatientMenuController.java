@@ -190,10 +190,10 @@ public class PatientMenuController implements Initializable{
 				
 				// ---> To close connection to the server
 				
-				/*	
-					outputStream.flush();
-			        releaseResources(outputStream, socket);
-				*/
+					LaunchClientApp.dataOutputStream.writeUTF("end_client");
+					LaunchClientApp.outputStream.flush();
+			        LaunchClientApp.releaseResources(LaunchClientApp.dataInputStream, LaunchClientApp.dataOutputStream, LaunchClientApp.outputStream, LaunchClientApp.socket);
+				
 				
 				
 				
@@ -208,13 +208,13 @@ public class PatientMenuController implements Initializable{
 	}
 	
 	@FXML
-    void close_app(MouseEvent event) {
+    void close_app(MouseEvent event) throws IOException{
 		
 		// --------> Here closes the connection to server too
-		
-			//outputStream.flush();
-			//releaseResources(outputStream, socket);
-		
+		LaunchClientApp.dataOutputStream.writeUTF("end_client");
+		LaunchClientApp.outputStream.flush();
+        LaunchClientApp.releaseResources(LaunchClientApp.dataInputStream, LaunchClientApp.dataOutputStream, LaunchClientApp.outputStream, LaunchClientApp.socket);
+
     	System.exit(0);
     }
 	
