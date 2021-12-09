@@ -115,7 +115,7 @@ public class AnxietyTestController implements Initializable {
   
     private LinkedList<String> positive_things = new LinkedList<String>();
     private LinkedList<String> negative_things = new LinkedList<String>();
-    
+    private LinkedList<String> symptoms = new LinkedList<String>();
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -126,39 +126,41 @@ public class AnxietyTestController implements Initializable {
 		positive_things.add("I sleep between 7-8 hours everyday");
 		positive_things.add("I sometimes do meditation before or after sleep");
 		positive_things.add("I can make some time during the week for my hobbies");
+		positive_things.add("I never have racing thoughts");
 		
 		negative_things.add("I sometimes have racing thoughts during the day");
 		negative_things.add("I often panic when I'm under a lot of stress");
 		negative_things.add("I consider that I tend to overthink too much");
-		negative_things.add("Racing thoughts");
-		negative_things.add("Panic attacks");
-		negative_things.add("Sleeping troubles");
-		negative_things.add("Appetite alterations");
-		negative_things.add("Dissociation");
-		negative_things.add("Heavy and fast breathing");
-		negative_things.add("Shaking");
-		negative_things.add("Dizziness");
-		negative_things.add("Fainting");
 		negative_things.add("I don't practice any sport");
 		negative_things.add("I usually prefer to be on my own");
 		negative_things.add("I never read or watch movies");
 		negative_things.add("I sleep less than 7-8 hours everyday");
 		negative_things.add("I never meditate");
 		negative_things.add("I never make some time during the week for my hobbies");
-		negative_things.add("I never have racing thoughts");
 		negative_things.add("I usually feel confortable under stress");
-		negative_things.add("I never have racing thoughts");
+		
+		symptoms.add("Racing thoughts");
+		symptoms.add("Panic attacks");
+		symptoms.add("Sleeping troubles");
+		symptoms.add("Appetite alterations");
+		symptoms.add("Dissociation");
+		symptoms.add("Heavy and fast breathing");
+		symptoms.add("Shaking");
+		symptoms.add("Dizziness");
+		symptoms.add("Fainting");
 		
 		LinkedList<String> positive_res = new LinkedList<String>();
 		LinkedList<String> negative_res = new LinkedList<String>();
+		LinkedList<String> symptoms_res = new LinkedList<String>();
 		
 		submitButton.setOnMouseClicked((MouseEvent event) -> {
 			try {
 				
-			    Boolean[] positive = {yes_sport.isSelected(), yes_socialize.isSelected(), yes_read.isSelected(), yes_sleep.isSelected(), yes_meditation.isSelected(), yes_hobbies.isSelected()};
-			    Boolean[] negative = {yes_racing_thoughts.isSelected(), yes_stress.isSelected(), yes_overthinker.isSelected(), racing_thoughts.isSelected(), panic_attacks.isSelected(), sleeping_troubles.isSelected(),
-			    		appetite_alterations.isSelected(), dissociation.isSelected(), heavy_fast_breathing.isSelected(), shaking.isSelected(), dizziness.isSelected(), fainting.isSelected(), no_sport.isSelected(), no_socialize.isSelected(), no_read.isSelected(),
-			    		no_sleep.isSelected(), no_meditation.isSelected(), no_hobbies.isSelected(), no_racing_thoughts.isSelected(), no_stress.isSelected(), no_overthinker.isSelected()};
+			    Boolean[] positive = {yes_sport.isSelected(), yes_socialize.isSelected(), yes_read.isSelected(), yes_sleep.isSelected(), yes_meditation.isSelected(), yes_hobbies.isSelected(), no_racing_thoughts.isSelected(),};
+			    Boolean[] negative = {yes_racing_thoughts.isSelected(), yes_stress.isSelected(), yes_overthinker.isSelected(), no_sport.isSelected(), no_socialize.isSelected(), no_read.isSelected(),
+			    		no_sleep.isSelected(), no_meditation.isSelected(), no_hobbies.isSelected(), no_stress.isSelected(), no_overthinker.isSelected()};
+			    Boolean[] symptom = {racing_thoughts.isSelected(), panic_attacks.isSelected(), sleeping_troubles.isSelected(),
+			    		appetite_alterations.isSelected(), dissociation.isSelected(), heavy_fast_breathing.isSelected(), shaking.isSelected(), dizziness.isSelected(), fainting.isSelected()};
 
 			    
 			    for(int i = 0; i<positive.length; i++) {
@@ -173,7 +175,12 @@ public class AnxietyTestController implements Initializable {
 			    	}
 			    }
 
-			    LaunchClientApp.dataOutputStream.writeUTF("new_psycho," + positive_res + negative_res + "," + String.valueOf(PatientHealthController.record_id));
+			    for(int i = 0; i<symptom.length; i++) {
+			    	if(symptom[i]==true) {
+			    		symptoms_res.add(symptoms.get(i));
+			    	}
+			    }
+			    LaunchClientApp.dataOutputStream.writeUTF("new_psycho," + positive_res + negative_res + symptoms_res + "," + String.valueOf(PatientHealthController.record_id));
 				
 				
 			} catch (IOException home_error) {
