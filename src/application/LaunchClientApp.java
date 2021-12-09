@@ -42,7 +42,6 @@ public class LaunchClientApp extends Application{
 			// -------> Here goes the code for the client connection to server
 			
 			Socket socket = new Socket("localhost", 9000);
-			System.out.println("tengo un socket");
 	        OutputStream outputStream = socket.getOutputStream();
 	        // create a data output stream from the output stream so we can send data through it
 	        dataOutputStream = new DataOutputStream(outputStream);

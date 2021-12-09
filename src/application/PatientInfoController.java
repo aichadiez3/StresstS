@@ -3,6 +3,8 @@ package application;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -155,34 +157,45 @@ public class PatientInfoController implements Initializable{
 			recordsTreeView.setShowRoot(false);
 
 		
-		display_insurances();
+			display_insurances();
 		
-		// ----------------> Predetermined parameters <----------------
-		/*
+		
+		
 		try {
 			
-			LaunchClientApp.dataOutputStream.writeUTF("search_patient_by_user_id,"+logInController.user_id);
+			LaunchClientApp.dataOutputStream.writeUTF("search_patient_by_user_id,"+String.valueOf(logInController.user_id));
 			patient_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 			
+			// ----------------> Predetermined parameters <----------------
 			
-			LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_patient_id, " + String.valueOf(patient_id));
-			insurance_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
-			LaunchClientApp.instruction = "search_doctor_by_insurance," + String.valueOf(insurance_id);
-			LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
-			doctorLabel.setText("Doctor: " + LaunchClientApp.dataInputStream.readUTF());
+			LaunchClientApp.dataOutputStream.writeUTF("search_patient_info_by_id," + String.valueOf(patient_id));
+			LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
+			String[] element = LaunchClientApp.feedback.split(",");
+			
+			nameLabel.setText(element[0]);
+			surnameLabel.setText(element[1]);
+			
+			if (!element[2].equals("null")) {
+			
+				birthDatePicker.setValue(LocalDate.parse(element[2]));
+				genderSelection.setValue(element[3]);
+				heightSpinner.getValueFactory().setValue(Integer.parseInt(element[4]));
+				weightSpinner.getValueFactory().setValue(Integer.parseInt(element[5]));
+				telephoneField.setText(element[6]);
+				
+				insurance_id = Integer.parseInt(element[7]);
+				LaunchClientApp.dataOutputStream.writeUTF("search_insurance_by_id,"+String.valueOf(insurance_id));
+				insuranceSelection.setValue(LaunchClientApp.dataInputStream.readUTF());
+				
+				LaunchClientApp.instruction = "search_doctor_by_insurance," + String.valueOf(insurance_id);
+				LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+				doctorLabel.setText("Doctor: " + LaunchClientApp.dataInputStream.readUTF());
 		
-			// SHOW NAME AND SURNAME OF THE PATIENT IN THE VISUAL TEXTFIELD OF THE APP, already not null parameters of patient 
-		
-			
-			
-			
+			}
 		
 		} catch (IOException read_info_error) {
 			read_info_error.printStackTrace();
 		}
-		*/
-		
-		
 		
 		
 		saveButton.setOnMouseClicked((MouseEvent event) -> {
@@ -268,7 +281,7 @@ public class PatientInfoController implements Initializable{
 		LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
 		
 		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
-		System.out.println("The feedback is: " + LaunchClientApp.feedback);
+		//System.out.println("The feedback is: " + LaunchClientApp.feedback);
 		elements = LaunchClientApp.feedback.split(".;,");
 		
 		List<MedicalRecordObject> list = new ArrayList<MedicalRecordObject>();
@@ -287,7 +300,6 @@ public class PatientInfoController implements Initializable{
 		}
 		
 		records_objects = FXCollections.observableArrayList(list);
-		System.out.println(records_objects.toString());
 		
 		} catch(IOException list_error) {
 			list_error.printStackTrace();
