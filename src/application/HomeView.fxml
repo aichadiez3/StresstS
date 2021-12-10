@@ -28,24 +28,24 @@
                </image>
             </ImageView>
          </children></Pane>
-      <Pane layoutX="690.0" layoutY="186.0" prefHeight="454.0" prefWidth="429.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
+      <Pane layoutX="690.0" layoutY="48.0" prefHeight="592.0" prefWidth="429.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
          <children>
-            <Label layoutX="25.0" layoutY="85.0" prefHeight="148.0" prefWidth="379.0" text="Here you will be able to take some tests on your own, which will be stored in our database so the doctor you are assigned, based on your insurance company, can check them and assist you in any way they might consider. All the devices you will need are a pulsiocymeter and a BITalino. " wrapText="true">
+            <Label layoutX="25.0" layoutY="113.0" prefHeight="148.0" prefWidth="379.0" text="Here you will be able to take some tests on your own, which will be stored in our database so the doctor you are assigned, based on your insurance company, can check them and assist you in any way they might consider. All the devices you will need are a pulsiocymeter and a BITalino. " wrapText="true">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="125.0" layoutY="38.0" text="Welcome to StresstS!">
+            <Label layoutX="75.0" layoutY="55.0" text="Welcome to StresstS!">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            <Label layoutX="25.0" layoutY="233.0" prefHeight="99.0" prefWidth="379.0" text="The purpose of these tests is to analyze and detect your stress levels, see if you suffer from anxiety and, with professional help, try to prevent events such as anxiety attacks and see what patterns may trigger them." wrapText="true">
+            <Label layoutX="25.0" layoutY="261.0" prefHeight="99.0" prefWidth="379.0" text="The purpose of these tests is to analyze and detect your stress levels, see if you suffer from anxiety and, with professional help, try to prevent events such as anxiety attacks and see what patterns may trigger them." wrapText="true">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="25.0" layoutY="347.0" prefHeight="75.0" prefWidth="379.0" text="We really hope you find our services useful. If you need anything, you can contact us at:                                 customer_service@stressts.com" wrapText="true">
+            <Label layoutX="25.0" layoutY="372.0" prefHeight="75.0" prefWidth="379.0" text="We really hope you find our services useful. If you need anything, you can contact us at:                                 customer_service@stressts.com" wrapText="true">
                <font>
                   <Font size="15.0" />
                </font>
@@ -53,7 +53,7 @@
          </children></Pane>
       <Pane layoutX="59.0" layoutY="370.0" prefHeight="88.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
          <children>
-            <ImageView fitHeight="60.0" fitWidth="81.0" focusTraversable="true" layoutX="502.0" layoutY="13.0" opacity="0.6" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="81.0" focusTraversable="true" layoutX="442.0" layoutY="14.0" opacity="0.6" preserveRatio="true">
                <image>
                   <Image url="@icon/happyFace.png" />
                </image>
@@ -65,63 +65,19 @@
                   </DropShadow>
                </effect>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="75.0" layoutX="427.0" layoutY="13.0" opacity="0.6" preserveRatio="true">
-               <image>
-                  <Image url="@icon/cheerfulFace.png" />
-               </image>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.8509804010391235" green="0.8509804010391235" blue="0.8509804010391235" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="74.0" layoutX="353.0" layoutY="13.0" opacity="0.6" preserveRatio="true">
-               <image>
-                  <Image url="@icon/unsureFace.png" />
-               </image>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.8509804010391235" green="0.8509804010391235" blue="0.8509804010391235" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="73.0" layoutX="280.0" layoutY="13.0" opacity="0.6" preserveRatio="true">
-               <image>
-                  <Image url="@icon/downFace.png" />
-               </image>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.8509804010391235" green="0.8509804010391235" blue="0.8509804010391235" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="125.0" layoutX="204.0" layoutY="13.0" opacity="0.6" preserveRatio="true">
-               <image>
-                  <Image url="@icon/cryingFace.png" />
-               </image>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.8509804010391235" green="0.8509804010391235" blue="0.8509804010391235" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </ImageView>
-            <Label layoutX="33.0" layoutY="31.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Rate yourself today" />
+            <Label layoutX="96.0" layoutY="24.0" prefHeight="40.0" prefWidth="346.0" styleClass="main-text" stylesheets="@dark-theme.css" text="Let us help you get to a better place" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
          </children>
       </Pane>
-      <Pane layoutX="690.0" layoutY="49.0" prefHeight="127.0" prefWidth="429.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
+      <Pane layoutX="59.0" layoutY="467.0" prefHeight="173.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css">
          <children>
-            <Label fx:id="countCheckUpLabel" layoutX="41.0" layoutY="50.0" styleClass="main-text" stylesheets="@dark-theme.css" text="It's been " />
-            <Label layoutX="149.0" layoutY="50.0" styleClass="main-text" stylesheets="@dark-theme.css" text="days since your last check up" />
-         </children>
-      </Pane>
-      <Pane layoutX="59.0" layoutY="467.0" prefHeight="173.0" prefWidth="613.0" styleClass="bubble-pane-layout" stylesheets="@dark-theme.css" />
+            <Label alignment="CENTER" prefHeight="173.0" prefWidth="613.0" text="StresstS" textFill="#eee5ae">
+               <font>
+                  <Font name="Impact" size="96.0" />
+               </font>
+            </Label>
+         </children></Pane>
    </children>
 </Pane>
