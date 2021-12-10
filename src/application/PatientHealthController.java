@@ -74,7 +74,7 @@ public class PatientHealthController implements Initializable{
 			
 			try {
 				
-			//CREO UN REF_NUMBER RANDOM Y ME CREO UN NUEVO MED_RECORD DONDE GRABAR LOS DATOS QUE VOY A MEDIR
+			//I CREATE A RANDOM REF_NUMBER AND A NEW MED_RECORD WHERE I STORE THE DATA I AM GOING TO TEST
 			Integer temporalRef=0;
 			
 			// if this generated ref_number already exists in database, it creates another
@@ -116,8 +116,7 @@ public class PatientHealthController implements Initializable{
 				healthPane.getChildren().removeAll();
 				healthPane.getChildren().setAll(bitalino_pane_fxml);
 				
-				
-				// CUANDO ABRE ESTE NUEVO PANEL, AUTOMÁTICAMENTE DEBE CREAR UN NUEVO BITALINO_TEST
+				//WHEN IT OPENS THIS PANEL, IT AUTOMATICALLY CREATES A NEW BITALINO_TEST
 				LaunchClientApp.dataOutputStream.writeUTF("new_bitalino_test");
 				bitalino_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
 				System.out.println("soy controller: " + String.valueOf(bitalino_id));

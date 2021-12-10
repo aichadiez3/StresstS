@@ -74,7 +74,6 @@ public class BitalinoController implements Initializable{
     @FXML
     private Group helpButton;
 
-
     @FXML
     private Pane configurationPane;
 
@@ -118,9 +117,6 @@ public class BitalinoController implements Initializable{
 		ObservableList<String> freqs = FXCollections.observableArrayList( "10","100","1000" );
 		freqSelection.setItems(freqs);
 		macAddressField.setText("20:17:11:20:50:75");
-		//pasarle el MAC address as follows
-		//macAddressField.getText();
-		
 		
 		infoMACaddress.setOnMouseEntered(new EventHandler<MouseEvent> () {
 			@Override
