@@ -4,6 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -194,17 +198,25 @@ public class BitalinoController implements Initializable{
 	            //RecordingController.setSeriesValues(dataECG, dataEDA);
 	            
 	            
-	            try {
-	            	
 	            root = auto_save_bitalino_data(dataECG.getData().toString(), dataEDA.getData().toString()).split(";");
 	            
 	            LaunchClientApp.instruction="new_ecg, " + root[0].toString() + "," + String.valueOf(PatientHealthController.bitalino_id);
 	            LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+	            
 	            LaunchClientApp.dataOutputStream.writeUTF("new_eda, " + root[1].toString() + "," + String.valueOf(PatientHealthController.bitalino_id));
+
+	    	 
+	            try {
+	            	
+	            	LaunchClientApp.dataOutputStream.writeUTF("search_patient_info_by_id,"+PatientHealthController.patient_id);
+	    			String[] info = LaunchClientApp.dataInputStream.readUTF().split(",");
+	            	
+	            	LaunchClientApp.dataOutputStream.writeUTF("save_in_server|"+dataECG.getData().toString()+"|"+dataEDA.getData().toString()+"|"+info[0]+info[1]+"|"+PatientHealthController.ref_number);
 
 	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
+	    			
 	    		} catch (IOException init_error) {
 	    			init_error.printStackTrace();
 	    		}
@@ -272,10 +284,18 @@ public class BitalinoController implements Initializable{
 	            LaunchClientApp.dataOutputStream.writeUTF("new_eda, " + root[1].toString() + "," + String.valueOf(PatientHealthController.bitalino_id));
 	            
 	            
+	            
 	            try {
+	            	
+	            	LaunchClientApp.dataOutputStream.writeUTF("search_patient_info_by_id,"+PatientHealthController.patient_id);
+	    			String[] info = LaunchClientApp.dataInputStream.readUTF().split(",");
+	            	
+	            	LaunchClientApp.dataOutputStream.writeUTF("save_in_server|"+"&"+"|"+dataEDA.getData().toString()+"|"+info[0]+info[1]+"|"+PatientHealthController.ref_number);
+	            	
 	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
+	    			
 	    		} catch (IOException init_error) {
 	    			init_error.printStackTrace();
 	    		}
@@ -292,6 +312,7 @@ public class BitalinoController implements Initializable{
 	            } catch (BitalinoException ex) {
 	                Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
 	            }
+	            
 	        }
 
 	        
@@ -338,21 +359,30 @@ public class BitalinoController implements Initializable{
 	            chargingIndicator.setVisible(false);
 	            bitalino.stop();
 	            
-	            //RecordingController.setSeriesValues(dataECG, null);
 	            
 	            root = auto_save_bitalino_data(dataECG.getData().toString(), null).split(";");
 	       
 	            LaunchClientApp.instruction="new_ecg, " + root[0].toString() + "," + String.valueOf(PatientHealthController.bitalino_id);
 	            LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
 	            
-	            
 	            try {
+	            	
+	            	LaunchClientApp.dataOutputStream.writeUTF("search_patient_info_by_id,"+PatientHealthController.patient_id);
+	    			String[] info = LaunchClientApp.dataInputStream.readUTF().split(",");
+	            	System.out.println(info.toString());
+	            	
+	    			LaunchClientApp.instruction = "save_in_server|"+dataECG.getData().toString()+"|"+"&"+"|"+info[0]+info[1]+"|"+PatientHealthController.ref_number;
+					LaunchClientApp.dataOutputStream.writeUTF(LaunchClientApp.instruction);
+					System.out.println(LaunchClientApp.instruction);
+	            	
 	    			Pane test_pane_fxml = FXMLLoader.load(getClass().getResource("AnxietyTestView.fxml"));
 	    			menuPane.getChildren().removeAll();
 	    			menuPane.getChildren().setAll(test_pane_fxml);
+	    			
 	    		} catch (IOException init_error) {
 	    			init_error.printStackTrace();
 	    		}
+	            
 	            
 	        } catch (BitalinoException ex) {
 	            Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -367,6 +397,7 @@ public class BitalinoController implements Initializable{
 	            } catch (BitalinoException ex) {
 	                Logger.getLogger(BitalinoController.class.getName()).log(Level.SEVERE, null, ex);
 	            }
+	            
 	        }
 	        
 		});
@@ -404,21 +435,31 @@ public class BitalinoController implements Initializable{
 		try {
 			FileWriter writer1,writer2;
 			String ecg_root="", eda_root="";
+			LaunchClientApp.dataOutputStream.writeUTF("search_patient_info_by_id,"+PatientHealthController.patient_id);
+			String[] info = LaunchClientApp.dataInputStream.readUTF().split(",");
+			
+			Path path = Paths.get("./src/.bitalinoResults/"+info[0]+info[1]+"/"+LocalDate.now().toString());
+			
+				Files.createDirectories(path);
+			
+			
 			
 			if(dataEcg!=null) {
-			  ecg_root ="./src/.bitalinoResults/ecg_results_" +PatientHealthController.ref_number +".txt";
+			  ecg_root = path + "/ecg_results_"+PatientHealthController.ref_number+".txt";
 			  writer1 = new FileWriter(ecg_root);
 		      writer1.write(dataEcg);
 		      writer1.close();
 			}
 		      
 			if(dataEda!=null) {
-				eda_root = "./src/.bitalinoResults/eda_results_" +PatientHealthController.ref_number +".txt";
+				
+				
+			  eda_root = path + "/eda_results_"+PatientHealthController.ref_number+".txt";
 		      writer2 = new FileWriter(eda_root);
 		      writer2.write(dataEda);
 		      writer2.close();
 			} 
-		      System.out.println("Successfully wrote to the file.");
+		      //System.out.println("Successfully wrote to the file.");
 		      String output=ecg_root+";"+eda_root;
 		    return output;
 		    

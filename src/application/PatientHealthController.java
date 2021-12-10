@@ -119,7 +119,6 @@ public class PatientHealthController implements Initializable{
 				//WHEN IT OPENS THIS PANEL, IT AUTOMATICALLY CREATES A NEW BITALINO_TEST
 				LaunchClientApp.dataOutputStream.writeUTF("new_bitalino_test");
 				bitalino_id = Integer.parseInt(LaunchClientApp.dataInputStream.readUTF());
-				System.out.println("soy controller: " + String.valueOf(bitalino_id));
 				
 				LaunchClientApp.dataOutputStream.writeUTF("update_medRecord_bitalino," + String.valueOf(bitalino_id)+ ","+ String.valueOf(record_id));
 				
