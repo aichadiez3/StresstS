@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -81,6 +82,7 @@ public class PatientMenuController implements Initializable{
 			
 		} catch (IOException init_error) {
 			init_error.printStackTrace();
+			alert_serverClosed_view();
 		}
 		
 		
@@ -118,6 +120,7 @@ public class PatientMenuController implements Initializable{
 				
 			} catch (IOException open_home_error) {
 				open_home_error.printStackTrace();
+				alert_serverClosed_view();
 			}
 			
 		});
@@ -135,6 +138,7 @@ public class PatientMenuController implements Initializable{
 				
 			} catch (IOException open_info_error) {
 				open_info_error.printStackTrace();
+				alert_serverClosed_view();
 			}
 			
 		});
@@ -150,6 +154,7 @@ public class PatientMenuController implements Initializable{
 				
 			} catch (IOException open_info_error) {
 				open_info_error.printStackTrace();
+				alert_serverClosed_view();
 			}
 		});
 		
@@ -165,6 +170,7 @@ public class PatientMenuController implements Initializable{
 				
 			} catch (IOException settings_error) {
 				settings_error.printStackTrace();
+				alert_serverClosed_view();
 			}
 		});
 		
@@ -201,6 +207,7 @@ public class PatientMenuController implements Initializable{
 				
 			} catch (IOException log_out_error) {
 				log_out_error.printStackTrace();
+				alert_serverClosed_view();
 			}
 			
 		});
@@ -236,6 +243,19 @@ public class PatientMenuController implements Initializable{
 		userInfoButton.setDisable(false);
 		homeButton.setDisable(false);
 		settingsButton.setDisable(false);
+	}
+	
+	void alert_serverClosed_view() {
+		try {
+			Pane initialize_pane_fxml = FXMLLoader.load(getClass().getResource("AlertView.fxml"));
+			menuPane.getChildren().removeAll();
+			menuPane.getChildren().setAll(initialize_pane_fxml);
+			
+			optionsPane.setDisable(true);
+			
+		} catch (IOException aler_open_error) {
+			aler_open_error.printStackTrace();
+		}
 	}
 	
 	

@@ -50,10 +50,6 @@ public class LaunchClientApp extends Application{
 
 	    	dataInputStream  = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 	        
-	        
-	        // ----------> CONDICIONES DE SALIDA DE LA APP PARA LIBERAR LOS RECURSOS
-	        //releaseResources(dataInputStream, dataOutputStream, outputStream, socket);
-			
 			// AFTER CREATING THE CONNECTION TO THE SERVER, WE START THE VISUAL CONTENT
 			
 			Parent root = FXMLLoader.load(getClass().getResource("LogInView.fxml"));

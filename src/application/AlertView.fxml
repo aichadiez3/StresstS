@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane prefHeight="682.0" prefWidth="1188.0" style="-fx-background-color: -fx-gray;" styleClass="subpane-layout" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AlertController">
+   <children>
+      <Pane layoutX="169.0" layoutY="186.0" prefHeight="311.0" prefWidth="888.0" styleClass="bubble-pane-layout">
+         <children>
+            <Label layoutX="381.0" layoutY="120.0" style="-fx-font-size: 25;" styleClass="main-text" text="The server has been closed." />
+            <ImageView fitHeight="177.0" fitWidth="199.0" layoutX="129.0" layoutY="64.0">
+               <image>
+                  <Image url="@icon/server_restricted.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="textLabel" layoutX="381.0" layoutY="159.0" style="-fx-font-size: 18;" styleClass="main-text" text="The application will stop in a few seconds..." />
+         </children>
+      </Pane>
+   </children>
+</Pane>
