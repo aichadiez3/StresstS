@@ -277,7 +277,7 @@ public class PatientInfoController implements Initializable{
 	void list_all_medical_records() {
 		String[] elements = null, parameter=null;
 		try {
-		LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records");
+		LaunchClientApp.dataOutputStream.writeUTF("list_all_medical_records,"+String.valueOf(patient_id));
 		
 		LaunchClientApp.feedback = LaunchClientApp.dataInputStream.readUTF();
 		elements = LaunchClientApp.feedback.split(".;,");
